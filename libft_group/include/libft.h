@@ -89,5 +89,7 @@ extras
 char	*ft_utoa(unsigned int n);
 int		ft_strcmp(char *s1, char *s2);
 long	int	ft_long_atoi(const char *str);
+void	print_arr(char **arr);
+void	print_matrix(char ***matrix);
 
 #endif

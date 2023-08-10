@@ -6,17 +6,17 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/08 18:47:30 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/10 16:12:12 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -Wall -Wextra -g #-Werror
 
 RD = -lreadline
 
-#SRC = main.c
+SRC = lexer.c
 
 LIBFTDIR = ./libft_group
 LIBFT = ./libft_group/libft.a
@@ -31,12 +31,12 @@ YELLOW           :=      \033[1;33m
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "$(YELLOW) [Success] Minishell compilation.$(BOLD)"
-	@echo "$(GREEN) [Success] Libft compilation.$(BOLD)"
+	@echo "$(GREEN) [Success] Minishell compilation.$(BOLD)"
+	@echo "$(YELLOW) [Success] Libft compilation.$(BOLD)"
 	$(MAKE) --no-print-directory -C $(LIBFTDIR)
-	@echo "$(GREEN) [Success] Libft compilation compleated!$(BOLD)"
+	@echo "$(YELLOW) [Success] Libft compilation compleated!$(BOLD)"
 	$(CC) $(CFLAGS) main.c $(OBJ) $(RD) $(LIBFT) -o $(NAME)
-	@echo "$(YELLOW) [Success] ./minishell created.$(BOLD)"
+	@echo "$(GREEN) [Success] ./minishell created.$(BOLD)"
 
 clean:
 	@rm -rf $(OBJ)
@@ -50,6 +50,6 @@ fclean: clean
 
 re: fclean all
 
-.SILENT: 
+.SILENT:
 
 .PHONY: all clean fclean re

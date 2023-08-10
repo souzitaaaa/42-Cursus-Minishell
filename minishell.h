@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/08 19:12:57 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:59:31 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,18 @@ typedef enum s_type
 {
 	PIPE,     // |
 	HEREDOC,  // <<
-	LPR,      // (
-	RPR,      // )
-	AND,      // &&
-	OR,       // ||
 	APPEND,   // >>
 	OUT,      // >
 	IN,       // <
-	STRING,   // string (pode ser comando, ficheiro
+	STRING,   // string (pode ser comando, ficheiro)
 	END       // end of cmd
 }t_type;
-
-typedef struct s_token
-{
-	char	**array; //se o tipo for um careter especial o array pode ser NULL?
-	t_type	type;
-}t_token;
 
 typedef struct s_node
 {
 	struct t_node	*prev;
-	t_token			token;
+	char	*array; //se o tipo for um careter especial o array pode ser NULL?
+	t_type	type;
 	struct t_node	*next;
 }t_node;
 
@@ -65,5 +56,13 @@ typedef struct s_list
 	struct t_node	*head;
 	int				size;
 }t_list;
+
+typedef struct s_main
+{
+	t_list			tokens;
+	char 			*input_prompt;
+}t_main;
+
+void	lexer(t_main *main);
 
 #endif

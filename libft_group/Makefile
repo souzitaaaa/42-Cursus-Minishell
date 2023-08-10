@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:28:56 by dinoguei          #+#    #+#              #
-#    Updated: 2023/08/08 19:12:57 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/10 15:43:53 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRCS = libft/ft_isalpha.c \
 		get_next_line/get_next_line.c \
 		extras/ft_utoa.c \
 		extras/ft_strcmp.c \
-		extras/ft_long_atoi.c
+		extras/ft_long_atoi.c \
+		extras/ft_print.c
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o)
 

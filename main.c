@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ai <jede-adi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:18 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/08 19:12:57 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/10 16:09:15 by jede-adi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_prompt(void)
+//TODO:
+
+void	init_prompt(t_main	*main)
 {
 	char		*input;
 	const char	*prompt;
@@ -21,7 +23,7 @@ void	init_prompt(void)
 	while (1)
 	{
 		input = readline(prompt);
-		
+
 		if (input == NULL)
 			break;
 		if (ft_strcmp(input, "exit") == 0)
@@ -29,23 +31,17 @@ void	init_prompt(void)
 			free(input);
 			break;
 		}
+		main->input_prompt = input;
+		//printf("Comando inserido: %s\n", main->input_prompt);
+		lexer(main);
 		add_history(input);
-		printf("Comando inserido: %s\n", input);
 		free(input);
 	}
 }
 
-void	signaltreatment(void)
-{
-	struct sigaction	sig;
-	
-	sig.sa_sigaction = 
-	sig.sa_flags = SA_SIGINFO;
-	
-}
-
 int	main(void)
 {
-	signaltreatment();
-	init_prompt();
+	t_main	main;
+
+	init_prompt(&main);
 }
