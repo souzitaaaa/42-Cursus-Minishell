@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft_group/include/libft.h"
+# include "env.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
