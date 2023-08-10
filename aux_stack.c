@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "minishell.h"
 
 void	shift_index(t_list *stack)
 {
 	t_node	*element;
 
-	stack->first->index = 0;
-	element = stack->first->next;
-	while (element != stack->first)
+	stack->head->index = 0;
+	element = stack->head->next;
+	while (element != stack->head)
 	{
 		element->index = element->prev->index + 1;
 		element = element->next;

@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -g #-Werror
 
 RD = -lreadline
 
-SRC = lexer.c
+SRC = lexer.c \
+	aux_stack.c
 
 LIBFTDIR = ./libft_group
 LIBFT = ./libft_group/libft.a
