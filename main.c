@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 //TODO:
 
@@ -31,10 +31,9 @@ void	init_prompt(t_main	*main)
 			free(input);
 			break;
 		}
-		main->input_prompt = input;
-		//printf("Comando inserido: %s\n", main->input_prompt);
-		lexer(main);
 		add_history(input);
+		main->input_prompt = input;
+		lexer(main);
 		free(input);
 	}
 }

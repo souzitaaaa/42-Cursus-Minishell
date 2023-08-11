@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/08 19:08:16 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/10 21:57:53 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,6 @@ int		ft_strcmp(char *s1, char *s2);
 long	int	ft_long_atoi(const char *str);
 void	print_arr(char **arr);
 void	print_matrix(char ***matrix);
+char    *ft_strtrimall(char const *str);
 
 #endif

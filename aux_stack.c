@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/08 19:11:56 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/11 02:10:09 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "includes/minishell.h"
 
 void	shift_index(t_list *stack)
 {
@@ -109,5 +109,29 @@ void	insert_last(t_list *stack, t_node *new)
 		stack->head->prev = new;
 	}
 	new->index = index;
+	index++;
 	stack->size++;
+}
+
+t_node	*create_n(t_main *main, t_type token, int *i)
+{
+	t_node	*new;
+
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->type = token;
+	//new->token = main->input_prompt[i];
+	return (new);
+}
+
+int	add_token(t_main *main, t_type token, int *i)
+{
+	t_node	*new;
+
+	new = create_n(main, token, i);
+	if (!new)
+		return (1);
+	insert_last(main->tokens, new);
+	return (0);
 }

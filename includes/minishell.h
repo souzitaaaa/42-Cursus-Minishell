@@ -6,14 +6,15 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/10 16:59:31 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/11 01:03:34 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft_group/include/libft.h"
+# include "../libft_group/include/libft.h"
+# include "env.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,18 +35,18 @@
 
 typedef enum s_type
 {
-	PIPE,     // |
-	HEREDOC,  // << 
-	APPEND,   // >> 
-	OUT,      // >
-	IN,       // <
-	STRING,   // string (pode ser comando, ficheiro)
+	PIPE = '|',     // |
+	IN = '<',       // <
+	HEREDOC = 'H',  // << 
+	OUT = '>',      // >
+	APPEND = 'A',   // >> 
+	STRING = 'S',   // string (pode ser comando, ficheiro)
 }t_type;
 
 typedef struct s_node
 {
 	struct s_node	*prev;
-	char	*array; //se o tipo for um careter especial o array pode ser NULL?
+	char	**token; //se o tipo for um careter especial o array pode ser NULL?
 	t_type	type;
 	int		index;
 	struct s_node	*next;
@@ -59,7 +60,7 @@ typedef struct s_list
 
 typedef struct s_main
 {
-	t_list			tokens;
+	t_list			*tokens;
 	char 			*input_prompt;
 }t_main;
 
@@ -73,6 +74,9 @@ void		insert_head(t_list *stack, t_node *new);
 void		free_stack(t_list *stack);
 void		create_stack(t_list *stack);
 void		insert_last(t_list *stack, t_node *new);
+t_node	*create_n(t_main *main, t_type token, int *i);
+int	add_token(t_main *main, t_type token, int *i);
+
 
 void	lexer(t_main *main);
 

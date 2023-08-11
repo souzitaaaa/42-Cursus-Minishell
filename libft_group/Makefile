@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:28:56 by dinoguei          #+#    #+#              #
-#    Updated: 2023/08/10 15:43:53 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/10 22:01:41 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ SRCS = libft/ft_isalpha.c \
 		extras/ft_utoa.c \
 		extras/ft_strcmp.c \
 		extras/ft_long_atoi.c \
-		extras/ft_print.c
+		extras/ft_print.c \
+		extras/ft_strtrimall.c
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o)
 
@@ -83,3 +84,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.SILENT: 

@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/10 16:12:12 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/11 00:16:16 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CFLAGS = -Wall -Wextra -g #-Werror
 
 RD = -lreadline
 
-SRC = lexer.c \
-	aux_stack.c
+SRC = lexer/lexer.c \
+	aux_stack.c 
 
 LIBFTDIR = ./libft_group
 LIBFT = ./libft_group/libft.a
