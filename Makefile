@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/13 17:30:23 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/13 17:48:41 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,13 @@ VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
-NAME 	= minishell
-_FILES 	= init list free \
+NAME 		= minishell
+_FILES 		= init list free \
 			lexer token
-OBJ	= $(_FILES:%=%.o)
-TARGET	= $(addprefix $(OBJDIR)/, $(OBJ))
+OBJ			= $(_FILES:%=%.o)
+TARGET		= $(addprefix $(OBJDIR)/, $(OBJ))
+_HEADERS	= lexer.h env.h lexer.h parcer.h minishell.h
+HDR			= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
 
@@ -55,10 +57,10 @@ $(NAME): $(OBJDIR) $(TARGET)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
 	$(MAKE) $(NPD) -C $(LIBFTDIR)
 	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
-	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)
 	echo "[$(GREEN)Success$(RESET)] ./minishell created$(BOLD)$(RESET)"
 
-$(OBJDIR)/%.o : %.c
+$(OBJDIR)/%.o : %.c $(HDR)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
 

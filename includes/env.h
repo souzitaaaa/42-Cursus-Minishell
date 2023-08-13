@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:04:00 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 14:13:33 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:48:35 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define ENV_H
 
 #include "minishell.h"
+
+
 
 typedef struct s_var
 {
