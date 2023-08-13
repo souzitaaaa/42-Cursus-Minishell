@@ -13,4 +13,4 @@
 #include "../../includes/minishell.h"
 
 //ANALISE SINTATICA
-//Devolve falso (erro) ou verdadeiro (chamar a create_ast)
+//Dá erro ou chamar a create_ast
