@@ -6,29 +6,29 @@
 #    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/13 17:48:41 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/13 18:12:55 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #-------------------------------------  COLORS  --------------------------------
-RESET	= \033[0m
-BLACK 	= \033[1;30m
-RED 	= \033[1;31m
-GREEN 	= \033[1;32m
-YELLOW 	= \033[1;33m
-BLUE	= \033[1;34m
-PURPLE 	= \033[1;35m
-CYAN 	= \033[1;36m
-WHITE 	= \033[1;37m
+RESET			= \033[0m
+BLACK 			= \033[1;30m
+RED 			= \033[1;31m
+GREEN 			= \033[1;32m
+YELLOW		 	= \033[1;33m
+BLUE			= \033[1;34m
+PURPLE 			= \033[1;35m
+CYAN 			= \033[1;36m
+WHITE 			= \033[1;37m
 
 #----------------------------------- COMMANDS ----------------------------------
-CC = cc
-RM = rm -rf
+CC				= cc
+RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS 	= -Wall -Wextra -g #-Werror
-NPD		= --no-print-directory
-RD 		= -lreadline
+CFLAGS			= -Wall -Wextra -g #-Werror
+NPD				= --no-print-directory
+RD				= -lreadline
 
 #----------------------------------  FOLDERS ------------------------------------
 
@@ -36,18 +36,18 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= lexer envp
+_SUBFOLDERS		= parcer envp
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
-NAME 		= minishell
-_FILES 		= init list free \
-			lexer token
-OBJ			= $(_FILES:%=%.o)
-TARGET		= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS	= lexer.h env.h lexer.h parcer.h minishell.h
-HDR			= $(addprefix $(INCLUDE)/, $(_HEADERS))
+NAME 			= minishell
+_FILES 			= init list free \
+					lexer token
+OBJ				= $(_FILES:%=%.o)
+TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
+_HEADERS		= lexer.h env.h lexer.h parcer.h minishell.h
+HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
 

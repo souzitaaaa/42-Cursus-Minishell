@@ -43,4 +43,10 @@ int	main(void)
 	t_main	main;
 
 	init_prompt(&main);
+	//tratar aspas
+	//lexer
+	//se nao tiver carecteres expeciais vai logo para a exec_cmd;
+	//analise sintatica --> se for falso da ERRO
+	//AST
+	//init_exec
 }

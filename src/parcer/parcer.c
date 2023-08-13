@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   parcer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 14:04:00 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 17:56:06 by rimarque         ###   ########.fr       */
+/*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
+/*   Updated: 2023/08/13 18:35:37 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "../../includes/minishell.h"
 
-#include "minishell.h"
-
-typedef struct s_var
-{
-    struct s_var    *prev;
-    char            *var;
-    int             index;
-    struct s_var    *next;
-} t_var;
-
-typedef struct s_env
-{
-    t_var   *head;
-    int     size;
-} t_env;
-
-#endif
+//ANALISE SINTATICA
+//Devolve falso (erro) ou verdadeiro (chamar a create_ast)

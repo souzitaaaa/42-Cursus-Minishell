@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/13 15:43:12 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:13:32 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define MINISHELL_H
 
 # include "../libft_group/include/libft.h"
-# include "lexer.h"
-# include "env.h"
 # include "parcer.h"
+# include "env.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -51,7 +50,6 @@ COLORS
 /*
 MAIN STRUCT
 */
-
 typedef struct s_main
 {
 	char 			*input_prompt;

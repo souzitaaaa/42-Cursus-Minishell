@@ -6,26 +6,34 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/13 17:14:04 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/13 19:55:01 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool    not_special(int c)
+bool    special_chr(int c)
+{
+    if (c == PIPE && c == IN && c == HEREDOC
+        && c == OUT && c == APPEND)
+        return true;
+    return false;
+}
+
+/*bool    not_special(int c)
 {
     if (c != PIPE && c != IN && c != HEREDOC
         && c != OUT && c != APPEND)
         return true;
     return false;
-}
+}*/
 
 void    search_extra_tokens(t_main *main, int *i)
 {
 	int start = *i;
 	char    *str;
 
-	while (main->input_prompt[*i] && not_special(main->input_prompt[*i]))
+	while (main->input_prompt[*i] && !special_chr(main->input_prompt[*i]))
 		(*i)++;
 			printf("start %i i %i\n", start, *i);
 	str = ft_substr(main->input_prompt, start, (*i - start));
@@ -66,7 +74,7 @@ void    print_tokens(t_list *tokens)
 	while (count++ < tokens->size)
 	{
 		printf("index: %i\n", aux->index);
-		printf("type: %c\n", aux->type);
+		printf("type: %c\n", aux->token.type);
 		aux = aux->next;
 	}
 }
