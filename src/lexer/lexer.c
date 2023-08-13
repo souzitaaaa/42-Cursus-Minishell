@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/11 02:05:27 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:14:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 bool    not_special(int c)
 {
@@ -24,7 +24,7 @@ void    search_extra_tokens(t_main *main, int *i)
 {
 	int start = *i;
 	char    *str;
-	
+
 	while (main->input_prompt[*i] && not_special(main->input_prompt[*i]))
 		(*i)++;
 			printf("start %i i %i\n", start, *i);
@@ -36,7 +36,7 @@ void    search_extra_tokens(t_main *main, int *i)
 
 void    search_tokens(t_main *main, int *i)
 {
-			printf("search tokens i %i\n", *i);
+	printf("search tokens i %i\n", *i);
 	if (main->input_prompt[*i] == PIPE)
 		add_token(main, PIPE, i);
 	else if (main->input_prompt[*i] == IN)
@@ -53,15 +53,15 @@ void    search_tokens(t_main *main, int *i)
 		else
 			add_token(main, OUT, i);
 	}
-	else if (main->input_prompt[*i] != " ")
-		search_extra_tokens(main, i);
+	//else if (main->input_prompt[*i] != " ") //tens de usar um strcmp, n complila
+	//	search_extra_tokens(main, i);
 }
 
 void    print_tokens(t_list *tokens)
 {
 	int count = 0;
 	t_node  *aux = tokens->head;
-	
+
 	printf("\033[1;32mPrinting tokens\033[0m\n");
 	while (count++ < tokens->size)
 	{
@@ -73,12 +73,10 @@ void    print_tokens(t_list *tokens)
 
 void	lexer(t_main *main)
 {
-
-				printf("\033[1;33m\t\tLexer function\033[0m\n");
-				printf("Input: %s\n\n", main->input_prompt);
-	create_stack(main->tokens);
 	int i;
-	
+	printf("\033[1;33m\t\tLexer function\033[0m\n");
+	printf("Input: %s\n\n", main->input_prompt);
+	init_list(main->tokens);
 	i = 0;
 	while(main->input_prompt[i])
 	{

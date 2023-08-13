@@ -3,34 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/11 00:16:33 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/13 17:14:12 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_var *var_node(const char *var)
 {
     t_var *new_node;
-    
+
     new_node = (t_var *)malloc(sizeof(t_var));
-    if (new_node == NULL) 
+    if (new_node == NULL)
     {
         //ft_error();
         exit(0);
     }
     new_node->var = strdup(var);
     return (new_node);
-}
-
-void	put_head_node(t_env *env, t_var *var_new)
-{
-	env->head = var_new;
-	var_new->next = env->head;
-	var_new->prev = env->head;
 }
 
 void	add_var(t_env *env, t_var *var_new)
@@ -40,10 +33,13 @@ void	add_var(t_env *env, t_var *var_new)
 	if (env->head == NULL)
 	{
 		index = 0;
-		put_head_node(env, var_new);
+		env->head = var_new;
+	    var_new->next = env->head;
+	    var_new->prev = env->head;
 	}
 	else
 	{
+        index++;     //acrescentei para o index ficar bem
 		env->head->prev->next = var_new;
 		var_new->prev = env->head->prev;
 		var_new->next = env->head;
@@ -53,6 +49,14 @@ void	add_var(t_env *env, t_var *var_new)
 	env->size++;
 }
 
+//acho que isto n vai funcionar porque estas a percorrer uma lista que ainda n existe, tens de usar o getenv para ir buscar o char **envp e copiares cada string do array para a lista
+/*Eu faria algo do genero:
+while (envp)
+{
+    aux = var_node(envp[i])
+    add_var(env, aux);
+    i++;
+}*/
 void    list_var(t_env  *env, t_var *var)
 {
     int     count;

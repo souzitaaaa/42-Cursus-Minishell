@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 14:04:00 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 14:13:33 by rimarque         ###   ########.fr       */
+/*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
+/*   Updated: 2023/08/13 17:13:53 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include "../includes/minishell.h"
 
-#include "minishell.h"
-
-typedef struct s_var
+void	init_list(t_list *stack)
 {
-    struct s_var    *prev;
-    char            *var;
-    int             index;
-    struct s_var    *next;
-} t_var;
-
-typedef struct s_env
-{
-    t_var   *head;
-    int     size;
-} t_env;
-
-#endif
+	stack->head = NULL;
+	stack->size = 0;
+}

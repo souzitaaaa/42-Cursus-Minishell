@@ -3,51 +3,77 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/11 00:16:16 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/13 17:30:23 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+#-------------------------------------  COLORS  --------------------------------
+RESET	= \033[0m
+BLACK 	= \033[1;30m
+RED 	= \033[1;31m
+GREEN 	= \033[1;32m
+YELLOW 	= \033[1;33m
+BLUE	= \033[1;34m
+PURPLE 	= \033[1;35m
+CYAN 	= \033[1;36m
+WHITE 	= \033[1;37m
+
+#----------------------------------- COMMANDS ----------------------------------
 CC = cc
-CFLAGS = -Wall -Wextra -g #-Werror
+RM = rm -rf
 
-RD = -lreadline
+#-----------------------------------  FLAGS  -----------------------------------
+CFLAGS 	= -Wall -Wextra -g #-Werror
+NPD		= --no-print-directory
+RD 		= -lreadline
 
-SRC = lexer/lexer.c \
-	aux_stack.c 
+#----------------------------------  FOLDERS ------------------------------------
 
-LIBFTDIR = ./libft_group
-LIBFT = ./libft_group/libft.a
+LIBFTDIR 		= libft_group
+LIBFT 			= $(LIBFTDIR)/libft.a
+INCLUDE			= includes
+SRCS			= src
+_SUBFOLDERS		= lexer envp
+VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
+OBJDIR			= obj
 
-OBJ = $(SRC:%.c=%.o)
+#--------------------------------- FILES  ---------------------------------------
+NAME 	= minishell
+_FILES 	= init list free \
+			lexer token
+OBJ	= $(_FILES:%=%.o)
+TARGET	= $(addprefix $(OBJDIR)/, $(OBJ))
 
-GREEN           :=      \033[1;32m
-RED             :=      \033[1;31m
-WHITE           :=      \033[1;37m
-YELLOW           :=      \033[1;33m
+#---------------------------------  RULES  --------------------------------------
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@echo "$(GREEN) [Success] Minishell compilation.$(BOLD)"
-	@echo "$(YELLOW) [Success] Libft compilation.$(BOLD)"
-	$(MAKE) --no-print-directory -C $(LIBFTDIR)
-	@echo "$(YELLOW) [Success] Libft compilation compleated!$(BOLD)"
-	$(CC) $(CFLAGS) main.c $(OBJ) $(RD) $(LIBFT) -o $(NAME)
-	@echo "$(GREEN) [Success] ./minishell created.$(BOLD)"
+$(NAME): $(OBJDIR) $(TARGET)
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
+	$(MAKE) $(NPD) -C $(LIBFTDIR)
+	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
+	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) $(LIBFT) -o $(NAME)
+	echo "[$(GREEN)Success$(RESET)] ./minishell created$(BOLD)$(RESET)"
+
+$(OBJDIR)/%.o : %.c
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(INCLUDE)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
 clean:
-	@rm -rf $(OBJ)
-	$(MAKE) clean --no-print-directory -C  $(LIBFTDIR)
-	@echo "$(RED) [Deleting] object files deleted.$(BOLD)"
+	$(RM) $(OBJDIR)
+	$(MAKE) clean $(NPD) -C  $(LIBFTDIR)
+	echo "[$(RED)Deleting$(RESET)]  object files deleted$(BOLD)$(RESET)"
 
 fclean: clean
-	@rm -rf $(NAME) $(OBJ)
-	$(MAKE) fclean --no-print-directory -C $(LIBFTDIR)
-	@echo "$(RED) [Deleting] .a deleted.$(BOLD)"
+	$(RM) $(NAME)
+	$(MAKE) fclean $(NPD) -C $(LIBFTDIR)
+	echo "[$(RED)Deleting$(RESET)]  .a deleted$(BOLD)"
 
 re: fclean all
 

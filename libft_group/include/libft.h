@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/10 21:57:53 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/13 15:16:34 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ Libraries
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+#include "get_next_line.h"
 
-/*
-define buffer_size for the get_next_line
-*/
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
-# endif
 /*
 libft
 */
@@ -36,12 +31,10 @@ int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
-size_t	ft_strlen(char *str);
 void	*ft_memset(void *s, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
@@ -65,6 +58,14 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+//FT_LEN.C
+size_t	ft_strlen(const char *str);
+size_t	ft_strclen(char const *s, char c);
+size_t	ft_arrlen(char **arr);
+//FT_CPY.C
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+size_t	ft_arrlcpy(char **dst, char **src, size_t size);
+
 /*
 ft_printf
 */
@@ -75,22 +76,19 @@ int		ft_putnbr(int n);
 int		ft_putnbr_u(unsigned int n);
 int		ft_puthex(unsigned int n, char *base);
 int		ft_putpointer(void *n, char *base);
-/*
-get_next_line
-*/
 
-char	*get_next_line(int fd);
-char	*read_file(int fd, char *backup);
-char	*get_line(char *backup);
-char	*remove_read(char *backup);
 /*
 extras
 */
 char	*ft_utoa(unsigned int n);
 int		ft_strcmp(char *s1, char *s2);
-long	int	ft_long_atoi(const char *str);
+long	int	ft_long_atol(const char *str);
 void	print_arr(char **arr);
 void	print_matrix(char ***matrix);
 char    *ft_strtrimall(char const *str);
+//FT_FREE.C
+void	ft_free_str(char **str);
+void	ft_free_array(char	***array);
+void	ft_free_matrix(char	****matrix);
 
 #endif

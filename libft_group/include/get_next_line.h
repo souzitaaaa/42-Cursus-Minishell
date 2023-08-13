@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 14:04:00 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 14:13:33 by rimarque         ###   ########.fr       */
+/*   Created: 2023/01/26 15:49:10 by rimarque          #+#    #+#             */
+/*   Updated: 2023/07/01 18:46:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include "minishell.h"
+# include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 
-typedef struct s_var
-{
-    struct s_var    *prev;
-    char            *var;
-    int             index;
-    struct s_var    *next;
-} t_var;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
 
-typedef struct s_env
-{
-    t_var   *head;
-    int     size;
-} t_env;
+# endif
+
+char	*get_next_line(int fd, int flag);
+char	*gnl_strjoin(char *temp, char **to_read);
+void	ft_strccpy(char *dst, char *src, char c);
+size_t	gnl_strclen(const char *str, char c);
+int		count_nl(char *str);
 
 #endif

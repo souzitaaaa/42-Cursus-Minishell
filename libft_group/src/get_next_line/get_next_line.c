@@ -3,123 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 15:15:28 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/02/15 13:37:00 by dinoguei         ###   ########.fr       */
+/*   Created: 2023/01/26 21:54:29 by rimarque          #+#    #+#             */
+/*   Updated: 2023/07/01 18:45:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/get_next_line.h"
 
-char	*read_file(int fd, char *backup)
+void	free_last_line(char	**str)
 {
-	int		read_bytes;
-	char	*buffer;
-	char	*temp;
-
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
-		return (NULL);
-	read_bytes = 1;
-	while (read_bytes > 0 && !ft_strchr(backup, '\n'))
+	if (*str == NULL)
+		return ;
+	if (count_nl(*str) == 1)
 	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free(buffer);
-			free(backup);
-			return (NULL);
-		}
-		buffer[read_bytes] = '\0';
-		temp = ft_strjoin(backup, buffer);
-		free(backup);
-		backup = temp;
+		if (str[0][gnl_strclen(*str, '\0') - 1] == '\n')
+			ft_free_str(str);
 	}
-	free(buffer);
-	return (backup);
 }
 
-char	*get_line(char *backup)
+char	*move_to_read(char **to_read)
 {
-	char	*line;
-	size_t	pos;
+	size_t	prev_line;
+	char	*dst;
 
-	if (!(*backup))
+	prev_line = gnl_strclen(*to_read, '\n');
+	dst = ft_calloc((gnl_strclen(*to_read, '\0') + 1) - prev_line,
+			sizeof(char));
+	ft_strccpy(dst, *to_read + prev_line, '\0');
+	ft_free_str(to_read);
+	return (dst);
+}
+
+char	*cpy_to_line(char *line, char **to_read)
+{
+	size_t	len;
+
+	len = gnl_strclen(*to_read, '\n');
+	if (len > 0)
+	{
+		line = ft_calloc(len + 1, sizeof(char));
+		ft_strccpy(line, *to_read, '\n');
+	}
+	if (to_read[0][len] == '\0')
+	{
+		free(*to_read);
+		*to_read = NULL;
+	}
+	return (line);
+}
+
+char	*read_to_line(int fd, char **to_read, char *line)
+{
+	int	bytes;
+
+	bytes = 1;
+	while (bytes > 0 && !count_nl(line))
+	{
+		if (bytes != 0)
+		{
+			free(*to_read);
+			*to_read = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+		}
+		bytes = read(fd, *to_read, BUFFER_SIZE);
+		if (bytes <= 0)
+			ft_free_str(to_read);
+		if (bytes < 0 && *line)
+			free(line);
+		if (bytes < 0 || (bytes == 0 && !*line))
+			return (NULL);
+		if (bytes > 0)
+			line = gnl_strjoin(line, to_read);
+	}
+	free_last_line(to_read);
+	return (line);
+}
+
+char	*get_next_line(int fd, int flag)
+{
+	static char		*to_read;
+	char			*line;
+
+	if (flag == 1)
+	{
+		ft_free_str(&to_read);
 		return (NULL);
-	pos = 0;
-	while (backup[pos] && backup[pos] != '\n')
-		pos++;
-	line = malloc(sizeof(char) * (pos + 2));
+	}
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	line = "\0";
+	if (!to_read)
+		to_read = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (*to_read)
+	{
+		to_read = move_to_read(&to_read);
+		line = cpy_to_line(line, &to_read);
+	}
+	if (!count_nl(line))
+		line = read_to_line(fd, &to_read, line);
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, backup, pos + 1);
-	if (backup[pos] == '\n')
-		line[pos++] = '\n';
-	line[pos] = '\0';
 	return (line);
 }
-
-char	*remove_read(char *backup)
-{
-	size_t	pos;
-	size_t	pos2;
-	char	*new_backup;
-
-	pos = 0;
-	pos2 = 0;
-	while (backup[pos] && backup[pos] != '\n')
-		pos++;
-	if (!backup[pos])
-	{
-		free(backup);
-		return (NULL);
-	}
-	new_backup = malloc(sizeof(char) * ft_strlen(backup) - pos + 1);
-	if (!new_backup)
-		return (NULL);
-	pos++;
-	while (backup[pos])
-		new_backup[pos2++] = backup[pos++];
-	new_backup[pos2] = '\0';
-	free(backup);
-	return (new_backup);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	*backup;
-	char		*line;
-
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
-	line = NULL;
-	if (backup == NULL)
-	{
-		backup = malloc(sizeof(char) * 1);
-		if (!backup)
-			return (NULL);
-		backup[0] = '\0';
-	}
-	backup = read_file(fd, backup);
-	if (!backup)
-		return (NULL);
-	line = get_line(backup);
-	backup = remove_read(backup);
-	return (line);
-}
-/*
-int	main(void)
-{
-	int		fd;
-	char	*prt;
-	fd = open("teste.txt", O_RDONLY);
-	prt = get_next_line(fd);
-	printf("\nFunc Return: %s\n", prt);
-	free(prt);
-	prt = get_next_line(fd);
-	printf("\nFunc Return: %s\n", prt);
-	free(prt);
-	close(fd);
-}
-*/

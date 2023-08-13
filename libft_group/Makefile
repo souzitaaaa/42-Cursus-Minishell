@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:28:56 by dinoguei          #+#    #+#              #
-#    Updated: 2023/08/10 22:01:41 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/13 15:13:26 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ SRCS = libft/ft_isalpha.c \
 		libft/ft_isalnum.c \
 		libft/ft_isascii.c \
 		libft/ft_isprint.c \
-		libft/ft_strlen.c \
+		libft/ft_len.c \
 		libft/ft_memset.c \
 		libft/ft_bzero.c \
 		libft/ft_memcpy.c \
 		libft/ft_memmove.c \
-		libft/ft_strlcpy.c \
+		libft/ft_cpy.c \
 		libft/ft_strlcat.c \
 		libft/ft_toupper.c \
 		libft/ft_tolower.c \
@@ -51,11 +51,13 @@ SRCS = libft/ft_isalpha.c \
 		ft_printf/ft_printf_hex.c \
 		ft_printf/ft_printf_pointer.c \
 		get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
 		extras/ft_utoa.c \
 		extras/ft_strcmp.c \
-		extras/ft_long_atoi.c \
+		extras/ft_atol.c \
 		extras/ft_print.c \
-		extras/ft_strtrimall.c
+		extras/ft_strtrimall.c \
+		extras/ft_free.c
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o)
 
@@ -85,4 +87,4 @@ fclean: clean
 
 re: fclean all
 
-.SILENT: 
+.SILENT:
