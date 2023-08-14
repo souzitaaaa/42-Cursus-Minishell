@@ -6,35 +6,36 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/14 17:05:08 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/15 00:25:22 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool    special_chr(int c)
+bool    special_chr(char c)
 {
-    if (c == PIPE && c == IN && c == HEREDOC
-        && c == OUT && c == APPEND)
+	printf("Comparing %c\n", c);
+    if (ft_strchr("|<>", c))
+    {
+        printf("Encontrou limite\n");
         return true;
+    }
     return false;
 }
-
-/*bool    not_special(int c)
-{
-    if (c != PIPE && c != IN && c != HEREDOC
-        && c != OUT && c != APPEND)
-        return true;
-    return false;
-}*/
 
 void    search_extra_tokens(t_main *main, int *i)
 {
 	int start = *i;
 	char    *str;
+	bool    run = true;
 
-	while (main->input_prompt[*i] && !special_chr(main->input_prompt[*i]))
-		(*i)++;
+	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
+	{
+		if (special_chr(main->input_prompt[*i]) == false)
+            (*i)++;
+        else
+            run = false;
+	}
 				printf("start %i i(end) %i\n", start, *i);
 	str = ft_substr(main->input_prompt, start, (*i - start));
 				printf("string: %s\n", str);
@@ -42,27 +43,42 @@ void    search_extra_tokens(t_main *main, int *i)
 	(*i)--;
 }
 
-void    search_tokens(t_main *main, int *i)
+void search_tokens(t_main *main, int *i)
 {
-				printf("search tokens i %i\n", *i);
-	if (main->input_prompt[*i] == PIPE)
-		add_token(main, PIPE, i);
-	else if (main->input_prompt[*i] == IN)
-	{
-		if (main->input_prompt[*i + 1] == IN)
-			add_token(main, HEREDOC, i);
-		else
-			add_token(main, IN, i);
-	}
-	else if (main->input_prompt[*i] == OUT)
-	{
-		if (main->input_prompt[*i + 1] == OUT)
-			add_token(main, APPEND, i);
-		else
-			add_token(main, OUT, i);
-	}
-	else if (main->input_prompt[*i] != ' ') //tens de usar um strcmp, n complila
-		search_extra_tokens(main, i);
+                printf("search tokens i %i\n", *i);
+    if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
+    {
+        printf("Token %c = %i found!\n", PIPE, PIPE);
+        add_token(main, PIPE, i);
+    }
+    else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
+    {
+        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
+        {
+            printf("Token %c = %i found!\n", HEREDOC, HEREDOC);
+            add_token(main, HEREDOC, i);
+        }
+        else
+        {
+            printf("Token %c = %i found!\n", IN, IN);
+            add_token(main, IN, i);
+        }
+    }
+    else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
+    {
+        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
+        {
+            printf("Token %c = %i found!\n", APPEND, APPEND);
+            add_token(main, APPEND, i);
+        }
+        else
+        {
+            printf("Token %c = %i found!\n", OUT, OUT);
+            add_token(main, OUT, i);
+        }
+    }
+    else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
+        search_extra_tokens(main, i);
 }
 
 void    print_tokens(t_list *tokens)
@@ -83,11 +99,10 @@ void	lexer(t_main *main)
 {
 	int i;
 				printf("\033[1;33m\t\t[Lexer function]\033[0m\n");
-				printf("Input: %s\n\n", main->input_prompt);
-	init_list(&main->tokens);
-				printf("init depois\n");
+	init_list(&main->tokens, main);
+				printf("Input: %s Size: %i\n\n", main->input_prompt, main->tokens.str_len);
 	i = 0;
-	while(main->input_prompt[i])
+	while(main->input_prompt[i] && i <= main->tokens.str_len)
 	{
 				printf("main i %i\n", i);
 		search_tokens(main, &i);

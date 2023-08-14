@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/14 16:48:26 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:20:39 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_list
 {
 	t_node          *head;
 	int				size;
+	int             str_len;
 }t_list;
 
 /*
