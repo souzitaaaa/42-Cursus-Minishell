@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennifera <jennifera@student.42.fr>        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/14 17:59:03 by jennifera        ###   ########.fr       */
+/*   Updated: 2023/08/14 18:33:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_var *var_node(const char *var)
         //ft_error();
         exit(0);
     }
-    new_node->var = strdup(var);
+    new_node->var = ft_strdup(var);
     return (new_node);
 }
 
@@ -39,7 +39,7 @@ void	add_var(t_env *env, t_var *var_new)
 	}
 	else
 	{
-        index++;     //acrescentei para o index ficar bem
+        index++;
 		env->head->prev->next = var_new;
 		var_new->prev = env->head->prev;
 		var_new->next = env->head;
@@ -55,11 +55,11 @@ void    list_var(t_main *main)
     t_var   *aux;
 
     env.i = 0;
-    init_list(&env);
-    while (main->envp)
+    init_env(&env);
+    while (main->envp[env.i])
     {
         aux = var_node(main->envp[env.i]);
-        add_var(main->envp, aux);
+        add_var(&env, aux);
         env.i++;
     }
     main->env = env;
