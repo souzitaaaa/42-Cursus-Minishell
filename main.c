@@ -12,8 +12,6 @@
 
 #include "includes/minishell.h"
 
-//TODO:
-
 void	init_prompt(t_main	*main)
 {
 	char		*input;
@@ -38,10 +36,13 @@ void	init_prompt(t_main	*main)
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
-
+	
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	init_prompt(&main);
 	//tratar aspas
 	//lexer

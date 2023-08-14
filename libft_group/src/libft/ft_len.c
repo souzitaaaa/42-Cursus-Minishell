@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_len.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:45:24 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 15:14:09 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:50:58 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *str)
 
 	if (!str)
 	{
-		write(1, "error: NULL string", 20);
+		write(1, "error: NULL string", 19);
 		return (1);
 	}
 	i = 0;
@@ -35,7 +35,7 @@ size_t	ft_strclen(char const *s, char c)
 
 	if (!s)
 	{
-		write(1, "error: NULL string", 20);
+		write(1, "error: NULL string", 19);
 		return (1);
 	}
 	len = 0;

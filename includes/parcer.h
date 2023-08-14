@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 19:32:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/14 16:48:26 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_node
 
 typedef struct s_list
 {
-	struct s_node	*head;
+	t_node          *head;
 	int				size;
 }t_list;
 
@@ -57,8 +57,8 @@ AST
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
-	struct s_ast_node	*right;
 	t_token				token;
+	struct s_ast_node	*right;
 }
 t_ast_node;
 

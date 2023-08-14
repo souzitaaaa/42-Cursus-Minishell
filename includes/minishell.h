@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/13 18:13:32 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:01:50 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ MAIN STRUCT
 typedef struct s_main
 {
 	char 			*input_prompt;
-	t_list			*tokens;
+	t_list			tokens;
 	//t_env			*env;
 	//t_ast 			*imput_exec;
 }t_main;
