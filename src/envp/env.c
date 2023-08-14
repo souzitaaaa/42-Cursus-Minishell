@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jennifera <jennifera@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/13 17:14:12 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:59:03 by jennifera        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,22 @@ void	add_var(t_env *env, t_var *var_new)
 	env->size++;
 }
 
-//acho que isto n vai funcionar porque estas a percorrer uma lista que ainda n existe, tens de usar o getenv para ir buscar o char **envp e copiares cada string do array para a lista
-/*Eu faria algo do genero:
-while (envp)
+void    list_var(t_main *main)
 {
-    aux = var_node(envp[i])
-    add_var(env, aux);
-    i++;
-}*/
-void    list_var(t_env  *env, t_var *var)
-{
-    int     count;
+    t_env   env;
+    t_var   *aux;
+
+    env.i = 0;
+    init_list(&env);
+    while (main->envp)
+    {
+        aux = var_node(main->envp[env.i]);
+        add_var(main->envp, aux);
+        env.i++;
+    }
+    main->env = env;
+}
+    /*int     count;
     t_var   *aux;
 
     aux = (t_var *)malloc(sizeof(t_var));
@@ -70,15 +75,15 @@ void    list_var(t_env  *env, t_var *var)
         aux = var_node(var);
         add_var(env, aux);
         var = var->next;
-    }
-}
+    }*/
 
-void    print_var(t_env *env)
+void    print_var(t_env env)
 {
     t_var   *current;
 
-    current = env->head;
-    while (current != NULL)
+    env.i = 0;
+    current = env.head;
+    while (env.i++ < env.size)
     {
         printf("%s\n", current->var);
         current = current->next;

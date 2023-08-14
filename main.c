@@ -21,7 +21,6 @@ void	init_prompt(t_main	*main)
 	while (1)
 	{
 		input = readline(prompt);
-
 		if (input == NULL)
 			break;
 		if (ft_strcmp(input, "exit") == 0)
@@ -31,6 +30,8 @@ void	init_prompt(t_main	*main)
 		}
 		add_history(input);
 		main->input_prompt = input;
+		list_var(main);
+		print_var(main->env);
 		lexer(main);
 		free(input);
 	}
@@ -40,9 +41,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
 	
+	main.envp = envp;
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	init_prompt(&main);
 	//tratar aspas
 	//lexer

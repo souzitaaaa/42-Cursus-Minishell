@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jennifera <jennifera@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/14 17:01:50 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:59:12 by jennifera        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	t_list			tokens;
-	//t_env			*env;
+	char			**envp;
+	t_env			env;
 	//t_ast 			*imput_exec;
 }t_main;
 
@@ -72,6 +73,11 @@ t_node		*remove_head(t_list *stack);
 void		insert_head(t_list *stack, t_node *new);
 void		insert_last(t_list *stack, t_node *new);
 
+/*
+ENVP
+*/
+void    	list_var(t_main *main);
+void  		print_var(t_env env);
 /*
 LEXER.C
 */

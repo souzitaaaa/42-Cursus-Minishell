@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jennifera <jennifera@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:04:00 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 17:56:06 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:46:26 by jennifera        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_env
 {
     t_var   *head;
     int     size;
+    int     i;
 } t_env;
 
 #endif
