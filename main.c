@@ -31,7 +31,6 @@ void	init_prompt(t_main	*main)
 		add_history(input);
 		main->input_prompt = input;
 		list_var(main);
-		print_var(main->env);
 		lexer(main);
 		free(input);
 	}

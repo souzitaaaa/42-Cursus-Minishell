@@ -3,19 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/14 18:20:52 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:16:30 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	init_list(t_list *stack)
+void	init_list(t_list *stack, t_main *main)
 {
+	//stack->head = malloc(sizeof(t_node));
+
 	stack->head = NULL;
 	stack->size = 0;
+	stack->str_len = ft_strlen(main->input_prompt);
 }
 
 void	init_env(t_env *stack)

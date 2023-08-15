@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/14 18:21:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:13:44 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_main
 /*
 INIT.C
 */
-void		init_list(t_list *stack);
+void		init_list(t_list *stack, t_main *main);
 void		init_env(t_env *stack);
 
 /*
@@ -87,8 +87,8 @@ void	lexer(t_main *main);
 /*
 TOKEN.C
 */
-t_node	*create_n(t_main *main, t_type token, int *i);
-int		add_token(t_main *main, t_type token, int *i);
+t_node	*create_n(t_main *main, t_type token, int *i, char *str);
+int		add_token(t_main *main, t_type token, int *i, char *str);
 
 /*
 FREE.C
