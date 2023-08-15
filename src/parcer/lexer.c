@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/15 00:25:22 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:46:50 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void search_tokens(t_main *main, int *i)
         {
             printf("Token %c = %i found!\n", HEREDOC, HEREDOC);
             add_token(main, HEREDOC, i);
+            (*i)++;
         }
         else
         {
@@ -70,6 +71,7 @@ void search_tokens(t_main *main, int *i)
         {
             printf("Token %c = %i found!\n", APPEND, APPEND);
             add_token(main, APPEND, i);
+            (*i)++;
         }
         else
         {
