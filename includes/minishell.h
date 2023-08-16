@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 19:20:19 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 19:25:32 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,15 @@ ENVP
 */
 void    	list_var(t_main *main);
 void  		print_var(t_env env);
+
+/*
+EXEC
+*/
+int		builtins(char **command);
+int		echo(char **command);
+int		pwd(void);
+void  		merda(t_main *main);
+
 /*
 LEXER.C
 */
@@ -89,7 +98,6 @@ EXTRA_TOKENS.C
 */
 void	search_extra_tokens(t_main *main, int *i);
 bool	special_chr(char c);
-
 
 /*
 TOKEN.C
@@ -102,7 +110,6 @@ FREE.C
 */
 void		free_list(t_list *stack);
 void		free_env(t_env *stack);
-
 
 /*
 quotes.C

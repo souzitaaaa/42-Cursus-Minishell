@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 19:19:10 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/16 19:25:52 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp parcer/lexer_tokens
+_SUBFOLDERS		= parcer envp builtins parcer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -45,7 +45,8 @@ NAME 			= minishell
 _FILES 			= init list free utils\
 					lexer token \
 					extra_tokens \
-					env
+					env \
+					builtins echo pwd
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= env.h parcer.h minishell.h
@@ -56,7 +57,7 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET)
-	echo "[$(CYAN)Compiling$(RESET)] Libft$(RESET)"
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
 	$(MAKE) $(NPD) -C $(LIBFTDIR)
 	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
 	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)

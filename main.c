@@ -32,6 +32,7 @@ void	init_prompt(t_main	*main)
 		main->input_prompt = input;
 		list_var(main);
 		lexer(main);
+		merda(main);
 		free(input);
 	}
 }
