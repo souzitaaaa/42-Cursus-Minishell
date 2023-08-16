@@ -3,86 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 16:07:27 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/16 14:49:12 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool    special_chr(char c)
-{
-	//printf("Comparing %c\n", c);
-    if (ft_strchr("|<>", c))
-    {
-        //printf("Encontrou limite\n");
-        return true;
-    }
-    return false;
-}
-
-void    search_extra_tokens(t_main *main, int *i)
-{
-	int start = *i;
-	char    *str;
-	bool    run = true;
-
-	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
-	{
-		if (special_chr(main->input_prompt[*i]) == false)
-            (*i)++;
-        else
-            run = false;
-	}
-				//printf("start %i i(end) %i\n", start, *i);
-	str = ft_substr(main->input_prompt, start, (*i - start));
-				//printf("string: %s\n", str);
-	add_token(main, STRING, i, str);
-	(*i)--;
-}
-
+//* Cerebro da separacao de tokens, vai ver oque tem a string nesse index
+	//* e posteriormente tratar de mandar, tudo tratado para a lista
 void search_tokens(t_main *main, int *i)
 {
-                //printf("search tokens i %i\n", *i);
-    if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
-    {
-        //printf("Token %c = %i found!\n", PIPE, PIPE);
-        add_token(main, PIPE, i, "|");
-    }
-    else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
-    {
-        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
-        {
-            //printf("Token %c = %i found!\n", HEREDOC, HEREDOC);
-            add_token(main, HEREDOC, i, "<<");
-            (*i)++;
-        }
-        else
-        {
-            //printf("Token %c = %i found!\n", IN, IN);
-            add_token(main, IN, i, "<");
-        }
-    }
-    else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
-    {
-        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
-        {
-            //printf("Token %c = %i found!\n", APPEND, APPEND);
-            add_token(main, APPEND, i, ">>");
-            (*i)++;
-        }
-        else
-        {
-            //printf("Token %c = %i found!\n", OUT, OUT);
-            add_token(main, OUT, i, ">");
-        }
-    }
-    else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
-        search_extra_tokens(main, i);
+				//printf("search tokens i %i\n", *i);
+	if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
+	{
+		//printf("Token %c = %i found!\n", PIPE, PIPE);
+		add_token(main, PIPE, i, "|");
+	}
+	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
+	{
+		if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
+		{
+			//printf("Token %c = %i found!\n", HEREDOC, HEREDOC);
+			add_token(main, HEREDOC, i, "<<");
+			(*i)++;
+		}
+		else
+		{
+			//printf("Token %c = %i found!\n", IN, IN);
+			add_token(main, IN, i, "<");
+		}
+	}
+	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
+	{
+		if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
+		{
+			//printf("Token %c = %i found!\n", APPEND, APPEND);
+			add_token(main, APPEND, i, ">>");
+			(*i)++;
+		}
+		else
+		{
+			//printf("Token %c = %i found!\n", OUT, OUT);
+			add_token(main, OUT, i, ">");
+		}
+	}
+	else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
+		search_extra_tokens(main, i);
 }
 
+//* Funcao para debug, podem reutiliza-la, so mandar a lista que pretender
+	//* e os argumentos que querem imprimir
 void    print_tokens(t_list *tokens)
 {
 	int count = 0;
@@ -99,24 +72,8 @@ void    print_tokens(t_list *tokens)
 	}
 }
 
-int check_quotes_print(t_main *main)
-{
-    int quotes = 0;
-    int i = 0;
-
-    printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
-    while (main->input_prompt[i] != '\0') 
-    {
-        char c = main->input_prompt[i];
-        quotes = check_quotes(c, quotes);
-        printf("Character: %c, Quotes state: %d\n", c, quotes);
-        i++;
-    }
-    printf("\n");
-
-    return 0;
-}
-
+//* Funcao main do lexer, vai simplesmente iniciar a lista e
+	//* percorrer a str de input para fazer a divisao de tokens
 void	lexer(t_main *main)
 {
 	int i;
@@ -131,5 +88,4 @@ void	lexer(t_main *main)
 		i++;
 	}
 	print_tokens(&main->tokens);
-    check_quotes_print(main);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 15:56:42 by joe              ###   ########.fr        #
+#    Updated: 2023/08/16 19:19:10 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp
+_SUBFOLDERS		= parcer envp parcer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -44,6 +44,7 @@ OBJDIR			= obj
 NAME 			= minishell
 _FILES 			= init list free utils\
 					lexer token \
+					extra_tokens \
 					env
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
@@ -55,7 +56,7 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET)
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
+	echo "[$(CYAN)Compiling$(RESET)] Libft$(RESET)"
 	$(MAKE) $(NPD) -C $(LIBFTDIR)
 	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
 	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)

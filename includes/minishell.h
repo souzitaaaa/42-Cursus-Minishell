@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 16:10:26 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/16 19:20:19 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,13 @@ void  		print_var(t_env env);
 LEXER.C
 */
 void	lexer(t_main *main);
+
+/*
+EXTRA_TOKENS.C
+*/
+void	search_extra_tokens(t_main *main, int *i);
+bool	special_chr(char c);
+
 
 /*
 TOKEN.C
