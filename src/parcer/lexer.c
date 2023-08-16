@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/15 17:33:28 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:07:27 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,24 @@ void    print_tokens(t_list *tokens)
 	}
 }
 
+int check_quotes_print(t_main *main)
+{
+    int quotes = 0;
+    int i = 0;
+
+    printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+    while (main->input_prompt[i] != '\0') 
+    {
+        char c = main->input_prompt[i];
+        quotes = check_quotes(c, quotes);
+        printf("Character: %c, Quotes state: %d\n", c, quotes);
+        i++;
+    }
+    printf("\n");
+
+    return 0;
+}
+
 void	lexer(t_main *main)
 {
 	int i;
@@ -113,4 +131,5 @@ void	lexer(t_main *main)
 		i++;
 	}
 	print_tokens(&main->tokens);
+    check_quotes_print(main);
 }

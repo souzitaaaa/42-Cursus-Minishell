@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/14 17:20:39 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:37:56 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_node
 	t_token			token;
 	int				index;
 	struct s_node	*next;
+	int				quotes;
 }t_node;
 
 typedef struct s_list

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/15 18:13:44 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:10:26 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,12 @@ FREE.C
 */
 void		free_list(t_list *stack);
 void		free_env(t_env *stack);
+
+
+/*
+quotes.C
+*/
+int check_quotes(char c, int quotes); 
+int check_quotes_print(t_main *main);
 
 #endif
