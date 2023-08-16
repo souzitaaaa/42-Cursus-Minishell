@@ -79,6 +79,15 @@ ENVP
 */
 void    	list_var(t_main *main);
 void  		print_var(t_env env);
+
+/*
+EXEC
+*/
+int		builtins(char **command);
+int		echo(char **command);
+int		pwd(void);
+void  		merda(t_main *main);
+
 /*
 LEXER.C
 */
@@ -95,7 +104,6 @@ FREE.C
 */
 void		free_list(t_list *stack);
 void		free_env(t_env *stack);
-
 
 /*
 quotes.C

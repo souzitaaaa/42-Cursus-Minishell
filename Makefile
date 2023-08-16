@@ -6,7 +6,7 @@
 #    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 15:56:42 by joe              ###   ########.fr        #
+#    Updated: 2023/08/16 18:13:27 by jede-ara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp
+_SUBFOLDERS		= parcer envp builtins
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -44,7 +44,8 @@ OBJDIR			= obj
 NAME 			= minishell
 _FILES 			= init list free utils\
 					lexer token \
-					env
+					env \
+					builtins echo pwd
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= env.h parcer.h minishell.h
