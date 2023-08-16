@@ -1,23 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 17:17:24 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/16 17:31:27 by jede-ara         ###   ########.fr       */
+/*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
+/*   Updated: 2023/08/16 21:07:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-//getcwd  obtém o diretório de trabalho atual
-int	pwd(void)
-{
-	char	pwd[4096];
-
-	getcwd(pwd, 4096);
-	ft_putendl_fd(pwd, STDOUT_FILENO);
-	return (0);
-}
+#include "../../../includes/minishell.h"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 14:49:12 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:51:05 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	lexer(t_main *main)
 {
 	int i;
 				printf("\033[1;33m\t\t[Lexer function]\033[0m\n");
-	init_list(&main->tokens, main);
 				printf("Input: %s Size: %i\n\n", main->input_prompt, main->tokens.str_len);
 	i = 0;
 	while(main->input_prompt[i] && i <= main->tokens.str_len)

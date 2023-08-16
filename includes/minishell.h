@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 19:25:32 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:00:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,16 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	t_list			tokens;
-	char			**envp;
-	t_env			env;
-	//t_ast 			*imput_exec;
+	t_env			env_list;
+	char			**env_arr;
+	int				stdout_copy;
+	t_ast 			input_exec;
 }t_main;
 
 /*
 INIT.C
 */
-void		init_list(t_list *stack, t_main *main);
-void		init_env(t_env *stack);
+void		init_main(t_main *main, char *input);
 
 /*
 LIST.C
@@ -77,8 +77,9 @@ void		insert_last(t_list *stack, t_node *new);
 /*
 ENVP
 */
-void    	list_var(t_main *main);
+void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
+void		set_env_arr(t_main *main);
 
 /*
 EXEC
@@ -114,7 +115,7 @@ void		free_env(t_env *stack);
 /*
 quotes.C
 */
-int check_quotes(char c, int quotes); 
+int check_quotes(char c, int quotes);
 int check_quotes_print(t_main *main);
 
 #endif

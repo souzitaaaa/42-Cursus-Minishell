@@ -12,7 +12,7 @@
 
 #include "includes/minishell.h"
 
-void	init_prompt(t_main	*main)
+void	init_prompt(t_main	*main, char **envp)
 {
 	char		*input;
 	const char	*prompt;
@@ -29,8 +29,8 @@ void	init_prompt(t_main	*main)
 			break;
 		}
 		add_history(input);
-		main->input_prompt = input;
-		list_var(main);
+		init_main(main, input);
+		set_env_list(main, envp);
 		lexer(main);
 		merda(main);
 		free(input);
@@ -40,11 +40,10 @@ void	init_prompt(t_main	*main)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
-	
-	main.envp = envp;
+
 	(void)argc;
 	(void)argv;
-	init_prompt(&main);
+	init_prompt(&main, envp);
 	//tratar aspas
 	//lexer
 	//se nao tiver carecteres expeciais vai logo para a exec_cmd;

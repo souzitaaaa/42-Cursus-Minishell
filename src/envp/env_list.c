@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/14 18:33:07 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:45:28 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,16 @@ void	add_var(t_env *env, t_var *var_new)
 	env->size++;
 }
 
-void    list_var(t_main *main)
+void    set_env_list(t_main *main, char **envp)
 {
-    t_env   env;
     t_var   *aux;
 
-    env.i = 0;
-    init_env(&env);
-    while (main->envp[env.i])
+    while (envp[main->env_list.i])
     {
-        aux = var_node(main->envp[env.i]);
-        add_var(&env, aux);
-        env.i++;
+        aux = var_node(envp[main->env_list.i]);
+        add_var(&main->env_list, aux);
+        main->env_list.i++;
     }
-    main->env = env;
 }
     /*int     count;
     t_var   *aux;

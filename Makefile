@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 18:13:27 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/08/16 21:06:35 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp builtins parcer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -45,8 +45,9 @@ NAME 			= minishell
 _FILES 			= init list free utils\
 					lexer token \
 					extra_tokens \
-					env \
-					builtins echo pwd
+					env_list env_arr \
+					exec_cmd \
+					echo pwd
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= env.h parcer.h minishell.h
