@@ -32,7 +32,7 @@ void	init_prompt(t_main	*main, char **envp)
 		init_main(main, input);
 		set_env_list(main, envp);
 		lexer(main);
-		merda(main);
+		test_exec(main);
 		free(input);
 	}
 }

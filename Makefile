@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 21:06:35 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/16 21:56:52 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ _FILES 			= init list free utils\
 					lexer token \
 					extra_tokens \
 					env_list env_arr \
-					exec_cmd \
+					exec_cmd execve execve_utils\
 					echo pwd
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

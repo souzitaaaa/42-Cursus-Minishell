@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/16 21:11:49 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/16 22:00:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int init_builtins(char  *str)
     return (0);
 }
 
-int	builtins(char **command)
+int	exec_cmd(char **command, t_main *main)
 {
 	int	exec;
 
@@ -40,19 +40,19 @@ int	builtins(char **command)
 		exec = ft_unset();
 	else if (ft_strcmp(command[0], "exit") == 0)
 		exec = ft_exit();
-    else
-        exec_other*/
+   	else
+       exec_other_cmd(command, main);*/
 	return (exec);
 }
 
-void    merda(t_main *main)
+void    test_exec(t_main *main)
 {
     int count = 0;
 	t_node  *aux = main->tokens.head;
 
 	while (count++ < main->tokens.size)
 	{
-        builtins(aux->token.token);
+        exec_cmd(aux->token.arr, main);
 		aux = aux->next;
 	}
 }

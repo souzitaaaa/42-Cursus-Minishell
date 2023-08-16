@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 21:00:26 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:56:06 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,18 @@ void		set_env_arr(t_main *main);
 /*
 EXEC
 */
-int		builtins(char **command);
+int		exec_cmd(char **command, t_main *main);
+void	test_exec(t_main *main);
+void	exec_other_cmd(char **cmd, t_main *main);
+void	execution(char **cmd, t_main *main);
+void	error_management(char *str, int stdout_copy, int exit_code); //temporario
+void	free_and_exit(int exit_code, char	**command, char	*pathname, int flag); //temporario
+
+/*
+BUILTINS
+*/
 int		echo(char **command);
 int		pwd(void);
-void  		merda(t_main *main);
 
 /*
 LEXER.C

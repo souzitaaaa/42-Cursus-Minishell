@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:02:18 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/15 17:26:39 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:38:59 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_node	*create_n(t_main *main, t_type token, int *index, char *str)
 		return (NULL);
 	new->token.type = token;
 	arr = ft_split(str, 32);
-	new->token.token = malloc(sizeof(char *) * ft_arrlen(arr) + 1);
-	ft_arrlcpy(new->token.token, arr, ft_arrlen(arr) + 1);
+	new->token.arr = malloc(sizeof(char *) * ft_arrlen(arr) + 1);
+	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	return (new);
 }
 

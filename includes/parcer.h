@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/16 15:37:56 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/16 21:36:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ TOKENS
 */
 typedef struct s_token
 {
-	char			**token; //se o tipo for um careter especial o array pode ser NULL?
+	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
 	t_type			type;
 }
 t_token;

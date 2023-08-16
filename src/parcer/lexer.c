@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 20:51:05 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:38:14 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void    print_tokens(t_list *tokens)
 		printf("\033[1;34mindex:\033[0m %i\n", aux->index);
 		printf("\033[1;34mtype:\033[0m %c\n", aux->token.type);
 		printf("\033[1;34marr:\033[0m \n");
-		print_arr(aux->token.token);
+		print_arr(aux->token.arr);
 		aux = aux->next;
 	}
 }
