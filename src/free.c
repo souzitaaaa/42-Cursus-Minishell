@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:15 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 17:13:58 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:12:56 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_list(t_list *stack)
+void	free_list(t_lexer *stack)
 {
 	t_node	*element;
 	t_node	*temp;

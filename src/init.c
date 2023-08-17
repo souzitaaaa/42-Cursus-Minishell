@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/16 20:48:21 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:12:31 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_ast(t_ast	*ast)
 	ast->counter = 0;
 }
 
-void	init_list(t_list *stack, t_main *main)
+void	init_list(t_lexer *stack, t_main *main)
 {
 	stack->head = NULL;
 	stack->size = 0;

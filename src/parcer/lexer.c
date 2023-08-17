@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/17 19:08:26 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:13:12 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void search_tokens(t_main *main, int *i)
 
 //* Funcao para debug, podem reutiliza-la, so mandar a lista que pretender
 	//* e os argumentos que querem imprimir
-void    print_tokens(t_list *tokens)
+void    print_tokens(t_lexer *tokens)
 {
 	int count = 0;
 	t_node  *aux = tokens->head;
@@ -71,7 +71,6 @@ void    print_tokens(t_list *tokens)
 		aux = aux->next;
 	}
 }
-
 
 int check_quotes_print(t_main *main)
 {

@@ -31,6 +31,7 @@ void	init_prompt(t_main	*main, char **envp)
 		add_history(input);
 		init_main(main, input);
 		set_env_list(main, envp);
+		//print_var(main->env_list);
 		lexer(main);
 		test_exec(main);
 		free(input);

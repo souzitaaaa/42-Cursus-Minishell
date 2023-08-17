@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 17:13:49 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:12:46 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	shift_index(t_list *stack)
+void	shift_index(t_lexer *stack)
 {
 	t_node	*element;
 
@@ -25,14 +25,14 @@ void	shift_index(t_list *stack)
 	}
 }
 
-void	put_head_node(t_list *stack, t_node *new)
+void	put_head_node(t_lexer *stack, t_node *new)
 {
 	stack->head = new;
 	new->next = stack->head;
 	new->prev = stack->head;
 }
 
-t_node	*remove_head(t_list *stack)
+t_node	*remove_head(t_lexer *stack)
 {
 	t_node	*temp;
 
@@ -50,7 +50,7 @@ t_node	*remove_head(t_list *stack)
 	return (temp);
 }
 
-void	insert_head(t_list *stack, t_node *new)
+void	insert_head(t_lexer *stack, t_node *new)
 {
 	if (stack->head == NULL)
 		put_head_node(stack, new);
@@ -66,7 +66,7 @@ void	insert_head(t_list *stack, t_node *new)
 	stack->size++;
 }
 
-void	insert_last(t_list *stack, t_node *new)
+void	insert_last(t_lexer *stack, t_node *new)
 {
 	static int	index = 0;
 

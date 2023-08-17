@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 21:56:06 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:12:21 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ MAIN STRUCT
 typedef struct s_main
 {
 	char 			*input_prompt;
-	t_list			tokens;
-	t_env			env_list;
 	char			**env_arr;
 	int				stdout_copy;
+	t_lexer			tokens;
+	t_env			env_list;
 	t_ast 			input_exec;
 }t_main;
 
@@ -68,11 +68,11 @@ void		init_main(t_main *main, char *input);
 /*
 LIST.C
 */
-void		shift_index(t_list *stack);
-void		put_head_node(t_list *stack, t_node *new);
-t_node		*remove_head(t_list *stack);
-void		insert_head(t_list *stack, t_node *new);
-void		insert_last(t_list *stack, t_node *new);
+void		shift_index(t_lexer *stack);
+void		put_head_node(t_lexer *stack, t_node *new);
+t_node		*remove_head(t_lexer *stack);
+void		insert_head(t_lexer *stack, t_node *new);
+void		insert_last(t_lexer *stack, t_node *new);
 
 /*
 ENVP
@@ -117,7 +117,7 @@ int		add_token(t_main *main, t_type token, int *i, char *str);
 /*
 FREE.C
 */
-void		free_list(t_list *stack);
+void		free_list(t_lexer *stack);
 void		free_env(t_env *stack);
 
 /*

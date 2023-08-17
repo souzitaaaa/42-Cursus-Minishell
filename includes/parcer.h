@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/16 21:36:04 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 21:16:52 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef enum s_type
 /*
 TOKENS
 */
+
+//* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
 typedef struct s_token
 {
 	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
@@ -35,23 +37,24 @@ typedef struct s_token
 }
 t_token;
 
+//* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
+	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
 typedef struct s_node
 {
 	struct s_node	*prev;
-	//char			**token;
-	//t_type			type;
 	t_token			token;
 	int				index;
-	struct s_node	*next;
 	int				quotes;
+	struct s_node	*next;
 }t_node;
 
-typedef struct s_list
+//* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
+typedef struct s_lexer
 {
-	t_node          *head;
+	t_node			*head;
 	int				size;
-	int             str_len;
-}t_list;
+	int				str_len;
+}t_lexer;
 
 /*
 AST
