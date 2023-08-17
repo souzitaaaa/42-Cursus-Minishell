@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:15 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/17 21:12:56 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/17 23:09:58 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/structs.h"
 
 void	free_list(t_lexer *stack)
 {

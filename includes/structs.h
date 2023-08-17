@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parcer.h                                           :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/13 14:03:41 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/17 21:16:52 by dinoguei         ###   ########.fr       */
+/*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
+/*   Updated: 2023/08/17 23:21:49 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARCER_H
-# define PARCER_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-# include "minishell.h"
+//#include "minishell.h"
+
+typedef struct s_var
+{
+    struct s_var    *prev;
+    char            *var;
+    int             index;
+    struct s_var    *next;
+} t_var;
+
+typedef struct s_env
+{
+    t_var   *head;
+    int     size;
+    int     i;
+} t_env;
 
 typedef enum s_type
 {
@@ -56,6 +71,7 @@ typedef struct s_lexer
 	int				str_len;
 }t_lexer;
 
+
 /*
 AST
 */
@@ -73,5 +89,19 @@ typedef	struct s_ast
 	int					counter;
 }
 t_ast;
+
+
+/*
+MAIN STRUCT
+*/
+typedef struct s_main
+{
+	char 			*input_prompt;
+	char			**env_arr;
+	int				stdout_copy;
+	t_lexer			tokens;
+	t_env			env_list;
+	t_ast 			input_exec;
+}t_main;
 
 #endif
