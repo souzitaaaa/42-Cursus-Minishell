@@ -19,7 +19,7 @@ char    *get_envvar(char *str, t_env *env_list)
 	int count = 0;
 	t_var *aux = env_list->head;
 	char *out = NULL;
-	
+
 	while(count++ < env_list->size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -44,7 +44,7 @@ char    *get_prompt_msg(t_main *main)
 	char    *green = NULL;
 	char    *reset = NULL;
 	char    *out = NULL;
-	
+
 	blue = "\033[1;36m"; //!pode usar os macros da cores já presentes no define.h
 	green = "\033[1;32m";
 	reset = "\033[0m";
@@ -54,7 +54,7 @@ char    *get_prompt_msg(t_main *main)
 	pwd = get_envvar("PWD", &main->env_list);
 	at = "\033[1;37m at \033[0m";
 	prompt = "\n\033[1;31m|MINIHELL😈|--> \033[1;0m";
-	
+
 	logname = ft_strjoin("[", logname);
 	logname = ft_strjoin(logname, "]");
 	blue = ft_strjoin(blue, logname);
@@ -66,17 +66,16 @@ char    *get_prompt_msg(t_main *main)
 	out = ft_strjoin(blue, at);
 	out = ft_strjoin(out, green);
 	out = ft_strjoin(out, prompt);
-	
+
 	return (out);
 }
 
 //* Vai iniciar o prompt para correr o programa
-void	init_prompt(t_main	*main, char **envp)
+//!Ver uma forma de ter sempre o prompt quando se da unset ou se muda as variaveis
+void	init_prompt(t_main	*main)
 {
 	char		*input = NULL;
 
-	init_env(&main->env_list);
-	set_env_list(main, envp);
 	while (1)
 	{
 		input = readline(get_prompt_msg(main));
@@ -91,7 +90,7 @@ void	init_prompt(t_main	*main, char **envp)
 		add_history(input);
 		init_main(main, input);
 		lexer(main);
-		if (main->quotes.error == 0) 
+		if (main->quotes.error == 0)
 			test_exec(main);
 		free(input);
 	}
@@ -104,7 +103,11 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	init_prompt(&main, envp);
+	init_env(&main.env_list);
+	set_env_list(&main, envp);
+	main.env_arr = ft_calloc(sizeof(char *), 1);
+	main.exit_code = 0;
+	init_prompt(&main);
 	//tratar aspas
 	//lexer
 	//se nao tiver carecteres expeciais vai logo para a exec_cmd;

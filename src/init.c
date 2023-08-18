@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/18 16:52:45 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 21:36:47 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	init_main(t_main *main, char *input)
 {
 		main->input_prompt = input;
 		init_list(&main->tokens, main);
-		//init_env(&main->env_list);
-		main->env_arr = ft_calloc(sizeof(char *), 1);
-		//main->stdout_copy = dup(1);
-		init_ast(&main->input_exec);
 		ini_quotes(&main->quotes);
+		init_ast(&main->input_exec);
 }

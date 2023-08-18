@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/18 03:56:12 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/18 22:15:54 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,7 @@ HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(TARGET)
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
-	$(MAKE) $(NPD) -C $(LIBFTDIR)
-	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
+$(NAME): $(OBJDIR) $(TARGET) $(LIBFT) main.c
 	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)
 	echo "[$(GREEN)Success$(RESET)] ./minishell created$(BOLD)$(RESET)"
 
@@ -70,6 +67,11 @@ $(OBJDIR)/%.o : %.c $(HDR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
+
+$(LIBFT):
+	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
+	$(MAKE) $(NPD) -C $(LIBFTDIR)
+	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
 
 clean:
 	$(RM) $(OBJDIR)
