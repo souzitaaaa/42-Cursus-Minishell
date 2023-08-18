@@ -49,6 +49,8 @@ char    *get_prompt_msg(t_main *main)
 	green = "\033[1;32m";
 	reset = "\033[0m";
 	logname = get_envvar("LOGNAME", &main->env_list);
+	if (!logname)
+		logname = get_envvar("USER", &main->env_list);
 	pwd = get_envvar("PWD", &main->env_list);
 	at = "\033[1;37m at \033[0m";
 	prompt = "\n\033[1;31m|MINIHELL😈|--> \033[1;0m";
