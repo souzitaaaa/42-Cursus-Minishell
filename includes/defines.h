@@ -26,4 +26,7 @@ COLORS
 # define CYAN 	"\033[1;36m"
 # define WHITE 	"\033[1;37m"
 
+
+# define SYNTAX_ERROR "syntax error near unexpected token `"
+
 #endif

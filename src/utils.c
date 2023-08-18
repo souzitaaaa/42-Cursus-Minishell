@@ -40,28 +40,77 @@ int check_quotes(char c, int quotes)
 	return quotes;
 }
 
+// int check_quotes_print(t_main *main)
+// {
+// 	int quotes_analises = 0;
+// 	int i = 0;
+
+// 	printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+// 	while (main->input_prompt[i] != '\0') 
+// 	{
+// 		char c = main->input_prompt[i];
+// 		quotes_analises = check_quotes(c, quotes_analises);
+// 		printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
+// 		i++;
+// 	}
+	
+// 	if (quotes_analises == 1 || quotes_analises == 2)
+// 	{
+// 		printf("%s", SYNTAX_ERROR);
+// 		main->quotes.error = 1;
+// 	}
+	   		
+// 	printf("\n");
+	
+// 	return(0);
+// }
+
 int check_quotes_print(t_main *main)
 {
-	int quotes_analises = 0;
-	int i = 0;
+    int quotes_analises = 0;
+    int i = 0;
+    int open_quote_position = -1; // Posição da aspa de abertura
+    char open_quote_type = '\0';  // Tipo da aspa de abertura
 
-	printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
-	while (main->input_prompt[i] != '\0') 
-	{
-		char c = main->input_prompt[i];
-		quotes_analises = check_quotes(c, quotes_analises);
-		printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
-		i++;
-	}
+    printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+    while (main->input_prompt[i] != '\0') 
+    {
+        char c = main->input_prompt[i];
+        quotes_analises = check_quotes(c, quotes_analises);
+
+        if (c == '\'' || c == '\"')
+        {
+            if (quotes_analises == 1 && open_quote_position == -1)
+            {
+                open_quote_position = i;
+                open_quote_type = c;
+            }
+            else if (quotes_analises == 0 && open_quote_position != -1)
+            {
+                printf("Open quote of type %c at position %d, Close quote at position %d\n", open_quote_type, open_quote_position, i);
+                main->quotes.type = open_quote_type;
+				main->quotes.start = open_quote_position;
+				main->quotes.end = i;
+				open_quote_position = -1; // Reset da posição da aspa de abertura
+                open_quote_type = '\0';   // Reset do tipo da aspa de abertura
+            }
+        }
+
+        printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
+        i++;
+    }
+
+    if (quotes_analises == 1 || quotes_analises == 2)
+    {
+        printf("%s", SYNTAX_ERROR);
+        main->quotes.error = 1;
+    }
 	
-	if (quotes_analises == 1 || quotes_analises == 2)
-	{
-		//printf("%s", SYNTAX_ERROR);
-		main->quotes.error = 1;
-	}
-	   		
-	printf("\n");
-	
-	return(0);
+
+    printf("\n");
+
+    return 0;
 }
+
+
 

@@ -45,7 +45,7 @@ char    *get_prompt_msg(t_main *main)
 	char    *reset = NULL;
 	char    *out = NULL;
 	
-	blue = "\033[1;36m";
+	blue = "\033[1;36m"; //!pode usar os macros da cores já presentes no define.h
 	green = "\033[1;32m";
 	reset = "\033[0m";
 	logname = get_envvar("LOGNAME", &main->env_list);
