@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/17 23:02:10 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/18 04:10:24 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 /*
 INIT.C
 */
+void		init_env(t_env *stack);
 void		init_main(t_main *main, char *input);
 
 /*
@@ -58,18 +59,21 @@ void		set_env_arr(t_main *main);
 /*
 EXEC
 */
+void	set_exit_code(t_main *main, int exit_code);
 int		exec_cmd(char **command, t_main *main);
 void	test_exec(t_main *main);
 void	exec_other_cmd(char **cmd, t_main *main);
 void	execution(char **cmd, t_main *main);
 void	error_management(char *str, int stdout_copy, int exit_code); //temporario
-void	free_and_exit(int exit_code, char	**command, char	*pathname, int flag); //temporario
+void	free_pathname(char	*pathname, int flag); //temporario
 
 /*
 BUILTINS
 */
 int		echo(char **command);
 int		pwd(void);
+int 	ft_env(t_env *env);
+int		ft_unset(t_main *main, char *str);
 
 /*
 LEXER.C

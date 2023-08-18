@@ -1,13 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_code.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 17:48:21 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:22 by rimarque         ###   ########.fr       */
+/*   Created: 2023/08/18 00:00:35 by rimarque          #+#    #+#             */
+/*   Updated: 2023/08/18 00:05:59 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
+
+void	set_exit_code(t_main *main, int exit_code)
+{
+	main->exit_code = exit_code;
+}

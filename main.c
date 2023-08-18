@@ -12,6 +12,7 @@
 
 #include "includes/minishell.h"
 
+//* Vai iniciar o prompt para correr o programa
 void	init_prompt(t_main	*main, char **envp)
 {
 	char		*input;
@@ -26,18 +27,20 @@ void	init_prompt(t_main	*main, char **envp)
 		if (ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
+			printf("exit\n");
 			break;
 		}
 		add_history(input);
 		init_main(main, input);
 		set_env_list(main, envp);
-		//print_var(main->env_list);
 		lexer(main);
-		test_exec(main);
+		if (main->quotes.error == 0) 
+			test_exec(main);
 		free(input);
 	}
 }
 
+//* Funcao main do nosso programa
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;

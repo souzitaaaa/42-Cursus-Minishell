@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:46:02 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/16 21:56:18 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/18 03:50:52 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 //COPIA DO PIPEX
 
-void	free_and_exit(int exit_code, char	**command, char	*pathname, int flag)
+void	free_pathname(char	*pathname, int flag)
 {
 	if (flag == 1)
 		ft_free_str(&pathname);
-	ft_free_array(&command);
-	exit(exit_code);
 }
 
 void	error_management(char *str, int stdout_copy, int exit_code)

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/16 21:58:46 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/18 03:59:31 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //COPIADO DO PIPEX
-
+/*
 char	*create_pathname(char	*str, char	*str_path, int *flag)
 {
 	char	*slash_cmd;
@@ -76,7 +76,7 @@ char	*ft_pathname(int *flag, char **envp, int stdout_copy, char **cmd)
 				return (str);
 			}
 			error_management(cmd[0], stdout_copy, 0);
-			free_and_exit(127, cmd, NULL, 0);
+			free_pathname(NULL, 0);
 		}
 	}
 	if (access((const char *)cmd[0], F_OK))
@@ -102,8 +102,9 @@ void	execution(char **cmd, t_main *main)
 	else
 		error = execve((const char *)pathname, (char **const)cmd, main->env_arr);
 	if (error == -1)
-		error_management(cmd[0], main->stdout_copy, 0);
-	free_and_exit(127, cmd, pathname, flag);
+		error_management(cmd[0], main->stdout_copy, 0); //STDOUTCOPY  N EXISTE
+	free_pathname(pathname, flag);
+	set_exit_code(main, 127);
 }
 
 void	exec_other_cmd(char **cmd, t_main *main)
@@ -112,7 +113,11 @@ void	exec_other_cmd(char **cmd, t_main *main)
 
 	pid = fork();
 	if(pid == 0)
+	{
+		set_env_arr(main);
 		execution(cmd, main);
-	waitpid(pid, NULL, WNOHANG); //PESQUISAR ESTA FLAG
-}
+	}
+	waitpid(pid, NULL, 0); //PESQUISAR ESTA FLAG
+	set_exit_code(main, 0);
+}*/
 

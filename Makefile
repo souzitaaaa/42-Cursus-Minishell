@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/17 23:05:02 by joe              ###   ########.fr        #
+#    Updated: 2023/08/18 03:56:12 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ _FILES 			= init list free utils\
 					extra_tokens \
 					env_list env_arr \
 					exec_cmd execve execve_utils\
-					echo pwd
+					echo pwd env unset
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:15 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/18 03:45:18 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,37 @@
 
 int echo_newline(char *command)
 {
-    int i;
+    int count;
 
     if (ft_strncmp(command, "-n", 2))
         return (0);
-    i = 2;
-    while (command[i])
+    count = 2;
+    while (command[count])
     {
-        if (command[i] != 'n')
+        if (command[count] != 'n')
             return (0);
-        i++;
+        count++;
     }
     return (1);
 }
-
 int echo(char **command)
 {
     int flag;
-    int i;
+    int count;
 
     flag = 1;
-    i = 1;
-    while (command[i] && echo_newline(command[i]))
+    count = 1;
+    while (command[count] && echo_newline(command[count]))
     {
         flag = 0; //nao imprime newline no final
-        i++;
+        count++;
     }
-    while (command[i])
+    while (command[count])
     {
-        ft_printf("%s", command[i]);
-        if (command[i + 1])
+        ft_printf("%s", command[count]);
+        if (command[count + 1])
             ft_printf(" ");
-        i++;
+        count++;
     }
     if (flag)
         ft_printf("\n");

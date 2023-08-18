@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/17 23:09:03 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/18 04:11:29 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
+
+
+void	ini_quotes(t_quotes *quotes)
+{
+	quotes->error = 0;
+}
 
 void	init_ast(t_ast	*ast)
 {
@@ -39,6 +45,7 @@ void	init_main(t_main *main, char *input)
 		init_list(&main->tokens, main);
 		init_env(&main->env_list);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
-		main->stdout_copy = dup(1);
+		//main->stdout_copy = dup(1);
 		init_ast(&main->input_exec);
+		ini_quotes(&main->quotes);
 }

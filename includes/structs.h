@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/17 23:21:49 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/18 03:57:22 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-//#include "minishell.h"
+#include "defines.h"
 
 typedef struct s_var
 {
@@ -90,6 +90,24 @@ typedef	struct s_ast
 }
 t_ast;
 
+/*
+QUOTES STRUCT
+*/
+typedef struct s_quotes
+{
+	int				type;
+    int				start;
+    int				end;
+    int				error;
+}t_quotes;
+
+typedef struct s_std
+{
+	int	stdin;
+	int	stdout;
+	int	stderr;
+}
+t_std;
 
 /*
 MAIN STRUCT
@@ -98,9 +116,10 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
-	int				stdout_copy;
+	int				exit_code;
 	t_lexer			tokens;
 	t_env			env_list;
+	t_quotes		quotes;
 	t_ast 			input_exec;
 }t_main;
 

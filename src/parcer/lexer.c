@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 16:11:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/17 21:13:12 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 04:01:31 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void    print_tokens(t_lexer *tokens)
 	int count = 0;
 	t_node  *aux = tokens->head;
 
-				printf("\033[1;32m\tPrinting tokens\033[0m\n");
+				printf("\033[1;32m\t\tPrinting tokens\033[0m\n");
 	while (count++ < tokens->size)
 	{
 		printf("\033[1;34mindex:\033[0m %i\n", aux->index);
@@ -72,23 +72,6 @@ void    print_tokens(t_lexer *tokens)
 	}
 }
 
-int check_quotes_print(t_main *main)
-{
-    int quotes = 0;
-    int i = 0;
-
-    printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
-    while (main->input_prompt[i] != '\0') 
-    {
-        char c = main->input_prompt[i];
-        quotes = check_quotes(c, quotes);
-        printf("Character: %c, Quotes state: %d\n", c, quotes);
-        i++;
-    }
-    printf("\n");
-
-    return 0;
-}
 
 //* Funcao main do lexer, vai simplesmente iniciar a lista e
 	//* percorrer a str de input para fazer a divisao de tokens
@@ -96,7 +79,7 @@ void	lexer(t_main *main)
 {
 	int i;
 				printf("\033[1;33m\t\t[Lexer function]\033[0m\n");
-				printf("Input: %s Size: %i\n\n", main->input_prompt, main->tokens.str_len);
+				printf("Input: %s Size: %i\n", main->input_prompt, main->tokens.str_len);
 	i = 0;
 	while(main->input_prompt[i] && i <= main->tokens.str_len)
 	{
