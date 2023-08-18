@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/18 04:10:24 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:16:37 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		free_list(t_lexer *stack);
 void		free_env(t_env *stack);
 
 /*
-quotes.C
+QUOTES.C
 */
 int check_quotes(char c, int quotes);
 int check_quotes_print(t_main *main);

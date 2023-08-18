@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/18 03:57:22 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:21:23 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "defines.h"
 
+//* Cada node vai conter uma string com a variavel de ambiente
 typedef struct s_var
 {
     struct s_var    *prev;
@@ -23,6 +24,7 @@ typedef struct s_var
     struct s_var    *next;
 } t_var;
 
+//* Struct inicial da t_env
 typedef struct s_env
 {
     t_var   *head;
@@ -30,6 +32,12 @@ typedef struct s_env
     int     i;
 } t_env;
 
+
+/*
+TOKENS
+*/
+
+//* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
 	PIPE = '|',     // |
@@ -39,10 +47,6 @@ typedef enum s_type
 	APPEND = 'A',   // >>
 	STRING = 'S',   // string (pode ser comando, ficheiro)
 }t_type;
-
-/*
-TOKENS
-*/
 
 //* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
 typedef struct s_token
@@ -75,6 +79,8 @@ typedef struct s_lexer
 /*
 AST
 */
+
+//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
@@ -83,6 +89,7 @@ typedef struct s_ast_node
 }
 t_ast_node;
 
+//* Struct inicial do t_ast (abstract syntax tree)
 typedef	struct s_ast
 {
 	t_ast_node			*head;
@@ -93,6 +100,8 @@ t_ast;
 /*
 QUOTES STRUCT
 */
+
+//*Estrutura para ajudar o tratamento de quotes no lexer
 typedef struct s_quotes
 {
 	int				type;
@@ -101,6 +110,7 @@ typedef struct s_quotes
     int				error;
 }t_quotes;
 
+//* ???
 typedef struct s_std
 {
 	int	stdin;
@@ -112,6 +122,9 @@ t_std;
 /*
 MAIN STRUCT
 */
+
+//*Struct principal do programa, vai ser a struct por onde vamos conseguir aceder a tudo
+	//* que seja informacao no nosso programa
 typedef struct s_main
 {
 	char 			*input_prompt;

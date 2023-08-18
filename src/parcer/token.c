@@ -6,11 +6,26 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:02:18 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/18 04:05:29 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 18:29:02 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	get_number_len(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n <= 0)
+		len++;
+	while (n != '\0')
+	{
+		len++;
+		n = n / 10;
+	}
+	return (len);
+}
 
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
 	//* ela vai percorrer a lista das env ate achar uma identica ao valor que lhe manda-mos
@@ -23,6 +38,13 @@ char	*expand(t_main *main, char *str)
 
 			printf("\033[1;32m\t\tExpanding\033[0m\n");
 			printf("str: %s and str + 1: %s\n", str, str + 1);
+	if (ft_strncmp(str, "$?", ft_strlen(str)) == 0)
+	{
+		printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", str, main->exit_code);
+		expanded = malloc(sizeof(char) * get_number_len(main->exit_code));
+		expanded = ft_itoa(main->exit_code);
+		return (expanded);
+	}
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str + 1, aux->var, ft_strlen(str) - 1) == 0)
