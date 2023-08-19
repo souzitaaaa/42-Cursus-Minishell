@@ -42,7 +42,7 @@ OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
-_FILES 			= error_msg exit_code init list free utils\
+_FILES 			= error_msg exit_code init list free utils prompts\
 					lexer token \
 					extra_tokens \
 					env_list env_arr \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/18 23:18:06 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/19 15:45:28 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,14 @@ typedef struct s_std
 }
 t_std;
 
+
+typedef struct s_prompt
+{
+	char	*out;
+	char	*logname;
+	char	*pwd;
+}t_prompt;
+
 /*
 MAIN STRUCT
 */
@@ -137,6 +145,7 @@ typedef struct s_main
 	t_quotes		quotes;
 	t_ast 			input_exec;
 	t_std			fd;
+	t_prompt		prompt_list;
 }t_main;
 
 #endif

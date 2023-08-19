@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/19 01:20:41 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/19 16:43:29 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,9 @@ ERROR_MSG
 */
 void	error_msg_cmd(char	*str, int fd);
 void	error_msg_file(char *str, int fd);
+
+
+void	prompt_diogo(t_prompt *prompt_list);
+void	prompt_rita(t_prompt *prompt_list);
 
 #endif

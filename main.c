@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ai <jede-adi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 17:29:18 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/10 16:09:15 by jede-adi         ###   ########.fr       */
+/*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
+/*   Updated: 2023/08/19 17:31:05 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,52 +33,48 @@ char    *get_envvar(char *str, t_env *env_list)
 	return(NULL);
 }
 
+//*Inicia a struct para o tratamento do prompt
+void	init_struct_prompt(t_main *main)
+{
+	main->prompt_list.logname = NULL;
+	main->prompt_list.pwd = NULL;
+	main->prompt_list.out = NULL;
+	main->prompt_list.logname = get_envvar("LOGNAME", &main->env_list);
+	if (!main->prompt_list.logname)
+		main->prompt_list.logname = get_envvar("USER", &main->env_list);
+	main->prompt_list.pwd = get_envvar("PWD", &main->env_list);
+}
+
 //* Esta funcao está muito má, eu depois melhoro-a mas por enquanto fica assim
 char    *get_prompt_msg(t_main *main)
 {
-	char    *logname = NULL;
-	char    *pwd = NULL;
-	char    *at = NULL;
-	char    *prompt = NULL;
-	char    *blue = NULL;
-	char    *green = NULL;
-	char    *reset = NULL;
-	char    *out = NULL;
+	init_struct_prompt(main);
 
-	blue = "\033[1;36m"; //!pode usar os macros da cores já presentes no define.h
-	green = "\033[1;32m";
-	reset = "\033[0m";
-	logname = get_envvar("LOGNAME", &main->env_list);
-	if (!logname)
-		logname = get_envvar("USER", &main->env_list);
-	pwd = get_envvar("PWD", &main->env_list);
-	at = "\033[1;37m at \033[0m";
-	prompt = "\n\033[1;31m|MINIHELL😈|--> \033[1;0m";
-
-	logname = ft_strjoin("[", logname);
-	logname = ft_strjoin(logname, "]");
-	blue = ft_strjoin(blue, logname);
-	blue = ft_strjoin(blue, reset);
-	pwd = ft_strjoin("[", pwd);
-	pwd = ft_strjoin(pwd, "]");
-	green = ft_strjoin(green, pwd);
-	green = ft_strjoin(green, reset);
-	out = ft_strjoin(blue, at);
-	out = ft_strjoin(out, green);
-	out = ft_strjoin(out, prompt);
-
-	return (out);
+	if (ft_strcmp(main->prompt_list.logname, "dinoguei") == 0)
+		prompt_diogo(&main->prompt_list);
+	else if (ft_strcmp(main->prompt_list.logname, "rita") == 0
+		|| ft_strcmp(main->prompt_list.logname, "rimarque") == 0)
+		prompt_rita(&main->prompt_list);
+	//else if (ft_strcmp(main->prompt_list.logname, "jede-ara"))
+	//	prompt_jenny(main->prompt_list);
+	//else if (ft_strcmp(main->prompt_list.logname, "jcruz-da"))
+	//	prompt_jo(main->prompt_list);
+	//else
+	//	prompt_default(main->prompt_list);
+	return (main->prompt_list.out);
 }
 
 //* Vai iniciar o prompt para correr o programa
-//!Ver uma forma de ter sempre o prompt quando se da unset ou se muda as variaveis
+//! Ver uma forma de ter sempre o prompt quando se da unset ou se muda as variaveis
 void	init_prompt(t_main	*main)
 {
-	char		*input = NULL;
+	char	*input = NULL;
+	char	*prompt = NULL;
 
 	while (1)
 	{
-		input = readline(get_prompt_msg(main));
+		prompt = get_prompt_msg(main);
+		input = readline(prompt);
 		if (input == NULL)
 			break;
 		if (ft_strcmp(input, "exit") == 0)
@@ -93,6 +89,7 @@ void	init_prompt(t_main	*main)
 		if (main->quotes.error == 0)
 			test_exec(main);
 		free(input);
+		free(prompt);
 	}
 }
 
