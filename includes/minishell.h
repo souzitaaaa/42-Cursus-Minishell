@@ -61,7 +61,7 @@ void		set_env_arr(t_main *main);
 EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
-int		exec_cmd(char **command, t_main *main);
+int	exec_cmd(char **command, t_main *main);
 void	test_exec(t_main *main);
 void	exec_other_cmd(char **cmd, t_main *main);
 void	execution(char **cmd, t_main *main);
@@ -108,7 +108,7 @@ int check_quotes_print(t_main *main);
 /*
 ERROR_MSG
 */
-void	error_msg_cmd(char	*str, int fd);
+void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
 
 

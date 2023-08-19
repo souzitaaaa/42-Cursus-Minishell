@@ -86,6 +86,7 @@ typedef struct s_ast_node
 	struct s_ast_node	*left;
 	t_token				token;
 	struct s_ast_node	*right;
+	struct s_ast_node	*prev;
 }
 t_ast_node;
 
@@ -94,6 +95,7 @@ typedef	struct s_ast
 {
 	t_ast_node			*head;
 	int					counter;
+	int					size; //number of nodes/operators
 }
 t_ast;
 

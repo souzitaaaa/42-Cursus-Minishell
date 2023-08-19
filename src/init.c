@@ -40,9 +40,9 @@ void	init_env(t_env *stack)
 }
 void	init_std(t_std *fd)
 {
-	fd->stdin = dup(0);
-	fd->stdout = dup(1);
-	fd->stderr = dup(2);
+	fd->stdin = dup(STDIN_FILENO);
+	fd->stdout = dup(STDOUT_FILENO);
+	fd->stderr = dup(STDERR_FILENO);
 }
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
 // Ou seja, as estruturas relacionadas com o imput

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/19 01:36:04 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:19:20 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//COPIADO DO PIPEX
 
 char	*create_pathname(char	*str, char	*str_path, int *flag)
 {
@@ -109,6 +107,7 @@ void	execution(char **cmd, t_main *main)
 void	exec_other_cmd(char **cmd, t_main *main)
 {
 	int	pid;
+	int exit_status;
 
 	pid = fork();
 	if(pid == 0)
@@ -116,8 +115,10 @@ void	exec_other_cmd(char **cmd, t_main *main)
 		set_env_arr(main);
 		execution(cmd, main);
 	}
-	waitpid(pid, NULL, 0);
-	//se o exit code do processo child for nao for 127 entao seu seto o exit code a 0??
-	//set_exit_code(main, 0); //!rever exitcodes
+	waitpid(pid, &exit_status, 0);
+	if(exit_status != 0)
+		set_exit_code(main, 127);
+	else
+		set_exit_code(main, 0);
 }
 
