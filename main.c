@@ -88,7 +88,7 @@ void	init_prompt(t_main	*main)
 			break;
 		}
 		add_history(input);
-		init_main(main, input);
+		init_input(main, input);
 		lexer(main);
 		if (main->quotes.error == 0)
 			test_exec(main);
@@ -103,10 +103,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	init_env(&main.env_list);
-	set_env_list(&main, envp);
-	main.env_arr = ft_calloc(sizeof(char *), 1);
-	main.exit_code = 0;
+	init_main(&main, envp);
 	init_prompt(&main);
 	//tratar aspas
 	//lexer

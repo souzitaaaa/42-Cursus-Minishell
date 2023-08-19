@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/18 18:16:37 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/19 01:20:41 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@
 INIT.C
 */
 void		init_env(t_env *stack);
-void		init_main(t_main *main, char *input);
+void		init_input(t_main *main, char *input);
+void		init_main(t_main *main, char ** env);
 
 /*
 LIST.C
@@ -64,8 +65,8 @@ int		exec_cmd(char **command, t_main *main);
 void	test_exec(t_main *main);
 void	exec_other_cmd(char **cmd, t_main *main);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str, int stdout_copy, int exit_code); //temporario
-void	free_pathname(char	*pathname, int flag); //temporario
+void	error_management(char *str, t_main *main);
+void	free_pathname(char	*pathname, int flag);
 
 /*
 BUILTINS
@@ -103,5 +104,11 @@ QUOTES.C
 */
 int check_quotes(char c, int quotes);
 int check_quotes_print(t_main *main);
+
+/*
+ERROR_MSG
+*/
+void	error_msg_cmd(char	*str, int fd);
+void	error_msg_file(char *str, int fd);
 
 #endif

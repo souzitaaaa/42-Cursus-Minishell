@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/18 22:15:54 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/19 01:17:58 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,11 +42,11 @@ OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
-_FILES 			= init list free utils\
+_FILES 			= error_msg exit_code init list free utils\
 					lexer token \
 					extra_tokens \
 					env_list env_arr \
-					exec_cmd execve execve_utils\
+					exec_cmd execve execve_utils \
 					echo pwd env unset
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

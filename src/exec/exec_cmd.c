@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 03:51:25 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:26:40 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,15 @@ int	exec_cmd(char **command, t_main *main)
 	/*else if (ft_strcmp(command[0], "cd") == 0)
 		exec = ft_cd();*/
 	else if (ft_strcmp(command[0], "env") == 0)
-		exec = ft_env(&main->env_list); 
+		exec = ft_env(&main->env_list);
 	/*else if (ft_strcmp(command[0], "export") == 0)
 		exec = ft_export();*/
 	else if (ft_strcmp(command[0], "unset") == 0)
 		exec = ft_unset(main, command[1]);
 	/*else if (ft_strcmp(command[0], "exit") == 0)
-		exec = ft_exit();
+		exec = ft_exit();*/
    	else
-       exec_other_cmd(command, main);*/
+       exec_other_cmd(command, main);
 	return (exec);
 }
 

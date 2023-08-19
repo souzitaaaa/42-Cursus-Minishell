@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/18 03:59:31 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/19 01:36:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 //COPIADO DO PIPEX
-/*
+
 char	*create_pathname(char	*str, char	*str_path, int *flag)
 {
 	char	*slash_cmd;
@@ -59,7 +59,7 @@ char	*find_path(char	*str, char	**envp, int *flag)
 	return (str);
 }
 
-char	*ft_pathname(int *flag, char **envp, int stdout_copy, char **cmd)
+char	*ft_pathname(int *flag, char **envp, char **cmd, t_main *main)
 {
 	int		len;
 	char	*str;
@@ -75,7 +75,7 @@ char	*ft_pathname(int *flag, char **envp, int stdout_copy, char **cmd)
 				str = cmd[0] + 2;
 				return (str);
 			}
-			error_management(cmd[0], stdout_copy, 0);
+			error_management(cmd[0], main);
 			free_pathname(NULL, 0);
 		}
 	}
@@ -92,7 +92,7 @@ void	execution(char **cmd, t_main *main)
 	int		error;
 	int		flag;
 
-	pathname = ft_pathname(&flag, main->env_arr, main->stdout_copy, cmd);
+	pathname = ft_pathname(&flag, main->env_arr, cmd, main);
 	if (!strncmp("./", cmd[0], 2))
 	{
 		cmd[0] = cmd[0] + 2;
@@ -102,9 +102,8 @@ void	execution(char **cmd, t_main *main)
 	else
 		error = execve((const char *)pathname, (char **const)cmd, main->env_arr);
 	if (error == -1)
-		error_management(cmd[0], main->stdout_copy, 0); //STDOUTCOPY  N EXISTE
+		error_management(cmd[0], main);
 	free_pathname(pathname, flag);
-	set_exit_code(main, 127);
 }
 
 void	exec_other_cmd(char **cmd, t_main *main)
@@ -117,7 +116,8 @@ void	exec_other_cmd(char **cmd, t_main *main)
 		set_env_arr(main);
 		execution(cmd, main);
 	}
-	waitpid(pid, NULL, 0); //PESQUISAR ESTA FLAG
-	set_exit_code(main, 0);
-}*/
+	waitpid(pid, NULL, 0);
+	//se o exit code do processo child for nao for 127 entao seu seto o exit code a 0??
+	//set_exit_code(main, 0); //!rever exitcodes
+}
 

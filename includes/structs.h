@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/18 18:21:23 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:18:06 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,9 @@ typedef struct s_quotes
     int				error;
 }t_quotes;
 
-//* ???
+//* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
+//--> quando se manda msg de erro deve sempre escrever-se para o stderr
+//--> para usar nas redirecoes
 typedef struct s_std
 {
 	int	stdin;
@@ -134,6 +136,7 @@ typedef struct s_main
 	t_env			env_list;
 	t_quotes		quotes;
 	t_ast 			input_exec;
+	t_std			fd;
 }t_main;
 
 #endif
