@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/19 01:17:58 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/19 23:11:11 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(LIBFT):
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
+	echo "[$(CYAN)Compiling$(RESET)] libft$(RESET)"
 	$(MAKE) $(NPD) -C $(LIBFTDIR)
 	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
 

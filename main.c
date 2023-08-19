@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/19 17:31:05 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/19 23:12:38 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,19 @@ void	init_struct_prompt(t_main *main)
 char    *get_prompt_msg(t_main *main)
 {
 	init_struct_prompt(main);
-
 	if (ft_strcmp(main->prompt_list.logname, "dinoguei") == 0)
 		prompt_diogo(&main->prompt_list);
 	else if (ft_strcmp(main->prompt_list.logname, "rita") == 0
 		|| ft_strcmp(main->prompt_list.logname, "rimarque") == 0)
 		prompt_rita(&main->prompt_list);
-	//else if (ft_strcmp(main->prompt_list.logname, "jede-ara"))
-	//	prompt_jenny(main->prompt_list);
-	//else if (ft_strcmp(main->prompt_list.logname, "jcruz-da"))
-	//	prompt_jo(main->prompt_list);
-	//else
-	//	prompt_default(main->prompt_list);
+	else if (ft_strcmp(main->prompt_list.logname, "jede-ara") == 0
+		|| ft_strcmp(main->prompt_list.logname, "Jennifer") == 0)
+		prompt_jenny(&main->prompt_list);
+	else if (ft_strcmp(main->prompt_list.logname, "jcruz-da") == 0
+		|| ft_strcmp(main->prompt_list.logname, "User") == 0)
+		prompt_jo(&main->prompt_list);
+	else
+		prompt_default(&main->prompt_list);
 	return (main->prompt_list.out);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/08/19 17:16:53 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/19 23:11:32 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ COLORS
 # define BRIGHT_MAGENTA 	"\033[1;95m"
 # define GRAY	"\033[1;90m"
 # define COL_RESET     "\x1b[0m"
-# define BCKGRD_COL_RED   "\e[48;2;200;0;0m"
-# define BCKGRD_COL_GREEN "\e[48;2;0;200;0m"
-# define BCKGRD_COL_BLUE  "\e[48;2;0;0;200m" // where rrr;ggg;bbb in 48;2;rrr;ggg;bbbm can go from 0 to 255 respectively
-# define BCKGRD_COL_MIKU   "\e[48;2;71;200;192m"
-# define BCKGRD_COL_PINK "\e[48;2;255;204;229m"
-# define BCKGRD_COL_WHITE "\e[48;2;255;255;255m"
+# define BCKGRD_RED   "\e[48;2;200;0;0m"
+# define BCKGRD_GREEN "\e[48;2;0;200;0m"
+# define BCKGRD_BLUE  "\e[48;2;0;0;200m" // where rrr;ggg;bbb in 48;2;rrr;ggg;bbbm can go from 0 to 255 respectively
+# define BCKGRD_MIKU   "\e[48;2;71;200;192m"
+# define BCKGRD_PINK "\e[48;2;249;245;246m"
+# define BCKGRD_WHITE "\e[48;2;255;255;255m"
 # define COLOR_BOLD  "\x1B[1m"
 # define COLOR_OFF   "\x1B[0m"
 # define ANSI_COLOR(r, g, b) "\033[38;2;" #r ";" #g ";" #b "m"
@@ -46,6 +46,11 @@ COLORS
 # define RGB_BLUE ANSI_COLOR(45, 55, 140)
 # define RGB_GREEN ANSI_COLOR(34, 151, 86)
 # define RGB_PINK ANSI_COLOR(209, 116, 168)
+# define RGB_WHITE_JEN ANSI_COLOR(249, 245, 246)
+# define RGB_PINK_2 ANSI_COLOR(253, 206, 223)
+# define RGB_PINK_3 ANSI_COLOR(242, 190, 209)
+# define RGB_PURPLE ANSI_COLOR(151, 78, 195)
+# define RGB_PURPLE_2 ANSI_COLOR(254, 123, 229)
 
 # define SYNTAX_ERROR "syntax error near unexpected token `"
 # define CMD_ERROR "command not found"
