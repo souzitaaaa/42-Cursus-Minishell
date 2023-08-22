@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:35:10 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/16 14:46:24 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:04:12 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	search_extra_tokens(t_main *main, int *i)
 		else
 			run = false;
 	}
-				//printf("start %i i(end) %i\n", start, *i);
+			//printf("start %i i(end) %i\n", start, *i);
 	str = ft_substr(main->input_prompt, start, (*i - start));
-				//printf("string: %s\n", str);
+			//printf("string: %s\n", str);
 	add_token(main, STRING, i, str);
 	(*i)--;
 }

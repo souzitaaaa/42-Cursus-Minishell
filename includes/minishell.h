@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/19 23:11:46 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:48:30 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ EXTRA_TOKENS.C
 */
 void	search_extra_tokens(t_main *main, int *i);
 bool	special_chr(char c);
+
+/*
+OUTPUT_TOKENS.C
+*/
+void    search_output_tokens(t_main *main, int *i);
 
 /*
 TOKEN.C

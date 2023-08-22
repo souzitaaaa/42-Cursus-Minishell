@@ -6,14 +6,21 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/19 15:45:28 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:51:35 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include "defines.h"
+# include "defines.h"
+# include "minishell.h"
+# include <stdbool.h>
+
+typedef struct s_bool
+{
+	bool            put_node_behind;
+} t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
 typedef struct s_var
@@ -32,11 +39,9 @@ typedef struct s_env
     int     i;
 } t_env;
 
-
 /*
 TOKENS
 */
-
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
@@ -148,6 +153,7 @@ typedef struct s_main
 	t_ast 			input_exec;
 	t_std			fd;
 	t_prompt		prompt_list;
+	t_bool          flags;
 }t_main;
 
 #endif

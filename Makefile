@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/19 23:11:11 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/22 15:45:58 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJDIR			= obj
 NAME 			= minishell
 _FILES 			= error_msg exit_code init list free utils prompts\
 					lexer token \
-					extra_tokens \
+					extra_tokens output_tokens\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
 					echo pwd env unset
