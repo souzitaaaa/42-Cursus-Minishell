@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/22 15:45:58 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/24 13:42:55 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,10 +43,10 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 _FILES 			= error_msg exit_code init list free utils prompts\
-					lexer token \
+					lexer token ast\
 					extra_tokens output_tokens\
 					env_list env_arr \
-					exec_cmd execve execve_utils \
+					exec_cmd execve execve_utils pipe\
 					echo pwd env unset
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

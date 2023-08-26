@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 23:26:40 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/26 16:28:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int init_builtins(char  *str)
     return (0);
 }
 
-int	exec_cmd(char **command, t_main *main)
+int	exec_cmd(char **command, t_main *main, bool pipe)
 {
 	int	exec;
 
 	exec = 0;
 	if (ft_strcmp(command[0], "echo") == 0)
-		exec = echo(command);
+		echo(command, main, pipe);
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		exec = pwd();
 	/*else if (ft_strcmp(command[0], "cd") == 0)
@@ -41,7 +41,12 @@ int	exec_cmd(char **command, t_main *main)
 	/*else if (ft_strcmp(command[0], "exit") == 0)
 		exec = ft_exit();*/
    	else
-       exec_other_cmd(command, main);
+	{
+		//dup2(main->fd.stdout, STDOUT_FILENO);
+		//printf("entra aqui\n");
+		exec_other_cmd(command, main, pipe);
+	}
+	//printf("sai aqui");
 	return (exec);
 }
 
@@ -52,7 +57,7 @@ void    test_exec(t_main *main)
 
 	while (count++ < main->tokens.size)
 	{
-        exec_cmd(aux->token.arr, main);
+        exec_cmd(aux->token.arr, main, false);
 		aux = aux->next;
 	}
 }

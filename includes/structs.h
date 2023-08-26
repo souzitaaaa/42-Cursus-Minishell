@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/22 16:51:35 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:28:50 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,13 @@ typedef struct s_lexer
 /*
 AST
 */
-
-//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
 	t_token				token;
 	struct s_ast_node	*right;
 	struct s_ast_node	*prev;
+	int					index; //!o index esta ao contrario da arvore, a favor da ordem de execução
 }
 t_ast_node;
 
@@ -103,7 +102,6 @@ typedef	struct s_ast
 	int					size; //number of nodes/operators
 }
 t_ast;
-
 /*
 QUOTES STRUCT
 */

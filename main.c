@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/19 23:12:38 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/25 13:08:31 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,17 @@ void	init_prompt(t_main	*main)
 		init_input(main, input);
 		lexer(main);
 		if (main->quotes.error == 0)
-			test_exec(main);
+		{
+			if(main->tokens.size > 1)
+			{
+				//analise sintática ->//* se tiver pipes faz arvore, se n tiver pipes n faz
+				test_ast(main->tokens, &main->input_exec);
+				//printf("init exec\n");
+				init_pipe(main->input_exec, main);
+			}
+			else
+				test_exec(main);
+		}
 		free(input);
 		free(prompt);
 	}

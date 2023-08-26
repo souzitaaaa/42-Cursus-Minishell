@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:02:18 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/18 22:02:36 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/24 16:53:25 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_node	*create_n(t_main *main, t_type token, int *index, char *str)
 	new->token.type = token;
 	arr = ft_split(str, 32);
 	check_expansion(main, arr);
-	new->token.arr = malloc(sizeof(char *) * ft_arrlen(arr) + 1);
+	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	//! falta o free da arr
 	return (new);

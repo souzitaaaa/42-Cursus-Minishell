@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:46:02 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/19 01:29:26 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:54:02 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	error_management(char *str, t_main *main)
 		error_msg_cmd(str, main->fd.stderr);
 	else 													//se começar por "/"" (ou seja se der o caminho)
 		error_msg_file(str, main->fd.stderr);
+	exit(127);
 }

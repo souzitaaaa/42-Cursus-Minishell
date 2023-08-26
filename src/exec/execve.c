@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/19 18:19:20 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/26 17:56:23 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	execution(char **cmd, t_main *main)
 	int		error;
 	int		flag;
 
+	//printf("entra aqui exec \n");
 	pathname = ft_pathname(&flag, main->env_arr, cmd, main);
 	if (!strncmp("./", cmd[0], 2))
 	{
@@ -104,21 +105,24 @@ void	execution(char **cmd, t_main *main)
 	free_pathname(pathname, flag);
 }
 
-void	exec_other_cmd(char **cmd, t_main *main)
+void	exec_other_cmd(char **cmd, t_main *main, bool pipe)
 {
 	int	pid;
 	int exit_status;
 
-	pid = fork();
-	if(pid == 0)
-	{
-		set_env_arr(main);
+	set_env_arr(main);
+	if(pipe)
 		execution(cmd, main);
-	}
-	waitpid(pid, &exit_status, 0);
-	if(exit_status != 0)
-		set_exit_code(main, 127);
 	else
-		set_exit_code(main, 0);
+	{
+		pid = fork();
+		if(pid == 0)
+			execution(cmd, main);
+		waitpid(pid, &exit_status, 0);
+		if (WEXITSTATUS(exit_status) != 0)
+			set_exit_code(main, WEXITSTATUS(exit_status));
+		else
+			set_exit_code(main, 0);
+	}
 }
 
