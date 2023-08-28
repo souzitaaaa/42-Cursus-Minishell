@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/28 10:00:32 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +69,6 @@ void	init_main(t_main *main, char **envp)
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
 		main->exit_code = 0;
+		main->fork = 0;
+		main->proc = 0;
 }
