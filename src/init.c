@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/24 15:35:47 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:00:32 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_input(t_main *main, char *input)
 		main->input_prompt = input;
 		init_list(&main->tokens, main);
 		ini_quotes(&main->quotes);
-		init_ast(&main->input_exec);
+		init_ast(&main->ast);
 		init_std(&main->fd); //!duvida se é aqui ou no init main
 		init_bool(&main->flags);
 }

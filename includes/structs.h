@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/24 17:28:50 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/27 00:45:23 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ typedef struct s_main
 	t_lexer			tokens;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			input_exec;
+	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;

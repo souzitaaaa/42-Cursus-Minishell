@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/26 16:28:42 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:04:37 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,26 +58,6 @@ void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
 
 /*
-EXEC
-*/
-void	set_exit_code(t_main *main, int exit_code);
-int		exec_cmd(char **command, t_main *main, bool pipe);
-void	test_exec(t_main *main);
-void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
-void	execution(char **cmd, t_main *main);
-void	error_management(char *str, t_main *main);
-void	free_pathname(char	*pathname, int flag);
-void	init_pipe(t_ast ast, t_main *main);
-
-/*
-BUILTINS
-*/
-void	echo(char **command, t_main *main, bool pipe);
-int		pwd(void);
-int 	ft_env(t_env *env);
-int		ft_unset(t_main *main, char *str);
-
-/*
 LEXER.C
 */
 void	lexer(t_main *main);
@@ -99,10 +79,39 @@ TOKEN.C
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
 
+
 /*
-AST
+PARCER
 */
+void	parcer(t_main *main);
 void	test_ast(t_lexer tokens, t_ast *ast);
+
+/*
+EXEC
+*/
+void	set_exit_code(t_main *main, int exit_code);
+void	exec_cmd(char **command, t_main *main, bool pipe);
+
+/*
+BUILTINS
+*/
+void	echo(char **command, t_main *main, bool pipe);
+int		pwd(void);
+int 	ft_env(t_env *env);
+int		ft_unset(t_main *main, char *str);
+
+/*
+EXECVE
+*/
+void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
+void	execution(char **cmd, t_main *main);
+void	error_management(char *str, t_main *main);
+void	free_pathname(char	*pathname, int flag);
+
+/*
+PIPES
+*/
+void	init_pipe(t_ast ast, t_main *main);
 
 /*
 FREE.C

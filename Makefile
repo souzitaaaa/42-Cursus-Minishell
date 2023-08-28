@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/24 13:42:55 by rimarque         ###   ########.fr        #
+#    Updated: 2023/08/28 10:01:17 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 _FILES 			= error_msg exit_code init list free utils prompts\
-					lexer token ast\
+					lexer token parcer ast\
 					extra_tokens output_tokens\
 					env_list env_arr \
 					exec_cmd execve execve_utils pipe\

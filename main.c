@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/25 13:08:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/27 01:11:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,10 @@ void	init_prompt(t_main	*main)
 		}
 		add_history(input);
 		init_input(main, input);
+		if (main->quotes.error)
+			break ;
 		lexer(main);
-		if (main->quotes.error == 0)
-		{
-			if(main->tokens.size > 1)
-			{
-				//analise sintática ->//* se tiver pipes faz arvore, se n tiver pipes n faz
-				test_ast(main->tokens, &main->input_exec);
-				//printf("init exec\n");
-				init_pipe(main->input_exec, main);
-			}
-			else
-				test_exec(main);
-		}
+		parcer(main);
 		free(input);
 		free(prompt);
 	}
