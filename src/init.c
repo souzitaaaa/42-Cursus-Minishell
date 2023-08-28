@@ -6,7 +6,6 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/28 17:29:31 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +22,7 @@ void	init_ast(t_ast	*ast)
 {
 	ast->head = NULL;
 	ast->counter = 0;
+	ast->size = 0;
 }
 
 void	init_list(t_lexer *stack, t_main *main)
@@ -57,7 +57,7 @@ void	init_input(t_main *main, char *input)
 		main->input_prompt = input;
 		init_list(&main->tokens, main);
 		ini_quotes(&main->quotes);
-		init_ast(&main->input_exec);
+		init_ast(&main->ast);
 		init_std(&main->fd); //!duvida se é aqui ou no init main
 		init_bool(&main->flags);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/28 18:13:12 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/28 10:04:37 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
+
 
 /*
 !GLOBAL VARIABLE
@@ -113,6 +114,42 @@ t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
 
 
+
+/*
+!PARCER
+*/
+void	parcer(t_main *main);
+void	test_ast(t_lexer tokens, t_ast *ast);
+
+/*
+!EXEC
+*/
+void	set_exit_code(t_main *main, int exit_code);
+void	exec_cmd(char **command, t_main *main, bool pipe);
+
+/*
+!BUILTINS
+*/
+void	echo(char **command, t_main *main, bool pipe);
+int		pwd(void);
+int 	ft_env(t_env *env);
+int		ft_unset(t_main *main, char *str);
+
+/*
+!EXECVE
+*/
+void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
+void	execution(char **cmd, t_main *main);
+void	error_management(char *str, t_main *main);
+void	free_pathname(char	*pathname, int flag);
+
+
+/*
+!PIPES
+*/
+void	init_pipe(t_ast ast, t_main *main);
+
+
 /*
 !FREE.C
 */
@@ -148,6 +185,5 @@ void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);
 void	prompt_jo(t_prompt *prompt_list);
 void    prompt_default(t_prompt *prompt_list);
-
 
 #endif

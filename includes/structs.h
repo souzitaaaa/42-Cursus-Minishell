@@ -84,14 +84,13 @@ typedef struct s_lexer
 /*
 AST
 */
-
-//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
 	t_token				token;
 	struct s_ast_node	*right;
 	struct s_ast_node	*prev;
+	int					index; //!o index esta ao contrario da arvore, a favor da ordem de execução
 }
 t_ast_node;
 
@@ -103,7 +102,6 @@ typedef	struct s_ast
 	int					size; //number of nodes/operators
 }
 t_ast;
-
 /*
 QUOTES STRUCT
 */
@@ -151,7 +149,7 @@ typedef struct s_main
 	t_lexer			tokens;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			input_exec;
+	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;

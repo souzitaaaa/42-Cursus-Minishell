@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 03:45:18 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/26 16:28:37 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int echo_newline(char *command)
     }
     return (1);
 }
-int echo(char **command)
+void    echo(char **command, t_main *main, bool pipe)
 {
     int flag;
     int count;
@@ -48,5 +48,7 @@ int echo(char **command)
     }
     if (flag)
         ft_printf("\n");
-    return (0);
+    if (pipe)
+        exit(0);
+    set_exit_code(main, 0);
 }

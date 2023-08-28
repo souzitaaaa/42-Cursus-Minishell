@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 23:26:40 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/28 10:05:00 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,22 @@ int init_builtins(char  *str)
     return (0);
 }
 
-int	exec_cmd(char **command, t_main *main)
+void	exec_cmd(char **command, t_main *main, bool pipe)
 {
-	int	exec;
-
-	exec = 0;
 	if (ft_strcmp(command[0], "echo") == 0)
-		exec = echo(command);
+		echo(command, main, pipe);
 	else if (ft_strcmp(command[0], "pwd") == 0)
-		exec = pwd();
+		pwd();
 	/*else if (ft_strcmp(command[0], "cd") == 0)
 		exec = ft_cd();*/
 	else if (ft_strcmp(command[0], "env") == 0)
-		exec = ft_env(&main->env_list);
+		ft_env(&main->env_list);
 	/*else if (ft_strcmp(command[0], "export") == 0)
 		exec = ft_export();*/
 	else if (ft_strcmp(command[0], "unset") == 0)
-		exec = ft_unset(main, command[1]);
+		ft_unset(main, command[1]);
 	/*else if (ft_strcmp(command[0], "exit") == 0)
 		exec = ft_exit();*/
    	else
-       exec_other_cmd(command, main);
-	return (exec);
-}
-
-void    test_exec(t_main *main)
-{
-    int count = 0;
-	t_node  *aux = main->tokens.head;
-
-	while (count++ < main->tokens.size)
-	{
-        exec_cmd(aux->token.arr, main);
-		aux = aux->next;
-	}
+		exec_other_cmd(command, main, pipe);
 }

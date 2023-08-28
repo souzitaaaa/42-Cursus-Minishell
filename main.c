@@ -90,9 +90,10 @@ void	init_prompt(t_main	*main)
 		add_history(input);
 		init_input(main, input);
 		ft_wait(main);
+		if (main->quotes.error)
+			break ;
 		lexer(main);
-		if (main->quotes.error == 0)
-			test_exec(main);
+		parcer(main);
 		free(input);
 		free(prompt);
 	}
