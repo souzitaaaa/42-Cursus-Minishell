@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:15 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 17:13:58 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/17 23:09:58 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/structs.h"
 
-void	free_list(t_list *stack)
+void	free_list(t_lexer *stack)
 {
 	t_node	*element;
 	t_node	*temp;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 14:19:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/12 14:25:13 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:09:36 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
+
 	write(fd, &c, 1);
 }
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/01/02 10:42:54 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/18 22:06:49 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ char	*ft_strjoin(char *str, const char *str2)
 		temp[len1 + i++] = *str2++;
 	temp[len1 + i] = '\0';
 	return (temp);
+}
+
+char	*ft_strjoinfree(char const *s1, char const *s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_s;
+
+	if (!s1 || !s2)
+		return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!new_s)
+		return (0);
+	ft_strlcpy(new_s, s1, (s1_len + 1));
+
+	ft_strlcpy((new_s + s1_len), s2, (s2_len + 1));
+	if (*s1)
+		ft_free_str((char **)&s1);
+	return (new_s);
 }
 /*
 int	main(void)

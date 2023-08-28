@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/16 18:13:27 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/08/28 10:01:17 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,29 +36,28 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp builtins
+_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
-_FILES 			= init list free utils\
-					lexer token \
-					env \
-					builtins echo pwd
+_FILES 			= error_msg exit_code init list free utils prompts\
+					lexer token parcer ast\
+					extra_tokens output_tokens\
+					env_list env_arr \
+					exec_cmd execve execve_utils pipe\
+					echo pwd env unset
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= env.h parcer.h minishell.h
+_HEADERS		= structs.h defines.h minishell.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
 
 all: $(NAME)
 
-$(NAME): $(OBJDIR) $(TARGET)
-	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) libft$(RESET)"
-	$(MAKE) $(NPD) -C $(LIBFTDIR)
-	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
+$(NAME): $(OBJDIR) $(TARGET) $(LIBFT) main.c
 	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)
 	echo "[$(GREEN)Success$(RESET)] ./minishell created$(BOLD)$(RESET)"
 
@@ -68,6 +67,11 @@ $(OBJDIR)/%.o : %.c $(HDR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
+
+$(LIBFT):
+	echo "[$(CYAN)Compiling$(RESET)] libft$(RESET)"
+	$(MAKE) $(NPD) -C $(LIBFTDIR)
+	echo "[$(GREEN)Success$(RESET)] Libft compilation compleated!$(BOLD)$(RESET)"
 
 clean:
 	$(RM) $(OBJDIR)

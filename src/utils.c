@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:51:38 by joe               #+#    #+#             */
-/*   Updated: 2023/08/16 16:10:36 by joe              ###   ########.fr       */
+/*   Updated: 2023/08/18 03:57:40 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,96 @@
  *                o valor atual de 'quotes' se nenhum estado de citação mudou.
  */
 
-// int check_quotes(char c, int quotes) 
-// {
-//     if (c == '\"') {
-//         if (!quotes)
-//             return 1;  // Início de uma citação de aspas duplas
-//         else if (quotes == 1)
-//             return 0;  // Fim de uma citação de aspas duplas
-//     } else if (c == '\'') {
-//         if (!quotes)
-//             return 2;  // Início de uma citação de aspas simples
-//         else if (quotes == 2)
-//             return 0;  // Fim de uma citação de aspas simples
-//     }
-//     return quotes;  // Retorna o estado atual de citação
-// }
-
+#include "../includes/minishell.h"
+#include "../includes/structs.h"
 
 int check_quotes(char c, int quotes) 
 {
-    if (c == '\"') {
-        if (!quotes)
-            return 1;
-        else if (quotes == 1)
-            return 0;
-    } else if (c == '\'') {
-        if (!quotes)
-            return 2;
-        else if (quotes == 2)
-            return 0;
-    }
-    return quotes;
+	if (c == '\"') {
+		if (!quotes)
+			return 1;
+		else if (quotes == 1)
+			return 0;
+	} else if (c == '\'') {
+		if (!quotes)
+			return 2;
+		else if (quotes == 2)
+			return 0;
+	}
+	return quotes;
 }
+
+// int check_quotes_print(t_main *main)
+// {
+// 	int quotes_analises = 0;
+// 	int i = 0;
+
+// 	printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+// 	while (main->input_prompt[i] != '\0') 
+// 	{
+// 		char c = main->input_prompt[i];
+// 		quotes_analises = check_quotes(c, quotes_analises);
+// 		printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
+// 		i++;
+// 	}
+	
+// 	if (quotes_analises == 1 || quotes_analises == 2)
+// 	{
+// 		printf("%s", SYNTAX_ERROR);
+// 		main->quotes.error = 1;
+// 	}
+	   		
+// 	printf("\n");
+	
+// 	return(0);
+// }
+
+int check_quotes_print(t_main *main)
+{
+    int quotes_analises = 0;
+    int i = 0;
+    int open_quote_position = -1; // Posição da aspa de abertura
+    char open_quote_type = '\0';  // Tipo da aspa de abertura
+
+    printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+    while (main->input_prompt[i] != '\0') 
+    {
+        char c = main->input_prompt[i];
+        quotes_analises = check_quotes(c, quotes_analises);
+
+        if (c == '\'' || c == '\"')
+        {
+            if (quotes_analises == 1 && open_quote_position == -1)
+            {
+                open_quote_position = i;
+                open_quote_type = c;
+            }
+            else if (quotes_analises == 0 && open_quote_position != -1)
+            {
+                printf("Open quote of type %c at position %d, Close quote at position %d\n", open_quote_type, open_quote_position, i);
+                main->quotes.type = open_quote_type;
+				main->quotes.start = open_quote_position;
+				main->quotes.end = i;
+				open_quote_position = -1; // Reset da posição da aspa de abertura
+                open_quote_type = '\0';   // Reset do tipo da aspa de abertura
+            }
+        }
+
+        printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
+        i++;
+    }
+
+    if (quotes_analises == 1 || quotes_analises == 2)
+    {
+        printf("%s", SYNTAX_ERROR);
+        main->quotes.error = 1;
+    }
+	
+
+    printf("\n");
+
+    return 0;
+}
+
+
 
