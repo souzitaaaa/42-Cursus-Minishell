@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/19 23:12:38 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/28 18:11:10 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int	g_ex_status;
 
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
@@ -58,7 +60,7 @@ char    *get_prompt_msg(t_main *main)
 		|| ft_strcmp(main->prompt_list.logname, "Jennifer") == 0)
 		prompt_jenny(&main->prompt_list);
 	else if (ft_strcmp(main->prompt_list.logname, "jcruz-da") == 0
-		|| ft_strcmp(main->prompt_list.logname, "User") == 0)
+		|| ft_strcmp(main->prompt_list.logname, "joe") == 0)
 		prompt_jo(&main->prompt_list);
 	else
 		prompt_default(&main->prompt_list);
@@ -74,6 +76,7 @@ void	init_prompt(t_main	*main)
 
 	while (1)
 	{
+		signals();
 		prompt = get_prompt_msg(main);
 		input = readline(prompt);
 		if (input == NULL)
@@ -86,6 +89,7 @@ void	init_prompt(t_main	*main)
 		}
 		add_history(input);
 		init_input(main, input);
+		ft_wait(main);
 		lexer(main);
 		if (main->quotes.error == 0)
 			test_exec(main);

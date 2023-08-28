@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/22 16:51:35 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:28:44 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,16 +137,17 @@ typedef struct s_prompt
 }t_prompt;
 
 /*
-MAIN STRUCT
+!MAIN STRUCT
 */
-
 //*Struct principal do programa, vai ser a struct por onde vamos conseguir aceder a tudo
-	//* que seja informacao no nosso programa
+//* que seja informacao no nosso programa
 typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
 	int				exit_code;
+	int				fork;
+	int				proc;
 	t_lexer			tokens;
 	t_env			env_list;
 	t_quotes		quotes;
@@ -154,6 +155,7 @@ typedef struct s_main
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
+	pid_t			pid;
 }t_main;
 
 #endif

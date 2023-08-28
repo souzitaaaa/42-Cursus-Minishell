@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/22 15:45:58 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/08/28 17:19:16 by joe              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
-_FILES 			= error_msg exit_code init list free utils prompts\
+_FILES 			= error_msg exit_code init list free utils prompts signal\
 					lexer token \
 					extra_tokens output_tokens\
 					env_list env_arr \
