@@ -44,7 +44,7 @@ OBJDIR			= obj
 NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free utils prompts signal\
-					lexer token \
+					lexer token parcer ast\
 					extra_tokens output_tokens quotes_treatment\
 					env_list env_arr \
 					exec_cmd execve execve_utils pipe\
