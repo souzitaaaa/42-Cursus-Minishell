@@ -17,9 +17,25 @@
 # include "minishell.h"
 # include <stdbool.h>
 
+/*
+typedef struct s_main
+{
+	char 			*input_prompt;
+	char			**env_arr;
+	int				exit_code;
+	t_lexer			tokens;
+	t_env			env_list;
+	t_quotes		quotes;
+	t_ast 			input_exec;
+	t_std			fd;
+	t_prompt		prompt_list;
+	t_bool          flags;
+}t_main;*/
+
 typedef struct s_bool
 {
 	bool            put_node_behind;
+	bool            rdr_treated;
 } t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
@@ -45,12 +61,13 @@ TOKENS
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
-	PIPE = '|',     // |
-	IN = '<',       // <
-	HEREDOC = 'H',  // <<
-	OUT = '>',      // >
-	APPEND = 'A',   // >>
-	STRING = 'S',   // string (pode ser comando, ficheiro)
+	PIPE = '|',      // |
+	IN = '<',        // <
+	HEREDOC = 'H',   // <<
+	OUT = '>',       // >
+	APPEND = 'A',    // >>
+	COMERCIAL = '&', // &
+	STRING = 'S',    // string (pode ser comando, ficheiro)
 }t_type;
 
 //* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
@@ -84,6 +101,9 @@ typedef struct s_lexer
 /*
 AST
 */
+
+
+//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
@@ -102,6 +122,7 @@ typedef	struct s_ast
 	int					size; //number of nodes/operators
 }
 t_ast;
+
 /*
 QUOTES STRUCT
 */

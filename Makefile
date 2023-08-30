@@ -45,7 +45,7 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free utils prompts signal\
 					lexer token \
-					extra_tokens output_tokens\
+					extra_tokens output_tokens quotes_treatment\
 					env_list env_arr \
 					exec_cmd execve execve_utils pipe\
 					echo pwd env unset

@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   quotes_treatment.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 17:24:23 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/05/17 16:56:17 by dinoguei         ###   ########.fr       */
+/*   Created: 2023/08/25 16:18:03 by dinoguei          #+#    #+#             */
+/*   Updated: 2023/08/25 16:18:03 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../../includes/minishell.h"
 
-int	ft_strcmp(char *s1, char *s2)
+void    quotes_treatment(t_main *main, int *i, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+            printf("\033[1;32m\t\t(Quotes treatment)\033[0m\n");
+        printf("Type: %c\n", (char)main->quotes.type);
+        printf("Type: %i\n", main->quotes.start);
+        printf("Type: %i\n", main->quotes.end);
+        
+            printf("\033[1;32m\t\t(End quotes treatment)\033[0m\n");
 }

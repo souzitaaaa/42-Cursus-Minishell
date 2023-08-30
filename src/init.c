@@ -47,6 +47,7 @@ void	init_std(t_std *fd)
 void    init_bool(t_bool *flags)
 {
 	flags->put_node_behind = false;
+	flags->rdr_treated = false;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
