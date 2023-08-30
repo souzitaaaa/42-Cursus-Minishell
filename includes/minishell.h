@@ -71,9 +71,8 @@ void		set_env_arr(t_main *main);
 !EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
-int	    exec_cmd(char **command, t_main *main);
+void    exec_cmd(char **command, t_main *main, bool pipe);
 void	test_exec(t_main *main);
-void	exec_other_cmd(char **cmd, t_main *main);
 void	execution(char **cmd, t_main *main);
 void	error_management(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
@@ -82,7 +81,7 @@ void	free_pathname(char	*pathname, int flag);
 /*
 !BUILTINS
 */
-int		echo(char **command);
+void    echo(char **command, t_main *main, bool pipe);
 int		pwd(void);
 int 	ft_env(t_env *env);
 int		ft_unset(t_main *main, char *str);
@@ -104,7 +103,7 @@ bool	special_chr(char c);
 /*
 !OUTPUT_TOKENS.C
 */
-void    search_output_tokens(t_main *main, int *i);
+void    search_output_tokens(t_main *main, int *i, char *str);
 bool    is_space(char c);
 int     get_fd_rdr(t_main *main, int *i);
 
@@ -143,7 +142,7 @@ int		ft_unset(t_main *main, char *str);
 /*
 !EXECVE
 */
-void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
+void    exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
 void	error_management(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
