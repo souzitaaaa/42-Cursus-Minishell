@@ -28,17 +28,24 @@ void	search_extra_tokens(t_main *main, int *i)
 	int		start = *i;
 	char	*str;
 	bool	run = true;
+	int     n_len = 0;
 
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{
+		if (main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57)
+		{
+			n_len = get_fd_rdr(main, i);
+			if (main->flags.rdr_treated == true)
+				break ;
+			else
+				n_len = 0;
+		}
 		if (special_chr(main->input_prompt[*i]) == false)
 			(*i)++;
 		else
 			run = false;
 	}
-			//printf("start %i i(end) %i\n", start, *i);
-	str = ft_substr(main->input_prompt, start, (*i - start));
-			//printf("string: %s\n", str);
+	str = ft_substr(main->input_prompt, start, (*i - start) - n_len);
 	add_token(main, STRING, i, str);
 	(*i)--;
 }

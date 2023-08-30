@@ -71,7 +71,7 @@ void		set_env_arr(t_main *main);
 !EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
-int	exec_cmd(char **command, t_main *main);
+int	    exec_cmd(char **command, t_main *main);
 void	test_exec(t_main *main);
 void	exec_other_cmd(char **cmd, t_main *main);
 void	execution(char **cmd, t_main *main);
@@ -105,15 +105,20 @@ bool	special_chr(char c);
 !OUTPUT_TOKENS.C
 */
 void    search_output_tokens(t_main *main, int *i);
+bool    is_space(char c);
+int     get_fd_rdr(t_main *main, int *i);
 
+/*
+!QUOTES_TREATMENT.C
+*/
+void    quotes_treatment(t_main *main, int *i, char *str);
 
 /*
 !TOKEN.C
 */
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
-
-
+int     add_prev_token(t_main *main, int *i, char *str);
 
 /*
 !PARCER

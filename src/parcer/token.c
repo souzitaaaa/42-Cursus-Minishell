@@ -30,13 +30,18 @@ int	get_number_len(int n)
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
 	//* ela vai percorrer a lista das env ate achar uma identica ao valor que lhe manda-mos
 	//* quando encontrar vai copiar oque esta depois do = para dentro dessa str
-char	*expand(t_main *main, char *str)
+char	*expand(t_main *main, char *cmp)
 {
 	int		count = 0;
 	t_var	*aux = main->env_list.head;
 	char *expanded = NULL;
+	char    *str;
+	int     i = 0;
 
-			printf("\033[1;32m\t\tExpanding\033[0m\n");
+	while (is_space(cmp[i]) == true && cmp[i])
+		i++;
+	str = ft_substr(cmp, i, ft_strlen(cmp) - i);
+			printf("\033[1;32m\t\t[Expanding]\033[0m\n");
 			printf("str: %s and str + 1: %s\n", str, str + 1);
 	if (ft_strncmp(str, "$?", ft_strlen(str)) == 0)
 	{
@@ -52,10 +57,12 @@ char	*expand(t_main *main, char *str)
 			printf("Encontrada variavel de ambiente: %s\n\tNa envp: %s\n", str, aux->var);
 			expanded = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(str) + 1);
 			ft_strlcpy(expanded, aux->var + ft_strlen(str), ft_strlen(aux->var) - ft_strlen(str) + 1);
+				printf("\033[1;32m\t\t[End expanding]\033[0m\n");
 			return (expanded);
 		}
 		aux = aux->next;
 	}
+			printf("\033[1;32m\t\t[End expanding]\033[0m\n");
 	return("Var nao encontrada");
 }
 
@@ -81,7 +88,7 @@ void	check_expansion(t_main *main, char **arr)
 
 //* Funcao que cria o novo node, criando uma arr dividindo as palavras e copiando essa mesma arr
 	//* para a variavel arr, na t_token que vai ser onde vao estar guardados os tokens
-t_node	*create_n(t_main *main, t_type token, int *index, char *str)
+t_node	*create_n(t_main *main, t_type token, int *i, char *str)
 {
 	t_node	*new;
 	char	**arr;
@@ -110,4 +117,111 @@ int	add_token(t_main *main, t_type token, int *i, char *str)
 		return (1);
 	insert_last(&main->tokens, new);
 	return (0);
+}
+
+//* Vai devolver o node do respetivo index em que queremos trabalhar
+t_node *get_node_index(t_lexer *tokens, int index_wanted)
+{
+	int     count = 0;
+	t_node *aux = tokens->head;
+	
+	while(count++ < tokens->size)
+	{
+		if (aux->index == index_wanted)
+			return (aux);
+		aux = aux->next;
+	}
+	return (NULL);
+}
+
+void    insert_index_var(t_lexer *lexer, t_node *new, int index)
+{
+    t_node   *current;
+
+    current = lexer->head;
+    int count = 0;
+    if (lexer->head == NULL)
+        put_head_node(lexer, new);
+    else
+    {
+        while (count++ < index)
+        {
+            current = current->next;
+        }
+	    new->next = current;
+		new->prev = current->prev;
+		current->prev->next = new;
+		current->prev = new;
+		if (index == 0)
+                lexer->head = new;
+		shift_index(lexer);
+    }
+    lexer->size++;
+}
+
+t_node	*create_n_teste(t_main *main, t_type token, char **arr)
+{
+	t_node	*new;
+
+	(void)main;
+	(void)index;
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->token.type = token;
+	check_expansion(main, arr);
+	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
+	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	//! falta o free da arr
+	return (new);
+}
+
+void    remove_node(t_lexer *lexer, int index)
+{
+	t_node   *current;
+    
+    int count = 0;
+    current = lexer->head;
+    if (lexer->size == 1)
+		lexer->head = NULL;
+    else
+    {
+        while (count++ < index)
+        {
+            current = current->next;
+        }
+            current->next->prev = current->prev;
+            current->prev->next = current->next;
+            if (index == 0)
+                lexer->head = current->next;
+            shift_index(lexer);
+    }
+    lexer->size--;
+    free(current);
+}
+
+//* Funcao para adicionar ao node anterior do redirect oque esta para a frente
+	//* do ficheiro redirecionado
+int add_prev_token(t_main *main, int *i, char *str)
+{
+	t_node	*new;
+	int j = 0;
+				printf("\033[1;32m\t\t(Add_prev_token)\033[0m\n");
+				printf("Adding str: %s\n", str);
+	int index_wanted = main->tokens.size - 2;
+				printf("index_wanted: %i\n", index_wanted);
+	t_node  *token_insert = get_node_index(&main->tokens, index_wanted);
+				print_arr(token_insert->token.arr);
+				printf("token.arr size: %li\n", ft_arrlen(token_insert->token.arr));
+	char    **temp = ft_calloc(ft_arrlen(token_insert->token.arr) + 2, sizeof(char *));
+	int index = token_insert->index;
+	ft_arrlcpy(temp, token_insert->token.arr, ft_arrlen(token_insert->token.arr) + 1);
+	while (temp[j])
+		j++;
+	temp[j] = str;
+	temp[j + 1] = NULL;
+	new = create_n_teste(main, token_insert->token.type, temp);
+	remove_node(&main->tokens, index);
+	insert_index_var(&main->tokens, new, index);
+				printf("\033[1;32m\t\t(End add_prev_token)\033[0m\n");
 }
