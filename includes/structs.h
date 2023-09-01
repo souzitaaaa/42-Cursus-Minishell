@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/27 00:45:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/30 19:47:43 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 typedef struct s_bool
 {
 	bool            put_node_behind;
+	bool            rdr_err;
 } t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
@@ -58,6 +59,7 @@ typedef struct s_token
 {
 	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
 	t_type			type;
+	bool			quotes;
 }
 t_token;
 
@@ -151,7 +153,7 @@ typedef struct s_main
 	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
-	t_bool          flags;
+	t_bool			flags;
 }t_main;
 
 #endif

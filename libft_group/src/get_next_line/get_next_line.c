@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:54:29 by rimarque          #+#    #+#             */
-/*   Updated: 2023/07/01 18:45:48 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:31:15 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ char	*read_to_line(int fd, char **to_read, char *line)
 	return (line);
 }
 
-char	*get_next_line(int fd, int flag)
+char	*get_next_line(int fd, bool free_static)
 {
 	static char		*to_read;
 	char			*line;
 
-	if (flag == 1)
+	if (free_static)
 	{
 		ft_free_str(&to_read);
 		return (NULL);

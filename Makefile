@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/08/28 10:01:17 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/01 18:02:12 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,10 @@ _FILES 			= error_msg exit_code init list free utils prompts\
 					lexer token parcer ast\
 					extra_tokens output_tokens\
 					env_list env_arr \
-					exec_cmd execve execve_utils pipe\
+					exec_cmd execve execve_utils \
+					pipe \
+					init_rdr rdr_in rdr_out rdr_app rdr_heredoc \
+					child_aux \
 					echo pwd env unset
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
@@ -59,7 +62,7 @@ all: $(NAME)
 
 $(NAME): $(OBJDIR) $(TARGET) $(LIBFT) main.c
 	$(CC) $(CFLAGS) main.c $(TARGET) $(RD) -I $(INCLUDE) $(LIBFT) -o $(NAME)
-	echo "[$(GREEN)Success$(RESET)] ./minishell created$(BOLD)$(RESET)"
+	echo "[$(GREEN)Success$(RESET)] minishell created$(BOLD)$(RESET)"
 
 $(OBJDIR)/%.o : %.c $(HDR)
 	echo "[$(CYAN)Compiling$(RESET)] $(CFLAGS) $<$(RESET)"

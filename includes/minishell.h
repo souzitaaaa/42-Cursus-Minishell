@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/28 10:04:37 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/01 16:48:24 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
+void	init_exec_ast(t_ast ast, t_main *main);
+
+/*
+RDR
+*/
+void	init_rdr(t_lexer tokens, t_main *main);
+void	rdr_in(char **arr, t_main *main);
+void	rdr_out(char **arr, t_main *main);
+void	rdr_app(char **arr, t_main *main);
+void	rdr_hd(t_token token, t_main *main);
 
 /*
 BUILTINS
@@ -111,7 +121,12 @@ void	free_pathname(char	*pathname, int flag);
 /*
 PIPES
 */
-void	init_pipe(t_ast ast, t_main *main);
+
+
+/*
+CHILD_AUX
+*/
+void	wait_estatus(int pid, t_main *main);
 
 /*
 FREE.C

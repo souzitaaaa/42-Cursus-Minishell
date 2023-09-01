@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/26 17:56:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/28 11:48:53 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,13 @@ void	execution(char **cmd, t_main *main)
 	free_pathname(pathname, flag);
 }
 
-void	exec_other_cmd(char **cmd, t_main *main, bool pipe)
+void	exec_other_cmd(char **cmd, t_main *main, bool child)
 {
 	int	pid;
 	int exit_status;
 
 	set_env_arr(main);
-	if(pipe)
+	if(child)
 		execution(cmd, main);
 	else
 	{
