@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/01 16:58:45 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:31:50 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,20 @@ bool	find_pipes(t_lexer tokens)
 	return (false);
 }
 
+void	ft_cmdcat(t_lexer *tokens)
+{
+
+}
+
 void	parcer(t_main *main)
 {
 	//if(!syntase())
 		//	return ;
 	if(main->tokens.size == 1 && main->tokens.head->token.type == STRING)
+	{
 		exec_cmd(main->tokens.head->token.arr, main, false);
-	//concatenar os comandos
+	}
+	//ft_cmdcat(&main->tokens);
 	else
 	{
 		if(find_pipes(main->tokens))
@@ -72,7 +79,6 @@ void	parcer(t_main *main)
 		}
 		else
 		{
-			printf("entra aqui\n");
 			init_rdr(main->tokens, main);
 		}
 	}

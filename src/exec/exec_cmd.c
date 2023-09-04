@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/28 10:05:00 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:16:32 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ int init_builtins(char  *str)
     return (0);
 }
 
-void	exec_cmd(char **command, t_main *main, bool pipe)
+void	exec_cmd(char **command, t_main *main, bool child)
 {
 	if (ft_strcmp(command[0], "echo") == 0)
-		echo(command, main, pipe);
+		echo(command, main, child);
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		pwd();
 	/*else if (ft_strcmp(command[0], "cd") == 0)
@@ -38,5 +38,7 @@ void	exec_cmd(char **command, t_main *main, bool pipe)
 	/*else if (ft_strcmp(command[0], "exit") == 0)
 		exec = ft_exit();*/
    	else
-		exec_other_cmd(command, main, pipe);
+	{
+		exec_other_cmd(command, main, child);
+	}
 }

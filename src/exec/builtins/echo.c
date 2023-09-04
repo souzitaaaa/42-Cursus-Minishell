@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/26 16:28:37 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:14:38 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int echo_newline(char *command)
     }
     return (1);
 }
-void    echo(char **command, t_main *main, bool pipe)
+void    echo(char **command, t_main *main, bool child)
 {
     int flag;
     int count;
@@ -48,7 +48,7 @@ void    echo(char **command, t_main *main, bool pipe)
     }
     if (flag)
         ft_printf("\n");
-    if (pipe)
+    if (child)
         exit(0);
     set_exit_code(main, 0);
 }

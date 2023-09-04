@@ -14,12 +14,10 @@
 
 void	exec_rdr(t_token token, t_main *main)
 {
-	printf("entra aqui 2\n");
 	if(token.type == IN)
 		rdr_in(token.arr, main);
 	if(token.type == OUT)
 	{
-		printf("entra aqui 3\n");
 		rdr_out(token.arr, main);
 	}
 	if(token.type == APPEND)
@@ -43,6 +41,7 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 			exec_cmd(aux->token.arr, main, true);
 		aux = aux->next;
 	}
+	exit(0);
 }
 
 //*Esta função percorre a lista tokens e executa os redirects, no final executa o comando
@@ -54,12 +53,11 @@ void	init_rdr(t_lexer tokens, t_main *main)
 
 	aux = tokens.head;
 	counter = 0;
-	//pid = fork();
-	//if (pid == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		while(counter++ < tokens.size)
 		{
-			printf("entra aqui 1\n");
 			if(aux->token.type == STRING)
 				aux = aux->next;
 			exec_rdr(aux->token, main);
@@ -67,5 +65,5 @@ void	init_rdr(t_lexer tokens, t_main *main)
 		}
 		find_exec_cmd(tokens, main);
 	}
-	//wait_estatus(pid, main);
+	wait_estatus(pid, main);
 }

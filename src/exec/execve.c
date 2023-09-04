@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/28 11:48:53 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:06:05 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,7 @@ char	*ft_pathname(int *flag, char **envp, char **cmd, t_main *main)
 
 	str = "\0";
 	len = ft_strlen(cmd[0]);
-	if (len > 3)
-	{
-		if (!ft_strncmp(".sh", cmd[0] + ft_strlen(cmd[0]) - 3, 3))
-		{
-			if (!ft_strncmp("./", cmd[0], 2))
-			{
-				str = cmd[0] + 2;
-				return (str);
-			}
-			error_management(cmd[0], main);
-			free_pathname(NULL, 0);
-		}
-	}
-	if (access((const char *)cmd[0], F_OK))
+	if (!ft_strchr(str, '/'))
 		str = find_path(cmd[0], envp, flag);
 	else
 		str = cmd[0];
@@ -90,7 +77,6 @@ void	execution(char **cmd, t_main *main)
 	int		error;
 	int		flag;
 
-	//printf("entra aqui exec \n");
 	pathname = ft_pathname(&flag, main->env_arr, cmd, main);
 	if (!strncmp("./", cmd[0], 2))
 	{
