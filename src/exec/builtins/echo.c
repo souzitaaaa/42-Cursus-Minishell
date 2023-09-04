@@ -27,7 +27,7 @@ int echo_newline(char *command)
     }
     return (1);
 }
-void    echo(char **command, t_main *main, bool pipe)
+void    echo(char **command, t_main *main, bool child)
 {
     int flag;
     int count;
@@ -35,10 +35,7 @@ void    echo(char **command, t_main *main, bool pipe)
     flag = 1;
     count = 1;
     while (command[count] && echo_newline(command[count]))
-    {
-        flag = 0; //nao imprime newline no final
-        count++;
-    }
+        flag = 0;
     while (command[count])
     {
         ft_printf("%s", command[count]);
@@ -48,7 +45,7 @@ void    echo(char **command, t_main *main, bool pipe)
     }
     if (flag)
         ft_printf("\n");
-    if (pipe)
+    if (child)
         exit(0);
     set_exit_code(main, 0);
 }

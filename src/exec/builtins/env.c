@@ -3,19 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:48:13 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 03:46:21 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:45:45 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int ft_env(t_env *env)
+void env(t_env *env, t_main *main, bool child, char **command)
 {
 	t_var	*current;
 	
+	if (command[1] != NULL)
+	{
+		if (child)
+    		exit(127);
+		set_exit_code(main, 127);
+		return ;
+	}
 	current = env->head;
 	env->i = 0;
 	while (env->i++ < env->size)
@@ -23,5 +30,7 @@ int ft_env(t_env *env)
 		ft_printf("%s\n", current->var);
 		current = current->next;
 	}
-	return (0);
+	if (child)
+        exit(0);
+	set_exit_code(main, 0);
 }

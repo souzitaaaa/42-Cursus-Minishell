@@ -164,6 +164,7 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*prev;
 	int				exit_code;
 	int				fork;
 	int				proc;

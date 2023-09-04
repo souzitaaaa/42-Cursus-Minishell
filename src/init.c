@@ -69,6 +69,7 @@ void	init_main(t_main *main, char **envp)
 		init_env(&main->env_list);
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
+		main->prev = NULL;
 		main->exit_code = 0;
 		main->fork = 0;
 		main->proc = 0;
