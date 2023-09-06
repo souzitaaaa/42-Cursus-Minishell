@@ -108,9 +108,15 @@ bool    is_space(char c);
 int     get_fd_rdr(t_main *main, int *i);
 
 /*
+!INPUT_TOKENS.C
+*/
+void    search_input_tokens(t_main *main, int *i, char *str);
+void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
+
+/*
 !QUOTES_TREATMENT.C
 */
-void    quotes_treatment(t_main *main, int *i, char *str);
+void    quotes_treatment(t_main *main, int *i, int start);
 
 /*
 !TOKEN.C
@@ -118,6 +124,7 @@ void    quotes_treatment(t_main *main, int *i, char *str);
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
 int     add_prev_token(t_main *main, int *i, char *str);
+char	*expand(t_main *main, char *cmp);
 
 /*
 !PARCER

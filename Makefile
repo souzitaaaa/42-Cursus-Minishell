@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer parcer/lexer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -45,7 +45,7 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free utils prompts signal\
 					lexer token parcer ast\
-					extra_tokens output_tokens quotes_treatment\
+					extra_tokens output_tokens input_tokens quotes_treatment\
 					env_list env_arr \
 					exec_cmd execve execve_utils pipe\
 					echo pwd env unset cd export utils_export

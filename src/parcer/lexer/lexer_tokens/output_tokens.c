@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 //* Vai meter na lista o certo
 void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
@@ -20,7 +20,8 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
     bool	run = true;
     
             printf("fd to insert: %s\n", fd);
-    while (special_chr(main->input_prompt[*i]) == true)
+    while (special_chr(main->input_prompt[*i]) == true
+        || is_space(main->input_prompt[*i]) == true)
         (*i)++;
     start = *i;
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
@@ -36,7 +37,7 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
     add_token(main, token, i, fd);
     if (*i < main->tokens.str_len)
         main->flags.put_node_behind = true;
-    (*i)--;
+    //(*i)--;
 }
 
 //* Identifica qual o tipo de token do fd
@@ -114,8 +115,8 @@ void    get_rdr_out(t_main *main, int *i, t_type token, char *fd)
 	}
     str = ft_substr(main->input_prompt, start, (*i - start));
     add_token(main, token, i, str);
-    if (*i < main->tokens.str_len)
-        main->flags.put_node_behind = true;
+    //if (*i < main->tokens.str_len)
+        //main->flags.put_node_behind = true;
     (*i)--;
 }
 

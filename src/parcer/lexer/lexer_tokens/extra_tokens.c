@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
 //* Funcao de ajuda para a search_extra_tokens para verificar se encontrou
 	//* um caracter delimitador de token
@@ -39,6 +39,11 @@ void	search_extra_tokens(t_main *main, int *i)
 				break ;
 			else
 				n_len = 0;
+		}
+		if (main->input_prompt[*i] == '\'' || main->input_prompt[*i] == '\"')
+		{
+			quotes_treatment(main, i, start);
+			return ;
 		}
 		if (special_chr(main->input_prompt[*i]) == false)
 			(*i)++;
