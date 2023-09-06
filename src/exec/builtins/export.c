@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/06 16:17:40 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/06 20:18:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,24 @@ void export(t_main *main, char **array, bool child)
     else
     {
         while(array[main->env_list.i])
-        {        
-            if (!ft_strchr(array[main->env_list.i], '='))
+        {
+            if (array[main->env_list.i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
+			{
+				error_export(array, STDERR_FILENO);
+                 if (child)
+                    exit(2);
+                set_exit_code(main, 2);
+			}
+			else
             {
-                if (child)
-                    exit(0);
-                set_exit_code(main, 0);
-                return ;
-            }
+                if (!ft_strchr(array[main->env_list.i], '='))
+                {
+					main->env_list.i++;
+                    continue ;
+                }
             if (modify_var(main, array[main->env_list.i]) == false)
                insert_var(main, array[main->env_list.i]);
+            }
             main->env_list.i++;
         }
     }

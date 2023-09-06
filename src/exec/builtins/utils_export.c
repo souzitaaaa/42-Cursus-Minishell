@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/04 19:47:16 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/06 20:18:22 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,4 @@ bool    modify_var(t_main *main, char *str)
         current = current->next;
     }
     return (false);
-}
-
-int	valid_export_var(char *var)
-{
-    int counter;
-
-    counter = 0;
-    while (var[counter])
-	{
-		if (var[counter] == '=')
-		{
-			if (var[counter - 1] == ' ')
-				ft_printf("not a valid identifier\n");
-		}
-		counter++;
-	}
-	return (1);//sintaxe valida
 }

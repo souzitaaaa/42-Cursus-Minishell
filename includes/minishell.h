@@ -86,7 +86,7 @@ void    export(t_main *main, char **array, bool child);
 void    insert_var(t_main *main, char *str);
 bool    modify_var(t_main *main, char *str);
 void    remove_var(t_env *env, int index);
-int     valid_export_var(char *var);
+bool     valid_export_var(char *var, t_main *main, bool child);
 void    cd(char *path, t_main *main, bool child);
 
 /*
@@ -172,6 +172,7 @@ void	ft_wait(t_main *main);
 void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
+void	error_export(char **str, int fd);
 void	prompt_diogo(t_prompt *prompt_list);
 void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);
