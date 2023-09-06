@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/04 17:06:05 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:15:23 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ char	*find_path(char	*str, char	**envp, int *flag)
 	return (str);
 }
 
-char	*ft_pathname(int *flag, char **envp, char **cmd, t_main *main)
+char	*ft_pathname(int *flag, char **envp, char **cmd)
 {
-	int		len;
 	char	*str;
 
 	str = "\0";
-	len = ft_strlen(cmd[0]);
 	if (!ft_strchr(str, '/'))
 		str = find_path(cmd[0], envp, flag);
 	else
@@ -77,7 +75,7 @@ void	execution(char **cmd, t_main *main)
 	int		error;
 	int		flag;
 
-	pathname = ft_pathname(&flag, main->env_arr, cmd, main);
+	pathname = ft_pathname(&flag, main->env_arr, cmd);
 	if (!strncmp("./", cmd[0], 2))
 	{
 		cmd[0] = cmd[0] + 2;
@@ -87,7 +85,7 @@ void	execution(char **cmd, t_main *main)
 	else
 		error = execve((const char *)pathname, (char **const)cmd, main->env_arr);
 	if (error == -1)
-		error_management(cmd[0], main);
+		error_management(cmd[0]);
 	free_pathname(pathname, flag);
 }
 

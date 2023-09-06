@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 17:29:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/01 16:48:24 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:34:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ TOKEN.C
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
 
+/*
+LEXER_UTILS
+*/
+void    remove_node(t_lexer *lexer, int index);
+void    insert_node(t_lexer *lexer, t_node *new, int index);
 
 /*
 PARCER
@@ -115,7 +120,7 @@ EXECVE
 */
 void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str, t_main *main);
+void	error_management(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
