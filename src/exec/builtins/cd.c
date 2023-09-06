@@ -6,14 +6,13 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/04 19:44:12 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/06 17:18:24 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-/* Quando nao tem path anterior, ele retorna um erro: bash: cd: OLDPWD not set (linha 80)*/
-char *find_home(char *path, t_main *main) 
+char *find_home(char *path, t_main *main, bool child) 
 {
     char    *home;
     char    *aux;
@@ -24,7 +23,9 @@ char *find_home(char *path, t_main *main)
         home = getenv("HOME");
         if (home == NULL)
         {
-            printf("cd: No such file or directory\n");
+            error_msg_file(path, STDERR_FILENO);
+            if (child)
+                exit(1);
             set_exit_code(main, 1);
             return (NULL);
         }
@@ -50,14 +51,16 @@ char    *prev_dir(char *path)
     return (ft_strdup(path));
 }
 
-int change_dir(char *path) 
+int change_dir(char *path, t_main *main, bool child) 
 {
     if (chdir(path) == 0) 
-        return (0);
+        set_exit_code(main, 0);
      else 
      {
-        perror("cd");
-        return (1);
+        error_msg_file(path, STDERR_FILENO);
+        if (child)
+                exit(1);
+        set_exit_code(main, 1);
     }
 }
 
@@ -71,12 +74,14 @@ void    cd(char *path, t_main *main, bool child)
     {
         if (main->prev)
         {
-            change_dir(main->prev);
+            change_dir(main->prev, main, child);
             ft_printf("%s\n", main->prev);
         }
         else
         {
-            //MSG DE ERRO
+            error_cd(STDERR_FILENO);
+            if (child)
+                exit(1);
             set_exit_code(main, 1);
         }
     }
@@ -85,7 +90,7 @@ void    cd(char *path, t_main *main, bool child)
         new_path = find_home(path, main);
         current = ft_calloc(sizeof(char), 4096);
         getcwd(current, 4096);
-        dir = change_dir(new_path);
+        dir = change_dir(new_path, main, child);
         if (dir == 0)
         {
             main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
@@ -98,3 +103,4 @@ void    cd(char *path, t_main *main, bool child)
         exit(0);
 	set_exit_code(main, 0);
 }
+
