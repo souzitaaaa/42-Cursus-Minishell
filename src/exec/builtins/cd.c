@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/06 17:18:24 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/06 17:30:43 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int change_dir(char *path, t_main *main, bool child)
                 exit(1);
         set_exit_code(main, 1);
     }
+    return (0);
 }
 
 void    cd(char *path, t_main *main, bool child) 
@@ -87,7 +88,7 @@ void    cd(char *path, t_main *main, bool child)
     }
     else
     {
-        new_path = find_home(path, main);
+        new_path = find_home(path, main, child);
         current = ft_calloc(sizeof(char), 4096);
         getcwd(current, 4096);
         dir = change_dir(new_path, main, child);
