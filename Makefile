@@ -48,7 +48,7 @@ _FILES 			= error_msg exit_code init list free utils prompts signal\
 					extra_tokens output_tokens input_tokens quotes_treatment\
 					env_list env_arr \
 					exec_cmd execve execve_utils pipe\
-					echo pwd env unset
+					echo pwd env unset cd export utils_export
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

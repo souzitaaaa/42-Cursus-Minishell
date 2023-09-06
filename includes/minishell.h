@@ -34,12 +34,10 @@
 # include <sys/wait.h>
 # include <sys/ioctl.h>
 
-
 /*
 !GLOBAL VARIABLE
 */
 extern int	g_ex_status;
-
 
 /*
 !INIT.C
@@ -47,7 +45,6 @@ extern int	g_ex_status;
 void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
-
 
 /*
 !LIST.C
@@ -58,47 +55,50 @@ t_node		*remove_head(t_lexer *stack);
 void		insert_head(t_lexer *stack, t_node *new);
 void		insert_last(t_lexer *stack, t_node *new);
 
-
 /*
 !ENVP
 */
+t_var       *var_node(const char *var);
+void        add_var(t_env *env, t_var *var_new);
+void	    shift_index_env(t_env *stack);
 void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
-
 
 /*
 !EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
-void    exec_cmd(char **command, t_main *main, bool pipe);
+void	exec_cmd(char **command, t_main *main, bool child);
 void	test_exec(t_main *main);
 void	execution(char **cmd, t_main *main);
 void	error_management(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
 
-
 /*
 !BUILTINS
 */
-void    echo(char **command, t_main *main, bool pipe);
-int		pwd(void);
-int 	ft_env(t_env *env);
-int		ft_unset(t_main *main, char *str);
-
+void    echo(char **command, t_main *main, bool child);
+void    pwd(t_main *main, bool child);
+void    env(t_env *env, t_main *main, bool child, char **command);
+void	unset(t_main *main, char *str, bool child);
+void    export(t_main *main, char **array, bool child);
+void    insert_var(t_main *main, char *str);
+bool    modify_var(t_main *main, char *str);
+void    remove_var(t_env *env, int index);
+int     valid_export_var(char *var);
+void    cd(char *path, t_main *main, bool child);
 
 /*
 !LEXER.C
 */
 void	lexer(t_main *main);
 
-
 /*
 !EXTRA_TOKENS.C
 */
 void	search_extra_tokens(t_main *main, int *i);
 bool	special_chr(char c);
-
 
 /*
 !OUTPUT_TOKENS.C
@@ -139,14 +139,6 @@ void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
 
 /*
-!BUILTINS
-*/
-void	echo(char **command, t_main *main, bool pipe);
-int		pwd(void);
-int 	ft_env(t_env *env);
-int		ft_unset(t_main *main, char *str);
-
-/*
 !EXECVE
 */
 void    exec_other_cmd(char **cmd, t_main *main, bool pipe);
@@ -154,12 +146,10 @@ void	execution(char **cmd, t_main *main);
 void	error_management(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
 
-
 /*
 !PIPES
 */
 void	init_pipe(t_ast ast, t_main *main);
-
 
 /*
 !FREE.C
@@ -167,13 +157,11 @@ void	init_pipe(t_ast ast, t_main *main);
 void		free_list(t_lexer *stack);
 void		free_env(t_env *stack);
 
-
 /*
 !QUOTES.C
 */
 int check_quotes(char c, int quotes);
 int check_quotes_print(t_main *main);
-
 
 /*
 !SIGNAL.C
@@ -185,12 +173,12 @@ void	signal_handler(int sig);
 void	signals(void);
 void	ft_wait(t_main *main);
 
-
 /*
 !ERROR_MSG
 */
 void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
+void	error_cd(int fd);
 void	prompt_diogo(t_prompt *prompt_list);
 void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);

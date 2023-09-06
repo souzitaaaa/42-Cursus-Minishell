@@ -3,21 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:17:24 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/16 21:07:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:46:16 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//getcwd  obtém o diretório de trabalho atual
-int	pwd(void)
+void	pwd(t_main *main, bool child)
 {
-	char	pwd[4096];
+	char	*pwd;
 
+	pwd = ft_calloc(sizeof(char), 4096);
 	getcwd(pwd, 4096);
-	ft_putendl_fd(pwd, STDOUT_FILENO);
-	return (0);
+	ft_printf("%s\n", pwd);
+	free(pwd);
+	if (child)
+        exit(0);
+	set_exit_code(main, 0);
 }
