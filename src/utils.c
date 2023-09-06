@@ -54,7 +54,7 @@ int check_quotes_print(t_main *main)
 
         if (c == '\'' || c == '\"')
         {
-            if (quotes_analises == 1 && open_quote_position == -1)
+            if ((quotes_analises == 1 || quotes_analises == 2) && open_quote_position == -1)
             {
                 open_quote_position = i;
                 open_quote_type = c;
@@ -70,7 +70,7 @@ int check_quotes_print(t_main *main)
             }
         }
 
-        printf("Character: %c, Quotes state: %d\n", c, quotes_analises);
+        printf("Character: %c, index: %i ,quotes state: %d\n", c, i, quotes_analises);
         i++;
     }
 
@@ -79,7 +79,7 @@ int check_quotes_print(t_main *main)
         printf("%s", SYNTAX_ERROR);
         main->quotes.error = 1;
     }
-    ft_printf("\n");
+    printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
 }
 

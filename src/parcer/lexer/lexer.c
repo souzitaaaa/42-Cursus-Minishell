@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 void    get_iteration(t_main *main, int *i)
 {
@@ -38,28 +38,13 @@ void    get_iteration(t_main *main, int *i)
 void search_tokens(t_main *main, int *i)
 {
 				//printf("search tokens i %i\n", *i);
-	if (*i <= main->tokens.str_len && main->flags.put_node_behind == true
+	/*if (*i <= main->tokens.str_len && main->flags.put_node_behind == true
 		&& special_chr(main->input_prompt[*i]) == false)
-		get_iteration(main, i);
-	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
-	{
-		//printf("Token %c = %i found!\n", PIPE, PIPE);
+		get_iteration(main, i);*/
+	/*else */if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
 		add_token(main, PIPE, i, "|");
-	}
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
-	{
-		if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
-		{
-			//printf("Token %c = %i found!\n", HEREDOC, HEREDOC);
-			add_token(main, HEREDOC, i, "<<");
-			(*i)++;
-		}
-		else
-		{
-			//printf("Token %c = %i found!\n", IN, IN);
-			add_token(main, IN, i, "<");
-		}
-	}
+		search_input_tokens(main, i, "");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
 	{
 		if (main->flags.rdr_treated == true)
@@ -102,10 +87,8 @@ void	lexer(t_main *main)
 	check_quotes_print(main);
 	while(main->input_prompt[i] && i <= main->tokens.str_len)
 	{
-				//printf("main i %i\n", i);
 		search_tokens(main, &i);
 		i++;
 	}
 	print_tokens(&main->tokens);
-	//printf("%i\n", main->tokens.head->quotes);
 }
