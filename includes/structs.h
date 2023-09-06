@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:55:40 by joe               #+#    #+#             */
-/*   Updated: 2023/08/30 19:47:43 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:28:44 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,25 @@
 # include "minishell.h"
 # include <stdbool.h>
 
+/*
+typedef struct s_main
+{
+	char 			*input_prompt;
+	char			**env_arr;
+	int				exit_code;
+	t_lexer			tokens;
+	t_env			env_list;
+	t_quotes		quotes;
+	t_ast 			input_exec;
+	t_std			fd;
+	t_prompt		prompt_list;
+	t_bool          flags;
+}t_main;*/
+
 typedef struct s_bool
 {
 	bool            put_node_behind;
+	bool            rdr_treated;
 	bool            rdr_err;
 } t_bool;
 
@@ -46,12 +62,13 @@ TOKENS
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
-	PIPE = '|',     // |
-	IN = '<',       // <
-	HEREDOC = 'H',  // <<
-	OUT = '>',      // >
-	APPEND = 'A',   // >>
-	STRING = 'S',   // string (pode ser comando, ficheiro)
+	PIPE = '|',      // |
+	IN = '<',        // <
+	HEREDOC = 'H',   // <<
+	OUT = '>',       // >
+	APPEND = 'A',    // >>
+	COMERCIAL = '&', // &
+	STRING = 'S',    // string (pode ser comando, ficheiro)
 }t_type;
 
 //* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
@@ -86,6 +103,9 @@ typedef struct s_lexer
 /*
 AST
 */
+
+
+//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
 	struct s_ast_node	*left;
@@ -104,6 +124,7 @@ typedef	struct s_ast
 	int					size; //number of nodes/operators
 }
 t_ast;
+
 /*
 QUOTES STRUCT
 */
@@ -137,23 +158,26 @@ typedef struct s_prompt
 }t_prompt;
 
 /*
-MAIN STRUCT
+!MAIN STRUCT
 */
-
 //*Struct principal do programa, vai ser a struct por onde vamos conseguir aceder a tudo
-	//* que seja informacao no nosso programa
+//* que seja informacao no nosso programa
 typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*prev;
 	int				exit_code;
+	int				fork;
+	int				proc;
 	t_lexer			tokens;
 	t_env			env_list;
 	t_quotes		quotes;
 	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
-	t_bool			flags;
+	t_bool          flags;
+	pid_t			pid;
 }t_main;
 
 #endif

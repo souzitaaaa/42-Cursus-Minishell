@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/04 14:14:38 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:20:44 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void    echo(char **command, t_main *main, bool child)
     flag = 1;
     count = 1;
     while (command[count] && echo_newline(command[count]))
-    {
-        flag = 0; //nao imprime newline no final
-        count++;
-    }
+        flag = 0;
     while (command[count])
     {
         ft_printf("%s", command[count]);

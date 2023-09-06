@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../../../includes/minishell.h"
 
-//* Funcao de ajuda para a get_rdr_out que verifica
-bool    is_space(char c)
-{
-    if (ft_strchr(" ", c))
-        return true;
-    return false;
-}
-
-//* Aqui vai identificar para onde se vai mandar o output do caracter
-void    get_rdr_out(t_main *main, int *i, t_type token)
+//* Aqui vai identificar para onde se vai mandar o input do caracter
+void    get_rdr_in(t_main *main, int *i, t_type token, char *fd)
 {
     int     start = 0;
     char    *str;
@@ -40,19 +32,19 @@ void    get_rdr_out(t_main *main, int *i, t_type token)
 	}
     str = ft_substr(main->input_prompt, start, (*i - start));
     add_token(main, token, i, str);
-    if (*i <= main->tokens.str_len)
-        main->flags.put_node_behind = true;
+    //if (*i < main->tokens.str_len)
+        //main->flags.put_node_behind = true;
     (*i)--;
 }
 
-//* Esta funcao identifica os caracteres de output, quer append quer redirect
-void    search_output_tokens(t_main *main, int *i)
+//* Esta funcao identifica os caracteres de input, quer heredoc ou in
+void    search_input_tokens(t_main *main, int *i, char *str)
 {
-    if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
+    if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
 	{
 		(*i)++;
-		get_rdr_out(main, i, APPEND);
+		get_rdr_in(main, i, HEREDOC, str);
 	}
 	else
-	    get_rdr_out(main, i, OUT);
+	    get_rdr_in(main, i, IN, str);
 }

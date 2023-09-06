@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/06 18:15:14 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/06 19:17:00 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,21 +36,22 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer parcer/lexer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
-_FILES 			= error_msg exit_code init list free utils prompts\
+
+_FILES 			= error_msg exit_code init list free utils prompts signal\
 					lexer token parcer ast\
-					extra_tokens output_tokens lexer_utils\
+					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
 					pipe \
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc \
 					child_aux \
-					echo pwd env unset
+					echo pwd env unset cd export utils_export
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

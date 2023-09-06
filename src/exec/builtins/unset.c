@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/18 03:56:12 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/04 19:46:31 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    remove_var(t_env *env, int index)
     free(current);
 }
 
-int	ft_unset(t_main *main, char *str)
+void	unset(t_main *main, char *str, bool child)
 {
 	int		count = 0;
 	t_var	*aux = main->env_list.head;
@@ -57,11 +57,10 @@ int	ft_unset(t_main *main, char *str)
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
-		{
 			remove_var(&main->env_list, aux->index);
-            return (0);
-		}
 		aux = aux->next;
 	}
-    return (1);
+	if (child)
+        exit(0);
+    set_exit_code(main, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/30 19:36:09 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:16:20 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	init_std(t_std *fd)
 void    init_bool(t_bool *flags)
 {
 	flags->put_node_behind = false;
+	flags->rdr_treated = false;
 	flags->rdr_err = false;
 }
 
@@ -69,6 +70,9 @@ void	init_main(t_main *main, char **envp)
 		init_env(&main->env_list);
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
+		main->prev = NULL;
 		main->exit_code = 0;
+		main->fork = 0;
+		main->proc = 0;
 		init_std(&main->fd); //*É AQUI! Se nao estou a fazer dup(1) e o 1 já foi redirecionado
 }

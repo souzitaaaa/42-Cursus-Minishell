@@ -27,3 +27,9 @@ void	error_msg_file(char *str, int fd)
 	ft_putstr_fd(": ", fd);
 	ft_putendl_fd(FILE_ERROR, fd);
 }
+
+void	error_cd(int fd)
+{
+	ft_putstr_fd("minishell: ", fd);
+	ft_putendl_fd("cd: OLDPWD not set", fd);
+}
