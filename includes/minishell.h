@@ -121,12 +121,14 @@ LEXER_UTILS
 */
 void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
+void    print_tokens(t_lexer *tokens);
 
 /*
 PARCER
 */
 void	parcer(t_main *main);
 void	test_ast(t_lexer tokens, t_ast *ast);
+void	cmdcat(t_lexer *tokens);
 
 /*
 EXEC

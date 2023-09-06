@@ -17,9 +17,7 @@ void	exec_rdr(t_token token, t_main *main)
 	if(token.type == IN)
 		rdr_in(token.arr, main);
 	if(token.type == OUT)
-	{
 		rdr_out(token.arr, main);
-	}
 	if(token.type == APPEND)
 		rdr_app(token.arr, main);
 	if(token.type == HEREDOC)
@@ -56,12 +54,17 @@ void	init_rdr(t_lexer tokens, t_main *main)
 	pid = fork();
 	if (pid == 0)
 	{
-		while(counter++ < tokens.size)
+		while(counter < tokens.size)
 		{
 			if(aux->token.type == STRING)
-				aux = aux->next;
+			{
+				counter++;
+				if(counter < tokens.size)
+					aux = aux->next;
+			}
 			exec_rdr(aux->token, main);
 			aux = aux->next;
+			counter++;
 		}
 		find_exec_cmd(tokens, main);
 	}

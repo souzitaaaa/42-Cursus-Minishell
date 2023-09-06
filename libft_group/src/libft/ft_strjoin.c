@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/06 17:18:00 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 23:22:40 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ char	**ft_arrjoin(char **s1, char **s2)
 		return (0);
 	ft_arrlcpy(new_s, s1, (s1_len + 1));
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
-	if (*s1)
-		ft_free_array((char ***)&s1);
 	return (new_s);
 }
 /*
