@@ -18,7 +18,7 @@ void    get_iteration(t_main *main, int *i)
 	char	*str;
 	bool	run = true;
 
-	while (*i <= main->tokens.str_len && main->input_prompt[*i] 
+	while (*i <= main->tokens.str_len && main->input_prompt[*i]
 		&& is_space(main->input_prompt[*i]) == true)
 		(*i)++;
 	start = *i;
@@ -54,25 +54,6 @@ void search_tokens(t_main *main, int *i)
 	}
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
 		search_extra_tokens(main, i);
-}
-
-//* Funcao para debug, podem reutiliza-la, so mandar a lista que pretenderem
-	//* e os argumentos que querem imprimir
-void    print_tokens(t_lexer *tokens)
-{
-	int count = 0;
-	t_node  *aux = tokens->head;
-
-				printf("\033[1;32m\t\t(Printing tokens)\033[0m\n");
-	while (count++ < tokens->size)
-	{
-		printf("\033[1;34m[INDEX] \033[0m %i\n", aux->index);
-		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->token.type);
-		printf("\033[1;34m[ARR] \033[0m \n");
-		print_arr(aux->token.arr);
-		aux = aux->next;
-	}
-			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");
 }
 
 

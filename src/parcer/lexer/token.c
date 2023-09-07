@@ -124,7 +124,7 @@ t_node *get_node_index(t_lexer *tokens, int index_wanted)
 {
 	int     count = 0;
 	t_node *aux = tokens->head;
-	
+
 	while(count++ < tokens->size)
 	{
 		if (aux->index == index_wanted)
@@ -132,31 +132,6 @@ t_node *get_node_index(t_lexer *tokens, int index_wanted)
 		aux = aux->next;
 	}
 	return (NULL);
-}
-
-void    insert_index_var(t_lexer *lexer, t_node *new, int index)
-{
-    t_node   *current;
-
-    current = lexer->head;
-    int count = 0;
-    if (lexer->head == NULL)
-        put_head_node(lexer, new);
-    else
-    {
-        while (count++ < index)
-        {
-            current = current->next;
-        }
-	    new->next = current;
-		new->prev = current->prev;
-		current->prev->next = new;
-		current->prev = new;
-		if (index == 0)
-                lexer->head = new;
-		shift_index(lexer);
-    }
-    lexer->size++;
 }
 
 t_node	*create_n_teste(t_main *main, t_type token, char **arr)
@@ -174,30 +149,6 @@ t_node	*create_n_teste(t_main *main, t_type token, char **arr)
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	//! falta o free da arr
 	return (new);
-}
-
-void    remove_node(t_lexer *lexer, int index)
-{
-	t_node   *current;
-    
-    int count = 0;
-    current = lexer->head;
-    if (lexer->size == 1)
-		lexer->head = NULL;
-    else
-    {
-        while (count++ < index)
-        {
-            current = current->next;
-        }
-            current->next->prev = current->prev;
-            current->prev->next = current->next;
-            if (index == 0)
-                lexer->head = current->next;
-            shift_index(lexer);
-    }
-    lexer->size--;
-    free(current);
 }
 
 //* Funcao para adicionar ao node anterior do redirect oque esta para a frente
@@ -222,6 +173,6 @@ int add_prev_token(t_main *main, int *i, char *str)
 	temp[j + 1] = NULL;
 	new = create_n_teste(main, token_insert->token.type, temp);
 	remove_node(&main->tokens, index);
-	insert_index_var(&main->tokens, new, index);
+	insert_node(&main->tokens, new, index);
 				printf("\033[1;32m\t\t(End add_prev_token)\033[0m\n");
 }

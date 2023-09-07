@@ -66,16 +66,6 @@ void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
 
 /*
-!EXEC
-*/
-void	set_exit_code(t_main *main, int exit_code);
-void	exec_cmd(char **command, t_main *main, bool child);
-void	test_exec(t_main *main);
-void	execution(char **cmd, t_main *main);
-void	error_management(char *str, t_main *main);
-void	free_pathname(char	*pathname, int flag);
-
-/*
 !BUILTINS
 */
 void    echo(char **command, t_main *main, bool child);
@@ -127,29 +117,47 @@ int     add_prev_token(t_main *main, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
 
 /*
-!PARCER
+LEXER_UTILS
+*/
+void    remove_node(t_lexer *lexer, int index);
+void    insert_node(t_lexer *lexer, t_node *new, int index);
+void    print_tokens(t_lexer *tokens);
+
+/*
+PARCER
 */
 void	parcer(t_main *main);
 void	test_ast(t_lexer tokens, t_ast *ast);
+void	cmdcat(t_lexer *tokens);
 
 /*
-!EXEC
+EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
+void	init_exec_ast(t_ast ast, t_main *main);
 
 /*
-!EXECVE
+RDR
 */
-void    exec_other_cmd(char **cmd, t_main *main, bool pipe);
+void	init_rdr(t_lexer tokens, t_main *main);
+void	rdr_in(char **arr, t_main *main);
+void	rdr_out(char **arr, t_main *main);
+void	rdr_app(char **arr, t_main *main);
+void	rdr_hd(t_token token, t_main *main);
+
+/*
+EXECVE
+*/
+void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str, t_main *main);
+void	error_management(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
-!PIPES
+CHILD_AUX
 */
-void	init_pipe(t_ast ast, t_main *main);
+void	wait_estatus(int pid, t_main *main);
 
 /*
 !FREE.C

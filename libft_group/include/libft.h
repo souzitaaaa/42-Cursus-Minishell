@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/18 21:50:45 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:09:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ char	*ft_strnstr(const char *str, const char *substr, size_t n);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t n, size_t size);
 char	*ft_strdup(const char *str);
+char	**ft_arrdup(char **arr);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_strjoin(char *str, const char *str2);
 char	*ft_strjoinfree(char const *s1, char const *s2);
+char	**ft_arrjoin(char **s1, char **s2);
 char	*ft_strtrim(char const *str, char const *set);
 char	**ft_split(char const *str, char c);
 char	*ft_itoa(int n);

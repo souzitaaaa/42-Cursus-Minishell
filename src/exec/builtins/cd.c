@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/06 17:30:43 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/06 19:22:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char *find_home(char *path, t_main *main, bool child) 
+char *find_home(char *path, t_main *main, bool child)
 {
     char    *home;
     char    *aux;
     char    *current;
-    
-    if (path[0] == '~') 
+
+    if (path[0] == '~')
     {
         home = getenv("HOME");
         if (home == NULL)
@@ -51,11 +51,11 @@ char    *prev_dir(char *path)
     return (ft_strdup(path));
 }
 
-int change_dir(char *path, t_main *main, bool child) 
+int change_dir(char *path, t_main *main, bool child)
 {
-    if (chdir(path) == 0) 
+    if (chdir(path) == 0)
         set_exit_code(main, 0);
-     else 
+     else
      {
         error_msg_file(path, STDERR_FILENO);
         if (child)
@@ -65,12 +65,12 @@ int change_dir(char *path, t_main *main, bool child)
     return (0);
 }
 
-void    cd(char *path, t_main *main, bool child) 
+void    cd(char *path, t_main *main, bool child)
 {
     char    *new_path;
     int     dir;
     char    *current;
-    
+
     if (ft_strcmp(path, "-") == 0)
     {
         if (main->prev)
@@ -101,7 +101,7 @@ void    cd(char *path, t_main *main, bool child)
         }
     }
     if (child)
-        exit(0);
+		 exit(0);
 	set_exit_code(main, 0);
 }
 
