@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:05:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/17 20:18:15 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/05 22:37:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_strdup(const char *str)
 {
@@ -32,19 +32,45 @@ char	*ft_strdup(const char *str)
 	ptr[i] = '\0';
 	return (ptr);
 }
-/*
-int	main(void)
+
+char	**ft_arrdup(char **arr)
 {
-	char	*teste = "Tokisaki Kurumi";
-	char	*testecpy = "";
+	int		i;
+	int		len;
+	char	**ptr;
+
+	len = ft_arrlen((char **)arr);
+	ptr = malloc((len + 1) * sizeof(const char *));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		ptr[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	ptr[i] = NULL;
+	return (ptr);
+}
+
+/*int	main(void)
+{
+	char	**teste;
+	char	**testecpy;
+
+	teste = ft_calloc(sizeof(char *), 4);
+	teste[0] = ft_calloc(sizeof(char), 4);
+	teste[0] = "ola";
+	teste[1] = ft_calloc(sizeof(char), 5);
+	teste[1] = "tudo";
+	teste[2] = ft_calloc(sizeof(char), 4);
+	teste[2] = "bem";
+	teste[3] = NULL;
 
 	printf("Original:\n");
-	printf("%s\n", teste);
-	teste = ft_strdup(teste);
-	printf("By the original:\n");
-	printf("%s\n", teste);
-	printf("By the original:\n");
-	testecpy = strdup(testecpy);
-	printf("%s\n", testecpy);
-}
-*/
+	print_arr(teste);
+	printf("Cpy:\n");
+	testecpy = ft_arrdup(teste);
+	print_arr(testecpy);
+}*/
+

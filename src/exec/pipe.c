@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:19:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/26 18:19:44 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:12:47 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_ast_node	*get_beg(t_ast ast)
 	return(aux);
 }
 
-void	init_pipe(t_ast ast, t_main *main)
+void	init_exec_ast(t_ast ast, t_main *main)
 {
 	t_ast_node	*aux;
 

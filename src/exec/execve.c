@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 16:15:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/26 17:56:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:15:23 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,27 +57,12 @@ char	*find_path(char	*str, char	**envp, int *flag)
 	return (str);
 }
 
-char	*ft_pathname(int *flag, char **envp, char **cmd, t_main *main)
+char	*ft_pathname(int *flag, char **envp, char **cmd)
 {
-	int		len;
 	char	*str;
 
 	str = "\0";
-	len = ft_strlen(cmd[0]);
-	if (len > 3)
-	{
-		if (!ft_strncmp(".sh", cmd[0] + ft_strlen(cmd[0]) - 3, 3))
-		{
-			if (!ft_strncmp("./", cmd[0], 2))
-			{
-				str = cmd[0] + 2;
-				return (str);
-			}
-			error_management(cmd[0], main);
-			free_pathname(NULL, 0);
-		}
-	}
-	if (access((const char *)cmd[0], F_OK))
+	if (!ft_strchr(str, '/'))
 		str = find_path(cmd[0], envp, flag);
 	else
 		str = cmd[0];
@@ -90,8 +75,7 @@ void	execution(char **cmd, t_main *main)
 	int		error;
 	int		flag;
 
-	//printf("entra aqui exec \n");
-	pathname = ft_pathname(&flag, main->env_arr, cmd, main);
+	pathname = ft_pathname(&flag, main->env_arr, cmd);
 	if (!strncmp("./", cmd[0], 2))
 	{
 		cmd[0] = cmd[0] + 2;
@@ -101,17 +85,17 @@ void	execution(char **cmd, t_main *main)
 	else
 		error = execve((const char *)pathname, (char **const)cmd, main->env_arr);
 	if (error == -1)
-		error_management(cmd[0], main);
+		error_management(cmd[0]);
 	free_pathname(pathname, flag);
 }
 
-void	exec_other_cmd(char **cmd, t_main *main, bool pipe)
+void	exec_other_cmd(char **cmd, t_main *main, bool child)
 {
 	int	pid;
 	int exit_status;
 
 	set_env_arr(main);
-	if(pipe)
+	if(child)
 		execution(cmd, main);
 	else
 	{

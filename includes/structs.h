@@ -36,6 +36,7 @@ typedef struct s_bool
 {
 	bool            put_node_behind;
 	bool            rdr_treated;
+	bool            rdr_err;
 } t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
@@ -75,6 +76,7 @@ typedef struct s_token
 {
 	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
 	t_type			type;
+	bool			quotes;
 }
 t_token;
 

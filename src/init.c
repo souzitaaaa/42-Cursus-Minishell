@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
+/*   Updated: 2023/09/11 16:43:18 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +48,7 @@ void    init_bool(t_bool *flags)
 {
 	flags->put_node_behind = false;
 	flags->rdr_treated = false;
+	flags->rdr_err = false;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
@@ -58,7 +60,6 @@ void	init_input(t_main *main, char *input)
 		init_list(&main->tokens, main);
 		ini_quotes(&main->quotes);
 		init_ast(&main->ast);
-		init_std(&main->fd); //!duvida se é aqui ou no init main
 		init_bool(&main->flags);
 }
 
@@ -73,4 +74,5 @@ void	init_main(t_main *main, char **envp)
 		main->exit_code = 0;
 		main->fork = 0;
 		main->proc = 0;
+		init_std(&main->fd); //*É AQUI! Se nao estou a fazer dup(1) e o 1 já foi redirecionado
 }

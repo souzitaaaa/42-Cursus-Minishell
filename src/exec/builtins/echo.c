@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/08/26 16:28:37 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:54:05 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ void    echo(char **command, t_main *main, bool child)
     flag = 1;
     count = 1;
     while (command[count] && echo_newline(command[count]))
-        flag = 0;
+	{
+		flag = 0;
+		count++;
+	}
+	count = 1;
     while (command[count])
     {
         ft_printf("%s", command[count]);
