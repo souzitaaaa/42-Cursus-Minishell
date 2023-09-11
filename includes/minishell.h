@@ -70,7 +70,6 @@ void		set_env_arr(t_main *main);
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool child);
-void	test_exec(t_main *main);
 void	execution(char **cmd, t_main *main);
 void	error_management(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
@@ -83,10 +82,10 @@ void    pwd(t_main *main, bool child);
 void    env(t_env *env, t_main *main, bool child, char **command);
 void	unset(t_main *main, char *str, bool child);
 void    export(t_main *main, char **array, bool child);
-void    insert_var(t_main *main, char *str);
-bool    modify_var(t_main *main, char *str);
+void    insert_var(t_main *main, char *str, bool exp);
+bool    modify_var(t_main *main, char *str, bool exp);
+void	copy_exp(t_main *main);
 void    remove_var(t_env *env, int index);
-bool     valid_export_var(char *var, t_main *main, bool child);
 void    cd(char *path, t_main *main, bool child);
 
 /*

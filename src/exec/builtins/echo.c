@@ -12,20 +12,30 @@
 
 #include "../../../includes/minishell.h"
 
-int echo_newline(char *command)
+int echo_newline(char *command, t_main *main, bool child)
 {
     int count;
 
     if (ft_strncmp(command, "-n", 2))
-        return (0);
+    {
+		if (child)
+    		exit(0);
+		set_exit_code(main, 0);
+	}
     count = 2;
     while (command[count])
     {
         if (command[count] != 'n')
-            return (0);
+        {
+			if (child)
+    			exit(0);
+			set_exit_code(main, 0);
+		}
         count++;
     }
-    return (1);
+    if (child)
+    	exit(1);
+	set_exit_code(main, 1);
 }
 void    echo(char **command, t_main *main, bool child)
 {
@@ -34,7 +44,7 @@ void    echo(char **command, t_main *main, bool child)
 
     flag = 1;
     count = 1;
-    while (command[count] && echo_newline(command[count]))
+    while (command[count] && echo_newline(command[count], main, child))
         flag = 0;
     while (command[count])
     {

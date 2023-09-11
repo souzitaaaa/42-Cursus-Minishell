@@ -12,7 +12,6 @@
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
-
 void	ini_quotes(t_quotes *quotes)
 {
 	quotes->error = 0;
@@ -67,6 +66,7 @@ void	init_input(t_main *main, char *input)
 void	init_main(t_main *main, char **envp)
 {
 		init_env(&main->env_list);
+		init_env(&main->export_list);
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
 		main->prev = NULL;
