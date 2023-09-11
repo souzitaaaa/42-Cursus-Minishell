@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -55,6 +55,8 @@ _HEADERS		= structs.h defines.h minishell.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
+
+
 
 all: $(NAME)
 

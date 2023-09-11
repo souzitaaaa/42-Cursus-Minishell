@@ -6,13 +6,13 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/07 19:59:14 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/11 16:14:20 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//atualizar o OLDPWD e PWD no cd 
+//atualizar o OLDPWD e PWD no cd
 //echo -n nao funciona 
 //unset para tirar o OLDPWD quando começa o programa esta dando segm fault quando fora do bash
 //quando tiver cd sozinho tem que chamar a find_home

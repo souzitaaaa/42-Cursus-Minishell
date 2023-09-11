@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/07 17:23:07 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/11 16:34:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void    set_env_list(t_main *main, char **envp)
         add_var(&main->env_list, aux);
         main->env_list.i++;
     }
-	//unset(main, "OLDPWD", false);
+	unset(main, "OLDPWD", false);
 }
 
 void    print_var(t_env env)
