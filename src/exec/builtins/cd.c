@@ -6,16 +6,15 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 16:57:29 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/11 19:16:40 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
 //atualizar o OLDPWD e PWD no cd
-//echo -n nao funciona 
-//unset para tirar o OLDPWD quando começa o programa esta dando segm fault quando fora do bash
 //quando tiver cd sozinho tem que chamar a find_home
+//se eu dou unset no oldpwd e depois mando; echo $OLDPWD tem que dar uma quebra de linha
 
 char *find_home(char *path, t_main *main, bool child)
 {
@@ -72,9 +71,9 @@ int change_dir(char *path, t_main *main, bool child)
 
 void cd(char *path, t_main *main, bool child)
 {
-	char *new_path;
-	int dir;
-	char *current;
+	char	*new_path;
+	int		dir;
+	char	*current;
 
 	if (ft_strcmp(path, "-") == 0)
 	{

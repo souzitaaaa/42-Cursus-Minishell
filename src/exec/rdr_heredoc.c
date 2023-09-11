@@ -41,7 +41,9 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 	char	*buff;
 
 	if (pipe(heredoc_fd) == -1)
+	{
 		//!error_management(NULL, 0, errno); //*errno -> number of last error
+	}
 	buff = read_stdin(lim, quotes);
 	write(heredoc_fd[1], buff, strlen(buff));
 	close(heredoc_fd[1]);
