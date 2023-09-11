@@ -178,7 +178,7 @@ void	ft_wait(t_main *main);
 void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
-void	error_export(char **str, int fd);
+void	error_export(int fd);
 void	prompt_diogo(t_prompt *prompt_list);
 void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);

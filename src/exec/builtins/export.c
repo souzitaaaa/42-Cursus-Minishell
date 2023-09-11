@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/07 16:20:06 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/11 15:58:32 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void export(t_main *main, char **array, bool child)
         {
             if (array[main->env_list.i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
 			{
-				error_export(array, STDERR_FILENO);
+				error_export(STDERR_FILENO);
                  if (child)
                     exit(2);
                 set_exit_code(main, 2);

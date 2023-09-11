@@ -77,8 +77,8 @@ void	init_prompt(t_main	*main)
 	while (1)
 	{
 		signals();
-		prompt = get_prompt_msg(main);
-		input = readline(prompt);
+		//prompt = get_prompt_msg(main);
+		input = readline("minihell");
 		if (input == NULL)
 			break;
 		if (ft_strcmp(input, "exit") == 0)
