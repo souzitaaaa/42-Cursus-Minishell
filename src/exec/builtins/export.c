@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 15:58:32 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/12 19:22:07 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,16 @@ void ft_export(t_env *exp)
 
 void export(t_main *main, char **array, bool child)
 {
-	copy_exp(main);
-    main->env_list.i = 1;
+	int	i;
+
+    i = 1;
     if (array[1] == 0)
         ft_export(&main->export_list);
     else
     {
-        while(array[main->env_list.i])
+        while(array[i] != NULL)
         {
-            if (array[main->env_list.i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
+            if (array[i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
 			{
 				error_export(STDERR_FILENO);
                  if (child)
@@ -91,18 +92,19 @@ void export(t_main *main, char **array, bool child)
 			}
 			else
             {
-                if (!ft_strchr(array[main->env_list.i], '='))
+                if (!ft_strchr(array[i], '='))
                 {
-					if (modify_var(main, array[main->env_list.i], true) == false)
-               			insert_var(main, array[main->env_list.i], true);
+					if (modify_var(main, array[i], true) == false)
+               			insert_var(main, array[i], true);
                 }
             	else 
 				{
-					if (modify_var(main, array[main->env_list.i], false) == false)
-               			insert_var(main, array[main->env_list.i], false);
+					//ft_printf("str: %s\n", array[i]);
+					if (modify_var(main, array[i], false) == false)
+               			insert_var(main, array[i], false);
 				}
             }
-            main->env_list.i++;
+            i++;
         }
     }
     if (child)

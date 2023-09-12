@@ -6,23 +6,45 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/07 16:18:43 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/12 19:05:46 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
+int	ft_isnbr(const char *str)
+{
+	if (ft_strlen(str) > 11)
+		return(0);
+	if (*str == '-' || *str == '+')
+		str++;
+	if (*str == '\0')
+		return(0);
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return(0);
+		str++;
+	}
+	return(1);
+}
 void    insert_var(t_main *main, char *str, bool exp)
 {
     t_var   *aux;
-
-    aux = var_node(str);
-	if (exp)
-    	add_var(&main->export_list, aux);
-	else
+	char	*temp;
+	
+	temp = ft_calloc(sizeof(char), ft_strclen(str, '=') + 1);
+	ft_strccpy(temp, str, '=');
+	if (!ft_isnbr(temp))
 	{
-		add_var(&main->export_list, aux);
-		add_var(&main->env_list, aux);
+    	aux = var_node(str);
+		if (exp)
+			add_var(&main->export_list, aux);
+		else
+		{
+			add_var(&main->export_list, aux);
+			add_var(&main->env_list, aux);
+		}
 	}
 }
 void	put_head_var(t_env *env, t_var *new)
@@ -62,26 +84,21 @@ bool    modify_var(t_main *main, char *str, bool exp)
     t_var   *current;
     t_var   *aux;
     int     count = 0;
+	int		index;
 
     current = main->env_list.head;
     while (count++ < main->env_list.size)
     {
         if (ft_strncmp(str, current->var, ft_strclen(str, '=')) == 0)
         {
-			if (exp)
-				remove_var(&main->export_list, current->index);
-			else
+			if(!exp)
 			{
+				index = current->index;
 				remove_var(&main->export_list, current->index);
-            	remove_var(&main->env_list, current->index);
-			}
-			aux = var_node(str);
-			if (exp)
-				add_index_var(&main->export_list, aux, current->index);
-			else
-			{
-				add_index_var(&main->export_list, aux, current->index);
-            	add_index_var(&main->env_list, aux, current->index);
+            	remove_var(&main->env_list, current->index);	
+				aux = var_node(str);
+				add_index_var(&main->export_list, aux, index);
+            	add_index_var(&main->env_list, aux, index);
 			}
             return (true);
         }

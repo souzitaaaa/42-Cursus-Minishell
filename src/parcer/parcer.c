@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/06 23:18:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:27:10 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	parcer(t_main *main)
 	if(main->tokens.size == 1 && main->tokens.head->token.type == STRING)
 	{
 		exec_cmd(main->tokens.head->token.arr, main, false);
+		printf("CHEGUEI\n");
 		return ;
 	}
 	cmdcat(&main->tokens);

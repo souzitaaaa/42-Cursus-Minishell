@@ -76,7 +76,7 @@ void	init_prompt(t_main	*main)
 
 	while (1)
 	{
-		signals();
+		//signals();
 		prompt = get_prompt_msg(main);
 		input = readline(prompt);
 		if (input == NULL)
@@ -94,6 +94,7 @@ void	init_prompt(t_main	*main)
 			break ;
 		lexer(main);
 		parcer(main);
+		printf("ok\n");
 		free(input);
 		free(prompt);
 	}

@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/11 16:43:18 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/12 18:49:48 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	init_main(t_main *main, char **envp)
 		init_env(&main->env_list);
 		init_env(&main->export_list);
 		set_env_list(main, envp);
+		copy_exp(main);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
 		main->prev = NULL;
 		main->exit_code = 0;
