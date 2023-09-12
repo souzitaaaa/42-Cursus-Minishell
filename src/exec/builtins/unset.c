@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 16:33:10 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/12 20:14:49 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_var	*find_var(t_env env, int index)
 	return (aux);
 }
 
-void	unset(t_main *main, char *str, bool child)
+void	unset_env(t_main *main, char *str, bool child)
 {
 	int		count = 0;
 	int		index;
@@ -80,3 +80,31 @@ void	unset(t_main *main, char *str, bool child)
         exit(0);
     set_exit_code(main, 0);
 }
+
+void	unset_exp(t_main *main, char *str, bool child)
+{
+	int		count = 0;
+	int		index;
+	t_var	*aux = main->export_list.head;
+
+	while (count++ < main->export_list.size)
+	{
+		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
+		{
+			index = aux->index;
+			remove_var(&main->export_list, aux->index);
+			aux = find_var(main->export_list, index);
+		}
+		aux = aux->next;
+	}
+	if (child)
+        exit(0);
+    set_exit_code(main, 0);
+}
+
+void	unset(t_main *main, char *str, bool child)
+{
+	unset_env(main, str, child);
+	unset_exp(main, str, child);	
+}
+
