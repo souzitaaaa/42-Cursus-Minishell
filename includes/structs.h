@@ -67,7 +67,7 @@ typedef enum s_type
 	HEREDOC = 'H',   // <<
 	OUT = '>',       // >
 	APPEND = 'A',    // >>
-	COMERCIAL = '&', // &
+	COMERCIAL = '&', // & //!APAGAR
 	STRING = 'S',    // string (pode ser comando, ficheiro)
 }t_type;
 
@@ -141,6 +141,7 @@ typedef struct s_quotes
 //* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
 //--> quando se manda msg de erro deve sempre escrever-se para o stderr
 //--> para usar nas redirecoes
+//!APAGAR
 typedef struct s_std
 {
 	int	stdin;

@@ -90,6 +90,10 @@ void	init_prompt(t_main	*main)
 		add_history(input);
 		init_input(main, input);
 		ft_wait(main);
+		if(g_ex_status != 0)
+			set_exit_code(main, g_ex_status);
+		if(g_ex_status != -1)
+			set_exit_code(main, 0);
 		if (main->quotes.error)
 			break ;
 		lexer(main);

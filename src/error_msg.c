@@ -39,3 +39,9 @@ void	error_export(int fd)
 	ft_putstr_fd("minishell: ", fd);
 	ft_putendl_fd("zsh: bad assignment", fd);
 }
+
+void	error_quotes(int fd)
+{
+	ft_putstr_fd("minishell: ", fd);
+	ft_putendl_fd(SYNTAX_ERROR, fd);
+}

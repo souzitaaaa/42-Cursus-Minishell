@@ -21,6 +21,7 @@ char	*read_stdin(char *lim, bool quotes)
 	buff = "\0";
 	while (1)
 	{
+		ft_printf("entra aqui 3\n");
 		ft_printf("> ");
 		str = get_next_line(STDIN_FILENO, false);
 		//!str = expand_line(str, quotes);
@@ -30,7 +31,7 @@ char	*read_stdin(char *lim, bool quotes)
 			break ;
 		}
 		buff = ft_strjoinfree(buff, str);
-		ft_free_str(&str);
+		//ft_free_str(&str);
 	}
 	return (buff);
 }
@@ -40,15 +41,17 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 	int		heredoc_fd[2];
 	char	*buff;
 
+	printf("entra aqui 2\n");
 	if (pipe(heredoc_fd) == -1)
 	{
-		//!error_management(NULL, 0, errno); //*errno -> number of last error
+			//!error_management(NULL, 0, errno); //*errno -> number of last error
 	}
 	buff = read_stdin(lim, quotes);
+	printf("buff: %s\n", buff);
 	write(heredoc_fd[1], buff, strlen(buff));
 	close(heredoc_fd[1]);
 	if (*buff)
-		ft_free_str(&buff);
+		//ft_free_str(&buff);
 	return (heredoc_fd[0]);
 }
 
@@ -56,6 +59,7 @@ void	rdr_hd(t_token token, t_main *main)
 {
 	int	fd;
 
+	printf("entra aqui\n");
 	if(token.arr[1] == NULL)
 	{
 		fd = open_hd(token.arr[0], token.quotes, main);
