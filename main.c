@@ -76,9 +76,12 @@ void	init_prompt(t_main	*main)
 
 	while (1)
 	{
-		//signals();
+		signals();
+		printf("aqui\n");
 		prompt = get_prompt_msg(main);
+		printf("aqui 2\n");
 		input = readline(prompt);
+		printf("aqui 3\n");
 		if (input == NULL)
 			break;
 		if (ft_strcmp(input, "exit") == 0)
@@ -89,7 +92,7 @@ void	init_prompt(t_main	*main)
 		}
 		add_history(input);
 		init_input(main, input);
-		ft_wait(main);
+		//ft_wait(main);
 		if (main->quotes.error)
 			break ;
 		lexer(main);
