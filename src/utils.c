@@ -23,7 +23,7 @@
  *                0 se uma citação de aspas foi fechada ou
  *                o valor atual de 'quotes' se nenhum estado de citação mudou.
  */
-int check_quotes(char c, int quotes) 
+int check_quotes(char c, int quotes)
 {
 	if (c == '\"') {
 		if (!quotes)
@@ -47,7 +47,7 @@ int check_quotes_print(t_main *main)
     char open_quote_type = '\0';  // Tipo da aspa de abertura
 
     printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
-    while (main->input_prompt[i] != '\0') 
+    while (main->input_prompt[i] != '\0')
     {
         char c = main->input_prompt[i];
         quotes_analises = check_quotes(c, quotes_analises);
@@ -76,8 +76,11 @@ int check_quotes_print(t_main *main)
 
     if (quotes_analises == 1 || quotes_analises == 2)
     {
-        printf("%s", SYNTAX_ERROR);
+        //printf("%s", SYNTAX_ERROR);
+        error_quotes(STDERR_FILENO);
+        set_exit_code(main, 2);
         main->quotes.error = 1;
+        return(0);
     }
     printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
@@ -95,7 +98,7 @@ int check_quotes_print(t_main *main)
  *
  * @param main Um ponteiro para a estrutura do t_main.
  */
-void ft_wait(t_main *main) 
+void ft_wait(t_main *main)
 {
     int status; // Variável para armazenar o status do processo filho.
     if (waitpid(main->pid, &status, 0) != -1)  // Aguarda a conclusão do processo filho e obtém o status.
