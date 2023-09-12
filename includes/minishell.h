@@ -78,6 +78,7 @@ bool    modify_var(t_main *main, char *str, bool exp);
 void	copy_exp(t_main *main);
 void    remove_var(t_env *env, int index);
 void    cd(char *path, t_main *main, bool child);
+void	ft_exit(char **command);
 
 /*
 !LEXER.C

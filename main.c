@@ -12,7 +12,7 @@
 
 #include "includes/minishell.h"
 
-int	g_ex_status;
+int	g_ex_status = 0; //*A norminette deixa
 
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
@@ -81,18 +81,13 @@ void	init_prompt(t_main	*main)
 		input = readline(prompt);
 		if (input == NULL)
 			break;
-		if (ft_strcmp(input, "exit") == 0)
-		{
-			free(input);
-			printf("exit\n");
-			break;
-		}
 		add_history(input);
 		init_input(main, input);
 		ft_wait(main);
+		printf("exit_code: %d\n", g_ex_status);
 		if(g_ex_status != 0)
 			set_exit_code(main, g_ex_status);
-		if(g_ex_status != -1)
+		if(g_ex_status == -1)
 			set_exit_code(main, 0);
 		if (main->quotes.error)
 			break ;

@@ -64,6 +64,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 {
 	char **temp;
 	int aux_index;
+	bool cmdcat;
 
 	temp = copy_first_cmd(*tokens, index);
 	aux = aux->next;
@@ -75,11 +76,13 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 			temp = ft_arrjoin(temp, aux->token.arr);
 			remove_node(tokens, aux->index);
 			aux = find_node(*tokens, aux_index);
+			cmdcat = true;
 		}
 		else
 			aux = aux->next;
 	}
-	insert_temp(tokens, index, temp);
+	if (cmdcat)
+		insert_temp(tokens, index, temp);
 }
 
 //*Esta função junta os tipos S todos no mesmo nó, para que entre pipes só haja um tipo S
@@ -88,6 +91,7 @@ void	cmdcat(t_lexer *tokens)
 	int	counter;
 	t_node *aux;
 	int	cmd_index;
+	int	aux_index;
 	int	size;
 
 	counter = 0;
@@ -95,12 +99,15 @@ void	cmdcat(t_lexer *tokens)
 	size = tokens->size;
 	while(counter < size)
 	{
+		printf("oi\n");
 		cmd_index = find_first_cmd(aux, tokens->size); //*encontra o primeiro comando e devolve o seu index
 		if(cmd_index == -1) //*Se não houver cmd, acaba aqui;
 			return ;
 		cmdpipecat(tokens, aux, cmd_index); //*concatenar os tipo S até ao próximo pipe ou até ao fim da lista
+		aux = find_node(*tokens, aux_index);
 		while(aux->token.type != PIPE && counter++ < size)
 			aux = aux->next;
 		aux = aux->next;
+		counter++;
 	}
 }
