@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/06 18:58:27 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:24:35 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	exec_cmd(char **command, t_main *main, bool child)
 		export(main, command, child);
 	else if (ft_strcmp(command[0], "unset") == 0)
 		unset(main, command[1], child);
+	else if (ft_strcmp(command[0], "exit") == 0)
+		ft_exit(command);
    	else
        exec_other_cmd(command, main, child);
 }

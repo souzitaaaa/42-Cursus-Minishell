@@ -1,0 +1,11 @@
+Makefile
+README.md
+in
+includes
+libft_group
+main.c
+minishell
+minishell.dSYM
+obj
+readline.supp
+src
