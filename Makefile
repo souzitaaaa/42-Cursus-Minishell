@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
+#    By: jenny <jenny@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/06 23:20:36 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/11 18:53:28 by jenny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 

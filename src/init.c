@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/06 19:16:20 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:43:18 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
-
 
 void	ini_quotes(t_quotes *quotes)
 {
@@ -68,6 +67,7 @@ void	init_input(t_main *main, char *input)
 void	init_main(t_main *main, char **envp)
 {
 		init_env(&main->env_list);
+		init_env(&main->export_list);
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
 		main->prev = NULL;

@@ -63,6 +63,7 @@ void	insert_temp(t_lexer *tokens, int index, char **temp)
 void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 {
 	char **temp;
+	int aux_index;
 
 	temp = copy_first_cmd(*tokens, index);
 	aux = aux->next;
@@ -70,9 +71,10 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	{
 		if(aux->token.type == STRING && aux->index != index)
 		{
-				temp = ft_arrjoin(temp, aux->token.arr);
-				remove_node(tokens, aux->index);
-				aux = find_node(*tokens, aux->index);
+			aux_index = aux->index;
+			temp = ft_arrjoin(temp, aux->token.arr);
+			remove_node(tokens, aux->index);
+			aux = find_node(*tokens, aux_index);
 		}
 		else
 			aux = aux->next;

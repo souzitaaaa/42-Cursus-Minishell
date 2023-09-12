@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:11:59 by joe               #+#    #+#             */
-/*   Updated: 2023/09/06 17:29:15 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/07 14:15:01 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void signal_handler(int sig)
     {
         g_ex_status = 130;       // Define o status de saída para 130
         ft_printf("\n");         // Escreve uma nova linha
-        rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
+        //rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
         rl_on_new_line();        // Move o cursor para uma nova linha
         rl_redisplay();          // Redisplay o prompt
     }
@@ -53,7 +53,7 @@ void signal_quit1(int sig)
     {
         ft_printf("\n");                  // Escreve uma nova linha no terminal
         g_ex_status = 130;                // Define o status de saída como 130
-        rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
+        //rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
         rl_on_new_line();                 // Move o cursor para uma nova linha
         signal(SIGQUIT, SIG_DFL);         // Restaura o comportamento padrão do sinal SIGQUIT
     }
@@ -77,7 +77,7 @@ void signal_quit(int sig)
     {
         write(1, "\n", 1);                 // Escreve uma nova linha no terminal
         g_ex_status = 131;                // Define o status de saída como 131
-        rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
+        //rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
         rl_on_new_line();                 // Move o cursor para uma nova linha
         ft_printf("Quit: (core dumped)\n"); // Imprime a mensagem "Quit: (core dumped)"
         signal(SIGQUIT, SIG_DFL);         // Restaura o comportamento padrão do sinal SIGQUIT
