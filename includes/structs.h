@@ -182,8 +182,6 @@ typedef struct s_main
 	char			**env_arr;
 	char			*prev;
 	int				exit_code;
-	int				fork;
-	int				proc;
 	t_lexer			tokens;
 	t_env			export_list;
 	t_env			env_list;
