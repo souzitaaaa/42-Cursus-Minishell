@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/18 14:34:59 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:29:14 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
+
 
 void	ini_quotes(t_quotes *quotes)
 {
@@ -49,7 +50,8 @@ void    init_bool(t_bool *flags)
 	flags->put_node_behind = false;
 	flags->rdr_treated = false;
 	flags->rdr_err = false;
-	flags->signal = false;
+	flags->free_flag.lexer_s = false;
+	flags->free_flag.prompt_s = true;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
@@ -68,11 +70,11 @@ void	init_input(t_main *main, char *input)
 void	init_main(t_main *main, char **envp)
 {
 		init_env(&main->env_list);
-		init_env(&main->export_list);
 		set_env_list(main, envp);
 		main->env_arr = ft_calloc(sizeof(char *), 1);
 		main->prev = NULL;
 		main->exit_code = 0;
+		main->fork = 0;
+		main->proc = 0;
 		init_std(&main->fd); //*É AQUI! Se nao estou a fazer dup(1) e o 1 já foi redirecionado
-		main->flags.signal = false;
 }

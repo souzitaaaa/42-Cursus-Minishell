@@ -17,12 +17,13 @@ void	 set_rdr_err(t_main *main)
 	main->flags.rdr_err = true;
 }
 
-void	rdr_error(char *str, t_main *main, int options)
+void	rdr_error()
 {
 	//!ERROR HANDLING "bad file descriptor" set exit code
-	if (options == 0)
-		error_msg_file(str, STDERR_FILENO);
-	if (options == 1)
-		error_msg_fd(str, STDERR_FILENO);
 	set_rdr_err(main); //parar os rdr exceto o here doc
 }
+
+//!if rdr_err --> set exit code 1?
+//!NAO FAZ O COMANDO
+
+

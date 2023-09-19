@@ -12,7 +12,7 @@
 
 #include "includes/minishell.h"
 
-int	g_ex_status = 0; //*A norminette deixa
+int	g_ex_status;
 
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
@@ -42,8 +42,10 @@ void	init_struct_prompt(t_main *main)
 	main->prompt_list.pwd = NULL;
 	main->prompt_list.out = NULL;
 	main->prompt_list.logname = get_envvar("LOGNAME", &main->env_list);
-	if (!main->prompt_list.logname)
+	if (main->prompt_list.logname == NULL)
 		main->prompt_list.logname = get_envvar("USER", &main->env_list);
+	if (main->prompt_list.logname == NULL)
+		main->prompt_list.logname = "default";
 	main->prompt_list.pwd = get_envvar("PWD", &main->env_list);
 }
 
@@ -76,24 +78,29 @@ void	init_prompt(t_main	*main)
 
 	while (1)
 	{
-		signals(0);
+		signals();
 		//prompt = get_prompt_msg(main);
-		input = readline("\033[1;31mminishell\033[0m🔥 ");
-		if (!input)
-			ft_exit(NULL, false, *main);
+		input = readline(get_prompt_msg(main));
+		if (input == NULL)
+			break;
+		if (ft_strcmp(input, "exit") == 0)
+		{
+			free(input);
+			//destroy(main);
+			printf("exit\n");
+			break;
+		}
 		add_history(input);
 		init_input(main, input);
-		if(g_ex_status != 0)
-		{
-			set_exit_code(main, g_ex_status);
-			g_ex_status = 0;
-		}
-		if (main->quotes.error)
+		ft_wait(main);
+		if (main->quotes.error) //! isto n devia ficar debaixo do lexer?
 			break ;
 		lexer(main);
-		parcer(main);
+		if (syntax_analysis(main) == true)
+			parcer(main);
+		//destroy(main);
 		free(input);
-		free(prompt);
+		//free(prompt);
 	}
 }
 

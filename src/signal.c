@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:11:59 by joe               #+#    #+#             */
-/*   Updated: 2023/09/19 16:54:17 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:29:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ extern int	g_ex_status;
  *
  * @param sig O número do sinal recebido, geralmente SIGINT.
  */
-void signal_handler(int sig)
+void signal_handler(int sig) 
 {
-    if (sig == SIGINT)
+    if (sig == SIGINT) 
     {
         g_ex_status = 130;       // Define o status de saída para 130
         ft_printf("\n");         // Escreve uma nova linha
@@ -37,28 +37,70 @@ void signal_handler(int sig)
     }
 }
 
-void signal_handler_child(int sig)
+/**
+ * Manipulador de sinal para o sinal SIGINT (interrupção do terminal).
+ *
+ * Esta função é chamada quando o processo recebe um sinal SIGINT, que é
+ * geralmente enviado quando o usuário pressiona Ctrl+C no terminal. Ela
+ * exibe uma nova linha, atualiza o status de saída para 130, limpa a linha
+ * atual, exibe uma nova linha e restaura o comportamento padrão do sinal SIGQUIT.
+ *
+ * @param sig O número do sinal recebido, geralmente SIGINT.
+ */
+void signal_quit1(int sig) 
 {
-    if (sig == SIGINT)
+    if (sig == SIGINT) 
     {
-        g_ex_status = 130;
-        ft_printf("\n");
+        ft_printf("\n");                  // Escreve uma nova linha no terminal
+        g_ex_status = 130;                // Define o status de saída como 130
+        rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
+        rl_on_new_line();                 // Move o cursor para uma nova linha
+        signal(SIGQUIT, SIG_DFL);         // Restaura o comportamento padrão do sinal SIGQUIT
     }
 }
 
-void signal_handler_hd(int sig)
+//!-----------------------> CRTL + \ <--------------------------
+/**
+ * Manipulador de sinal para o sinal SIGQUIT (sair do terminal com despejo de núcleo).
+ *
+ * Esta função é chamada quando o processo recebe um sinal SIGQUIT, que é
+ * geralmente enviado quando o usuário pressiona Ctrl+\ no terminal. Ela
+ * exibe uma nova linha, atualiza o status de saída para 131, limpa a linha
+ * atual, exibe uma nova linha, imprime a mensagem "Quit: (core dumped)"
+ * e restaura o comportamento padrão do sinal SIGQUIT.
+ *
+ * @param sig O número do sinal recebido, geralmente SIGQUIT.
+ */
+void signal_quit(int sig) 
 {
-    if (sig == SIGINT)
+    if (sig == SIGQUIT) 
     {
-        exit(0);
+        write(1, "\n", 1);                 // Escreve uma nova linha no terminal
+        g_ex_status = 131;                // Define o status de saída como 131
+        rl_replace_line("", 0);           // Substitui a linha atual por uma string vazia
+        rl_on_new_line();                 // Move o cursor para uma nova linha
+        ft_printf("Quit: (core dumped)\n"); // Imprime a mensagem "Quit: (core dumped)"
+        signal(SIGQUIT, SIG_DFL);         // Restaura o comportamento padrão do sinal SIGQUIT
     }
 }
 
-void signal_handler_nothing(int sig)
-{
-    if (sig == SIGINT)
-        g_ex_status = 130;
+/**
+ * Manipulador de sinal para o sinal SIGQUIT (sair do terminal com despejo de núcleo).
+ *
+ * Esta função é chamada quando o processo recebe um sinal SIGQUIT, que é
+ * geralmente enviado quando o usuário pressiona Ctrl+\ no terminal. Ela
+ * atualiza o status de saída para 131 e ignora futuros sinais SIGQUIT.
+ *
+ * @param sig O número do sinal recebido, geralmente SIGQUIT.
+ */
+void signal_quit2(int sig) {
+    if (sig == SIGQUIT) {
+        g_ex_status = 131;            // Define o status de saída como 131
+        signal(SIGQUIT, SIG_IGN);     // Ignora futuros sinais SIGQUIT
+    }
 }
+
+
 /**
  * Configura os manipuladores de sinal para SIGINT e SIGQUIT.
  *
@@ -66,15 +108,8 @@ void signal_handler_nothing(int sig)
  * SIGINT e SIGQUIT. Ela utiliza a função signal_handler para SIGINT e
  * ignora SIGQUIT.
  */
-void signals(int options)
+void signals(void) 
 {
-    if(options == 0)
-        signal(SIGINT, signal_handler);
-    else if(options == 1)
-        signal(SIGINT, signal_handler_child);
-    else if(options == 2)
-        signal(SIGINT, signal_handler_hd);
-	else if(options == -1)
-		signal(SIGINT, signal_handler_nothing);
-    signal(SIGQUIT, SIG_IGN);  // Ignora o sinal SIGQUIT
+    signal(SIGINT, signal_handler);     // Associa signal_handler ao sinal SIGINT
+    signal(SIGQUIT, SIG_IGN);           // Ignora o sinal SIGQUIT
 }

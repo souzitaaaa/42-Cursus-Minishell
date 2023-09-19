@@ -63,36 +63,8 @@ void    print_tokens(t_lexer *tokens)
 		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->token.type);
 		printf("\033[1;34m[ARR] \033[0m \n");
 		print_arr(aux->token.arr);
+		printf("\033[1;34m[QUOTES HEREDOC]  \033[0m %i\n\n", aux->token.quotes);
 		aux = aux->next;
 	}
 			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");
-}
-
-t_node	*find_node(t_lexer tokens, int index)
-{
-	int	counter;
-	t_node *aux;
-
-	counter = 0;
-	aux = tokens.head;
-	while(counter++ < index)
-		aux = aux->next;
-	return (aux);
-}
-
-int find_last_hd(t_lexer tokens)
-{
-	int	counter;
-	t_node *aux;
-    t_node *result;
-
-	counter = 0;
-	aux = tokens.head;
-	while(counter++ < tokens.size)
-    {
-        if(aux->token.type == HEREDOC)
-            result = aux;
-        aux = aux->next;
-    }
-	return (result->index);
 }

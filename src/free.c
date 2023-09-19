@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:15 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/17 23:09:58 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/12 16:15:24 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
-
-void	free_list(t_lexer *stack)
+/*
+void	free_lexer(t_lexer *stack)
 {
 	t_node	*element;
 	t_node	*temp;
@@ -25,13 +25,14 @@ void	free_list(t_lexer *stack)
 	counter = 0;
 	while (counter++ < stack->size)
 	{
+		destroy_token(element);
 		temp = element;
 		element = element->next;
 		free(temp);
 	}
 	stack->head = NULL;
 	stack->size = 0;
-}
+}*/
 
 void	free_env(t_env *stack)
 {

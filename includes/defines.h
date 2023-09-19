@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/19 16:11:15 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/08/19 23:11:32 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ COLORS
 # define SYNTAX_ERROR "syntax error near unexpected token `"
 # define CMD_ERROR "command not found"
 # define FILE_ERROR "No such file or directory"
-# define FD_ERROR "Bad file descriptor"
+
 #endif

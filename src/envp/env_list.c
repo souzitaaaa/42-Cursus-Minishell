@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 16:34:15 by jenny            ###   ########.fr       */
+/*   Updated: 2023/08/18 04:11:47 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,19 @@ void    set_env_list(t_main *main, char **envp)
         add_var(&main->env_list, aux);
         main->env_list.i++;
     }
-	unset(main, "OLDPWD", false);
 }
+    /*int     count;
+    t_var   *aux;
+
+    aux = (t_var *)malloc(sizeof(t_var));
+    var = env->head;
+    count = 0;
+    while (count++ <= env->size)
+    {
+        aux = var_node(var);
+        add_var(env, aux);
+        var = var->next;
+    }*/
 
 void    print_var(t_env env)
 {

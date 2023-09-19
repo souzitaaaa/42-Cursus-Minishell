@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 16:33:10 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/04 19:46:31 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,16 @@ void    remove_var(t_env *env, int index)
     env->size--;
     free(current);
 }
-t_var	*find_var(t_env env, int index)
-{
-	int	counter;
-	t_var *aux;
-
-	counter = 0;
-	aux = env.head;
-	while(counter++ < index)
-		aux = aux->next;
-	return (aux);
-}
 
 void	unset(t_main *main, char *str, bool child)
 {
 	int		count = 0;
-	int		index;
 	t_var	*aux = main->env_list.head;
 
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
-		{
-			index = aux->index;
 			remove_var(&main->env_list, aux->index);
-			aux = find_var(main->env_list, index);
-		}
 		aux = aux->next;
 	}
 	if (child)
