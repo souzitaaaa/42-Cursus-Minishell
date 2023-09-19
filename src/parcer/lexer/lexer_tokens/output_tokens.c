@@ -12,6 +12,49 @@
 
 #include "../../../../includes/minishell.h"
 
+void    check_quotes_heredoc(t_lexer *lexer)
+{
+	int     count = 0;
+	int     i = 0;
+	int     j = 0;
+	
+	t_node  *aux = lexer->head;
+
+	while (count++ < lexer->size)
+		aux = aux->next;
+	while (aux->token.arr[i])
+	    i++;
+	i--;
+	if (aux->token.arr[i][j] == '\'' && aux->token.arr[i][j + 1] != '\0')
+	{
+	    j++;
+	    while (aux->token.arr[i][j] != '\0')
+	    {
+	        if (aux->token.arr[i][j] == '\'')
+	        {
+	            aux->token.quotes = true;
+	            return ;
+	        }
+	        j++;
+	    }
+	    
+	}
+	else if (aux->token.arr[i][j] == '\"' && aux->token.arr[i][j + 1] != '\0')
+	{
+	    j++;
+	    while (aux->token.arr[i][j] != '\0')
+	    {
+	        if (aux->token.arr[i][j] == '\"')
+	        {
+	            aux->token.quotes = true;
+	            return ;
+	        }
+	        j++;
+	    }
+	    
+    }
+}
+
 //* Vai meter na lista o certo
 void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 {
@@ -35,21 +78,37 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
     fd = ft_strjoin(fd, " ");
     fd = ft_strjoin(fd, aux);
     add_token(main, token, i, fd);
-    if (*i < main->tokens.str_len)
-        main->flags.put_node_behind = true;
+    if (token == HEREDOC || token == IN)
+        check_quotes_heredoc(&main->tokens);
+    //if (*i < main->tokens.str_len)
+    //    main->flags.put_node_behind = true;
     //(*i)--;
 }
 
 //* Identifica qual o tipo de token do fd
-void    fd_tokens(t_main *main, int *i, char *str)
+void    fd_tokens(t_main *main, int *i, char *str, char token)
 {
-    if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
-	{
-		(*i)++;
-		get_fd_out(main, i, APPEND, str);
-	}
-	else
-	    get_fd_out(main, i, OUT, str);
+    if (token == OUT)
+    {
+        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
+	    {
+		    (*i)++;
+		    get_fd_out(main, i, APPEND, str);
+	    }
+	    else
+	        get_fd_out(main, i, OUT, str);
+    }
+    else
+    {
+        if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
+	    {
+		    (*i)++;
+		    get_fd_out(main, i, HEREDOC, str);
+	    }
+	    else
+	        get_fd_out(main, i, IN, str);
+    }
+    
 }
 
 //* Funcao principal para verificar se os numeros são um fd
@@ -73,7 +132,7 @@ int    get_fd_rdr(t_main *main, int *i)
                 else
                 {
                     str = ft_substr(main->input_prompt, start, (*i - start));
-                    fd_tokens(main, i, str);
+                    fd_tokens(main, i, str, main->input_prompt[*i]);
                     main->flags.rdr_treated = true;
                     printf("\033[1;32m\t\t(End get_fd_rdr special)\033[0m\n");
                     return (*i - start);

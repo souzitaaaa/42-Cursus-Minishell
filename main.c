@@ -12,7 +12,7 @@
 
 #include "includes/minishell.h"
 
-int	g_ex_status = 0; //*A norminette deixa
+int	g_ex_status = 0;
 
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
@@ -42,8 +42,10 @@ void	init_struct_prompt(t_main *main)
 	main->prompt_list.pwd = NULL;
 	main->prompt_list.out = NULL;
 	main->prompt_list.logname = get_envvar("LOGNAME", &main->env_list);
-	if (!main->prompt_list.logname)
+	if (main->prompt_list.logname == NULL)
 		main->prompt_list.logname = get_envvar("USER", &main->env_list);
+	if (main->prompt_list.logname == NULL)
+		main->prompt_list.logname = "default";
 	main->prompt_list.pwd = get_envvar("PWD", &main->env_list);
 }
 
@@ -91,9 +93,11 @@ void	init_prompt(t_main	*main)
 		if (main->quotes.error)
 			break ;
 		lexer(main);
-		parcer(main);
+		if (syntax_analysis(main) == true)
+			parcer(main);
+		//destroy(main);
 		free(input);
-		free(prompt);
+		//free(prompt);
 	}
 }
 

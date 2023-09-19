@@ -108,6 +108,7 @@ void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 !QUOTES_TREATMENT.C
 */
 void    quotes_treatment(t_main *main, int *i, int start);
+int     add_token_quotes(t_main *main, t_type token, int *i, char *str, bool expand);
 
 /*
 !TOKEN.C
@@ -116,32 +117,36 @@ t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 int		add_token(t_main *main, t_type token, int *i, char *str);
 int     add_prev_token(t_main *main, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
+void	check_expansion(t_main *main, char **arr);
 
 /*
-LEXER_UTILS
+!LEXER_UTILS
 */
 void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
-t_node	*find_node(t_lexer tokens, int index);
-int		find_last_hd(t_lexer tokens);
 
 /*
-PARCER
+!SYNTAX
+*/
+bool    syntax_analysis(t_main *main);
+
+/*
+!PARCER
 */
 void	parcer(t_main *main);
 void	test_ast(t_lexer tokens, t_ast *ast);
 void	cmdcat(t_lexer *tokens);
 
 /*
-EXEC
+!EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
 void	pipex(t_ast *ast, t_main *main);
 
 /*
-RDR
+!RDR
 */
 void	init_rdr(t_lexer tokens, t_main *main);
 void	rdr_in(char **arr, t_main *main);
@@ -152,22 +157,22 @@ int		open_hd(char *lim, bool quotes, t_main *main);
 void	rdr_error(char *str, t_main *main, int options);
 
 /*
-EXECVE
+!EXECVE
 */
 void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_execve(char *str);
+void	error_management(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
-CHILD_AUX
+!CHILD_AUX
 */
 void	wait_estatus(int pid, t_main *main);
 
 /*
 !FREE.C
 */
-void		free_list(t_lexer *stack);
+void		free_lexer(t_lexer *stack);
 void		free_env(t_env *stack);
 
 /*
@@ -194,6 +199,11 @@ void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
 void	error_export(int fd);
 void	error_quotes(int fd);
+
+/*
+!DESTROY
+*/
+void    destroy(t_main *main);
 
 //!PROMPT
 void	prompt_diogo(t_prompt *prompt_list);

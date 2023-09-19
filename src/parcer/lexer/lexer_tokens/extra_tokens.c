@@ -28,6 +28,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	int		start = *i;
 	char	*str;
 	bool	run = true;
+	bool    extra = false;
 	int     n_len = 0;
 
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
@@ -46,11 +47,17 @@ void	search_extra_tokens(t_main *main, int *i)
 			return ;
 		}
 		if (special_chr(main->input_prompt[*i]) == false)
+		{
 			(*i)++;
+			extra = true;
+		}
 		else
 			run = false;
 	}
+	if (main->flags.rdr_treated == true && extra == false)
+		return ;
 	str = ft_substr(main->input_prompt, start, (*i - start) - n_len);
 	add_token(main, STRING, i, str);
+	free(str);
 	(*i)--;
 }

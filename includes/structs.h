@@ -22,15 +22,25 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*prev;
 	int				exit_code;
+	int				fork;
+	int				proc;
 	t_lexer			tokens;
+	t_env			export_list;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			input_exec;
+	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
 }t_main;*/
+
+typedef struct s_frees
+{
+	bool            lexer_s;
+	bool            prompt_s;
+} t_free;
 
 typedef struct s_bool
 {
@@ -38,6 +48,7 @@ typedef struct s_bool
 	bool            rdr_treated;
 	bool            rdr_err;
 	bool			signal;
+	t_free          free_flag;
 } t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
@@ -68,7 +79,7 @@ typedef enum s_type
 	HEREDOC = 'H',   // <<
 	OUT = '>',       // >
 	APPEND = 'A',    // >>
-	COMERCIAL = '&', // & //!APAGAR
+	COMERCIAL = '&', // &
 	STRING = 'S',    // string (pode ser comando, ficheiro)
 }t_type;
 
@@ -90,7 +101,7 @@ typedef struct s_node
 	int				index;
 	int				quotes;
 	struct s_node	*next;
-	int				fd;
+	int		fd;
 }t_node;
 
 //* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
@@ -105,6 +116,8 @@ typedef struct s_lexer
 /*
 AST
 */
+
+
 //* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
@@ -122,7 +135,7 @@ typedef	struct s_ast
 {
 	t_ast_node			*head;
 	int					counter;
-	int					size; //number of pipes/nodes
+	int					size; //number of nodes/operators
 }
 t_ast;
 
@@ -142,7 +155,6 @@ typedef struct s_quotes
 //* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
 //--> quando se manda msg de erro deve sempre escrever-se para o stderr
 //--> para usar nas redirecoes
-//!APAGAR
 typedef struct s_std
 {
 	int	stdin;
