@@ -35,6 +35,7 @@ void	rdr_out(char **arr, t_main *main)
 		//!	error_management(file, 0, 0);
 		if(dup2(fd, ft_atoi(arr[0])) == -1)
 		{
+			printf("error\n");
 			 //!ERROR HANDLING "bad file descriptor" set exit code
 			//! set_rdr_err(main); //parar os rdr exceto o here doc
 		}

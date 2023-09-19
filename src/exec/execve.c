@@ -62,7 +62,7 @@ char	*ft_pathname(int *flag, char **envp, char **cmd)
 	char	*str;
 
 	str = "\0";
-	if (!ft_strchr(str, '/'))
+	if (!ft_strchr(cmd[0], '/'))
 		str = find_path(cmd[0], envp, flag);
 	else
 		str = cmd[0];
@@ -85,7 +85,7 @@ void	execution(char **cmd, t_main *main)
 	else
 		error = execve((const char *)pathname, (char **const)cmd, main->env_arr);
 	if (error == -1)
-		error_management(cmd[0]);
+		error_execve(cmd[0]);
 	free_pathname(pathname, flag);
 }
 
@@ -99,12 +99,18 @@ void	exec_other_cmd(char **cmd, t_main *main, bool child)
 		execution(cmd, main);
 	else
 	{
+		signals(1);
 		pid = fork();
 		if(pid == 0)
+		{
 			execution(cmd, main);
+		}
+		//!if pid = -1
 		waitpid(pid, &exit_status, 0);
 		if (WEXITSTATUS(exit_status) != 0)
+		{
 			set_exit_code(main, WEXITSTATUS(exit_status));
+		}
 		else
 			set_exit_code(main, 0);
 	}

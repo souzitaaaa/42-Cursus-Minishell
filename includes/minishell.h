@@ -73,11 +73,12 @@ void    pwd(t_main *main, bool child);
 void    env(t_env *env, t_main *main, bool child, char **command);
 void	unset(t_main *main, char *str, bool child);
 void    export(t_main *main, char **array, bool child);
-void    insert_var(t_main *main, char *str);
-bool    modify_var(t_main *main, char *str);
+void    insert_var(t_main *main, char *str, bool exp);
+bool    modify_var(t_main *main, char *str, bool exp);
+void	copy_exp(t_main *main);
 void    remove_var(t_env *env, int index);
-int     valid_export_var(char *var);
 void    cd(char *path, t_main *main, bool child);
+void	ft_exit(char **command, bool child, t_main main);
 
 /*
 !LEXER.C
@@ -142,7 +143,7 @@ void	cmdcat(t_lexer *tokens);
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
-void	init_exec_ast(t_ast ast, t_main *main);
+void	pipex(t_ast *ast, t_main *main);
 
 /*
 !RDR
@@ -151,7 +152,9 @@ void	init_rdr(t_lexer tokens, t_main *main);
 void	rdr_in(char **arr, t_main *main);
 void	rdr_out(char **arr, t_main *main);
 void	rdr_app(char **arr, t_main *main);
-void	rdr_hd(t_token token, t_main *main);
+void	rdr_hd(t_token token, t_main *main, int fd);
+int		open_hd(char *lim, bool quotes, t_main *main);
+void	rdr_error(char *str, t_main *main, int options);
 
 /*
 !EXECVE
@@ -185,7 +188,7 @@ void	signal_quit(int sig);
 void	signal_quit1(int sig);
 void	signal_quit2(int sig);
 void	signal_handler(int sig);
-void	signals(void);
+void	signals(int options);
 void	ft_wait(t_main *main);
 
 /*
@@ -194,15 +197,19 @@ void	ft_wait(t_main *main);
 void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
-void	prompt_diogo(t_prompt *prompt_list);
-void	prompt_rita(t_prompt *prompt_list);
-void    prompt_jenny(t_prompt *prompt_list);
-void	prompt_jo(t_prompt *prompt_list);
-void    prompt_default(t_prompt *prompt_list);
+void	error_export(int fd);
+void	error_quotes(int fd);
 
 /*
 !DESTROY
 */
 void    destroy(t_main *main);
+
+//!PROMPT
+void	prompt_diogo(t_prompt *prompt_list);
+void	prompt_rita(t_prompt *prompt_list);
+void    prompt_jenny(t_prompt *prompt_list);
+void	prompt_jo(t_prompt *prompt_list);
+void    prompt_default(t_prompt *prompt_list);
 
 #endif

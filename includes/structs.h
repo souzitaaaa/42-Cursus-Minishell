@@ -22,11 +22,15 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*prev;
 	int				exit_code;
+	int				fork;
+	int				proc;
 	t_lexer			tokens;
+	t_env			export_list;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			input_exec;
+	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
@@ -43,6 +47,7 @@ typedef struct s_bool
 	bool            put_node_behind;
 	bool            rdr_treated;
 	bool            rdr_err;
+	bool			signal;
 	t_free          free_flag;
 } t_bool;
 
@@ -119,7 +124,8 @@ typedef struct s_ast_node
 	t_token				token;
 	struct s_ast_node	*right;
 	struct s_ast_node	*prev;
-	int					index; //!o index esta ao contrario da arvore, a favor da ordem de execução
+	int					pid;
+	int					index; //*index dos nodes/pipes: o index esta ao contrario da arvore, a favor da ordem de execução
 }
 t_ast_node;
 
@@ -178,13 +184,13 @@ typedef struct s_main
 	int				fork;
 	int				proc;
 	t_lexer			tokens;
+	t_env			export_list;
 	t_env			env_list;
 	t_quotes		quotes;
 	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
-	pid_t			pid;
 }t_main;
 
 #endif

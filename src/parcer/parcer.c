@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/19 15:49:04 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:57:33 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	parcer(t_main *main)
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);
-		init_exec_ast(main->ast, main);
+		pipex(&main->ast, main);
 	}
 	else
 	{

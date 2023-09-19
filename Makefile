@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/19 15:58:45 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/09/19 17:51:52 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,9 @@ _FILES 			= error_msg exit_code init list free utils prompts signal destroy\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
 					pipe \
-					init_rdr rdr_in rdr_out rdr_app rdr_heredoc \
+					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
-					echo pwd env unset cd export utils_export
+					echo pwd env unset cd export utils_export exit
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

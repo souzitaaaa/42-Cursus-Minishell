@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 void	insert_l_left(t_ast_node **leave, t_node *special)
 {
@@ -19,6 +19,8 @@ void	insert_l_left(t_ast_node **leave, t_node *special)
 	(*leave)->left = NULL;
 	(*leave)->right = NULL;
 	(*leave)->prev = NULL;
+	(*leave)->index = 0;
+	(*leave)->pid = 0;
 }
 
 void	insert_l_right(t_ast_node **leave, t_node *special)
@@ -28,6 +30,8 @@ void	insert_l_right(t_ast_node **leave, t_node *special)
 	(*leave)->left = NULL;
 	(*leave)->right = NULL;
 	(*leave)->prev = NULL;
+	(*leave)->index = 0;
+	(*leave)->pid = 0;
 }
 
 void	insert_first_op(t_ast_node **op, t_node *special, t_ast_node *l_left, t_ast_node *l_right)
@@ -38,16 +42,17 @@ void	insert_first_op(t_ast_node **op, t_node *special, t_ast_node *l_left, t_ast
 	(*op)->right = l_right;
 	(*op)->prev = NULL;
 	(*op)->index = 0;
+	(*op)->pid = 0;
 }
 
 void	insert_op(t_ast_node **op, t_node *special, t_ast_node **l_left, t_ast_node *l_right)
 {
-	printf("oi\n");
 	*op = malloc(sizeof(t_ast_node));
 	(*op)->token = special->token;
 	(*op)->left = *l_left;
 	(*op)->right = l_right;
 	(*op)->prev = NULL;
+	(*op)->pid = 0;
 	(*l_left)->prev = *op;
 }
 
@@ -110,7 +115,7 @@ void	create_ast(t_lexer tokens, t_ast *ast)
 		{
 			if(ast->size == 0)
 			{
-				printf("token: %s\n", aux_token->token.arr[0]);
+				//printf("token: %s\n", aux_token->token.arr[0]);
 				last_op = insert_first_ast(aux_token);
 			}
 			else
@@ -125,5 +130,5 @@ void	create_ast(t_lexer tokens, t_ast *ast)
 void	test_ast(t_lexer tokens, t_ast *ast)
 {
 	create_ast(tokens, ast);
-	print_ast(*ast);
+	//print_ast(*ast);
 }
