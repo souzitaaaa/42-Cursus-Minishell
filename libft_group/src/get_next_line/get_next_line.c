@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:54:29 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/01 16:31:15 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:38:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ char	*get_next_line(int fd, bool free_static)
 		return (NULL);
 	line = "\0";
 	if (!to_read)
+	{
 		to_read = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	}
 	if (*to_read)
 	{
 		to_read = move_to_read(&to_read);

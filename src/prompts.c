@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 15:32:26 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/07 19:04:41 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/15 17:51:17 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void	prompt_rita(t_prompt *prompt_list)
 	prompt_list->out = ft_strjoin(prompt_list->out, RGB_PINK);
 	prompt_list->out = ft_strjoin(prompt_list->out, prompt_list->logname);
 	prompt_list->out = ft_strjoin(prompt_list->out, RESET);
-	prompt_list->out = ft_strjoin(prompt_list->out, "\n");
+	prompt_list->out = ft_strjoin(prompt_list->out, " minihell🔥 ");
+	/*prompt_list->out = ft_strjoin(prompt_list->out, "\n");
 	prompt_list->out = ft_strjoin(prompt_list->out, WHITE);
 	prompt_list->out = ft_strjoin(prompt_list->out, "┃\n");
 	prompt_list->out = ft_strjoin(prompt_list->out, RESET);
 	prompt_list->out = ft_strjoin(prompt_list->out, WHITE);
 	prompt_list->out = ft_strjoin(prompt_list->out, "┖ minihell🔥 ");
-	prompt_list->out = ft_strjoin(prompt_list->out, RESET);
+	prompt_list->out = ft_strjoin(prompt_list->out, RESET);*/
 }
 void    prompt_jenny(t_prompt *prompt_list)
 {

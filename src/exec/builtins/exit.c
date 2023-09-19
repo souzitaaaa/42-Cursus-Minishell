@@ -27,16 +27,17 @@ int	ft_isnbr(const char *str)
 	return(1);
 }
 
-void	ft_exit(char **command)
+void	ft_exit(char **command, bool child, t_main main)
 {
 	int exit_code;
 
-	//free_everything(); //!É PARA DAR FREE AQUI
-	ft_putendl_fd("exit", STDERR_FILENO);
+	//free_all(); //!É PARA DAR FREE AQUI
+	if (!child)
+		ft_putendl_fd("exit", STDERR_FILENO);
+	if(!command)
+		exit(main.exit_code);
 	if(!command[1])
-	{
-		exit(0);
-	}
+		exit(main.exit_code);
 	if(ft_isnbr(command[1]) && command[2] == NULL)
 	{
 		exit_code = ft_atoi(command[1]);
@@ -44,12 +45,12 @@ void	ft_exit(char **command)
 	}
 	if(ft_isnbr(command[1]) && command[2])
 	{
-		ft_putendl_fd("bash: exit: too many arguments", STDERR_FILENO);
+		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
 		exit(1);
 	}
 	if(!ft_isnbr(command[1]))
 	{
-		ft_putstr_fd("bash: exit: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(command[1], STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 		exit(2);

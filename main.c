@@ -76,19 +76,18 @@ void	init_prompt(t_main	*main)
 
 	while (1)
 	{
-		signals();
-		prompt = get_prompt_msg(main);
-		input = readline(prompt);
-		if (input == NULL)
-			break;
+		signals(0);
+		//prompt = get_prompt_msg(main);
+		input = readline("\033[1;31mminishell\033[0m🔥 ");
+		if (!input)
+			ft_exit(NULL, false, *main);
 		add_history(input);
 		init_input(main, input);
-		ft_wait(main);
-		printf("exit_code: %d\n", g_ex_status);
 		if(g_ex_status != 0)
+		{
 			set_exit_code(main, g_ex_status);
-		if(g_ex_status == -1)
-			set_exit_code(main, 0);
+			g_ex_status = 0;
+		}
 		if (main->quotes.error)
 			break ;
 		lexer(main);

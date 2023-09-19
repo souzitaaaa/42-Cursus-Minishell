@@ -26,18 +26,6 @@ char	**copy_first_cmd(t_lexer tokens, int index)
 	return (ft_arrdup(aux->token.arr));
 }
 
-t_node	*find_node(t_lexer tokens, int index)
-{
-	int	counter;
-	t_node *aux;
-
-	counter = 0;
-	aux = tokens.head;
-	while(counter++ < index)
-		aux = aux->next;
-	return (aux);
-}
-
 t_node *create_n_cmd(char **temp)
 {
 	t_node *new;
