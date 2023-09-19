@@ -12,7 +12,7 @@
 
 #include "includes/minishell.h"
 
-int	g_ex_status;
+int	g_ex_status = 0;
 
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
