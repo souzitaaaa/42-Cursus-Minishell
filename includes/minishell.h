@@ -125,6 +125,8 @@ void	check_expansion(t_main *main, char **arr);
 void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
+t_node	*find_node(t_lexer tokens, int index);
+int		find_last_hd(t_lexer tokens);
 
 /*
 !SYNTAX
@@ -199,6 +201,7 @@ void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
 void	error_export(int fd);
 void	error_quotes(int fd);
+void	error_msg_fd(char *str, int fd);
 
 /*
 !DESTROY
