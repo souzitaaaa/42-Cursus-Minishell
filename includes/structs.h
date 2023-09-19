@@ -101,6 +101,7 @@ typedef struct s_node
 	int				index;
 	int				quotes;
 	struct s_node	*next;
+	int		fd;
 }t_node;
 
 //* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
