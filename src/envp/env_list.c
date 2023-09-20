@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 16:34:15 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/20 19:00:11 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,50 +26,53 @@ t_var *var_node(const char *var)
     return (new_node);
 }
 
-void	add_var(t_env *env, t_var *var_new)
+void	add_var(t_env *env, t_var *var_new, int index)
 {
-	static int	index = 0;
-
 	if (env->head == NULL)
 	{
-		index = 0;
 		env->head = var_new;
 	    var_new->next = env->head;
 	    var_new->prev = env->head;
 	}
 	else
 	{
-        index++;
 		env->head->prev->next = var_new;
 		var_new->prev = env->head->prev;
 		var_new->next = env->head;
 		env->head->prev = var_new;
 	}
-	var_new->index = index;
+	if (index == -1)
+		var_new->index = env->size;
+	else
+		var_new->index = index;
 	env->size++;
 }
 
 void    set_env_list(t_main *main, char **envp)
 {
     t_var   *aux;
-
-    while (envp[main->env_list.i])
+	int i;
+	
+	i = 0;
+    while (envp[i])
     {
-        aux = var_node(envp[main->env_list.i]);
-        add_var(&main->env_list, aux);
-        main->env_list.i++;
+        aux = var_node(envp[i]);
+        add_var(&main->env_list, aux, i);
+        i++;
     }
 	unset(main, "OLDPWD", false);
 }
-
+//!APAGAR
 void    print_var(t_env env)
 {
     t_var   *current;
 
     env.i = 0;
     current = env.head;
+	printf("size: %d\n", env.size);
     while (env.i++ < env.size)
     {
+		printf("%d: ", current->index);
         printf("%s\n", current->var);
         current = current->next;
     }

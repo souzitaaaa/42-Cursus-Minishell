@@ -6,7 +6,7 @@
 #    By: jenny <jenny@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/11 18:53:28 by jenny            ###   ########.fr        #
+#    Updated: 2023/09/19 15:25:47 by jenny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ _FILES 			= error_msg exit_code init list free utils prompts signal\
 					pipe \
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc \
 					child_aux \
-					echo pwd env unset cd export utils_export
+					echo pwd env unset cd export utils_export utils_builtins
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/12 19:05:46 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/20 20:22:18 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void    insert_var(t_main *main, char *str, bool exp)
 	{
     	aux = var_node(str);
 		if (exp)
-			add_var(&main->export_list, aux);
+			add_var(&main->export_list, aux, -1);
 		else
 		{
-			add_var(&main->export_list, aux);
-			add_var(&main->env_list, aux);
+			add_var(&main->export_list, aux, -1);
+			add_var(&main->env_list, aux, -1);
 		}
 	}
 }
@@ -57,11 +57,20 @@ void	put_head_var(t_env *env, t_var *new)
 void    add_index_var(t_env *env, t_var *node, int index)
 {
     t_var   *current;
-
+	
+	if(index == env->size)
+	{
+		add_var(env, node, -1);
+		//print_var(*env);
+		return ;
+	}
     current = env->head;
     env->i = 0;
     if (env->head == NULL)
+	{
         put_head_var(env, node);
+		env->size++;
+	}
     else
     {
         while (env->i++ < index)
@@ -69,23 +78,24 @@ void    add_index_var(t_env *env, t_var *node, int index)
             current = current->next;
         }
         node->next = current;
-        node->prev = current->next;
+        node->prev = current->prev;
         current->prev->next = node;
         current->prev = node;
+    	env->size++;
         if (index == 0)
             env->head = node;
         shift_index_env(env);
     }
-    env->size--;
+	//print_var(*env);
 }
-
 bool    modify_var(t_main *main, char *str, bool exp)
 {
     t_var   *current;
     t_var   *aux;
-    int     count = 0;
+    int     count;
 	int		index;
 
+	count = 0;
     current = main->env_list.head;
     while (count++ < main->env_list.size)
     {
@@ -106,7 +116,6 @@ bool    modify_var(t_main *main, char *str, bool exp)
     }
     return (false);
 }
-
 void	copy_exp(t_main *main)
 {
     t_var  *aux;
@@ -117,13 +126,13 @@ void	copy_exp(t_main *main)
     while (main->export_list.i < main->env_list.size)
     {
 		new = var_node(aux->var);
-        add_var(&main->export_list, new);
+        add_var(&main->export_list, new, -1);
         main->export_list.i++;
 		aux = aux->next;
     }
 	if (main->prev == NULL)
 	{
 		new = var_node("OLDPWD");
-		add_var(&main->export_list, new);
+		add_var(&main->export_list, new, -1);
 	}
 }

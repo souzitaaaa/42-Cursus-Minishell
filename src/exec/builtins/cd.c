@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/12 20:23:36 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/20 20:27:56 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 •	echo -na ola nao funciona, nao printa o ola na mesma linha que o prompt
 •	echo -nnnnnnnnn -nnnnnnnnna nao funciona, nao esta a printar o                       -nnnnnnnnna  na mesma linha que o prompt
 Export:
-•	export 2=mario nao pode funcionar
+•	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO
 •	export PATH=ola coloca o programa a receber input  deixa de funcionar ???
 •	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free 
 (ultils_export.c linha 83)
@@ -86,6 +86,7 @@ void cd(char *path, t_main *main, bool child)
 	char	*new_path;
 	int		dir;
 	char	*current;
+	char	*path_pwd;
 
 	if (path == NULL)
 	{
@@ -102,12 +103,17 @@ void cd(char *path, t_main *main, bool child)
 	}
 	else
 	{
+		//atualizar o prev quando dá cd -
 		if (ft_strcmp(path, "-") == 0)
 		{
 			if (main->prev)
 			{
 				change_dir(main->prev, main, child);
 				ft_printf("%s\n", main->prev);
+				path_pwd = ft_calloc(sizeof(char), 4096);
+				getcwd(path_pwd, 4096);
+				refresh_pwd(main, path_pwd);
+				refresh_oldpwd(main, main->prev);
 			}
 			else
 			{
@@ -127,11 +133,19 @@ void cd(char *path, t_main *main, bool child)
 			{
 				main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
 				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-				
+				path_pwd = ft_calloc(sizeof(char), 4096);
+				getcwd(path_pwd, 4096);
+				ft_printf("entra aqui 0\n");
+				refresh_pwd(main, path_pwd);
+				ft_printf("entra aqui 1\n");
+				refresh_oldpwd(main, main->prev);
+				ft_printf("entra aqui 2\n");
 			}
 		}
 		if (child)
 			exit(0);
 		set_exit_code(main, 0);
+		ft_printf("entra aqui 3\n");
 	}
 }
+

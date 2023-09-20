@@ -59,7 +59,7 @@ void		insert_last(t_lexer *stack, t_node *new);
 !ENVP
 */
 t_var       *var_node(const char *var);
-void        add_var(t_env *env, t_var *var_new);
+void		add_var(t_env *env, t_var *var_new, int index);
 void	    shift_index_env(t_env *stack);
 void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
@@ -71,13 +71,19 @@ void		set_env_arr(t_main *main);
 void    echo(char **command, t_main *main, bool child);
 void    pwd(t_main *main, bool child);
 void    env(t_env *env, t_main *main, bool child, char **command);
+void	unset_exp(t_main *main, char *str);
+int		unset_env(t_main *main, char *str);
 void	unset(t_main *main, char *str, bool child);
+void	ft_export(t_env *exp);
 void    export(t_main *main, char **array, bool child);
 void    insert_var(t_main *main, char *str, bool exp);
 bool    modify_var(t_main *main, char *str, bool exp);
 void	copy_exp(t_main *main);
 void    remove_var(t_env *env, int index);
+void    add_index_var(t_env *env, t_var *node, int index);
 void    cd(char *path, t_main *main, bool child);
+void	refresh_pwd(t_main *main, char *str);
+void	refresh_oldpwd(t_main *main, char *str);
 
 /*
 !LEXER.C
@@ -162,14 +168,14 @@ void	wait_estatus(int pid, t_main *main);
 /*
 !FREE.C
 */
-void		free_list(t_lexer *stack);
-void		free_env(t_env *stack);
+void	free_list(t_lexer *stack);
+void	free_env(t_env *stack);
 
 /*
 !QUOTES.C
 */
-int check_quotes(char c, int quotes);
-int check_quotes_print(t_main *main);
+int		check_quotes(char c, int quotes);
+int		check_quotes_print(t_main *main);
 
 /*
 !SIGNAL.C
