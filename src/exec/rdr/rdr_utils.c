@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 void	 set_rdr_err(t_main *main)
 {
@@ -19,7 +19,6 @@ void	 set_rdr_err(t_main *main)
 
 void	rdr_error(char *str, t_main *main, int options)
 {
-	//!ERROR HANDLING "bad file descriptor" set exit code
 	if (options == 0)
 		error_msg_file(str, STDERR_FILENO);
 	if (options == 1)

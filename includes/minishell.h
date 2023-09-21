@@ -125,6 +125,8 @@ void	check_expansion(t_main *main, char **arr);
 void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
+t_node	*find_node(t_lexer tokens, int index);
+int		find_last_hd(t_lexer tokens);
 
 /*
 !SYNTAX
@@ -168,6 +170,7 @@ void	free_pathname(char	*pathname, int flag);
 !CHILD_AUX
 */
 void	wait_estatus(int pid, t_main *main);
+void	wait_set_line(int pid, t_main *main);
 
 /*
 !FREE.C
@@ -199,6 +202,8 @@ void	error_msg_file(char *str, int fd);
 void	error_cd(int fd);
 void	error_export(int fd);
 void	error_quotes(int fd);
+void	error_msg_fd(char *str, int fd);
+void	error_msg_hd(char *str, int fd, int line);
 
 /*
 !DESTROY

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/19 17:51:52 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/09/20 12:31:35 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins parcer/lexer parcer/lexer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr parcer/lexer parcer/lexer/lexer_tokens
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 

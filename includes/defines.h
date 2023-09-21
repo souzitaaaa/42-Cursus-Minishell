@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/19 18:04:21 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:53:15 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ COLORS
 # define CMD_ERROR "command not found"
 # define FILE_ERROR "No such file or directory"
 # define FD_ERROR "Bad file descriptor"
+# define HD_ERROR "here-document at line 1 delimited by end-of-file"
 
 #endif
