@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:11:59 by joe               #+#    #+#             */
-/*   Updated: 2023/09/19 17:54:52 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:43:49 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void signal_handler_hd(int sig)
 {
     if (sig == SIGINT)
     {
+        ft_printf("\n");
         exit(0);
     }
 }

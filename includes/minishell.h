@@ -170,6 +170,7 @@ void	free_pathname(char	*pathname, int flag);
 !CHILD_AUX
 */
 void	wait_estatus(int pid, t_main *main);
+void	wait_set_line(int pid, t_main *main);
 
 /*
 !FREE.C
@@ -202,6 +203,7 @@ void	error_cd(int fd);
 void	error_export(int fd);
 void	error_quotes(int fd);
 void	error_msg_fd(char *str, int fd);
+void	error_msg_hd(char *str, int fd, int line);
 
 /*
 !DESTROY

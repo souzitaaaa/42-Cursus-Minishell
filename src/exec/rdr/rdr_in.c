@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rdr_out.c                                          :+:      :+:    :+:   */
+/*   rdr_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 19:56:07 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/30 19:56:07 by rimarque         ###   ########.fr       */
+/*   Created: 2023/08/30 14:59:13 by rimarque          #+#    #+#             */
+/*   Updated: 2023/08/30 14:59:13 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-void	rdr_out(char **arr, t_main *main)
+void	rdr_in(char **arr, t_main *main)
 {
 	int	fd;
 
 	if(main->flags.rdr_err)
-	{
 		return ;
-	}
 	if(arr[1] == NULL)
 	{
-		fd = open(arr[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(arr[0], O_RDONLY);
 		if (fd == -1)
 			rdr_error(arr[0], main, 0);
-		dup2(fd, STDOUT_FILENO);
+		dup2(fd, STDIN_FILENO);
 	}
 	else
 	{
-		fd = open(arr[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(arr[1], O_RDONLY);
 		if (fd == -1)
 			rdr_error(arr[1], main, 0);
 		else

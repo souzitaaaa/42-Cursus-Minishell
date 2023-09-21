@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 void	exec_rdr(t_token token, t_main *main, int hd_fd)
 {
@@ -64,12 +64,16 @@ void	init_rdr(t_lexer tokens, t_main *main)
 				hd = true;
 			else
 				close(hd_fd);
-			hd_fd = open_hd(aux->token.arr[0], aux->quotes, main);
+			if(aux->token.arr[1] == NULL)
+				hd_fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
+			else
+				hd_fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
 		}
 		aux = aux->next;
 	}
 	signals(1);
 	pid = fork();
+	//error_pipe();
 	aux = tokens.head;
 	counter = 0;
 	if (pid == 0)

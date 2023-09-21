@@ -22,3 +22,12 @@ void	wait_estatus(int pid, t_main *main)
 	else
 		set_exit_code(main, 0);
 }
+
+void	wait_set_line(int pid, t_main *main)
+{
+	int	exit_status;
+
+	waitpid(pid, &exit_status, 0);
+	if (WEXITSTATUS(exit_status) != 0)
+		main->line += WEXITSTATUS(exit_status);
+}
