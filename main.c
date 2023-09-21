@@ -96,8 +96,8 @@ void	init_prompt(t_main	*main)
 		if (main->quotes.error)
 			break ;
 		lexer(main);
-		if (syntax_analysis(main) == true)
-			parcer(main);
+		//if (syntax_analysis(main) == true)
+		parcer(main);
 		//destroy(main);
 		free(input);
 	}
