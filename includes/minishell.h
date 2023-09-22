@@ -163,7 +163,7 @@ void	rdr_error(char *str, t_main *main, int options);
 */
 void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str);
+void	error_execve(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
@@ -171,6 +171,7 @@ void	free_pathname(char	*pathname, int flag);
 */
 void	wait_estatus(int pid, t_main *main);
 void	wait_set_line(int pid, t_main *main);
+void	error_fp(int pid, int exit_code, t_main *main);
 
 /*
 !FREE.C

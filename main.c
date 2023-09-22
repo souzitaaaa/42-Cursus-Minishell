@@ -74,7 +74,7 @@ char    *get_prompt_msg(t_main *main)
 void	init_prompt(t_main	*main)
 {
 	char	*input = NULL;
-	char	*prompt = NULL;
+	//char	*prompt = NULL;
 
 	while (1)
 	{

@@ -6,11 +6,11 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:19:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/19 12:07:16 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:36:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 t_ast_node	*get_beg(t_ast *ast)
 {
@@ -27,7 +27,6 @@ t_ast_node	*get_beg(t_ast *ast)
 void	wait_estatus_p(t_main *main, t_ast ast)
 {
 	int exit_status;
-	int result;
 	t_ast_node *node;
 	bool first_time;
 	int counter;
@@ -91,13 +90,9 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 
 	while (node->index < ast->size - 1) //*quando o index é igual ao size - 1, estamos no ultimo pipe a ser executado
 	{
-		if (pipe(next_fd) == -1)
-		{
-			//!error_management(NULL, 0, errno);
-		}
+		error_fp(pipe(next_fd) , errno, main);
 		pid = fork();
-		//!if (pid == -1)
-		//!	error_management(NULL, 0, errno);
+		error_fp(pid, errno, main);
 		if (pid == 0)
 		{
 			node->right->pid = getpid();
@@ -107,10 +102,7 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 			node->right->pid = pid;
 		close(fd[0]);
 		close(fd[1]);
-		if (pipe(fd) == -1)
-		{
-			//!error_management(NULL, 0, errno);
-		}
+		error_fp(pipe(fd), errno, main);
 		dup2(next_fd[0], fd[0]);
 		dup2(next_fd[1], fd[1]);
 		close(next_fd[0]);
@@ -118,12 +110,9 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 		node = node->prev;
 	}
 	pid = fork();
-	//!if (pid == -1)
-		//!	error_management(NULL, 0, errno);
+	error_fp(pid, errno, main);
 	if (pid == 0)
-	{
 		read_from_pipe(fd, node->right->token.arr, main);
-	}
 	else
 		node->right->pid = pid;
 	close(fd[0]);
@@ -139,13 +128,9 @@ void	pipex(t_ast *ast, t_main *main)
 
 	signals(1);
 	node = get_beg(ast);
-	if (pipe(fd) == -1)
-	{
-		//!errror
-	}
+	error_fp(pipe(fd), errno, main);
 	pid = fork();
-	//!if (pid == -1)
-		//!	error_management(NULL, 0, errno);
+	error_fp(pid, errno, main);
 	if (pid == 0)
 	{
 		write_to_pipe(fd, node->left->token.arr, main);
@@ -161,8 +146,7 @@ void	pipex(t_ast *ast, t_main *main)
 	else
 	{
 		pid = fork();
-		//!if (pid == -1)
-			//!	error_management(NULL, 0, errno);
+		error_fp(pid, errno, main);
 		if (pid == 0)
 		{
 			read_from_pipe(fd, node->right->token.arr, main);

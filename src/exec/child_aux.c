@@ -31,3 +31,14 @@ void	wait_set_line(int pid, t_main *main)
 	if (WEXITSTATUS(exit_status) != 0)
 		main->line += WEXITSTATUS(exit_status);
 }
+
+void	error_fp(int pid, int exit_code, t_main *main)
+{
+	if (pid == -1)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putendl_fd(strerror(exit_code), STDERR_FILENO);
+		set_exit_code(main, exit_code);
+		ft_exit(NULL, false, *main);
+	}
+}

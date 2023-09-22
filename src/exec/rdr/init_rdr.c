@@ -73,7 +73,7 @@ void	init_rdr(t_lexer tokens, t_main *main)
 	}
 	signals(1);
 	pid = fork();
-	//error_pipe();
+	error_fp(pid, errno, main);
 	aux = tokens.head;
 	counter = 0;
 	if (pid == 0)
