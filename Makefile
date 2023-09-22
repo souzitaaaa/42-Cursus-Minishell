@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
+#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/20 12:31:35 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/22 13:14:26 by joe              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,14 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr parcer/lexer parcer/lexer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr parcer/lexer parcer/lexer/lexer_tokens print_start quotes
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init list free utils prompts signal destroy\
+_FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
 					parcer cmdcat ast syntax\
 					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils\
@@ -52,7 +52,9 @@ _FILES 			= error_msg exit_code init list free utils prompts signal destroy\
 					pipe \
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
-					echo pwd env unset cd export utils_export exit
+					echo pwd env unset cd export utils_export exit\
+					print_img utils list_quotes
+										
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
 _HEADERS		= structs.h defines.h minishell.h

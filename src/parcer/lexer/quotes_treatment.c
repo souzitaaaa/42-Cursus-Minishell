@@ -17,8 +17,9 @@ void    single_quotes(t_main *main, int *i, int start)
     char    *str;
     char    *out;
             printf("\033[1;35m\t(Single quotes treatment)\033[0m\n");
-        printf("Start on the str: %c\n", main->input_prompt[main->quotes.start]);
-        printf("End on the str: %c\n", main->input_prompt[main->quotes.end]);
+    //!Como 
+    //    printf("Start on the str: %c\n", main->input_prompt[main->quotes.start]);
+    //    printf("End on the str: %c\n", main->input_prompt[main->quotes.end]);
     out = ft_substr(main->input_prompt, start, (main->quotes.start - start));
     str = ft_substr(main->input_prompt, main->quotes.start + 1, (main->quotes.end - main->quotes.start) - 1);
         printf("str: %s\n", str);
@@ -26,8 +27,8 @@ void    single_quotes(t_main *main, int *i, int start)
         printf("out: %s\n", out);
     add_token_quotes(main, STRING, i, out, false);
     (*i) = main->quotes.end;
-            printf("\033[1;35m\t(End single quotes treatment)\033[0m\n");
-}
+    //        printf("\033[1;35m\t(End single quotes treatment)\033[0m\n");
+} 
 
 void    double_quotes(t_main *main, int *i, int start)
 {
