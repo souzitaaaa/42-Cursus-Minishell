@@ -66,7 +66,7 @@ int check_quotes_print(t_main *main)
                     new_node->start = open_quote_type;
                     new_node->end = i;
                     insert_last_quotes(quotes, new_node);
-                    prinf("tamanho da lista --> %i\n", quotes->size);
+                    printf("tamanho da lista --> %i\n", quotes->size);
                 }
                 // main->quotes.type = open_quote_type;
 				// main->quotes.start = open_quote_position;
