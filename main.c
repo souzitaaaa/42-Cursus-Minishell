@@ -80,7 +80,7 @@ void	init_prompt(t_main	*main)
 	{
 		signals(0);
 		//prompt = get_prompt_msg(main);
-		input = readline("\033[1;31mminishell\033[0m🔥 ");
+		input = readline(" minishell -> ");
 		//free(prompt);
 		if (!input)
 			ft_exit(NULL, false, *main);
