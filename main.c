@@ -80,12 +80,11 @@ void	init_prompt(t_main	*main)
 	{
 		signals(0);
 		//prompt = get_prompt_msg(main);
-		input = readline("\033[1;31mminishell\033[0m🔥 ");
+		input = readline("mminishell> ");
 		//free(prompt);
 		if (!input)
 			ft_exit(NULL, false, *main);
 		main->line++;
-		printf("line: %d\n", main->line);
 		add_history(input);
 		init_input(main, input);
 		if(g_ex_status != 0)

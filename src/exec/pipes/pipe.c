@@ -6,157 +6,96 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:19:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/22 17:36:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:35:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-t_ast_node	*get_beg(t_ast *ast)
+//*Abre um processo filho (19)
+//*Executa o primeiro comando dentro de um processo filho (21, 22)
+//(redirecionando o output para o writing end do pipe (fd[1]))
+//*Guarda o id do processo filho, no processo pai (24, 25)
+void	first_fork(int *fd, t_ast_node *leaf, t_main *main)
 {
-	t_ast_node	*aux;
+	int	pid;
 
-	aux = ast->head;
-
-	ast->counter = 0;
-	while(ast->counter++ < ast->size - 1)
-		aux = aux->left;
-	return(aux);
-}
-
-void	wait_estatus_p(t_main *main, t_ast ast)
-{
-	int exit_status;
-	t_ast_node *node;
-	bool first_time;
-	int counter;
-
-	first_time = true;
-	node = get_beg(&ast);
-	counter = 0;
-	while(counter < ast.size)
-	{
-		if(first_time)
-		{
-			waitpid(node->left->pid, &exit_status, 0);
-			first_time = false;
-		}
-		else
-		{
-			waitpid(node->right->pid, &exit_status, 0);
-			counter++;
-			node = node->prev;
-		}
-	}
-	if (WEXITSTATUS(exit_status) != 0)
-	{
-		set_exit_code(main, WEXITSTATUS(exit_status));
-	}
+	pid = ft_fork(main);
+	if (pid == 0)
+		write_to_pipe(fd, leaf->token.arr, main);
 	else
-		set_exit_code(main, 0);
+		leaf->pid = pid;
+	close(fd[1]);
 }
 
-void	pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main)
+void	fork_btwn_pipes(int *fd, int *next_fd, t_ast_node *leaf, t_main *main)
 {
-	close(fd[1]);
-	close(next_fd[0]);
-	dup2(fd[0], STDIN_FILENO);
+	int	pid;
+
+	pid = ft_fork(main);
+	if (pid == 0)
+		pipe_read_and_write(fd, next_fd, leaf->token.arr, main);
+	else
+		leaf->pid = pid;
 	close(fd[0]);
-	dup2(next_fd[1], STDOUT_FILENO);
 	close(next_fd[1]);
-	exec_cmd(cmd, main, true);
 }
 
-void	read_from_pipe(int *fd, char **cmd, t_main *main)
+//*Executa o último comando dentro de um processo filho(36)
+//*Executa o último comando dentro de um processo filho(37, 38)
+//(redirecionando o input para o reading end do pipe (fd[0]))
+//*Guarda o id do processo filho, no processo pai (39, 40)
+//*Fecha os fd do pipe no processo pai(41, 42)
+//*Espera pelos processos filhos e guarda o exit status (43)
+void	last_fork(int *fd, t_ast_node *leaf, t_main *main, t_ast ast)
 {
-	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO); //*redireciona o stdin para o pipe
-	close(fd[0]);
-	exec_cmd(cmd, main, true);
-}
+	int pid;
 
-void	write_to_pipe(int *fd, char **cmd, t_main *main)
-{
+	pid = ft_fork(main);
+	if (pid == 0)
+		read_from_pipe(fd, leaf->token.arr, main);
+	else
+		leaf->pid = pid;
 	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO); //*redireciona o stdout para o pipe
-	close(fd[1]);
-	exec_cmd(cmd, main, true);
+	wait_estatus_p(main, ast);
 }
 
 void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 {
 	int	next_fd[2];
-	int pid;
 
 	while (node->index < ast->size - 1) //*quando o index é igual ao size - 1, estamos no ultimo pipe a ser executado
 	{
 		error_fp(pipe(next_fd) , errno, main);
-		pid = fork();
-		error_fp(pid, errno, main);
-		if (pid == 0)
-		{
-			node->right->pid = getpid();
-			pipe_read_and_write(fd, next_fd, node->right->token.arr, main);
-		}
-		else
-			node->right->pid = pid;
-		close(fd[0]);
-		close(fd[1]);
+		fork_btwn_pipes(fd, next_fd, node->right, main);
 		error_fp(pipe(fd), errno, main);
+		close(fd[1]);
 		dup2(next_fd[0], fd[0]);
-		dup2(next_fd[1], fd[1]);
 		close(next_fd[0]);
-		close(next_fd[1]);
 		node = node->prev;
 	}
-	pid = fork();
-	error_fp(pid, errno, main);
-	if (pid == 0)
-		read_from_pipe(fd, node->right->token.arr, main);
-	else
-		node->right->pid = pid;
-	close(fd[0]);
-	close(fd[1]);
-	wait_estatus_p(main, *ast);
+	last_fork(fd, node->right, main, *ast);
 }
 
+//*Esta função organiza a execução dos pipes
+//*Encontra o 1º pipe (59), abre um pipe (60)
+//*Modifica o handle do ctrl C (61)
+//*Executa o primeiro comando dentro de um processo filho(62)
+//(redirecionando o output para o writing end do pipe (fd[1]))
+//*Se houver mais que um pipe, chama a função mltp_pipes (63, 64)
+//*Se houver apenas um pipe, executa o segundo e ultimo comando dentro de outro processo filho (65, 66)
+//(redirecionando o input para o reading end do pipe (fd[0]))
 void	pipex(t_ast *ast, t_main *main)
 {
 	int	fd[2];
-	int	pid;
 	t_ast_node	*node;
 
-	signals(1);
 	node = get_beg(ast);
 	error_fp(pipe(fd), errno, main);
-	pid = fork();
-	error_fp(pid, errno, main);
-	if (pid == 0)
-	{
-		write_to_pipe(fd, node->left->token.arr, main);
-	}
-	else
-	{
-		node->left->pid = pid;
-	}
+	signals(1);
+	first_fork(fd, node->left, main);
 	if(ast->size > 1)
-	{
 		mltp_pipes(fd, ast, node, main);
-	}
 	else
-	{
-		pid = fork();
-		error_fp(pid, errno, main);
-		if (pid == 0)
-		{
-			read_from_pipe(fd, node->right->token.arr, main);
-		}
-		else
-		{
-			node->right->pid = pid;
-		}
-		close(fd[0]);
-		close(fd[1]);
-		wait_estatus_p(main, *ast);
-	}
+		last_fork(fd, node->right, main, *ast);
 }
