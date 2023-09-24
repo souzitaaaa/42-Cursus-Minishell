@@ -6,24 +6,23 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/20 20:27:56 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/24 14:07:58 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//atualizar o OLDPWD e PWD no cd na env_list e export_list
 /*Echo:
-•	comando echo nao printa \n
+•	comando echo nao printa \n - ok
 •	quantos mais argumentos são corridos mais \n existem no output
-•	echo -na ola nao funciona, nao printa o ola na mesma linha que o prompt
-•	echo -nnnnnnnnn -nnnnnnnnna nao funciona, nao esta a printar o                       -nnnnnnnnna  na mesma linha que o prompt
+•	echo -na ola nao funciona, nao printa o ola na mesma linha que o prompt (mas o bash escreve tudo e dá uma quebra de linha)
+•	echo -nnnnnnnnn -nnnnnnnnna nao funciona, nao esta a printar o -nnnnnnnnna  na mesma linha que o prompt - ok
 Export:
-•	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO
-•	export PATH=ola coloca o programa a receber input  deixa de funcionar ???
-•	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free 
+•	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO 
+•	export PATH=ola coloca o programa a receber input  deixa de funcionar - ja muda o valor da variavel
+•	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free - ja muda o valor da variavel
 (ultils_export.c linha 83)
-•	export ola= ; se tentar unset ola a variável continua presente */
+•	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel */
 
 char	*only_cd(t_main *main, bool  child)
 {
@@ -135,17 +134,13 @@ void cd(char *path, t_main *main, bool child)
 				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
 				path_pwd = ft_calloc(sizeof(char), 4096);
 				getcwd(path_pwd, 4096);
-				ft_printf("entra aqui 0\n");
 				refresh_pwd(main, path_pwd);
-				ft_printf("entra aqui 1\n");
 				refresh_oldpwd(main, main->prev);
-				ft_printf("entra aqui 2\n");
 			}
 		}
 		if (child)
 			exit(0);
 		set_exit_code(main, 0);
-		ft_printf("entra aqui 3\n");
 	}
 }
 

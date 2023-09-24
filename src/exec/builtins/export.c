@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/20 16:20:05 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/21 16:26:17 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,15 @@ void export(t_main *main, char **array, bool child)
             {
                 if (!ft_strchr(array[i], '='))
                 {
-					if (modify_var(main, array[i], true) == false)
-               			insert_var(main, array[i], true);
+					if (modify_var_exp(main, array[i]) == false)
+               			insert_var_exp(main, array[i]);
                 }
             	else 
 				{
-					if (modify_var(main, array[i], false) == false)
-               			insert_var(main, array[i], false);
+					if (modify_var_exp(main, array[i]) == false)
+               			insert_var_exp(main, array[i]);
+					if (modify_var_env(main, array[i]) == false)
+               			insert_var_env(main, array[i]);
 				}
             }
             i++;

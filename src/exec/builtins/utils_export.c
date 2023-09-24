@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/20 20:22:18 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/21 16:34:53 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_isnbr(const char *str)
 	}
 	return(1);
 }
-void    insert_var(t_main *main, char *str, bool exp)
+void    insert_var_exp(t_main *main, char *str)
 {
     t_var   *aux;
 	char	*temp;
@@ -38,62 +38,35 @@ void    insert_var(t_main *main, char *str, bool exp)
 	if (!ft_isnbr(temp))
 	{
     	aux = var_node(str);
-		if (exp)
-			add_var(&main->export_list, aux, -1);
-		else
-		{
-			add_var(&main->export_list, aux, -1);
-			add_var(&main->env_list, aux, -1);
-		}
+		add_var(&main->export_list, aux, -1);
 	}
 }
+
+void    insert_var_env(t_main *main, char *str)
+{
+    t_var   *aux;
+	char	*temp;
+	
+	temp = ft_calloc(sizeof(char), ft_strclen(str, '=') + 1);
+	ft_strccpy(temp, str, '=');
+	if (!ft_isnbr(temp))
+	{
+    	aux = var_node(str);
+		add_var(&main->env_list, aux, -1);
+	}
+}
+
 void	put_head_var(t_env *env, t_var *new)
 {
 	env->head = new;
 	new->next = env->head;
 	new->prev = env->head;
 }
-
-void    add_index_var(t_env *env, t_var *node, int index)
+bool    modify_var_env(t_main *main, char *str)
 {
     t_var   *current;
-	
-	if(index == env->size)
-	{
-		add_var(env, node, -1);
-		//print_var(*env);
-		return ;
-	}
-    current = env->head;
-    env->i = 0;
-    if (env->head == NULL)
-	{
-        put_head_var(env, node);
-		env->size++;
-	}
-    else
-    {
-        while (env->i++ < index)
-        {
-            current = current->next;
-        }
-        node->next = current;
-        node->prev = current->prev;
-        current->prev->next = node;
-        current->prev = node;
-    	env->size++;
-        if (index == 0)
-            env->head = node;
-        shift_index_env(env);
-    }
-	//print_var(*env);
-}
-bool    modify_var(t_main *main, char *str, bool exp)
-{
-    t_var   *current;
-    t_var   *aux;
     int     count;
-	int		index;
+	char	*temp;
 
 	count = 0;
     current = main->env_list.head;
@@ -101,16 +74,32 @@ bool    modify_var(t_main *main, char *str, bool exp)
     {
         if (ft_strncmp(str, current->var, ft_strclen(str, '=')) == 0)
         {
-			if(!exp)
-			{
-				index = current->index;
-				remove_var(&main->export_list, current->index);
-            	remove_var(&main->env_list, current->index);	
-				aux = var_node(str);
-				add_index_var(&main->export_list, aux, index);
-            	add_index_var(&main->env_list, aux, index);
-			}
-            return (true);
+			temp = ft_strdup(str);
+    		free(current->var);
+    		current->var = temp;
+    		return (true);
+		}
+        current = current->next;
+    }
+    return (false);
+}
+
+bool    modify_var_exp(t_main *main, char *str)
+{
+    t_var   *current;
+    int     count;
+	char	*temp;
+
+	count = 0;
+    current = main->export_list.head;
+    while (count++ < main->export_list.size)
+    {
+        if (ft_strncmp(str, current->var, ft_strclen(str, '=')) == 0)
+        {
+				temp = ft_strdup(str);
+    			free(current->var);
+    			current->var = temp;
+            	return (true);
         }
         current = current->next;
     }
