@@ -114,7 +114,7 @@ typedef struct s_lexer
 
 
 /*
-AST
+!AST
 */
 
 
@@ -140,17 +140,30 @@ typedef	struct s_ast
 t_ast;
 
 /*
-QUOTES STRUCT
+!QUOTES STRUCT
 */
 
-//*Estrutura para ajudar o tratamento de quotes no lexer
-typedef struct s_quotes
+//* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
+	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
+typedef struct s_node_quotes
 {
+	struct s_node_quotes	*prev;
+	int				index; //!precisa?
 	int				type;
-    int				start;
-    int				end;
-    int				error;
+	int				start;
+	int				end;
+	struct s_node_quotes	*next;
+	int		fd; //!precisa?
+}t_node_quotes;
+
+
+typedef	struct s_quotes
+{
+	t_node_quotes			*head;
+	int					counter; //!Qual a diferença do counter para o size??
+	int					size; 
 }t_quotes;
+
 
 //* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
 //--> quando se manda msg de erro deve sempre escrever-se para o stderr

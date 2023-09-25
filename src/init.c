@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/20 13:08:52 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/22 13:17:04 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 void	ini_quotes(t_quotes *quotes)
 {
-	quotes->error = 0;
+	quotes->head = NULL;
+	quotes->size = 0;
+	quotes->counter = 0;
 }
 
 void	init_ast(t_ast	*ast)

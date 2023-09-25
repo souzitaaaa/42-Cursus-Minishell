@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/20 12:53:15 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:53:50 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,19 @@ COLORS
 # define RGB_PINK_3 ANSI_COLOR(242, 190, 209)
 # define RGB_PURPLE ANSI_COLOR(151, 78, 195)
 # define RGB_PURPLE_2 ANSI_COLOR(254, 123, 229)
+#define LYELLOWB "\001\033[0;30;43m\002"
+#define REDB "\001\033[0;37;41m\002"
+
+//Reset
+# define COLOUR_RESET "\001\033[0m\002"
 
 # define SYNTAX_ERROR "syntax error near unexpected token `"
 # define CMD_ERROR "command not found"
 # define FILE_ERROR "No such file or directory"
 # define FD_ERROR "Bad file descriptor"
 # define HD_ERROR "here-document at line 1 delimited by end-of-file"
+
+# define SQUOTE 39
+# define DQUOTE 34
 
 #endif
