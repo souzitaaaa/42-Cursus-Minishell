@@ -88,6 +88,7 @@ void	check_expansion(t_main *main, char **arr)
 
 //* Funcao que cria o novo node, criando uma arr dividindo as palavras e copiando essa mesma arr
 	//* para a variavel arr, na t_token que vai ser onde vao estar guardados os tokens
+/*
 t_node	*create_n(t_main *main, t_type token, int *i, char *str)
 {
 	t_node	*new;
@@ -105,9 +106,10 @@ t_node	*create_n(t_main *main, t_type token, int *i, char *str)
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	new->token.quotes = false;
 	return (new);
-}
+}*/
 
 //* Vai adicionar o token a s_list criando um novo node com os parametros que eu mando
+/*
 int	add_token(t_main *main, t_type token, int *i, char *str)
 {
 	t_node	*new;
@@ -118,7 +120,7 @@ int	add_token(t_main *main, t_type token, int *i, char *str)
 	insert_last(&main->tokens, new);
 	main->flags.free_flag.lexer_s = true;
 	return (0);
-}
+}*/
 
 //* Vai devolver o node do respetivo index em que queremos trabalhar
 t_node *get_node_index(t_lexer *tokens, int index_wanted)
@@ -135,6 +137,7 @@ t_node *get_node_index(t_lexer *tokens, int index_wanted)
 	return (NULL);
 }
 
+/*
 t_node	*create_n_teste(t_main *main, t_type token, char **arr)
 {
 	t_node	*new;
@@ -152,9 +155,11 @@ t_node	*create_n_teste(t_main *main, t_type token, char **arr)
 	//! falta o free da arr
 	return (new);
 }
+*/
 
 //* Funcao para adicionar ao node anterior do redirect oque esta para a frente
 	//* do ficheiro redirecionado
+/*
 int add_prev_token(t_main *main, int *i, char *str)
 {
 	t_node	*new;
@@ -177,4 +182,4 @@ int add_prev_token(t_main *main, int *i, char *str)
 	remove_node(&main->tokens, index);
 	insert_node(&main->tokens, new, index);
 				printf("\033[1;32m\t\t(End add_prev_token)\033[0m\n");
-}
+}*/

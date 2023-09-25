@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/20 12:31:35 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/21 16:07:19 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ NAME 			= minishell
 _FILES 			= error_msg exit_code init list free utils prompts signal destroy\
 					lexer token \
 					parcer cmdcat ast syntax\
-					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils\
+					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils add_tokens create_nodes\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
 					pipe \

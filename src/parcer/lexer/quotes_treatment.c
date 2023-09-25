@@ -20,6 +20,7 @@ void    single_quotes(t_main *main, int *i, int start)
         printf("Start on the str: %c\n", main->input_prompt[main->quotes.start]);
         printf("End on the str: %c\n", main->input_prompt[main->quotes.end]);
     out = ft_substr(main->input_prompt, start, (main->quotes.start - start));
+        printf("aux out: %s\n", out);
     str = ft_substr(main->input_prompt, main->quotes.start + 1, (main->quotes.end - main->quotes.start) - 1);
         printf("str: %s\n", str);
     out = ft_strjoin(out, str);
@@ -38,6 +39,7 @@ void    double_quotes(t_main *main, int *i, int start)
         printf("Start on the str: %c\n", main->input_prompt[main->quotes.start]);
         printf("End on the str: %c\n", main->input_prompt[main->quotes.end]);
     out = ft_substr(main->input_prompt, start, (main->quotes.start - start));
+        printf("aux out: %s\n", out);
     str = ft_substr(main->input_prompt, main->quotes.start + 1, (main->quotes.end - main->quotes.start) - 1);
     while (str[j] != '\0')
     {
@@ -71,6 +73,7 @@ void    quotes_treatment(t_main *main, int *i, int start)
         printf("\033[1;35m\t\t(End quotes treatment)\033[0m\n");
 }
 
+/*
 t_node	*create_n_quotes(t_main *main, t_type token, int *i, char *str, bool expand)
 {
 	t_node	*new;
@@ -100,4 +103,4 @@ int	add_token_quotes(t_main *main, t_type token, int *i, char *str, bool expand)
 		return (1);
 	insert_last(&main->tokens, new);
 	return (0);
-}
+}*/
