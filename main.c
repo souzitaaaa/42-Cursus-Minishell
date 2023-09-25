@@ -86,7 +86,6 @@ void	init_prompt(t_main	*main)
 		if (!input)
 			ft_exit(NULL, false, *main);
 		main->line++;
-		printf("line: %d\n", main->line);
 		add_history(input);
 		init_input(main, input);
 		if(g_ex_status != 0)

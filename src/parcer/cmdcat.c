@@ -12,6 +12,7 @@
 
 #include "../../includes/minishell.h"
 
+//*encontra o primeiro comando e devolve o seu index
 int	find_first_cmd(t_node *aux, int size)
 {
 	int counter;
@@ -60,17 +61,18 @@ void	insert_temp(t_lexer *tokens, int index, char **temp)
 	insert_node(tokens, new, index);
 }
 
+//*concatenar os tipo S até ao próximo pipe ou até ao fim da lista
 void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 {
 	char **temp;
 	int aux_index;
 	bool cmdcat;
 
-	temp = copy_first_cmd(*tokens, index);
+	temp = aux->token.arr;
 	aux = aux->next;
 	while(aux->token.type != PIPE && aux != tokens->head)
 	{
-		if(aux->token.type == STRING && aux->index != index)
+		if(aux->token.type == STRING)
 		{
 			aux_index = aux->index;
 			temp = ft_arrjoin(temp, aux->token.arr);
@@ -85,29 +87,24 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 		insert_temp(tokens, index, temp);
 }
 
-//*Esta função junta os tipos S todos no mesmo nó, para que entre pipes só haja um tipo S
+//*Esta função junta os tipos S todos no mesmo nó, para que entre pipes só haja um tipo S (comando)
 void	cmdcat(t_lexer *tokens)
 {
-	int	counter;
 	t_node *aux;
 	int	cmd_index;
-	int	aux_index;
-	int	size;
 
-	counter = 0;
 	aux = tokens->head;
-	size = tokens->size;
-	while(counter < size)
+	while(aux->next != tokens->head)
 	{
-		printf("oi\n");
-		cmd_index = find_first_cmd(aux, tokens->size); //*encontra o primeiro comando e devolve o seu index
+		cmd_index = find_first_cmd(aux, tokens->size);
+		aux = find_node(*tokens, cmd_index);
 		if(cmd_index == -1) //*Se não houver cmd, acaba aqui;
 			return ;
-		cmdpipecat(tokens, aux, cmd_index); //*concatenar os tipo S até ao próximo pipe ou até ao fim da lista
-		aux = find_node(*tokens, aux_index);
-		while(aux->token.type != PIPE && counter++ < size)
+		cmdpipecat(tokens, aux, cmd_index);
+		while(aux->token.type != PIPE && aux->next != tokens->head)
 			aux = aux->next;
+		if(aux->next == tokens->head)
+			break ;
 		aux = aux->next;
-		counter++;
 	}
 }

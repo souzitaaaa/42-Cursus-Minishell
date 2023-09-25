@@ -145,7 +145,13 @@ void	cmdcat(t_lexer *tokens);
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
-void	pipex(t_ast *ast, t_main *main);
+
+//!PIPES
+void		pipex(t_ast *ast, t_main *main);
+t_ast_node	*get_beg(t_ast *ast);
+void		write_to_pipe(int *fd, char **cmd, t_main *main);
+void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
+void		read_from_pipe(int *fd, char **cmd, t_main *main);
 
 /*
 !RDR
@@ -163,7 +169,7 @@ void	rdr_error(char *str, t_main *main, int options);
 */
 void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str);
+void	error_execve(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
@@ -171,7 +177,9 @@ void	free_pathname(char	*pathname, int flag);
 */
 void	wait_estatus(int pid, t_main *main);
 void	wait_set_line(int pid, t_main *main);
-
+void	error_fp(int pid, int exit_code, t_main *main);
+int		ft_fork(t_main *main);
+void	wait_estatus_p(t_main *main, t_ast ast);
 /*
 !FREE.C
 */

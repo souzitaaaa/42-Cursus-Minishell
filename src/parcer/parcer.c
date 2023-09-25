@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parcer.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/19 17:57:33 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/23 20:30:16 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,20 @@ void	parcer(t_main *main)
 {
 	//if(!syntase())
 		//	return ;
+	if(main->tokens.size == 0)
+		return ;
 	if(main->tokens.size == 1 && main->tokens.head->token.type == STRING)
 	{
 		exec_cmd(main->tokens.head->token.arr, main, false);
 		return ;
 	}
 	cmdcat(&main->tokens);
-	//print_tokens(&main->tokens);
+	print_tokens(&main->tokens);
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);
 		pipex(&main->ast, main);
 	}
 	else
-	{
 		init_rdr(main->tokens, main);
-	}
 }
