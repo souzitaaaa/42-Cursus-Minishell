@@ -21,7 +21,7 @@ bool	special_chr(char c)
 	return false;
 }
 
-//* Esta funcao vai procurar pelo que nao for special char 
+//* Esta funcao vai procurar pelo que nao for special char
 	//* para guardar numa str e mandar para a struct
 void	search_extra_tokens(t_main *main, int *i)
 {
@@ -43,7 +43,7 @@ void	search_extra_tokens(t_main *main, int *i)
 		}
 		if (main->input_prompt[*i] == '\'' || main->input_prompt[*i] == '\"')
 		{
-			quotes_treatment(main, i, start);
+			//quotes_treatment(main, i, start);
 			return ;
 		}
 		if (special_chr(main->input_prompt[*i]) == false)

@@ -93,8 +93,8 @@ void	init_prompt(t_main	*main)
 			set_exit_code(main, g_ex_status);
 			g_ex_status = 0;
 		}
-		if (main->quotes.error)
-			break ;
+		//if (main->quotes.error)
+		//	break ;
 		lexer(main);
 		//if (syntax_analysis(main) == true)
 		parcer(main);
