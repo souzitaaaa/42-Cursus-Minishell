@@ -6,28 +6,12 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:34:53 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 17:22:25 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_isnbr(const char *str)
-{
-	if (ft_strlen(str) > 11)
-		return(0);
-	if (*str == '-' || *str == '+')
-		str++;
-	if (*str == '\0')
-		return(0);
-	while (*str)
-	{
-		if (*str < '0' || *str > '9')
-			return(0);
-		str++;
-	}
-	return(1);
-}
 void    insert_var_exp(t_main *main, char *str)
 {
     t_var   *aux;

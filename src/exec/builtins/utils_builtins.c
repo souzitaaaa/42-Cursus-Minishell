@@ -6,13 +6,27 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:05:04 by jenny             #+#    #+#             */
-/*   Updated: 2023/09/25 15:26:56 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 17:22:45 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//VER DE ADD O OLDPWD 
+int	ft_isnbr(const char *str)
+{
+	if (*str == '-' || *str == '+')
+		str++;
+	if (*str == '\0')
+		return(0);
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return(0);
+		str++;
+	}
+	return(1);
+}
+
 int	unset_cd(t_main *main, char *str)
 {
 	int	index;

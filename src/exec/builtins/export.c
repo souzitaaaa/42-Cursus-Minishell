@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/25 09:26:38 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 19:10:25 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,19 @@ void export(t_main *main, char **array, bool child)
 
     i = 1;
     if (array[1] == 0)
-        ft_export(&main->export_list);
+	{
+		if (main->flags.not_print == false)
+        	ft_export(&main->export_list);
+	}
     else
     {
         while(array[i] != NULL)
         {
             if (array[i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
 			{
-				error_export(STDERR_FILENO);
-                 if (child)
+				if (main->flags.not_print == false)
+					error_export(STDERR_FILENO);
+                if (child)
                     exit(2);
                 set_exit_code(main, 2);
 			}

@@ -86,6 +86,7 @@ void    cd(char *path, t_main *main, bool child);
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
 void	ft_exit(char **command, bool child, t_main main);
+int		ft_isnbr(const char *str);
 
 /*
 !LEXER.C

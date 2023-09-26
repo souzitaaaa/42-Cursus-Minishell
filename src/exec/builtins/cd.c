@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/26 16:28:15 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 19:14:19 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ Export:
 (ultils_export.c linha 83)
 •	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel
 Unset: 
-Dar unset em várias variáveis de uma vez - ok */
+Dar unset em várias variáveis de uma vez - ok 
+
+- TEM UM SEG FAULT QUANDO FAÇO >a cd .. e cd . (nao sei em qual ordem e situação)*/
 
 char	*only_cd(t_main *main, bool  child)
 {
@@ -34,7 +36,8 @@ char	*only_cd(t_main *main, bool  child)
 	home = getenv("HOME");
 	if (home == NULL)
 	{
-		error_cd(STDERR_FILENO);
+		if (main->flags.not_print == false)
+			error_cd(STDERR_FILENO);
 		if (child)
 			exit(1);
 		set_exit_code(main, 1);
@@ -55,7 +58,8 @@ char *find_home(char *path, t_main *main, bool child)
 		home = getenv("HOME");
 		if (home == NULL)
 		{
-			error_msg_file(path, STDERR_FILENO);
+			if (main->flags.not_print == false)
+				error_msg_file(path, STDERR_FILENO);
 			if (child)
 				exit(1);
 			set_exit_code(main, 1);
@@ -74,7 +78,8 @@ int change_dir(char *path, t_main *main, bool child)
 		set_exit_code(main, 0);
 	else
 	{
-		error_msg_file(path, STDERR_FILENO);
+		if (main->flags.not_print == false)
+			error_msg_file(path, STDERR_FILENO);
 		if (child)
 			exit(1);
 		set_exit_code(main, 1);
@@ -89,11 +94,11 @@ void cd(char *path, t_main *main, bool child)
 	char	*current;
 	char	*path_pwd;
 
+	current = ft_calloc(sizeof(char), 4096);
+	getcwd(current, 4096);
 	if (path == NULL)
 	{
 		new_path = only_cd(main, child);
-		current = ft_calloc(sizeof(char), 4096);
-		getcwd(current, 4096);
 		change_dir(new_path, main, child);
 		dir = change_dir(new_path, main, child);
 		if (dir == 0)
@@ -109,16 +114,23 @@ void cd(char *path, t_main *main, bool child)
 		{
 			if (main->prev)
 			{
-				change_dir(main->prev, main, child);
-				ft_printf("%s\n", main->prev);
-				path_pwd = ft_calloc(sizeof(char), 4096);
-				getcwd(path_pwd, 4096);
-				refresh_pwd(main, path_pwd);
-				refresh_oldpwd(main, main->prev);
+				dir = change_dir(main->prev, main, child);
+				if (dir == 0)
+				{
+					if (main->flags.not_print == false)
+						ft_printf("%s\n", main->prev);
+					main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+					ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+					path_pwd = ft_calloc(sizeof(char), 4096);
+					getcwd(path_pwd, 4096);
+					refresh_pwd(main, path_pwd);
+					refresh_oldpwd(main, main->prev);
+				}
 			}
 			else
 			{
-				error_cd(STDERR_FILENO);
+				if (main->flags.not_print == false)
+					error_cd(STDERR_FILENO);
 				if (child)
 					exit(1);
 				set_exit_code(main, 1);
@@ -127,8 +139,6 @@ void cd(char *path, t_main *main, bool child)
 		else
 		{
 			new_path = find_home(path, main, child);
-			current = ft_calloc(sizeof(char), 4096);
-			getcwd(current, 4096);
 			dir = change_dir(new_path, main, child);
 			if (dir == 0)
 			{

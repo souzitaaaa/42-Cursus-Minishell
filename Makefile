@@ -6,7 +6,7 @@
 #    By: jenny <jenny@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/26 16:41:03 by jenny            ###   ########.fr        #
+#    Updated: 2023/09/26 18:02:34 by jenny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
