@@ -6,7 +6,11 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/12 20:17:06 by jenny            ###   ########.fr       */
+=======
+/*   Updated: 2023/09/23 20:30:16 by rimarque         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +65,8 @@ void	parcer(t_main *main)
 {
 	//if(!syntase())
 		//	return ;
+	if(main->tokens.size == 0)
+		return ;
 	if(main->tokens.size == 1 && main->tokens.head->token.type == STRING)
 	{
 		exec_cmd(main->tokens.head->token.arr, main, false);
@@ -71,10 +77,8 @@ void	parcer(t_main *main)
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);
-		init_exec_ast(main->ast, main);
+		pipex(&main->ast, main);
 	}
 	else
-	{
 		init_rdr(main->tokens, main);
-	}
 }

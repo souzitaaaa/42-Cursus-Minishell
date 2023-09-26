@@ -10,64 +10,86 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-char	*read_stdin(char *lim, bool quotes)
+
+int	get_max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+
+int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
+{
+	if(!str)
+	{
+			error_msg_hd(lim,  main->fd.stdout, main->line);
+			return(-1);
+	}
+	(*line)++;
+	if (!ft_strncmp(lim, str, get_max(ft_strlen(lim), ft_strclen(str, '\n'))))
+	{
+		ft_free_str(&str);
+		return(-1);
+	}
+	return(0);
+}
+
+int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 {
 	char	*str;
-	char	*buff;
+	int		line;
 
 	str = "\0";
-	buff = "\0";
+	line = 0;
 	while (1)
 	{
-		ft_printf("> ");
+		write(main->fd.stdout, "> ", 2);
 		str = get_next_line(STDIN_FILENO, false);
-		//!str = expand_line(str, quotes);
-		if (!strncmp(lim, str, strlen(lim)))
-		{
-			ft_free_str(&str);
-			break ;
-		}
-		buff = ft_strjoinfree(buff, str);
+		if (read_stdin_aux(str, lim, main, &line) == -1)
+			break;
+		//!if(!quotes)
+			//!str = expand_line(str, quotes);
+		write(fd, str, strlen(str));
 		ft_free_str(&str);
 	}
-	return (buff);
+	return(line);
 }
 
 int	open_hd(char *lim, bool quotes, t_main *main)
 {
 	int		heredoc_fd[2];
-	char	*buff;
+	int		pid;
+	int		hd_line;
 
-	if (pipe(heredoc_fd) == -1)
+	error_fp(pipe(heredoc_fd), errno, main);
+	signals(2);
+	pid = fork();
+	error_fp(pid, errno, main);
+	if(pid == 0)
 	{
-		//!error_management(NULL, 0, errno); //*errno -> number of last error
+		close(heredoc_fd[0]);
+		hd_line = read_stdin(heredoc_fd[1], lim, quotes, main);
+		close(heredoc_fd[1]);
+		exit(hd_line);
 	}
-	buff = read_stdin(lim, quotes);
-	write(heredoc_fd[1], buff, strlen(buff));
+	signals(-1);
 	close(heredoc_fd[1]);
-	if (*buff)
-		ft_free_str(&buff);
-	return (heredoc_fd[0]);
+	wait_set_line(pid, main);
+	return(heredoc_fd[0]);
 }
 
-void	rdr_hd(t_token token, t_main *main)
+void	rdr_hd(t_token token, t_main *main, int fd)
 {
-	int	fd;
-
 	if(token.arr[1] == NULL)
-	{
-		fd = open_hd(token.arr[0], token.quotes, main);
 		dup2(fd, STDIN_FILENO);
-	}
 	else
 	{
-		fd = open_hd(token.arr[1], token.quotes, main);
 		if(dup2(fd, ft_atoi(token.arr[0])) == -1)
-		{
-			//!std_err
-		}
+				rdr_error(token.arr[0], main, 1);
 	}
 	close(fd);
 }
+

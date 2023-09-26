@@ -28,6 +28,25 @@ void	error_msg_file(char *str, int fd)
 	ft_putendl_fd(FILE_ERROR, fd);
 }
 
+void	error_msg_fd(char *str, int fd)
+{
+	ft_putstr_fd("minishell: ", fd);
+	ft_putstr_fd(str, fd);
+	ft_putstr_fd(": ", fd);
+	ft_putendl_fd(FD_ERROR, fd);
+}
+
+void	error_msg_hd(char *str, int fd, int line)
+{
+	ft_putstr_fd("minishell: warning: ", fd);
+	ft_putstr_fd("here-document at line ", fd);
+	ft_putnbr_fd(line, fd);
+	ft_putstr_fd(" delimited by end-of-file", fd);
+	ft_putstr_fd(" (wanted `", fd);
+	ft_putstr_fd(str, fd);
+	ft_putendl_fd("')", fd);
+}
+
 void	error_cd(int fd)
 {
 	ft_putstr_fd("minishell: ", fd);
@@ -38,4 +57,10 @@ void	error_export(int fd)
 {
 	ft_putstr_fd("minishell: ", fd);
 	ft_putendl_fd("zsh: bad assignment", fd);
+}
+
+void	error_quotes(int fd)
+{
+	ft_putstr_fd("minishell: ", fd);
+	ft_putendl_fd(SYNTAX_ERROR, fd);
 }

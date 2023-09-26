@@ -63,7 +63,7 @@ char	*expand(t_main *main, char *cmp)
 		aux = aux->next;
 	}
 			printf("\033[1;32m\t\t[End expanding]\033[0m\n");
-	return("Var nao encontrada");
+	return("\n");
 }
 
 //* Esta funcao vai verificar se nos comandos foi inserido um $ para poder
@@ -103,7 +103,7 @@ t_node	*create_n(t_main *main, t_type token, int *i, char *str)
 	check_expansion(main, arr);
 	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
-	//! falta o free da arr
+	new->token.quotes = false;
 	return (new);
 }
 
@@ -116,6 +116,7 @@ int	add_token(t_main *main, t_type token, int *i, char *str)
 	if (!new)
 		return (1);
 	insert_last(&main->tokens, new);
+	main->flags.free_flag.lexer_s = true;
 	return (0);
 }
 
@@ -147,6 +148,7 @@ t_node	*create_n_teste(t_main *main, t_type token, char **arr)
 	check_expansion(main, arr);
 	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	new->token.quotes = false;
 	//! falta o free da arr
 	return (new);
 }

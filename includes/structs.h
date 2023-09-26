@@ -22,21 +22,33 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*prev;
 	int				exit_code;
+	int				fork;
+	int				proc;
 	t_lexer			tokens;
+	t_env			export_list;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			input_exec;
+	t_ast 			ast;
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
 }t_main;*/
+
+typedef struct s_frees
+{
+	bool            lexer_s;
+	bool            prompt_s;
+} t_free;
 
 typedef struct s_bool
 {
 	bool            put_node_behind;
 	bool            rdr_treated;
 	bool            rdr_err;
+	bool			signal;
+	t_free          free_flag;
 } t_bool;
 
 //* Cada node vai conter uma string com a variavel de ambiente
@@ -89,6 +101,7 @@ typedef struct s_node
 	int				index;
 	int				quotes;
 	struct s_node	*next;
+	int		fd;
 }t_node;
 
 //* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
@@ -101,7 +114,7 @@ typedef struct s_lexer
 
 
 /*
-AST
+!AST
 */
 
 
@@ -112,7 +125,8 @@ typedef struct s_ast_node
 	t_token				token;
 	struct s_ast_node	*right;
 	struct s_ast_node	*prev;
-	int					index; //!o index esta ao contrario da arvore, a favor da ordem de execução
+	int					pid;
+	int					index; //*index dos nodes/pipes: o index esta ao contrario da arvore, a favor da ordem de execução
 }
 t_ast_node;
 
@@ -126,17 +140,30 @@ typedef	struct s_ast
 t_ast;
 
 /*
-QUOTES STRUCT
+!QUOTES STRUCT
 */
 
-//*Estrutura para ajudar o tratamento de quotes no lexer
-typedef struct s_quotes
+//* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
+	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
+typedef struct s_node_quotes
 {
+	struct s_node_quotes	*prev;
+	int				index; //!precisa?
 	int				type;
-    int				start;
-    int				end;
-    int				error;
+	int				start;
+	int				end;
+	struct s_node_quotes	*next;
+	int		fd; //!precisa?
+}t_node_quotes;
+
+
+typedef	struct s_quotes
+{
+	t_node_quotes			*head;
+	int					counter; //!Qual a diferença do counter para o size??
+	int					size; 
 }t_quotes;
+
 
 //* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
 //--> quando se manda msg de erro deve sempre escrever-se para o stderr
@@ -168,8 +195,7 @@ typedef struct s_main
 	char			**env_arr;
 	char			*prev;
 	int				exit_code;
-	int				fork;
-	int				proc;
+	int				line;
 	t_lexer			tokens;
 	t_env			export_list;
 	t_env			env_list;
@@ -178,7 +204,6 @@ typedef struct s_main
 	t_std			fd;
 	t_prompt		prompt_list;
 	t_bool          flags;
-	pid_t			pid;
 }t_main;
 
 #endif

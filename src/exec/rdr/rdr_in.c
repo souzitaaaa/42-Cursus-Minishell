@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 void	rdr_in(char **arr, t_main *main)
 {
@@ -21,19 +21,19 @@ void	rdr_in(char **arr, t_main *main)
 	if(arr[1] == NULL)
 	{
 		fd = open(arr[0], O_RDONLY);
-		//!if (fd == -1)
-			//!	error_management(file, 0, 0);
+		if (fd == -1)
+			rdr_error(arr[0], main, 0);
 		dup2(fd, STDIN_FILENO);
 	}
 	else
 	{
 		fd = open(arr[1], O_RDONLY);
-		//!if (fd == -1)
-			//!	error_management(file, 0, 0);
-		if(dup2(fd, ft_atoi(arr[0])) == -1)
+		if (fd == -1)
+			rdr_error(arr[1], main, 0);
+		else
 		{
-			 //!ERROR HANDLING "bad file descriptor" set exit code
-			 //!rdr_error()
+			if(dup2(fd, ft_atoi(arr[0])) == -1)
+				rdr_error(arr[0], main, 1);
 		}
 	}
 	close(fd);
