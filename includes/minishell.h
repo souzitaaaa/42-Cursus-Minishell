@@ -73,7 +73,7 @@ void    pwd(t_main *main, bool child);
 void    env(t_env *env, t_main *main, bool child, char **command);
 void	unset_exp(t_main *main, char *str);
 int		unset_env(t_main *main, char *str);
-void	unset(t_main *main, char *str, bool child);
+void	unset(t_main *main, char **array, bool child);
 void	ft_export(t_env *exp);
 void    export(t_main *main, char **array, bool child);
 void    insert_var_exp(t_main *main, char *str);

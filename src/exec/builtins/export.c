@@ -6,11 +6,25 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:26:17 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/25 09:26:38 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+/*fazer uma funcao que dá erro em: - + * = % ? / | \ () e não adicionar
+export -=jenny : bash: export: -=: invalid option
+export: usage: export [-nf] [name[=value] ...] or export -p
+export+=jenny : bash: export: `+=jenny': not a valid identifier
+export *=jenny: bash: export: `*=jenny': not a valid identifier
+export =jenny: bash: export: `=jenny': not a valid identifier(o nosso faz: minishell: zsh: bad assignment)
+export %=jenny: bash: export: `%=jenny': not a valid identifier
+export ?=jenny: bash: export: `?=jenny': not a valid identifier
+export /=export: bash: export: `/=export': not a valid identifier
+export |=export: bash: =export: command not found
+export \=export: bash: export: `=export': not a valid identifier
+export (=export: bash: syntax error near unexpected token `=export'
+export )=export: bash: syntax error near unexpected token `)'*/
 
 void swap_var(t_var *var1, t_var *var2)
 {

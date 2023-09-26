@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:35:25 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 16:26:01 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	unset_exp(t_main *main, char *str)
 {
 	int		count = 0;
 	t_var	*aux = main->export_list.head;
-
+	
 	while (count++ < main->export_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -83,10 +83,15 @@ void	unset_exp(t_main *main, char *str)
 	}
 }
 
-void	unset(t_main *main, char *str, bool child)
+void	unset(t_main *main, char **array, bool child)
 {
-	unset_env(main, str);
-	unset_exp(main, str);
+	int		i = 1;
+	while (array[i]  != NULL)
+	{
+		unset_env(main, array[i]);
+		unset_exp(main, array[i]);
+		i++;
+	}
 	if (child)
         exit(0);
     set_exit_code(main, 0);

@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/12 20:17:28 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 16:24:30 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	exec_cmd(char **command, t_main *main, bool child)
 	else if (ft_strcmp(command[0], "export") == 0)
 		export(main, command, child);
 	else if (ft_strcmp(command[0], "unset") == 0)
-		unset(main, command[1], child);
+		unset(main, command, child);
    	else
        exec_other_cmd(command, main, child);
 }

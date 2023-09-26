@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/24 14:07:58 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 16:28:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ Export:
 •	export PATH=ola coloca o programa a receber input  deixa de funcionar - ja muda o valor da variavel
 •	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free - ja muda o valor da variavel
 (ultils_export.c linha 83)
-•	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel */
+•	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel
+Unset: 
+Dar unset em várias variáveis de uma vez - ok */
 
 char	*only_cd(t_main *main, bool  child)
 {
