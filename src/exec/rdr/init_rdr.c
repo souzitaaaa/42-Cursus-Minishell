@@ -25,6 +25,21 @@ void	exec_rdr(t_token token, t_main *main, int hd_fd)
 		rdr_hd(token, main, hd_fd);
 }
 
+void	find_exec_cmd_parent(t_lexer tokens, t_main *main)
+{
+	t_node *aux;
+	int	counter;
+
+	aux = tokens.head;
+	counter = 0;
+	while(counter++ < tokens.size)
+	{
+		if(aux->token.type == STRING)
+			exec_cmd(aux->token.arr, main, false);
+		aux = aux->next;
+	}
+}
+
 //*Esta função percorre a lista tokens e executa o comando
 void	find_exec_cmd(t_lexer tokens, t_main *main)
 {
@@ -43,7 +58,6 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 			exec_cmd(aux->token.arr, main, true);
 		aux = aux->next;
 	}
-	exit(0);
 }
 
 //*Esta função percorre a lista tokens, executa os here_doc, guarda o fd do último hd executado,
@@ -97,6 +111,25 @@ void	ft_redirect(t_lexer	tokens, t_main *main, int hd_fd, int index)
 	}
 }
 
+int	check_cmd(t_lexer tokens)
+{
+	t_node	*aux;
+	int counter;
+
+	aux = tokens.head;
+	counter = 0;
+	while(counter++ < tokens.size)
+	{
+		if(aux->token.type == STRING)
+			if(ft_strcmp(aux->token.arr[0], "cd") ||
+				ft_strcmp(aux->token.arr[0], "export") || 
+					ft_strcmp(aux->token.arr[0], "unset"))
+					return(1);
+		aux = aux->next;
+	}
+	return(0);
+}
+
 //*Esta função percorre a lista tokens e executa os redirects, no final executa o comando
 void	init_rdr(t_lexer tokens, t_main *main)
 {
@@ -115,11 +148,15 @@ void	init_rdr(t_lexer tokens, t_main *main)
 		if(hd)
 			close(hd_fd);
 		find_exec_cmd(tokens, main);
+		exit(0);
 	}
 	else
 	{
-		//if (check_cmd == -1) //*checka se são cd, unset ou export
-			//update_env(); //*uma função que chama versões do cd, unset e export, que não imprimem nada (servem para atualizar as variaveis de ambiente e o cd tem que fazer o chdir)
+		if(check_cmd(tokens))
+		{
+			main->flags.not_print = true;
+			find_exec_cmd_parent(tokens, main);//uma função que chama versões do cd, unset e export, que não imprimem nada (servem para atualizar as variaveis de ambiente e o cd tem que fazer o chdir)
+		}
 		if(hd)
 			close(hd_fd);
 	}

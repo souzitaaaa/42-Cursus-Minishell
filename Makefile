@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
+#    By: jenny <jenny@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/25 08:34:08 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/26 18:02:34 by jenny            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -52,7 +52,7 @@ _FILES 			= error_msg exit_code init list free prompts signal destroy\
 					pipe pipe_utils\
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
-					echo pwd env unset cd export utils_export exit\
+					echo pwd env unset cd export utils_export  utils_builtins exit\
 					print_img utils list_quotes
 
 OBJ				= $(_FILES:%=%.o)

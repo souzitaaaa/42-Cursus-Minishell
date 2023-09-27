@@ -48,6 +48,7 @@ typedef struct s_bool
 	bool            rdr_treated;
 	bool            rdr_err;
 	bool			signal;
+	bool			not_print;
 	t_free          free_flag;
 } t_bool;
 

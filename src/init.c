@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/22 13:17:04 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/26 17:27:33 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void    init_bool(t_bool *flags)
 	flags->signal = false;
 	flags->free_flag.lexer_s = false;
 	flags->free_flag.prompt_s = true;
+	flags->not_print = false;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
@@ -73,9 +74,11 @@ void	init_input(t_main *main, char *input)
 void	init_main(t_main *main, char **envp)
 {
 	init_env(&main->env_list);
+	init_env(&main->export_list);
 	set_env_list(main, envp);
-	main->env_arr = ft_calloc(sizeof(char *), 1);
 	main->prev = NULL;
+	copy_exp(main);
+	main->env_arr = ft_calloc(sizeof(char *), 1);
 	main->exit_code = 0;
 	main->line = 0;
 	init_std(&main->fd); //*É AQUI! Se nao estou a fazer dup(1) e o 1 já foi redirecionado
