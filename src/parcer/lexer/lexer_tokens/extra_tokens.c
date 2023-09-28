@@ -27,19 +27,25 @@ void	search_extra_tokens(t_main *main, int *i)
 {
 	int		start = *i;
 	char	*str;
+	bool	fd = true;
 	bool	run = true;
 	bool    extra = false;
 	int     n_len = 0;
 
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{
-		if (main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57)
+		if ((main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57) && fd == true)
 		{
-			n_len = get_fd_rdr(main, i);
-			if (main->flags.rdr_treated == true)
-				break ;
+			if (main->input_prompt[*i - 1] == '-')
+				fd = false;
 			else
-				n_len = 0;
+			{
+				n_len = get_fd_rdr(main, i);
+				if (main->flags.rdr_treated == true)
+					break ;
+				else
+					n_len = 0;
+			}
 		}
 		if (main->input_prompt[*i] == '\'' || main->input_prompt[*i] == '\"')
 		{

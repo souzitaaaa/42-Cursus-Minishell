@@ -121,10 +121,12 @@ int	check_cmd(t_lexer tokens)
 	while(counter++ < tokens.size)
 	{
 		if(aux->token.type == STRING)
-			if(ft_strcmp(aux->token.arr[0], "cd") ||
-				ft_strcmp(aux->token.arr[0], "export") || 
-					ft_strcmp(aux->token.arr[0], "unset"))
-					return(1);
+		{
+			if(!ft_strcmp(aux->token.arr[0], "cd") ||
+				!ft_strcmp(aux->token.arr[0], "export") || 
+					!ft_strcmp(aux->token.arr[0], "unset"))
+						return(1);
+		}
 		aux = aux->next;
 	}
 	return(0);

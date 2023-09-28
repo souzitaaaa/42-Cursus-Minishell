@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/28 16:53:00 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:28:29 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,15 @@ void    fd_tokens(t_main *main, int *i, char *str, char token)
 	
 }
 
+bool	check_valid_fd(char *str)
+{
+	long int fd = ft_long_atol(str);
+
+	if (fd > INT_MAX)
+		return (false);
+	return (true);
+}
+
 //* Funcao principal para verificar se os numeros são um fd
 int    get_fd_rdr(t_main *main, int *i)
 {
@@ -132,6 +141,8 @@ int    get_fd_rdr(t_main *main, int *i)
 				else
 				{
 					str = ft_substr(main->input_prompt, start, (*i - start));
+					if (check_valid_fd(str) == false)
+						break ;
 					fd_tokens(main, i, str, main->input_prompt[*i]);
 					main->flags.rdr_treated = true;
 					printf("\033[1;32m\t\t(End get_fd_rdr special)\033[0m\n");
