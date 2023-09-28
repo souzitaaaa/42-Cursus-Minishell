@@ -6,7 +6,7 @@
 #    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/28 15:22:32 by joe              ###   ########.fr        #
+#    Updated: 2023/09/28 17:07:56 by joe              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ _FILES 			= error_msg exit_code init list free prompts signal destroy\
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= structs.h defines.h minishell.h envp.h print_start.h
+_HEADERS		= structs.h defines.h minishell.h 
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

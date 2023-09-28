@@ -13,16 +13,18 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "../src/parcer/lexer/lexer_tokens/lexer_tokens.h"
-# include "../src/print_start/print_start.h"
-# include "../src/exec/builtins/builtins.h"
 # include "../libft_group/include/libft.h"
 
 # include "defines.h"
 # include "structs.h"
 
-# include "print_start.h"
+# include "quotes.h"
+# include "pipes.h"
 # include "envp.h"
+# include "exec.h"
+# include "rdr.h"
+# include "parcer.h"
+# include "lexer.h"
 
 
 # include <unistd.h>
@@ -48,6 +50,7 @@
 */
 extern int	g_ex_status;
 
+
 /*
 !BUILTINS
 */
@@ -71,7 +74,10 @@ void	refresh_oldpwd(t_main *main, char *str);
 void	ft_exit(char **command, bool child, t_main main);
 int		ft_isnbr(const char *str);
 
-
+/*
+!PRINT_START
+*/
+void	print_intro(void);
 
 /*
 !INIT.C
@@ -96,12 +102,6 @@ void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
 
 
-
-/*
-!LEXER.C
-*/
-void	lexer(t_main *main);
-
 /*
 !EXTRA_TOKENS.C
 */
@@ -121,20 +121,6 @@ int     get_fd_rdr(t_main *main, int *i);
 void    search_input_tokens(t_main *main, int *i, char *str);
 void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 
-/*
-!QUOTES_TREATMENT.C
-*/
-void    quotes_treatment(t_main *main, int *i, int start);
-int     add_token_quotes(t_main *main, t_type token, int *i, char *str, bool expand);
-
-/*
-!TOKEN.C
-*/
-t_node	*create_n(t_main *main, t_type token, int *i, char *str);
-int		add_token(t_main *main, t_type token, int *i, char *str);
-int     add_prev_token(t_main *main, int *i, char *str);
-char	*expand(t_main *main, char *cmp);
-void	check_expansion(t_main *main, char **arr);
 
 /*
 !LEXER_UTILS
@@ -145,58 +131,61 @@ void    print_tokens(t_lexer *tokens);
 t_node	*find_node(t_lexer tokens, int index);
 int		find_last_hd(t_lexer tokens);
 
-/*
-!SYNTAX
-*/
-bool    syntax_analysis(t_main *main);
+// /*
+// !SYNTAX
+// */
+// bool    syntax_analysis(t_main *main);
 
-/*
-!PARCER
-*/
-void	parcer(t_main *main);
-void	test_ast(t_lexer tokens, t_ast *ast);
-void	cmdcat(t_lexer *tokens);
+// /*
+// !PARCER
+// */
+// void	parcer(t_main *main);
+// void	test_ast(t_lexer tokens, t_ast *ast);
+// void	cmdcat(t_lexer *tokens);
 
 /*
 !EXEC
 */
 void	set_exit_code(t_main *main, int exit_code);
-void	exec_cmd(char **command, t_main *main, bool pipe);
+//void	exec_cmd(char **command, t_main *main, bool pipe);
 
-//!PIPES
-void		pipex(t_ast *ast, t_main *main);
-t_ast_node	*get_beg(t_ast *ast);
-void		write_to_pipe(int *fd, char **cmd, t_main *main);
-void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
-void		read_from_pipe(int *fd, char **cmd, t_main *main);
+// //!PIPES
+// void		pipex(t_ast *ast, t_main *main);
+// t_ast_node	*get_beg(t_ast *ast);
+// void		write_to_pipe(int *fd, char **cmd, t_main *main);
+// void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
+// void		read_from_pipe(int *fd, char **cmd, t_main *main);
 
-/*
-!RDR
-*/
-void	init_rdr(t_lexer tokens, t_main *main);
-void	rdr_in(char **arr, t_main *main);
-void	rdr_out(char **arr, t_main *main);
-void	rdr_app(char **arr, t_main *main);
-void	rdr_hd(t_token token, t_main *main, int fd);
-int		open_hd(char *lim, bool quotes, t_main *main);
-void	rdr_error(char *str, t_main *main, int options);
+// /*
+// !RDR
+// */
+// void	init_rdr(t_lexer tokens, t_main *main);
+// void	rdr_in(char **arr, t_main *main);
+// void	rdr_out(char **arr, t_main *main);
+// void	rdr_app(char **arr, t_main *main);
+// void	rdr_hd(t_token token, t_main *main, int fd);
+// int		open_hd(char *lim, bool quotes, t_main *main);
+// void	rdr_error(char *str, t_main *main, int options);
 
-/*
-!EXECVE
-*/
-void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
-void	execution(char **cmd, t_main *main);
-void	error_execve(char *str);
-void	free_pathname(char	*pathname, int flag);
+// /*
+// !EXECVE
+// */
+// void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
+// void	execution(char **cmd, t_main *main);
+// void	error_execve(char *str);
+// void	free_pathname(char	*pathname, int flag);
 
-/*
-!CHILD_AUX.C
-*/
-void	wait_estatus(int pid, t_main *main);
-void	wait_set_line(int pid, t_main *main);
-void	error_fp(int pid, int exit_code, t_main *main);
-int		ft_fork(t_main *main);
-void	wait_estatus_p(t_main *main, t_ast ast);
+// /*
+// !CHILD_AUX.C
+// */
+// void	wait_estatus(int pid, t_main *main);
+// void	wait_set_line(int pid, t_main *main);
+// void	error_fp(int pid, int exit_code, t_main *main);
+// int		ft_fork(t_main *main);
+// void	wait_estatus_p(t_main *main, t_ast ast);
+// 
+
+
 /*
 !FREE.C
 */
@@ -205,21 +194,7 @@ void	free_env(t_env *stack);
 void	free_lexer(t_lexer *stack);
 void	free_env(t_env *stack);
 
-/*
-!QUOTES.C
-*/
-int		check_quotes(char c, int quotes);
-int		check_quotes_print(t_main *main);
 
-/*
-!QUOTES LIST.C
-*/
-void		shift_index_quotes(t_quotes *stack);
-void		put_head_node_quotes(t_quotes *stack, t_node_quotes *new);
-t_node_quotes		*remove_head_quotes(t_quotes *stack);
-void		insert_head_quotes(t_quotes *stack, t_node_quotes *new);
-void		insert_last_quotes(t_quotes *stack, t_node_quotes *new);
-void    print_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C

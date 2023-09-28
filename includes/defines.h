@@ -6,7 +6,7 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/22 11:53:50 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/28 17:13:55 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ COLORS
 # define RGB_PINK_3 ANSI_COLOR(242, 190, 209)
 # define RGB_PURPLE ANSI_COLOR(151, 78, 195)
 # define RGB_PURPLE_2 ANSI_COLOR(254, 123, 229)
-#define LYELLOWB "\001\033[0;30;43m\002"
-#define REDB "\001\033[0;37;41m\002"
+# define LYELLOWB "\001\033[0;30;43m\002"
+# define REDB "\001\033[0;37;41m\002"
 
 //Reset
 # define COLOUR_RESET "\001\033[0m\002"
