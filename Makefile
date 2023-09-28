@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/28 15:22:32 by joe              ###   ########.fr        #
+#    Updated: 2023/09/28 17:04:26 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb #-fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -46,7 +46,7 @@ NAME 			= minishell
 _FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
 					parcer cmdcat ast syntax\
-					extra_tokens output_tokens input_tokens lexer_utils\
+					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils add_tokens create_nodes fd_token\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
 					pipe pipe_utils\
