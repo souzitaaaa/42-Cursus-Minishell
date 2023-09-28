@@ -81,7 +81,7 @@ void	init_prompt(t_main	*main)
 	{
 		signals(0);
 		//prompt = get_prompt_msg(main);
-		input = readline(" minishell -> ");
+		input = readline("minishell -> ");
 		//free(prompt);
 		if (!input)
 			ft_exit(NULL, false, *main);
@@ -110,7 +110,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	print_intro();
+	//print_intro();
 	init_main(&main, envp);
 	init_prompt(&main);
 	//tratar aspas

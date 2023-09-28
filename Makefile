@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/25 08:34:08 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/28 10:50:11 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,10 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
-					parcer cmdcat ast syntax\
 					extra_tokens output_tokens input_tokens lexer_utils\
+					parcer cmdcat ast ast_utils ast_lexer syntax list_endnull\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
-					pipe pipe_utils\
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
 					echo pwd env unset cd export utils_export exit\

@@ -16,6 +16,7 @@
 # include "../libft_group/include/libft.h"
 # include "defines.h"
 # include "structs.h"
+# include "envp.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -54,16 +55,17 @@ void		put_head_node(t_lexer *stack, t_node *new);
 t_node		*remove_head(t_lexer *stack);
 void		insert_head(t_lexer *stack, t_node *new);
 void		insert_last(t_lexer *stack, t_node *new);
+void		insert_last_ast(t_lexer *stack, t_node *new, int index);
 
 /*
 !ENVP
-*/
 t_var       *var_node(const char *var);
 void        add_var(t_env *env, t_var *var_new);
 void	    shift_index_env(t_env *stack);
 void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
+*/
 
 /*
 !BUILTINS
@@ -126,7 +128,6 @@ void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
 t_node	*find_node(t_lexer tokens, int index);
-int		find_last_hd(t_lexer tokens);
 
 /*
 !SYNTAX
@@ -139,6 +140,18 @@ bool    syntax_analysis(t_main *main);
 void	parcer(t_main *main);
 void	test_ast(t_lexer tokens, t_ast *ast);
 void	cmdcat(t_lexer *tokens);
+
+//!AST
+
+//!AST_ULTIS
+void	insert_l_left(t_leave **leave, t_node *pipe);
+void	insert_l_right(t_leave **leave, t_node *pipe, t_lexer tokens);
+
+//!AST_LEXER
+void	left_create_list_in(t_lexer *list_in, t_node *aux);
+void	left_create_list_out(t_lexer *list_out, t_node *aux);
+void	right_create_list_in(t_lexer *list_in, t_node *aux, t_lexer tokens);
+void	right_create_list_out(t_lexer *list_out, t_node *aux, t_lexer tokens);
 
 /*
 !EXEC
@@ -163,6 +176,7 @@ void	rdr_app(char **arr, t_main *main);
 void	rdr_hd(t_token token, t_main *main, int fd);
 int		open_hd(char *lim, bool quotes, t_main *main);
 void	rdr_error(char *str, t_main *main, int options);
+int		find_last_hd(t_lexer tokens);
 
 /*
 !EXECVE
@@ -234,5 +248,12 @@ void    prompt_jenny(t_prompt *prompt_list);
 void	prompt_jo(t_prompt *prompt_list);
 void    prompt_default(t_prompt *prompt_list);
 void	print_intro(void);
+
+//!LIST_END_NULL
+void	shift_index_endnull(t_lexer *stack);
+void	put_head_node_endnull(t_lexer *stack, t_node *new);
+void	insert_head_endnull(t_lexer *stack, t_node *new);
+void	insert_last_endnull(t_lexer *stack, t_node *new, int index);
+void    print_list_endnull(t_node *head);
 
 #endif

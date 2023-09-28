@@ -17,25 +17,6 @@
 # include "minishell.h"
 # include <stdbool.h>
 
-/*
-typedef struct s_main
-{
-	char 			*input_prompt;
-	char			**env_arr;
-	char			*prev;
-	int				exit_code;
-	int				fork;
-	int				proc;
-	t_lexer			tokens;
-	t_env			export_list;
-	t_env			env_list;
-	t_quotes		quotes;
-	t_ast 			ast;
-	t_std			fd;
-	t_prompt		prompt_list;
-	t_bool          flags;
-}t_main;*/
-
 typedef struct s_frees
 {
 	bool            lexer_s;
@@ -80,7 +61,8 @@ typedef enum s_type
 	OUT = '>',       // >
 	APPEND = 'A',    // >>
 	COMERCIAL = '&', // &
-	STRING = 'S',    // string (pode ser comando, ficheiro)
+	STRING = 'S',    // Comando
+	EMPTY = 'E',	 // Vazio
 }t_type;
 
 //* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
@@ -116,26 +98,36 @@ typedef struct s_lexer
 /*
 !AST
 */
-
+typedef struct s_leave	t_leave;
 
 //* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
 typedef struct s_ast_node
 {
-	struct s_ast_node	*left;
-	t_token				token;
-	struct s_ast_node	*right;
 	struct s_ast_node	*prev;
-	int					pid;
+	t_token				token;
+	t_leave				*right;
+	t_leave				*left;
+	struct s_ast_node	*left_n;
 	int					index; //*index dos nodes/pipes: o index esta ao contrario da arvore, a favor da ordem de execução
 }
 t_ast_node;
+
+typedef struct s_leave
+{
+	t_ast_node			*prev;
+	t_token				token;
+	t_node				*left;
+	t_node				*right;
+	int					pid;
+}
+t_leave;
 
 //* Struct inicial do t_ast (abstract syntax tree)
 typedef	struct s_ast
 {
 	t_ast_node			*head;
 	int					counter;
-	int					size; //number of nodes/operators
+	int					size; //number of ast_nodes/operators/pipes
 }
 t_ast;
 
@@ -161,7 +153,7 @@ typedef	struct s_quotes
 {
 	t_node_quotes			*head;
 	int					counter; //!Qual a diferença do counter para o size??
-	int					size; 
+	int					size;
 }t_quotes;
 
 
