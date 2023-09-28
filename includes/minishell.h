@@ -14,8 +14,14 @@
 # define MINISHELL_H
 
 # include "../libft_group/include/libft.h"
+
 # include "defines.h"
 # include "structs.h"
+
+# include "print_start.h"
+# include "envp.h"
+
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -38,6 +44,31 @@
 !GLOBAL VARIABLE
 */
 extern int	g_ex_status;
+
+/*
+!BUILTINS
+*/
+void    echo(char **command, t_main *main, bool child);
+void    pwd(t_main *main, bool child);
+void    env(t_env *env, t_main *main, bool child, char **command);
+void	unset_exp(t_main *main, char *str);
+int		unset_env(t_main *main, char *str);
+void	unset(t_main *main, char **array, bool child);
+void	ft_export(t_env *exp);
+//void    export(t_main *main, char **array, bool child);
+void    insert_var_exp(t_main *main, char *str);
+void    insert_var_env(t_main *main, char *str);
+bool    modify_var_exp(t_main *main, char *str);
+bool    modify_var_env(t_main *main, char *str);
+void	copy_exp(t_main *main);
+void    remove_var(t_env *env, int index);
+void    cd(char *path, t_main *main, bool child);
+void	refresh_pwd(t_main *main, char *str);
+void	refresh_oldpwd(t_main *main, char *str);
+void	ft_exit(char **command, bool child, t_main main);
+int		ft_isnbr(const char *str);
+
+
 
 /*
 !INIT.C
@@ -65,28 +96,7 @@ void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
 
-/*
-!BUILTINS
-*/
-void    echo(char **command, t_main *main, bool child);
-void    pwd(t_main *main, bool child);
-void    env(t_env *env, t_main *main, bool child, char **command);
-void	unset_exp(t_main *main, char *str);
-int		unset_env(t_main *main, char *str);
-void	unset(t_main *main, char **array, bool child);
-void	ft_export(t_env *exp);
-void    export(t_main *main, char **array, bool child);
-void    insert_var_exp(t_main *main, char *str);
-void    insert_var_env(t_main *main, char *str);
-bool    modify_var_exp(t_main *main, char *str);
-bool    modify_var_env(t_main *main, char *str);
-void	copy_exp(t_main *main);
-void    remove_var(t_env *env, int index);
-void    cd(char *path, t_main *main, bool child);
-void	refresh_pwd(t_main *main, char *str);
-void	refresh_oldpwd(t_main *main, char *str);
-void	ft_exit(char **command, bool child, t_main main);
-int		ft_isnbr(const char *str);
+
 
 /*
 !LEXER.C
@@ -181,7 +191,7 @@ void	error_execve(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
-!CHILD_AUX
+!CHILD_AUX.C
 */
 void	wait_estatus(int pid, t_main *main);
 void	wait_set_line(int pid, t_main *main);
@@ -210,6 +220,7 @@ void		put_head_node_quotes(t_quotes *stack, t_node_quotes *new);
 t_node_quotes		*remove_head_quotes(t_quotes *stack);
 void		insert_head_quotes(t_quotes *stack, t_node_quotes *new);
 void		insert_last_quotes(t_quotes *stack, t_node_quotes *new);
+void    print_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C
@@ -243,6 +254,5 @@ void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);
 void	prompt_jo(t_prompt *prompt_list);
 void    prompt_default(t_prompt *prompt_list);
-void	print_intro(void);
 
 #endif

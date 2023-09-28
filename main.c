@@ -110,7 +110,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	//print_intro();
+	print_intro();
 	init_main(&main, envp);
 	init_prompt(&main);
 	//tratar aspas

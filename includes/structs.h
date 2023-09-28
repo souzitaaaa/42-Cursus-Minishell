@@ -154,7 +154,6 @@ typedef struct s_node_quotes
 	int				start;
 	int				end;
 	struct s_node_quotes	*next;
-	int		fd; //!precisa?
 }t_node_quotes;
 
 
