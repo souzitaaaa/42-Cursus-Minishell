@@ -13,7 +13,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "defines.h"
 # include "minishell.h"
 # include <stdbool.h>
 

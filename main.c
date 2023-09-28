@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+# include "../src/parcer/lexer/lexer_tokens/lexer_tokens.h"
+# include "../src/print_start/print_start.h"
+# include "../src/exec/builtins/builtins.h"
+# include "../libft_group/include/libft.h"
+# include "../src/parcer/lexer/lexer.h"
+# include "../src/quotes/quotes.h"
+# include "../src/parcer/parcer.h"
+# include "../src/exec/exec.h"
+
+
+
+
+
 
 int	g_ex_status = 0;
 
@@ -110,7 +123,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	//print_intro();
+	print_intro();
 	init_main(&main, envp);
 	init_prompt(&main);
 	//tratar aspas
