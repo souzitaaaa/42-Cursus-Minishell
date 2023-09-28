@@ -18,10 +18,12 @@ int	find_first_cmd(t_node *aux, int size)
 	int counter;
 
 	counter = 0;
-	while(counter++ < size)
+	while(1)
 	{
 		if(aux->token.type == STRING)
 			return (aux->index);
+		if(aux->index == size - 1)
+			break ;
 		aux = aux->next;
 	}
 	return (-1);

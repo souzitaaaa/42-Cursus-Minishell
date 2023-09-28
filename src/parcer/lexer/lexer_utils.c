@@ -76,24 +76,10 @@ t_node	*find_node(t_lexer tokens, int index)
 
 	counter = 0;
 	aux = tokens.head;
-	while(counter++ < index)
-		aux = aux->next;
-	return (aux);
-}
-
-int find_last_hd(t_lexer tokens)
-{
-	int	counter;
-	t_node *aux;
-    t_node *result;
-
-	counter = 0;
-	aux = tokens.head;
-	while(counter++ < tokens.size)
+	while(counter < index && counter < tokens.size)
     {
-        if(aux->token.type == HEREDOC)
-            result = aux;
         aux = aux->next;
+        counter++;
     }
-	return (result->index);
+	return (aux);
 }

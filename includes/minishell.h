@@ -20,7 +20,6 @@
 
 # include "quotes.h"
 # include "pipes.h"
-# include "envp.h"
 # include "exec.h"
 # include "rdr.h"
 # include "parcer.h"
@@ -61,7 +60,7 @@ void	unset_exp(t_main *main, char *str);
 int		unset_env(t_main *main, char *str);
 void	unset(t_main *main, char **array, bool child);
 void	ft_export(t_env *exp);
-//void    export(t_main *main, char **array, bool child);
+void    export(t_main *main, char **array, bool child);
 void    insert_var_exp(t_main *main, char *str);
 void    insert_var_env(t_main *main, char *str);
 bool    modify_var_exp(t_main *main, char *str);
@@ -91,9 +90,8 @@ void		init_main(t_main *main, char ** env);
 */
 void    destroy(t_main *main);
 
-/*
-!ENVP
-*/
+
+//!ENVP
 t_var       *var_node(const char *var);
 void		add_var(t_env *env, t_var *var_new, int index);
 void	    shift_index_env(t_env *stack);
@@ -121,8 +119,6 @@ int     get_fd_rdr(t_main *main, int *i);
 void    search_input_tokens(t_main *main, int *i, char *str);
 void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 
-<<<<<<< HEAD
-=======
 /*
 !QUOTES_TREATMENT.C
 */
@@ -134,7 +130,6 @@ void    quotes_treatment(t_main *main, int *i, int start);
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
 void	check_expansion(t_main *main, char **arr);
->>>>>>> main
 
 /*
 !LEXER_UTILS
@@ -143,14 +138,7 @@ void    remove_node(t_lexer *lexer, int index);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
 t_node	*find_node(t_lexer tokens, int index);
-int		find_last_hd(t_lexer tokens);
 
-<<<<<<< HEAD
-// /*
-// !SYNTAX
-// */
-// bool    syntax_analysis(t_main *main);
-=======
 /*
 !ADD_TOKENS
 */
@@ -165,11 +153,22 @@ t_node	*create_n_quotes(t_main *main, t_type token, int *i, char *str, bool expa
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 t_node	*create_n_prev(t_main *main, t_type token, char **arr);
 
+//!AST
+
+//!AST_ULTIS
+void	insert_l_left(t_leave **leave, t_node *pipe);
+void	insert_l_right(t_leave **leave, t_node *pipe, t_lexer tokens);
+
+//!AST_LEXER
+void	left_create_list_in(t_lexer *list_in, t_node *aux);
+void	left_create_list_out(t_lexer *list_out, t_node *aux);
+void	right_create_list_in(t_lexer *list_in, t_node *aux, t_lexer tokens);
+void	right_create_list_out(t_lexer *list_out, t_node *aux, t_lexer tokens);
+
 /*
 !SYNTAX
 */
 bool    syntax_analysis(t_main *main);
->>>>>>> main
 
 // /*
 // !PARCER
@@ -218,7 +217,7 @@ void	set_exit_code(t_main *main, int exit_code);
 // void	error_fp(int pid, int exit_code, t_main *main);
 // int		ft_fork(t_main *main);
 // void	wait_estatus_p(t_main *main, t_ast ast);
-// 
+//
 
 
 /*
@@ -292,5 +291,12 @@ void	prompt_rita(t_prompt *prompt_list);
 void    prompt_jenny(t_prompt *prompt_list);
 void	prompt_jo(t_prompt *prompt_list);
 void    prompt_default(t_prompt *prompt_list);
+
+//!LIST_END_NULL
+void	shift_index_endnull(t_lexer *stack);
+void	put_head_node_endnull(t_lexer *stack, t_node *new);
+void	insert_head_endnull(t_lexer *stack, t_node *new);
+void	insert_last_endnull(t_lexer *stack, t_node *new, int index);
+void    print_list_endnull(t_node *head);
 
 #endif

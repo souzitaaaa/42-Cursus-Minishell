@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/09/28 17:07:56 by joe              ###   ########.fr        #
-=======
-#    Updated: 2023/09/28 17:04:26 by dinoguei         ###   ########.fr        #
->>>>>>> main
+#    Updated: 2023/09/28 20:30:10 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +45,10 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
-					parcer cmdcat ast syntax\
+					parcer cmdcat ast ast_utils ast_lexer syntax list_endnull\
 					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils add_tokens create_nodes fd_token\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
-					pipe pipe_utils\
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
 					echo pwd env unset cd export utils_export  utils_builtins exit\
@@ -61,7 +56,7 @@ _FILES 			= error_msg exit_code init list free prompts signal destroy\
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= structs.h defines.h minishell.h 
+_HEADERS		= structs.h defines.h minishell.h exec.h lexer.h parcer.h pipes.h quotes.h rdr.h structs.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------
