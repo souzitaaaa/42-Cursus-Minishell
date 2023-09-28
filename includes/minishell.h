@@ -61,7 +61,7 @@ void	unset_exp(t_main *main, char *str);
 int		unset_env(t_main *main, char *str);
 void	unset(t_main *main, char **array, bool child);
 void	ft_export(t_env *exp);
-//void    export(t_main *main, char **array, bool child);
+void    export(t_main *main, char **array, bool child);
 void    insert_var_exp(t_main *main, char *str);
 void    insert_var_env(t_main *main, char *str);
 bool    modify_var_exp(t_main *main, char *str);
@@ -121,8 +121,6 @@ int     get_fd_rdr(t_main *main, int *i);
 void    search_input_tokens(t_main *main, int *i, char *str);
 void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 
-<<<<<<< HEAD
-=======
 /*
 !QUOTES_TREATMENT.C
 */
@@ -134,7 +132,6 @@ void    quotes_treatment(t_main *main, int *i, int start);
 t_node	*create_n(t_main *main, t_type token, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
 void	check_expansion(t_main *main, char **arr);
->>>>>>> main
 
 /*
 !LEXER_UTILS
@@ -145,12 +142,6 @@ void    print_tokens(t_lexer *tokens);
 t_node	*find_node(t_lexer tokens, int index);
 int		find_last_hd(t_lexer tokens);
 
-<<<<<<< HEAD
-// /*
-// !SYNTAX
-// */
-// bool    syntax_analysis(t_main *main);
-=======
 /*
 !ADD_TOKENS
 */
@@ -169,7 +160,6 @@ t_node	*create_n_prev(t_main *main, t_type token, char **arr);
 !SYNTAX
 */
 bool    syntax_analysis(t_main *main);
->>>>>>> main
 
 // /*
 // !PARCER
@@ -218,7 +208,7 @@ void	set_exit_code(t_main *main, int exit_code);
 // void	error_fp(int pid, int exit_code, t_main *main);
 // int		ft_fork(t_main *main);
 // void	wait_estatus_p(t_main *main, t_ast ast);
-// 
+//
 
 
 /*
