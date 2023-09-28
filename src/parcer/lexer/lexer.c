@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "lexer.h"
 
 void    get_iteration(t_main *main, int *i)
 {
@@ -37,21 +37,12 @@ void    get_iteration(t_main *main, int *i)
 	//* e posteriormente tratar de mandar, tudo tratado para a lista
 void search_tokens(t_main *main, int *i)
 {
-				//printf("search tokens i %i\n", *i);
-	/*if (*i <= main->tokens.str_len && main->flags.put_node_behind == true
-		&& special_chr(main->input_prompt[*i]) == false)
-		get_iteration(main, i);*/
-	/*else */if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
+	if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
 		add_token(main, PIPE, i, "|");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
 		search_input_tokens(main, i, "");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
-	{
-		if (main->flags.rdr_treated == true)
-			main->flags.rdr_treated = false;
-		else
-			search_output_tokens(main, i, "");
-	}
+		search_output_tokens(main, i, "");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
 		search_extra_tokens(main, i);
 }

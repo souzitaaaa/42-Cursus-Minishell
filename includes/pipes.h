@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.h                                             :+:      :+:    :+:   */
+/*   pipes.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 14:20:56 by joe               #+#    #+#             */
-/*   Updated: 2023/09/28 20:12:10 by rimarque         ###   ########.fr       */
+/*   Created: 2023/09/28 12:10:32 by joe               #+#    #+#             */
+/*   Updated: 2023/09/28 12:11:18 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#ifndef PIPES_H
+# define PIPES_H
 
 # include "minishell.h"
 # include "defines.h"
 # include "structs.h"
 
-/*
-!ENVP
-*/
-t_var       *var_node(const char *var);
-void		add_var(t_env *env, t_var *var_new, int index);
-void	    shift_index_env(t_env *stack);
-void		set_env_list(t_main *main, char **envp);
-void  		print_var(t_env env);
-void		set_env_arr(t_main *main);
+
+//!PIPES
+void		pipex(t_ast *ast, t_main *main);
+t_ast_node	*get_beg(t_ast *ast);
+void		write_to_pipe(int *fd, char **cmd, t_main *main);
+void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
+void		read_from_pipe(int *fd, char **cmd, t_main *main);
+
 
 #endif

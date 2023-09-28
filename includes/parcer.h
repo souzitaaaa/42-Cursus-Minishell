@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.h                                             :+:      :+:    :+:   */
+/*   parcer.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 14:20:56 by joe               #+#    #+#             */
-/*   Updated: 2023/09/28 20:12:10 by rimarque         ###   ########.fr       */
+/*   Created: 2023/09/28 12:14:01 by joe               #+#    #+#             */
+/*   Updated: 2023/09/28 12:14:45 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#ifndef PARCER_H
+# define PARCER_H
 
 # include "minishell.h"
 # include "defines.h"
 # include "structs.h"
 
 /*
-!ENVP
+!SYNTAX
 */
-t_var       *var_node(const char *var);
-void		add_var(t_env *env, t_var *var_new, int index);
-void	    shift_index_env(t_env *stack);
-void		set_env_list(t_main *main, char **envp);
-void  		print_var(t_env env);
-void		set_env_arr(t_main *main);
+bool    syntax_analysis(t_main *main);
+
+/*
+!PARCER
+*/
+void	parcer(t_main *main);
+void	test_ast(t_lexer tokens, t_ast *ast);
+void	cmdcat(t_lexer *tokens);
 
 #endif

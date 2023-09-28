@@ -12,21 +12,6 @@
 
 #include "../../../includes/minishell.h"
 
-int	ft_isnbr(const char *str)
-{
-	if (*str == '-' || *str == '+')
-		str++;
-	if (*str == '\0')
-		return(0);
-	while (*str)
-	{
-		if (*str < '0' || *str > '9')
-			return(0);
-		str++;
-	}
-	return(1);
-}
-
 void	ft_exit(char **command, bool child, t_main main)
 {
 	int exit_code;

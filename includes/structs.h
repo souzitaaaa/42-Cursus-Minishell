@@ -13,7 +13,6 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include "defines.h"
 # include "minishell.h"
 # include <stdbool.h>
 
@@ -29,6 +28,7 @@ typedef struct s_bool
 	bool            rdr_treated;
 	bool            rdr_err;
 	bool			signal;
+	bool			not_print;
 	t_free          free_flag;
 } t_bool;
 
@@ -145,7 +145,6 @@ typedef struct s_node_quotes
 	int				start;
 	int				end;
 	struct s_node_quotes	*next;
-	int		fd; //!precisa?
 }t_node_quotes;
 
 
