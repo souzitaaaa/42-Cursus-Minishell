@@ -121,6 +121,20 @@ int     get_fd_rdr(t_main *main, int *i);
 void    search_input_tokens(t_main *main, int *i, char *str);
 void    get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 
+<<<<<<< HEAD
+=======
+/*
+!QUOTES_TREATMENT.C
+*/
+void    quotes_treatment(t_main *main, int *i, int start);
+
+/*
+!TOKEN.C
+*/
+t_node	*create_n(t_main *main, t_type token, int *i, char *str);
+char	*expand(t_main *main, char *cmp);
+void	check_expansion(t_main *main, char **arr);
+>>>>>>> main
 
 /*
 !LEXER_UTILS
@@ -131,10 +145,31 @@ void    print_tokens(t_lexer *tokens);
 t_node	*find_node(t_lexer tokens, int index);
 int		find_last_hd(t_lexer tokens);
 
+<<<<<<< HEAD
 // /*
 // !SYNTAX
 // */
 // bool    syntax_analysis(t_main *main);
+=======
+/*
+!ADD_TOKENS
+*/
+int     add_token_quotes(t_main *main, t_type token, int *i, char *str, bool expand);
+int		add_token(t_main *main, t_type token, int *i, char *str);
+int     add_prev_token(t_main *main, int *i, char *str);
+
+/*
+!CREATE_NODES
+*/
+t_node	*create_n_quotes(t_main *main, t_type token, int *i, char *str, bool expand);
+t_node	*create_n(t_main *main, t_type token, int *i, char *str);
+t_node	*create_n_prev(t_main *main, t_type token, char **arr);
+
+/*
+!SYNTAX
+*/
+bool    syntax_analysis(t_main *main);
+>>>>>>> main
 
 // /*
 // !PARCER
