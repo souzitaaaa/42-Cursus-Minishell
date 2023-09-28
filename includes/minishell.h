@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../src/parcer/lexer/lexer_tokens/lexer_tokens.h"
+# include "../src/print_start/print_start.h"
+# include "../src/exec/builtins/builtins.h"
 # include "../libft_group/include/libft.h"
 
 # include "defines.h"
@@ -78,13 +81,9 @@ void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
 
 /*
-!LIST.C
+!DESTROY
 */
-void		shift_index(t_lexer *stack);
-void		put_head_node(t_lexer *stack, t_node *new);
-t_node		*remove_head(t_lexer *stack);
-void		insert_head(t_lexer *stack, t_node *new);
-void		insert_last(t_lexer *stack, t_node *new);
+void    destroy(t_main *main);
 
 /*
 !ENVP
@@ -243,10 +242,39 @@ void	error_quotes(int fd);
 void	error_msg_fd(char *str, int fd);
 void	error_msg_hd(char *str, int fd, int line);
 
+
 /*
-!DESTROY
+!EXIT_CODE.C
 */
-void    destroy(t_main *main);
+void	set_exit_code(t_main *main, int exit_code);
+
+
+/*
+!FREE.C
+*/
+void	free_list(t_lexer *stack);
+void	free_env(t_env *stack);
+void	free_lexer(t_lexer *stack);
+void	free_env(t_env *stack);
+
+
+/*
+!INIT.C
+*/
+void		init_env(t_env *stack);
+void		init_input(t_main *main, char *input);
+void		init_main(t_main *main, char ** env);
+
+
+/*
+!LIST.C
+*/
+void		shift_index(t_lexer *stack);
+void		put_head_node(t_lexer *stack, t_node *new);
+t_node		*remove_head(t_lexer *stack);
+void		insert_head(t_lexer *stack, t_node *new);
+void		insert_last(t_lexer *stack, t_node *new);
+
 
 //!PROMPT
 void	prompt_diogo(t_prompt *prompt_list);

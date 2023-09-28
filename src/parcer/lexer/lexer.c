@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "lexer.h"
 
 void    get_iteration(t_main *main, int *i)
 {
