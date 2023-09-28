@@ -20,7 +20,6 @@
 
 # include "quotes.h"
 # include "pipes.h"
-# include "envp.h"
 # include "exec.h"
 # include "rdr.h"
 # include "parcer.h"
@@ -91,15 +90,14 @@ void		init_main(t_main *main, char ** env);
 */
 void    destroy(t_main *main);
 
-/*
-!ENVP
+
+//!ENVP
 t_var       *var_node(const char *var);
 void		add_var(t_env *env, t_var *var_new, int index);
 void	    shift_index_env(t_env *stack);
 void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
-*/
 
 
 /*

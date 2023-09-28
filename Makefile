@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/28 20:15:28 by rimarque         ###   ########.fr        #
+#    Updated: 2023/09/28 20:30:10 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ _FILES 			= error_msg exit_code init list free prompts signal destroy\
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= structs.h defines.h minishell.h
+_HEADERS		= structs.h defines.h minishell.h exec.h lexer.h parcer.h pipes.h quotes.h rdr.h structs.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

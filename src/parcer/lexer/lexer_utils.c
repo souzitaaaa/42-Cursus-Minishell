@@ -59,7 +59,6 @@ void    print_tokens(t_lexer *tokens)
 				printf("\033[1;32m\t\t(Printing tokens)\033[0m\n");
 	while (count++ < tokens->size)
 	{
-        printf("loop??\n");
 		printf("\033[1;34m[INDEX] \033[0m %i\n", aux->index);
 		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->token.type);
 		printf("\033[1;34m[ARR] \033[0m \n");
