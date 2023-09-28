@@ -6,51 +6,68 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/11 19:16:40 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 19:14:19 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-//atualizar o OLDPWD e PWD no cd
-//quando tiver cd sozinho tem que chamar a find_home
-//se eu dou unset no oldpwd e depois mando; echo $OLDPWD tem que dar uma quebra de linha
+/*Echo:
+•	comando echo nao printa \n - ok
+•	quantos mais argumentos são corridos mais \n existem no output
+•	echo -na ola nao funciona, nao printa o ola na mesma linha que o prompt (mas o bash escreve tudo e dá uma quebra de linha)
+•	echo -nnnnnnnnn -nnnnnnnnna nao funciona, nao esta a printar o -nnnnnnnnna  na mesma linha que o prompt - ok
+Export:
+•	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO 
+•	export PATH=ola coloca o programa a receber input  deixa de funcionar - ja muda o valor da variavel
+•	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free - ja muda o valor da variavel
+(ultils_export.c linha 83)
+•	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel
+Unset: 
+Dar unset em várias variáveis de uma vez - ok 
+
+- TEM UM SEG FAULT QUANDO FAÇO >a cd .. e cd . (nao sei em qual ordem e situação)*/
+
+char	*only_cd(t_main *main, bool  child)
+{
+	char *home;
+	char *aux;
+	
+	home = getenv("HOME");
+	if (home == NULL)
+	{
+		if (main->flags.not_print == false)
+			error_cd(STDERR_FILENO);
+		if (child)
+			exit(1);
+		set_exit_code(main, 1);
+		return (NULL);
+	}
+	aux = ft_substr(home, 1, ft_strlen(home) - 1);
+	free(aux);
+	return (home);
+}
 
 char *find_home(char *path, t_main *main, bool child)
 {
 	char *home;
 	char *aux;
-	char *current;
 
 	if (path[0] == '~')
 	{
 		home = getenv("HOME");
 		if (home == NULL)
 		{
-			error_msg_file(path, STDERR_FILENO);
+			if (main->flags.not_print == false)
+				error_msg_file(path, STDERR_FILENO);
 			if (child)
 				exit(1);
 			set_exit_code(main, 1);
 			return (NULL);
 		}
 		aux = ft_substr(path, 1, ft_strlen(path) - 1);
-		current = ft_strjoin(home, aux);
 		free(aux);
-		return (current);
-	}
-	return (ft_strdup(path));
-}
-
-char *prev_dir(char *path)
-{
-	static char prev[4096];
-
-	if (ft_strcmp(path, "-") == 0)
-	{
-		if (prev[0] != '\0')
-			return (ft_strdup(prev));
-		else
-			return (NULL);
+		return (home);
 	}
 	return (ft_strdup(path));
 }
@@ -61,7 +78,8 @@ int change_dir(char *path, t_main *main, bool child)
 		set_exit_code(main, 0);
 	else
 	{
-		error_msg_file(path, STDERR_FILENO);
+		if (main->flags.not_print == false)
+			error_msg_file(path, STDERR_FILENO);
 		if (child)
 			exit(1);
 		set_exit_code(main, 1);
@@ -74,37 +92,67 @@ void cd(char *path, t_main *main, bool child)
 	char	*new_path;
 	int		dir;
 	char	*current;
+	char	*path_pwd;
 
-	if (ft_strcmp(path, "-") == 0)
+	current = ft_calloc(sizeof(char), 4096);
+	getcwd(current, 4096);
+	if (path == NULL)
 	{
-		if (main->prev)
-		{
-			change_dir(main->prev, main, child);
-			ft_printf("%s\n", main->prev);
-		}
-		else
-		{
-			error_cd(STDERR_FILENO);
-			if (child)
-				exit(1);
-			set_exit_code(main, 1);
-		}
+		new_path = only_cd(main, child);
+		change_dir(new_path, main, child);
+		dir = change_dir(new_path, main, child);
+		if (dir == 0)
+			{
+				main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+			}
 	}
 	else
 	{
-		new_path = find_home(path, main, child);
-		current = ft_calloc(sizeof(char), 4096);
-		getcwd(current, 4096);
-		dir = change_dir(new_path, main, child);
-		if (dir == 0)
+		//atualizar o prev quando dá cd -
+		if (ft_strcmp(path, "-") == 0)
 		{
-			main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-			ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-			free(new_path);
-			free(current);
+			if (main->prev)
+			{
+				dir = change_dir(main->prev, main, child);
+				if (dir == 0)
+				{
+					if (main->flags.not_print == false)
+						ft_printf("%s\n", main->prev);
+					main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+					ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+					path_pwd = ft_calloc(sizeof(char), 4096);
+					getcwd(path_pwd, 4096);
+					refresh_pwd(main, path_pwd);
+					refresh_oldpwd(main, main->prev);
+				}
+			}
+			else
+			{
+				if (main->flags.not_print == false)
+					error_cd(STDERR_FILENO);
+				if (child)
+					exit(1);
+				set_exit_code(main, 1);
+			}
 		}
+		else
+		{
+			new_path = find_home(path, main, child);
+			dir = change_dir(new_path, main, child);
+			if (dir == 0)
+			{
+				main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+				path_pwd = ft_calloc(sizeof(char), 4096);
+				getcwd(path_pwd, 4096);
+				refresh_pwd(main, path_pwd);
+				refresh_oldpwd(main, main->prev);
+			}
+		}
+		if (child)
+			exit(0);
+		set_exit_code(main, 0);
 	}
-	if (child)
-		exit(0);
-	set_exit_code(main, 0);
 }
+

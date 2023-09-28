@@ -6,90 +6,89 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/07 16:18:43 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 17:22:25 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void    insert_var(t_main *main, char *str, bool exp)
+void    insert_var_exp(t_main *main, char *str)
 {
     t_var   *aux;
-
-    aux = var_node(str);
-	if (exp)
-    	add_var(&main->export_list, aux);
-	else
+	char	*temp;
+	
+	temp = ft_calloc(sizeof(char), ft_strclen(str, '=') + 1);
+	ft_strccpy(temp, str, '=');
+	if (!ft_isnbr(temp))
 	{
-		add_var(&main->export_list, aux);
-		add_var(&main->env_list, aux);
+    	aux = var_node(str);
+		add_var(&main->export_list, aux, -1);
 	}
 }
+
+void    insert_var_env(t_main *main, char *str)
+{
+    t_var   *aux;
+	char	*temp;
+	
+	temp = ft_calloc(sizeof(char), ft_strclen(str, '=') + 1);
+	ft_strccpy(temp, str, '=');
+	if (!ft_isnbr(temp))
+	{
+    	aux = var_node(str);
+		add_var(&main->env_list, aux, -1);
+	}
+}
+
 void	put_head_var(t_env *env, t_var *new)
 {
 	env->head = new;
 	new->next = env->head;
 	new->prev = env->head;
 }
-
-void    add_index_var(t_env *env, t_var *node, int index)
+bool    modify_var_env(t_main *main, char *str)
 {
     t_var   *current;
+    int     count;
+	char	*temp;
 
-    current = env->head;
-    env->i = 0;
-    if (env->head == NULL)
-        put_head_var(env, node);
-    else
-    {
-        while (env->i++ < index)
-        {
-            current = current->next;
-        }
-        node->next = current;
-        node->prev = current->next;
-        current->prev->next = node;
-        current->prev = node;
-        if (index == 0)
-            env->head = node;
-        shift_index_env(env);
-    }
-    env->size--;
-}
-
-bool    modify_var(t_main *main, char *str, bool exp)
-{
-    t_var   *current;
-    t_var   *aux;
-    int     count = 0;
-
+	count = 0;
     current = main->env_list.head;
     while (count++ < main->env_list.size)
     {
         if (ft_strncmp(str, current->var, ft_strclen(str, '=')) == 0)
         {
-			if (exp)
-				remove_var(&main->export_list, current->index);
-			else
-			{
-				remove_var(&main->export_list, current->index);
-            	remove_var(&main->env_list, current->index);
-			}
-			aux = var_node(str);
-			if (exp)
-				add_index_var(&main->export_list, aux, current->index);
-			else
-			{
-				add_index_var(&main->export_list, aux, current->index);
-            	add_index_var(&main->env_list, aux, current->index);
-			}
-            return (true);
-        }
+			temp = ft_strdup(str);
+    		free(current->var);
+    		current->var = temp;
+    		return (true);
+		}
         current = current->next;
     }
     return (false);
 }
 
+bool    modify_var_exp(t_main *main, char *str)
+{
+    t_var   *current;
+    int     count;
+	char	*temp;
+
+	count = 0;
+    current = main->export_list.head;
+    while (count++ < main->export_list.size)
+    {
+        if (ft_strncmp(str, current->var, ft_strclen(str, '=')) == 0)
+        {
+				temp = ft_strdup(str);
+    			free(current->var);
+    			current->var = temp;
+            	return (true);
+        }
+        current = current->next;
+    }
+    return (false);
+}
 void	copy_exp(t_main *main)
 {
     t_var  *aux;
@@ -100,13 +99,13 @@ void	copy_exp(t_main *main)
     while (main->export_list.i < main->env_list.size)
     {
 		new = var_node(aux->var);
-        add_var(&main->export_list, new);
+        add_var(&main->export_list, new, -1);
         main->export_list.i++;
 		aux = aux->next;
     }
 	if (main->prev == NULL)
 	{
 		new = var_node("OLDPWD");
-		add_var(&main->export_list, new);
+		add_var(&main->export_list, new, -1);
 	}
 }

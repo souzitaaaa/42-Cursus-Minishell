@@ -101,18 +101,13 @@ void	exec_other_cmd(char **cmd, t_main *main, bool child)
 	{
 		signals(1);
 		pid = fork();
+		error_fp(pid, errno, main);
 		if(pid == 0)
 		{
 			execution(cmd, main);
 		}
-		//!if pid = -1
+		wait_estatus(pid, main);
 		waitpid(pid, &exit_status, 0);
-		if (WEXITSTATUS(exit_status) != 0)
-		{
-			set_exit_code(main, WEXITSTATUS(exit_status));
-		}
-		else
-			set_exit_code(main, 0);
 	}
 }
 

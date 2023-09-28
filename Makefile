@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/09/28 16:49:18 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/09/28 16:57:58 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -36,26 +36,28 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr parcer/lexer parcer/lexer/lexer_tokens
+_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr exec/pipes parcer/lexer parcer/lexer/lexer_tokens print_start quotes
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init list free utils prompts signal destroy\
+_FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
 					parcer cmdcat ast syntax\
 					extra_tokens output_tokens input_tokens quotes_treatment lexer_utils add_tokens create_nodes fd_token\
 					env_list env_arr \
 					exec_cmd execve execve_utils \
-					pipe \
+					pipe pipe_utils\
 					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
 					child_aux \
-					echo pwd env unset cd export utils_export exit
+					echo pwd env unset cd export utils_export  utils_builtins exit\
+					print_img utils list_quotes
+
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= structs.h defines.h minishell.h
+_HEADERS		= structs.h defines.h minishell.h envp.h print_start.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

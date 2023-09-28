@@ -13,9 +13,18 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../src/parcer/lexer/lexer_tokens/lexer_tokens.h"
+# include "../src/print_start/print_start.h"
+# include "../src/exec/builtins/builtins.h"
 # include "../libft_group/include/libft.h"
+
 # include "defines.h"
 # include "structs.h"
+
+# include "print_start.h"
+# include "envp.h"
+
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -40,6 +49,31 @@
 extern int	g_ex_status;
 
 /*
+!BUILTINS
+*/
+void    echo(char **command, t_main *main, bool child);
+void    pwd(t_main *main, bool child);
+void    env(t_env *env, t_main *main, bool child, char **command);
+void	unset_exp(t_main *main, char *str);
+int		unset_env(t_main *main, char *str);
+void	unset(t_main *main, char **array, bool child);
+void	ft_export(t_env *exp);
+//void    export(t_main *main, char **array, bool child);
+void    insert_var_exp(t_main *main, char *str);
+void    insert_var_env(t_main *main, char *str);
+bool    modify_var_exp(t_main *main, char *str);
+bool    modify_var_env(t_main *main, char *str);
+void	copy_exp(t_main *main);
+void    remove_var(t_env *env, int index);
+void    cd(char *path, t_main *main, bool child);
+void	refresh_pwd(t_main *main, char *str);
+void	refresh_oldpwd(t_main *main, char *str);
+void	ft_exit(char **command, bool child, t_main main);
+int		ft_isnbr(const char *str);
+
+
+
+/*
 !INIT.C
 */
 void		init_env(t_env *stack);
@@ -47,38 +81,21 @@ void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
 
 /*
-!LIST.C
+!DESTROY
 */
-void		shift_index(t_lexer *stack);
-void		put_head_node(t_lexer *stack, t_node *new);
-t_node		*remove_head(t_lexer *stack);
-void		insert_head(t_lexer *stack, t_node *new);
-void		insert_last(t_lexer *stack, t_node *new);
+void    destroy(t_main *main);
 
 /*
 !ENVP
 */
 t_var       *var_node(const char *var);
-void        add_var(t_env *env, t_var *var_new);
+void		add_var(t_env *env, t_var *var_new, int index);
 void	    shift_index_env(t_env *stack);
 void		set_env_list(t_main *main, char **envp);
 void  		print_var(t_env env);
 void		set_env_arr(t_main *main);
 
-/*
-!BUILTINS
-*/
-void    echo(char **command, t_main *main, bool child);
-void    pwd(t_main *main, bool child);
-void    env(t_env *env, t_main *main, bool child, char **command);
-void	unset(t_main *main, char *str, bool child);
-void    export(t_main *main, char **array, bool child);
-void    insert_var(t_main *main, char *str, bool exp);
-bool    modify_var(t_main *main, char *str, bool exp);
-void	copy_exp(t_main *main);
-void    remove_var(t_env *env, int index);
-void    cd(char *path, t_main *main, bool child);
-void	ft_exit(char **command, bool child, t_main main);
+
 
 /*
 !LEXER.C
@@ -156,7 +173,13 @@ void	cmdcat(t_lexer *tokens);
 */
 void	set_exit_code(t_main *main, int exit_code);
 void	exec_cmd(char **command, t_main *main, bool pipe);
-void	pipex(t_ast *ast, t_main *main);
+
+//!PIPES
+void		pipex(t_ast *ast, t_main *main);
+t_ast_node	*get_beg(t_ast *ast);
+void		write_to_pipe(int *fd, char **cmd, t_main *main);
+void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
+void		read_from_pipe(int *fd, char **cmd, t_main *main);
 
 /*
 !RDR
@@ -174,26 +197,40 @@ void	rdr_error(char *str, t_main *main, int options);
 */
 void	exec_other_cmd(char **cmd, t_main *main, bool pipe);
 void	execution(char **cmd, t_main *main);
-void	error_management(char *str);
+void	error_execve(char *str);
 void	free_pathname(char	*pathname, int flag);
 
 /*
-!CHILD_AUX
+!CHILD_AUX.C
 */
 void	wait_estatus(int pid, t_main *main);
 void	wait_set_line(int pid, t_main *main);
-
+void	error_fp(int pid, int exit_code, t_main *main);
+int		ft_fork(t_main *main);
+void	wait_estatus_p(t_main *main, t_ast ast);
 /*
 !FREE.C
 */
-void		free_lexer(t_lexer *stack);
-void		free_env(t_env *stack);
+void	free_list(t_lexer *stack);
+void	free_env(t_env *stack);
+void	free_lexer(t_lexer *stack);
+void	free_env(t_env *stack);
 
 /*
 !QUOTES.C
 */
-int check_quotes(char c, int quotes);
-int check_quotes_print(t_main *main);
+int		check_quotes(char c, int quotes);
+int		check_quotes_print(t_main *main);
+
+/*
+!QUOTES LIST.C
+*/
+void		shift_index_quotes(t_quotes *stack);
+void		put_head_node_quotes(t_quotes *stack, t_node_quotes *new);
+t_node_quotes		*remove_head_quotes(t_quotes *stack);
+void		insert_head_quotes(t_quotes *stack, t_node_quotes *new);
+void		insert_last_quotes(t_quotes *stack, t_node_quotes *new);
+void    print_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C
@@ -216,10 +253,39 @@ void	error_quotes(int fd);
 void	error_msg_fd(char *str, int fd);
 void	error_msg_hd(char *str, int fd, int line);
 
+
 /*
-!DESTROY
+!EXIT_CODE.C
 */
-void    destroy(t_main *main);
+void	set_exit_code(t_main *main, int exit_code);
+
+
+/*
+!FREE.C
+*/
+void	free_list(t_lexer *stack);
+void	free_env(t_env *stack);
+void	free_lexer(t_lexer *stack);
+void	free_env(t_env *stack);
+
+
+/*
+!INIT.C
+*/
+void		init_env(t_env *stack);
+void		init_input(t_main *main, char *input);
+void		init_main(t_main *main, char ** env);
+
+
+/*
+!LIST.C
+*/
+void		shift_index(t_lexer *stack);
+void		put_head_node(t_lexer *stack, t_node *new);
+t_node		*remove_head(t_lexer *stack);
+void		insert_head(t_lexer *stack, t_node *new);
+void		insert_last(t_lexer *stack, t_node *new);
+
 
 //!PROMPT
 void	prompt_diogo(t_prompt *prompt_list);
