@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 17:17:42 by rimarque          #+#    #+#             */
-/*   Updated: 2023/08/13 15:16:54 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:12:42 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t	gnl_strclen(const char *str, char c)
 	return (i);
 }
 
-void	ft_strccpy(char *dst, char *src, char c)
+void	gnl_strccpy(char *dst, char *src, char c)
 {
 	size_t	i;
 
@@ -71,8 +71,8 @@ char	*gnl_strjoin(char *line, char **to_read)
 	len_read = gnl_strclen(*to_read, '\n');
 	len_dst = len_line + len_read;
 	dst = ft_calloc(len_dst + 1, sizeof(char));
-	ft_strccpy(dst, line, '\n');
-	ft_strccpy((dst + len_line), *to_read, '\n');
+	gnl_strccpy(dst, line, '\n');
+	gnl_strccpy((dst + len_line), *to_read, '\n');
 	if (*line)
 		free(line);
 	return (dst);

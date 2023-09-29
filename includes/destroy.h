@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.h                                            :+:      :+:    :+:   */
+/*   destroy.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:10:32 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:22 by rimarque         ###   ########.fr       */
+/*   Created: 2023/09/29 12:41:52 by rimarque          #+#    #+#             */
+/*   Updated: 2023/09/29 12:45:18 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPES_H
-# define PIPES_H
+#ifndef DESTROY_H
+# define DESTROY_H
 
 # include "minishell.h"
 
 /*
-!PIPES
+!FREE.C
 */
-void		pipex(t_ast *ast, t_main *main);
+void	free_env(t_env *stack);
 
 /*
-!PIPES_UTIL
+!DESTROY
 */
-t_ast_node	*get_beg(t_ast *ast);
-void		write_to_pipe(int *fd, char **cmd, t_main *main);
-void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
-void		read_from_pipe(int *fd, char **cmd, t_main *main);
-
+void	destroy(t_main *main);
 
 #endif

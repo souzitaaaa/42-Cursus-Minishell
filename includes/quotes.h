@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:02:07 by joe               #+#    #+#             */
-/*   Updated: 2023/09/28 17:02:36 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/29 12:37:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVP_H
-# define ENVP_H
+#ifndef QUOTES_H
+# define QUOTES_H
 
 # include "minishell.h"
-# include "defines.h"
-# include "structs.h"
 
 /*
 !QUOTES.C

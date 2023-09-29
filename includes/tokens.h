@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.h                                            :+:      :+:    :+:   */
+/*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:10:32 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:22 by rimarque         ###   ########.fr       */
+/*   Created: 2023/09/29 12:19:59 by rimarque          #+#    #+#             */
+/*   Updated: 2023/09/29 12:38:04 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPES_H
-# define PIPES_H
+#ifndef TOKENS_H
+# define TOKENS_H
 
 # include "minishell.h"
 
 /*
-!PIPES
+!EXTRA_TOKENS.C
 */
-void		pipex(t_ast *ast, t_main *main);
+void	search_extra_tokens(t_main *main, int *i);
+bool	special_chr(char c);
 
 /*
-!PIPES_UTIL
+!OUTPUT_TOKENS.C
 */
-t_ast_node	*get_beg(t_ast *ast);
-void		write_to_pipe(int *fd, char **cmd, t_main *main);
-void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
-void		read_from_pipe(int *fd, char **cmd, t_main *main);
+void	search_output_tokens(t_main *main, int *i, char *str);
+bool	is_space(char c);
+int		get_fd_rdr(t_main *main, int *i);
 
+/*
+!INPUT_TOKENS.C
+*/
+void	search_input_tokens(t_main *main, int *i, char *str);
+void	get_rdr_in(t_main *main, int *i, t_type token, char *fd);
 
 #endif

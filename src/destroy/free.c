@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipes.h                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/28 12:10:32 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:22 by rimarque         ###   ########.fr       */
+/*   Created: 2023/08/13 14:38:15 by rimarque          #+#    #+#             */
+/*   Updated: 2023/09/29 12:45:11 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPES_H
-# define PIPES_H
+#include "../../includes/minishell.h"
 
-# include "minishell.h"
+void	free_env(t_env *stack)
+{
+	t_var	*element;
+	t_var	*temp;
+	int		counter;
 
-/*
-!PIPES
-*/
-void		pipex(t_ast *ast, t_main *main);
-
-/*
-!PIPES_UTIL
-*/
-t_ast_node	*get_beg(t_ast *ast);
-void		write_to_pipe(int *fd, char **cmd, t_main *main);
-void		pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main);
-void		read_from_pipe(int *fd, char **cmd, t_main *main);
-
-
-#endif
+	if (stack->head == NULL)
+		return ;
+	element = stack->head;
+	counter = 0;
+	while (counter++ < stack->size)
+	{
+		temp = element;
+		element = element->next;
+		free(temp);
+	}
+	stack->head = NULL;
+	stack->size = 0;
+}
