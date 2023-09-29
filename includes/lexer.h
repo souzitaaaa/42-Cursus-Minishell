@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/09/28 12:03:46 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/29 10:58:02 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		add_token(t_main *main, t_type token, int *i, char *str);
 int     add_prev_token(t_main *main, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
 void	check_expansion(t_main *main, char **arr);
+t_node *get_node_index(t_lexer *tokens, int index_wanted);
 
 /*
 !LEXER_UTILS
