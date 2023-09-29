@@ -14,7 +14,6 @@
 # define STRUCTS_H
 
 # include "minishell.h"
-# include <stdbool.h>
 
 typedef struct s_frees
 {
