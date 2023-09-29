@@ -15,12 +15,28 @@
 
 # include "minishell.h"
 
+/*
+!HD
+*/
+typedef struct s_hd
+{
+	int			fd;
+	int			index;
+
+} t_hd;
+
+/*
+!FREE
+*/
 typedef struct s_frees
 {
 	bool            lexer_s;
 	bool            prompt_s;
 } t_free;
 
+/*
+!BOOL
+*/
 typedef struct s_bool
 {
 	bool            put_node_behind;
@@ -31,6 +47,9 @@ typedef struct s_bool
 	t_free          free_flag;
 } t_bool;
 
+/*
+!ENV
+*/
 //* Cada node vai conter uma string com a variavel de ambiente
 typedef struct s_var
 {
@@ -49,8 +68,9 @@ typedef struct s_env
 } t_env;
 
 /*
-TOKENS
+!TOKENS
 */
+
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
@@ -72,6 +92,10 @@ typedef struct s_token
 	bool			quotes;
 }
 t_token;
+
+/*
+!LEXER
+*/
 
 //* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
 	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
@@ -95,23 +119,31 @@ typedef struct s_lexer
 
 
 /*
-!AST
+!Abstract Syntaxt Tree (AST)
 */
-typedef struct s_leave	t_leave;
 
-//* Nodes da lista da ast, onde vai conter os tokens pela ordem de execução
+typedef struct s_leaf		t_leaf;
+typedef struct s_ast_node	t_ast_node;
+
+//*Nodes da ast, onde vai conter os pipes
+//Os t_ast_node prev aponta para o pipe seguinte (ordem de execucao)
+//Os t_leave apontam para os comandos anterior (left) e seguinte (right) ao pipe
+//Os t_ast_node left_n aponta para o pipe anterior (ordem de execucao)
+//O index esta ao contrario da arvore, a favor da ordem de execução
 typedef struct s_ast_node
 {
-	struct s_ast_node	*prev;
-	t_token				token;
-	t_leave				*right;
-	t_leave				*left;
-	struct s_ast_node	*left_n;
-	int					index; //*index dos nodes/pipes: o index esta ao contrario da arvore, a favor da ordem de execução
+	t_ast_node		*prev;
+	t_token			token;
+	t_leaf			*right;
+	t_leaf			*left;
+	t_ast_node		*left_n;
+	int				index;
 }
 t_ast_node;
 
-typedef struct s_leave
+//*Leaves da lista da ast, onde vai conter os comandos
+//Os t_node apontam para listas de rdr in (left) e rdr out(right)
+typedef struct s_leaf
 {
 	t_ast_node			*prev;
 	t_token				token;
@@ -119,14 +151,15 @@ typedef struct s_leave
 	t_node				*right;
 	int					pid;
 }
-t_leave;
+t_leaf;
 
-//* Struct inicial do t_ast (abstract syntax tree)
+//* Struct inicial do t_ast
+//O size corresponde ao numero de de nodes/pipes
 typedef	struct s_ast
 {
 	t_ast_node			*head;
 	int					counter;
-	int					size; //number of ast_nodes/operators/pipes
+	int					size;
 }
 t_ast;
 
@@ -139,25 +172,22 @@ t_ast;
 typedef struct s_node_quotes
 {
 	struct s_node_quotes	*prev;
-	int				index; //!precisa?
+	int				index;
 	int				type;
 	int				start;
 	int				end;
 	struct s_node_quotes	*next;
 }t_node_quotes;
 
-
 typedef	struct s_quotes
 {
 	t_node_quotes			*head;
-	int					counter; //!Qual a diferença do counter para o size??
+	int					counter;
 	int					size;
 }t_quotes;
 
-
-//* estrutura que guarda uma copia dos file descriptor para imput (stdin), output (stdout), error (stderr)
-//--> quando se manda msg de erro deve sempre escrever-se para o stderr
-//--> para usar nas redirecoes
+//* Estrutura que guarda uma copia dos file descriptor
+	//*para imput (stdin), output (stdout), error (stderr)
 typedef struct s_std
 {
 	int	stdin;
@@ -165,7 +195,6 @@ typedef struct s_std
 	int	stderr;
 }
 t_std;
-
 
 typedef struct s_prompt
 {
@@ -192,8 +221,9 @@ typedef struct s_main
 	t_quotes		quotes;
 	t_ast 			ast;
 	t_std			fd;
+	t_hd			hd;
 	t_prompt		prompt_list;
-	t_bool          flags;
+	t_bool			flags;
 }t_main;
 
 #endif

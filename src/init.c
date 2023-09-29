@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/26 17:27:33 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/29 17:59:20 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
-
 
 void	ini_quotes(t_quotes *quotes)
 {
@@ -68,6 +67,8 @@ void	init_input(t_main *main, char *input)
 		ini_quotes(&main->quotes);
 		init_ast(&main->ast);
 		init_bool(&main->flags);
+		main->hd.fd = 0;
+		main->hd.index = 0;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas apenas uma vez

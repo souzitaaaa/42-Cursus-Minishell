@@ -18,20 +18,24 @@ t_ast_node	*get_beg(t_ast *ast)
 	t_ast_node	*aux;
 
 	aux = ast->head;
-
-	ast->counter = 0;
-	while(ast->counter++ < ast->size - 1)
-		aux = aux->left;
+	while(aux->left_n)
+		aux = aux->left_n;
 	return(aux);
 }
 
 //*Esta função redireciona o stdout para o writing end do pipe (fd[1]) e executa o comando
-void	write_to_pipe(int *fd, char **cmd, t_main *main)
+void	write_to_pipe(int *fd, t_leaf *cmd, t_main *main, bool hd)
 {
 	close(fd[0]);
+	if(cmd->left)
+	{
+		ft_redirect_in(cmd->left, main);
+		if(hd)
+			close(main->hd.fd);
+	}
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	exec_cmd(cmd, main, true);
+	exec_cmd(cmd->token.arr, main, true);
 }
 
 //*Esta função redireciona o stdin para o reading end do pipe anterior (fd[0])

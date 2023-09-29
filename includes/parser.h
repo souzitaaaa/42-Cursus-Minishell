@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:14:01 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:43:39 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:14:51 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	test_ast(t_lexer tokens, t_ast *ast);
 void	cmdcat(t_lexer *tokens);
 
 //!AST_ULTIS
-void	insert_l_left(t_leave **leave, t_node *pipe);
-void	insert_l_right(t_leave **leave, t_node *pipe, t_lexer tokens);
+void	insert_l_left(t_leaf **leave, t_node *pipe);
+void	insert_l_right(t_leaf **leave, t_node *pipe, t_lexer tokens);
 
 //!AST_LEXER
 void	left_create_list_in(t_lexer *list_in, t_node *aux);

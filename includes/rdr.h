@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:08:17 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:08:31 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 !INIT_RDR
 */
 void	init_rdr(t_lexer tokens, t_main *main);
+void	exec_rdr(t_token token, t_main *main);
 
 /*
 !RDR_APP

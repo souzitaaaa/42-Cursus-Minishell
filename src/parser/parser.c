@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 11:56:28 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:55:17 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	parser(t_main *main)
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);
-		//pipex(&main->ast, main);
+		pipex(&main->ast, main);
 	}
 	else
 		init_rdr(main->tokens, main);

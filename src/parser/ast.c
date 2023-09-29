@@ -12,18 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-/*void	insert_l_left(t_leave **leave, t_node *pipe)
-{
-	*leave = malloc(sizeof(t_leave));
-	(*leave)->token = special->prev->token;
-	(*leave)->left = NULL;
-	(*leave)->right = NULL;
-	(*leave)->prev = NULL;
-	(*leave)->index = 0;
-	(*leave)->pid = 0;
-}*/
-
-void	insert_first_op(t_ast_node **op, t_node *pipe, t_leave *l_left, t_leave *l_right)
+void	insert_first_op(t_ast_node **op, t_node *pipe, t_leaf *l_left, t_leaf *l_right)
 {
 	*op = malloc(sizeof(t_ast_node));
 	(*op)->token = pipe->token;
@@ -34,22 +23,22 @@ void	insert_first_op(t_ast_node **op, t_node *pipe, t_leave *l_left, t_leave *l_
 	(*op)->index = 0;
 }
 
-void	insert_op(t_ast_node **op, t_node *pipe, t_ast_node **l_left, t_leave *l_right)
+void	insert_op(t_ast_node **op, t_node *pipe, t_ast_node **last_op, t_leaf *l_right)
 {
 	*op = malloc(sizeof(t_ast_node));
 	(*op)->token = pipe->token;
-	(*op)->left_n = *l_left;
+	(*op)->left_n = *last_op;
 	(*op)->left = NULL;
 	(*op)->right = l_right;
 	(*op)->prev = NULL;
-	(*l_left)->prev = *op;
+	(*last_op)->prev = *op;
 }
 
 t_ast_node	*insert_first_ast(t_node *pipe, t_lexer tokens)
 {
 	t_ast_node	*op;
-	t_leave		*l_left;
-	t_leave		*l_right;
+	t_leaf		*l_left;
+	t_leaf		*l_right;
 
 	insert_l_left(&l_left, pipe);
 	insert_l_right(&l_right, pipe, tokens);
@@ -57,13 +46,13 @@ t_ast_node	*insert_first_ast(t_node *pipe, t_lexer tokens)
 	return(op);
 }
 
-t_ast_node *insert_ast(t_node *pipe, t_ast_node *l_left, int size, t_lexer tokens)
+t_ast_node *insert_ast(t_node *pipe, t_ast_node *last_op, int size, t_lexer tokens)
 {
 	t_ast_node	*op;
-	t_leave		*l_right;
+	t_leaf		*l_right;
 
 	insert_l_right(&l_right, pipe, tokens);
-	insert_op(&op, pipe, &l_left, l_right);
+	insert_op(&op, pipe, &last_op, l_right);
 	op->index = size;
 	return(op);
 }
