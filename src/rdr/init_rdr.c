@@ -12,8 +12,10 @@
 
 #include "../../includes/minishell.h"
 
+extern int	g_ex_status;
+
 //*Esta função chama as funções que executam os rdr guardados no token enviado
-void	exec_rdr(t_token token, t_main *main)
+void	exec_rdr(t_token token, t_main *main, int hd)
 {
 	if(token.type == IN)
 		rdr_in(token.arr, main);
@@ -22,7 +24,7 @@ void	exec_rdr(t_token token, t_main *main)
 	if(token.type == APPEND)
 		rdr_app(token.arr, main);
 	if(token.type == HEREDOC)
-		rdr_hd(token, main, main->hd.fd);
+		rdr_hd(token, main, hd);
 }
 
 void	find_exec_cmd_parent(t_lexer tokens, t_main *main)
@@ -61,7 +63,7 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 }
 
 //*Esta função percorre a lista tokens, executa os here_doc, guarda o fd do último hd executado,
-//*seta a bool hd a verdadeiro caso exista alguum hd e devolve o index do último hd executado
+//*seta a bool hd a verdadeiro caso exista algum hd e o guarda o index do último hd executado
 void	exec_hd(t_lexer tokens, t_main *main, bool *hd)
 {
 	t_node *aux;
@@ -83,6 +85,8 @@ void	exec_hd(t_lexer tokens, t_main *main, bool *hd)
 				main->hd.fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
 			main->hd.index = aux->index;
 		}
+		if (g_ex_status == 130)
+			break ;
 		aux = aux->next;
 	}
 }
@@ -103,7 +107,7 @@ void	ft_redirect(t_lexer	tokens, t_main *main)
 			if(counter < tokens.size)
 				aux = aux->next;
 		}
-		exec_rdr(aux->token, main);
+		exec_rdr(aux->token, main, main->hd.fd);
 		aux = aux->next;
 		counter++;
 	}
@@ -138,6 +142,8 @@ void	init_rdr(t_lexer tokens, t_main *main)
 
 	hd = false;
 	exec_hd(tokens, main, &hd);
+	if (g_ex_status == 130)
+		return ;
 	signals(1);
 	pid = ft_fork(main);
 	if (pid == 0)

@@ -34,19 +34,17 @@ void	insert_l_left(t_leaf **leaf, t_node *pipe)
 	t_lexer	list_in;
 	t_lexer list_out;
 
-	printf("chega aqui 5\n");
 	*leaf = malloc(sizeof(t_leaf));
 	(*leaf)->token = find_cmd_left(pipe->prev);
-	printf("chega aqui 6\n");
 	left_create_list_in(&list_in, pipe->prev);
-	printf("head: %p\n", list_in.head);
-	printf("chega aqui 7\n");
 	left_create_list_out(&list_out, pipe->prev);
 	(*leaf)->left = list_in.head;
-	//printf("head: %p\n", (*leaf)->left->head);
 	(*leaf)->right = list_out.head;
 	(*leaf)->prev = NULL;
 	(*leaf)->pid = 0;
+	(*leaf)->hd.fd = 0;
+	(*leaf)->hd.flag = false;
+	(*leaf)->hd.index = 0;
 }
 
 //*Encontra o comando à direita do pipe
@@ -86,4 +84,7 @@ void	insert_l_right(t_leaf **leaf, t_node *pipe, t_lexer tokens)
 	(*leaf)->right = list_out.head;
 	(*leaf)->prev = NULL;
 	(*leaf)->pid = 0;
+	(*leaf)->hd.fd = 0;
+	(*leaf)->hd.flag = false;
+	(*leaf)->hd.index = 0;
 }

@@ -20,9 +20,9 @@
 */
 typedef struct s_hd
 {
+	bool		flag;
 	int			fd;
 	int			index;
-
 } t_hd;
 
 /*
@@ -39,11 +39,12 @@ typedef struct s_frees
 */
 typedef struct s_bool
 {
-	bool            put_node_behind;
-	bool            rdr_treated;
-	bool            rdr_err;
+	bool			put_node_behind;
+	bool			rdr_treated;
+	bool			rdr_err;
 	bool			signal;
 	bool			not_print;
+	bool			hd;
 	t_free          free_flag;
 } t_bool;
 
@@ -84,7 +85,7 @@ typedef enum s_type
 	EMPTY = 'E',	 // Vazio
 }t_type;
 
-//* Estrutura que define os tokens, metendo na array o tokem em si e afirmando o tipo dele
+//* Estrutura que define os tokens, metendo na array o token em si e afirmando o tipo dele
 typedef struct s_token
 {
 	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
@@ -106,7 +107,7 @@ typedef struct s_node
 	int				index;
 	int				quotes;
 	struct s_node	*next;
-	int		fd;
+	int				fd;
 }t_node;
 
 //* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
@@ -150,6 +151,7 @@ typedef struct s_leaf
 	t_node				*left;
 	t_node				*right;
 	int					pid;
+	t_hd				hd;
 }
 t_leaf;
 

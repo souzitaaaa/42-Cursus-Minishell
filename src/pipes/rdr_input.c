@@ -6,14 +6,14 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:47:38 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 18:24:42 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:06:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//i_hd -> index do ultimo hd
-void	ft_redirect_in(t_node	*head, t_main *main)
+//tenho de fechar o hd, aqui e no main process
+void	ft_redirect_in(t_node	*head, t_main *main, t_hd hd)
 {
 	t_node *aux;
 	int	counter;
@@ -22,35 +22,63 @@ void	ft_redirect_in(t_node	*head, t_main *main)
 	counter = 0;
 	while(aux != NULL)
 	{
-		if(aux->token.type == HEREDOC && aux->index != main->hd.index)
+		if(aux->token.type == HEREDOC && aux->index != hd.index)
 			aux = aux->next;
-		exec_rdr(aux->token, main);
+		exec_rdr(aux->token, main, hd.fd);
 		aux = aux->next;
 		counter++;
 	}
+	if(hd.flag)
+		close(hd.fd);
 }
 
-void	exec_hd_p(t_node *head, t_main *main)
+void	ft_heredoc(t_node *head, t_main *main, t_hd *hd)
 {
 	t_node *aux;
-	bool hd;
 
-	hd = false;
 	aux = head;
 	while(aux != NULL)
 	{
 		if(aux->token.type == HEREDOC)
 		{
-			if(!hd)
-				hd = true;
+			if(!hd->flag)
+				hd->flag = true;
 			else
-				close(main->hd.fd);
+				close(hd->fd);
 			if(aux->token.arr[1] == NULL)
-				main->hd.fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
+				hd->fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
 			else
-				main->hd.fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
-			main->hd.index = aux->index;
+				hd->fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
+			hd->index = aux->index;
 		}
+		if (g_ex_status == 130)
+			return ;
 		aux = aux->next;
+	}
+}
+
+//percorre a arvore pela ordem de execucao e executa os hd
+void	exec_hd_p(t_ast *ast, t_main *main)
+{
+	t_ast_node	*node;
+	t_leaf		*leaf;
+
+	node = get_beg(ast);
+	while(node)
+	{
+		if (node->index == 0)
+		{
+			leaf = node->left;
+			if(node->left->left != NULL)
+				ft_heredoc(node->left->left, main, &leaf->hd);
+			if (g_ex_status == 130)
+				return ;
+		}
+		leaf = node->right;
+		if(node->right->left != NULL)
+			ft_heredoc(node->right->left, main, &leaf->hd);
+		if (g_ex_status == 130)
+			return ;
+		node = node->prev;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:19:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 19:07:24 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:50:40 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,14 @@ bool	check_hd(t_node *head)
 void	first_fork(int *fd, t_leaf *leaf, t_main *main)
 {
 	int	pid;
-	bool hd;
 
-	hd = false;
-	if(leaf->left)
-		hd = check_hd(leaf->left);
-	if(hd)
-		exec_hd_p(leaf->left, main);
 	pid = ft_fork(main);
 	if (pid == 0)
-		write_to_pipe(fd, leaf, main, hd);
+		write_to_pipe(fd, leaf, main);
 	else
 	{
-		if(hd)
-			close(main->hd.fd);
+		if(leaf->hd.flag)
+			close(leaf->hd.fd);
 		leaf->pid = pid;
 	}
 	close(fd[1]);
@@ -59,9 +53,13 @@ void	fork_btwn_pipes(int *fd, int *next_fd, t_leaf *leaf, t_main *main)
 
 	pid = ft_fork(main);
 	if (pid == 0)
-		pipe_read_and_write(fd, next_fd, leaf->token.arr, main);
+		pipe_read_and_write(fd, next_fd, leaf, main);
 	else
+	{
+		if(leaf->hd.flag)
+			close(leaf->hd.fd);
 		leaf->pid = pid;
+	}
 	close(fd[0]);
 	close(next_fd[1]);
 }
@@ -78,14 +76,17 @@ void	last_fork(int *fd, t_leaf *leaf, t_main *main, t_ast ast)
 
 	pid = ft_fork(main);
 	if (pid == 0)
-		read_from_pipe(fd, leaf->token.arr, main);
+		read_from_pipe(fd, leaf, main);
 	else
+	{
+		if(leaf->hd.flag)
+			close(leaf->hd.fd);
 		leaf->pid = pid;
+	}
 	close(fd[0]);
 	wait_estatus_p(main, ast);
 }
 
-//*quando o index é igual ao size - 1, estamos no ultimo pipe a ser executado
 void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 {
 	int	next_fd[2];

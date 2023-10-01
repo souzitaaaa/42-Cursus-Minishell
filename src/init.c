@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 17:59:20 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:49:34 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void    init_bool(t_bool *flags)
 	flags->free_flag.lexer_s = false;
 	flags->free_flag.prompt_s = true;
 	flags->not_print = false;
+	flags->hd = false;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt

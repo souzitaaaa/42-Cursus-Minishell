@@ -6,12 +6,13 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 16:55:17 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/01 15:48:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+extern int	g_ex_status;
 //*O parcer organiza o imput para a execução
 //*1º faz a analise sintatica e retorna caso a sintase esteja errada
 //*2º caso a lista tenha apenas 1 elemento tipo STRING vai executar o comando, caso contrario segue para os passos seguintes
@@ -73,6 +74,9 @@ void	parser(t_main *main)
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);
+		exec_hd_p(&main->ast, main);
+		if(g_ex_status == 130)
+			return ;
 		pipex(&main->ast, main);
 	}
 	else
