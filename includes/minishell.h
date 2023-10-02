@@ -96,15 +96,6 @@ void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
 
 /*
-!LIST.C
-*/
-void		shift_index(t_lexer *stack);
-void		put_head_node(t_lexer *stack, t_node *new);
-t_node		*remove_head(t_lexer *stack);
-void		insert_head(t_lexer *stack, t_node *new);
-void		insert_last(t_lexer *stack, t_node *new);
-
-/*
 !PROMPT
 */
 void	prompt_diogo(t_prompt *prompt_list);

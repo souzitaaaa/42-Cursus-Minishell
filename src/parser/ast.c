@@ -141,9 +141,3 @@ void    print_ast(t_ast	ast)
 			aux = aux->left_n;
 	}
 }
-
-void	test_ast(t_lexer tokens, t_ast *ast)
-{
-	create_ast(tokens, ast);
-	print_ast(*ast);
-}

@@ -63,19 +63,13 @@ int	ft_fork(t_main *main)
 void	wait_estatus_p(t_main *main, t_ast ast)
 {
 	t_ast_node *node;
-	bool first_time;
 
 	node = get_beg(&ast);
 	while(node != NULL)
 	{
 		if(node->left)
-		{
 			wait_estatus(node->left->pid, main);
-			wait_estatus(node->right->pid, main);
-			first_time = false;
-		}
-		else
-			wait_estatus(node->right->pid, main);
+		wait_estatus(node->right->pid, main);
 		node = node->prev;
 	}
 }

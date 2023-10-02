@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/01 15:48:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:15:03 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,6 @@ extern int	g_ex_status;
 //*3º concatena todos os tipos strings no mesmo comando, até ao próximo pipe
 //*4º verifica se existem pipes, nesse caso faz a arvore e depois a execuçao
 //*5º caso nao hajam pipes, a execucao dos riderects é feita usando a lista
-
-/*bool syntase()
-{
-	pipes seguidos, redirects seguidos, acabar em pipe ou riderect (o arr tem que ser NULL), começar em pipe, redirect e pipe por esta ordem, erro & (?)
-}*/
-
-//*Devolve verdadeiro se tiver pipes ou rdr e falso se nao tiver
-/*bool	find_tk(t_lexer tokens)
-{
-	int counter;
-	t_node *aux;
-
-	counter = 0;
-	aux = tokens.head;
-	while(counter++ < tokens.size)
-	{
-		if(aux->token.type != STRING)
-			return (true);
-		aux = aux->next;
-	}
-	return (false);
-}*/
 
 bool	find_pipes(t_lexer tokens)
 {
@@ -60,20 +38,24 @@ bool	find_pipes(t_lexer tokens)
 
 void	parser(t_main *main)
 {
-	//if(!syntase())
-		//	return ;
 	if(main->tokens.size == 0)
 		return ;
+	if(!syntax_analysis(main->tokens))
+	{
+		set_exit_code(main, 2);
+		return ;
+	}
 	if(main->tokens.size == 1 && main->tokens.head->token.type == STRING)
 	{
 		exec_cmd(main->tokens.head->token.arr, main, false);
 		return ;
 	}
 	cmdcat(&main->tokens);
-	print_tokens(&main->tokens);
+	//print_tokens(&main->tokens);
 	if(find_pipes(main->tokens))
 	{
-		test_ast(main->tokens, &main->ast);
+		create_ast(main->tokens,&main->ast);
+		//print_ast(*ast);
 		exec_hd_p(&main->ast, main);
 		if(g_ex_status == 130)
 			return ;
