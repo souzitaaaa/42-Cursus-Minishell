@@ -77,7 +77,9 @@ void ft_export(t_env *exp)
 void export(t_main *main, char **array, bool child)
 {
 	int	i;
-	
+	int exit_code = 0;
+    int error;
+
     i = 1;
     if (array[1] == 0)
 	{
@@ -88,8 +90,14 @@ void export(t_main *main, char **array, bool child)
     {
         while(array[i] != NULL)
         {
-			validations_ch(main, &array[i], STDERR_FILENO, child);
-            if (array[i][0] == '=') //fazer uma funcao que dá erro se der por exemplo export -=batata: - + * = % ? / | \ ()
+			error = validations_ch(main, array[i], STDERR_FILENO, child);
+            if(error)
+            {
+                exit_code = error;
+                i++;
+                continue ;
+            }
+            if (array[i][0] == '=')
 			{
 				if (main->flags.not_print == false)
 					error_export(STDERR_FILENO);
@@ -116,7 +124,7 @@ void export(t_main *main, char **array, bool child)
         }
     }
     if (child)
-        exit(0);
-    set_exit_code(main, 0);
+        exit(exit_code);
+    set_exit_code(main, exit_code);
 }
 

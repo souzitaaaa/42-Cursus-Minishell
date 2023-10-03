@@ -57,60 +57,32 @@ void	refresh_oldpwd(t_main *main, char *str)
 	if (modify_var_env(main, oldpwd) == false)
 		insert_var_env(main, oldpwd);
 }
-/*fazer uma funcao que dá erro em: - + * = % ? / | \ () e não adicionar
-export -=jenny : bash: export: -=: invalid option: EXIT_CODE: 2
-export: usage: export [-nf] [name[=value] ...] or export -p
-export+=jenny : bash: export: `+=jenny': not a valid identifier EXIT_CODE: 1
-export *=jenny: bash: export: `*=jenny': not a valid identifier EXIT_CODE: 1
-export =jenny: bash: export: `=jenny': not a valid identifier(o nosso faz: minishell: zsh: bad assignment) EXIT_CODE: 1
-export %=jenny: bash: export: `%=jenny': not a valid identifier EXIT_CODE: 1 
-export ?=jenny: bash: export: `?=jenny': not a valid identifier EXIT_CODE: 1
-export /=export: bash: export: `/=export': not a valid identifier EXIT_CODE: 1
-export |=export: bash: =export: command not found EXIT_CODE: 127
-export \=export: bash: export: `=export': not a valid identifier EXIT_CODE: 1
-export (=export: bash: syntax error near unexpected token `=export' EXIT_CODE: 258
-export )=export: bash: syntax error near unexpected token `)' EXIT_CODE: 258 */
-void	validations_ch(t_main *main, char **str, int fd, bool child) 
-{
-    int i = 1;
 
-    if (str[i][0] == '-')
+int	validations_ch(t_main *main, char *str, int fd, bool child) 
+{
+    int i = 0;
+    if (str[i] == '-')
 	{
         ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd(str[i], fd);
-		ft_printf("entra aqui?\n");
+        ft_putstr_fd(str, fd);
         ft_putstr_fd(": invalid option\n", fd);
-		if (child)
-			exit(2);
-		set_exit_code(main, 2);
+		return (2);
     }
-	else if (str[i][0] == '+' || str[i][0] == '*' || str[i][0] == '%' || str[i][0] == '?' || str[i][0] == '/' || str[i][0] == '\\')
+	else if (str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
 	{
         ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd(str[i], fd);
-        ft_putstr_fd(": invalid option\n", fd);
-		if (child)
-			exit(1);
-		set_exit_code(main, 1);
+        ft_putstr_fd(str, fd);
+        ft_putstr_fd(": not a valid identifier\n", fd);
+		return (1);
     }
-	else if (str[i][0] == '|')
+	else if (str[i] == '(' || str[i] == ')')
 	{
         ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd(str[i], fd);
-        ft_putstr_fd(": invalid option\n", fd);
-		if (child)
-			exit(127);
-		set_exit_code(main, 127);
-    }
-	else if (str[i][0] == '(' || str[i][0] == ')')
-	{
-        ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd(str[i], fd);
+        ft_putstr_fd(str, fd);
         ft_putstr_fd(": syntax error near unexpected token '", fd);
-        ft_putstr_fd(str[i], fd);
+        ft_putstr_fd(str, fd);
         ft_putstr_fd("'\n", fd);
-		if (child)
-			exit(258);
-		set_exit_code(main, 258);
+		return (258);
     }
+	return (0);
 }
