@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/26 19:44:19 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:56:31 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-
-/*
-Export:
-•	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO 
-• TEM UM SEG FAULT QUANDO FAÇO >a cd .. e cd . (nao sei em qual ordem e situação)
-*/
 
 char	*only_cd(t_main *main, bool  child)
 {

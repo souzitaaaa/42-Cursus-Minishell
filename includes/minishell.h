@@ -87,7 +87,7 @@ void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
 void	ft_exit(char **command, bool child, t_main main);
 int		ft_isnbr(const char *str);
-int	validations_ch(t_main *main, char *str, int fd, bool child);
+int     validations_ch(char *str, int fd, char *command);
 
 /*
 !LEXER.C

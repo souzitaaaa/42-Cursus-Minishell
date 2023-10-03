@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/03 14:27:07 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:06:49 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,11 @@ void ft_export(t_env *exp)
 void export(t_main *main, char **array, bool child)
 {
 	int	i;
-	int exit_code = 0;
+	int exit_code;
     int error;
 
     i = 1;
+    exit_code = 0;
     if (array[1] == 0)
 	{
 		if (main->flags.not_print == false)
@@ -90,7 +91,7 @@ void export(t_main *main, char **array, bool child)
     {
         while(array[i] != NULL)
         {
-			error = validations_ch(main, array[i], STDERR_FILENO, child);
+			error = validations_ch(array[i], STDERR_FILENO, array[0]);
             if(error)
             {
                 exit_code = error;

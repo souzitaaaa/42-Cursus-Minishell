@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/26 16:26:01 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/03 16:07:00 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	shift_index_env(t_env *stack)
 		element = element->next;
 	}
 }
+
 void    remove_var(t_env *env, int index)
 {
 	t_var   *current;
@@ -85,15 +86,27 @@ void	unset_exp(t_main *main, char *str)
 
 void	unset(t_main *main, char **array, bool child)
 {
-	int		i = 1;
+	int		i;
+	int exit_code;
+    int error;
+
+	i = 1;
+	exit_code = 0;
 	while (array[i]  != NULL)
 	{
+		error = validations_ch(array[i], STDERR_FILENO, array[0]);
+            if(error)
+            {
+                exit_code = error;
+                i++;
+                continue ;
+            }
 		unset_env(main, array[i]);
 		unset_exp(main, array[i]);
 		i++;
 	}
 	if (child)
-        exit(0);
-    set_exit_code(main, 0);
+        exit(exit_code);
+    set_exit_code(main, exit_code);
 }
 
