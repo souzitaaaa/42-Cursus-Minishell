@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/06 19:09:07 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:51:37 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ size_t	ft_arrlen(char **arr);
 //FT_CPY.C
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_arrlcpy(char **dst, char **src, size_t size);
+void	ft_strccpy(char *dst, char *src, char c);
 
 /*
 ft_printf
@@ -86,9 +87,10 @@ extras
 char	*ft_utoa(unsigned int n);
 int		ft_strcmp(char *s1, char *s2);
 long	int	ft_long_atol(const char *str);
+char    *ft_strtrimall(char const *str);
+//FT_PRINT.C
 void	print_arr(char **arr);
 void	print_matrix(char ***matrix);
-char    *ft_strtrimall(char const *str);
 //FT_FREE.C
 void	ft_free_str(char **str);
 void	ft_free_array(char	***array);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:54:29 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/01 16:31:15 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:13:12 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*move_to_read(char **to_read)
 	prev_line = gnl_strclen(*to_read, '\n');
 	dst = ft_calloc((gnl_strclen(*to_read, '\0') + 1) - prev_line,
 			sizeof(char));
-	ft_strccpy(dst, *to_read + prev_line, '\0');
+	gnl_strccpy(dst, *to_read + prev_line, '\0');
 	ft_free_str(to_read);
 	return (dst);
 }
@@ -44,7 +44,7 @@ char	*cpy_to_line(char *line, char **to_read)
 	if (len > 0)
 	{
 		line = ft_calloc(len + 1, sizeof(char));
-		ft_strccpy(line, *to_read, '\n');
+		gnl_strccpy(line, *to_read, '\n');
 	}
 	if (to_read[0][len] == '\0')
 	{

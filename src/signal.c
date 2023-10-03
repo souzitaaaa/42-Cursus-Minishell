@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 17:11:59 by joe               #+#    #+#             */
-/*   Updated: 2023/09/26 17:20:10 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/29 11:28:20 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void signal_handler(int sig)
     {
         g_ex_status = 130;       // Define o status de saída para 130
         ft_printf("\n");         // Escreve uma nova linha
-        //rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
+        rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
         rl_on_new_line();        // Move o cursor para uma nova linha
         rl_redisplay();          // Redisplay o prompt
     }

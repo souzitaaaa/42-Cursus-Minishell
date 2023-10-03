@@ -13,6 +13,20 @@
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
+void create_new_node(t_main *main, int open_quote_type, int open_quote_position, int i)
+{
+    t_node_quotes *new_node;
+    new_node = malloc(sizeof(t_node_quotes));
+    if (!new_node)
+        return ;
+    new_node->type = open_quote_type;
+    new_node->start = open_quote_position;
+    new_node->end = i;
+    insert_last_quotes(&main->quotes, new_node);
+    printf("tamanho da lista --> %i\n", main->quotes.size);
+
+}
+
 int check_quotes(char c, int quotes)
 {
 	if (c == DQUOTE) {
@@ -50,30 +64,14 @@ int check_quotes_print(t_main *main)
             else if (quotes_analises == 0 && open_quote_position != -1)
             {
                 printf("Open quote of type %c at position %d, Close quote at position %d\n", open_quote_type, open_quote_position, i);
-                t_quotes *quotes;
-                if (quotes->size == 0)
-                {
-                    t_node_quotes *node;
-                    node->type = open_quote_type;
-                    node->start = open_quote_position;
-                    node->end = i;
-                    insert_head_quotes(quotes, node);
-                }
-                else
-                {
-                    t_node_quotes *new_node;
-                    new_node->type = open_quote_type;
-                    new_node->start = open_quote_type;
-                    new_node->end = i;
-                    insert_last_quotes(quotes, new_node);
-                    printf("tamanho da lista --> %i\n", quotes->size);
-                }
+                create_new_node(main, open_quote_type, open_quote_position, i);
+                // }
                 // main->quotes.type = open_quote_type;
 				// main->quotes.start = open_quote_position;
 				// main->quotes.end = i;
 				open_quote_position = -1; // Reset da posição da aspa de abertura
                 open_quote_type = '\0';   // Reset do tipo da aspa de abertura
-            }   
+            }
         }
         //printf("Character: %c, index: %i ,quotes state: %d\n", c, i, quotes_analises);
         i++;
@@ -86,6 +84,7 @@ int check_quotes_print(t_main *main)
         //!main->quotes.error = 1;
         return(0);
     }
+    //print_quotes(&main->quotes);
     //printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
 }

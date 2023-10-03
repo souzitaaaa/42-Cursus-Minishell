@@ -6,7 +6,7 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/22 13:38:10 by joe              ###   ########.fr       */
+/*   Updated: 2023/09/28 16:30:01 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,21 @@ void	insert_last_quotes(t_quotes *stack, t_node_quotes *new)
 	}
 	new->index = index;
 	stack->size++;
+}
+
+void    print_quotes(t_quotes *quotes)
+{
+	int count = 0;
+	t_node_quotes  *aux = quotes->head;
+
+				printf("\033[1;32m\t\t(Printing quotes)\033[0m\n");
+	while (count++ < quotes->size)
+	{
+		printf("\033[1;34m[INDEX] \033[0m %i\n", aux->index);
+		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->type);
+		printf("\033[1;34m[START]  \033[0m %i\n", aux->start);
+		printf("\033[1;34m[END]  \033[0m %i\n\n", aux->end);
+		aux = aux->next;
+	}
+			printf("\033[1;32m\t\t(End printing quotes)\033[0m\n");
 }

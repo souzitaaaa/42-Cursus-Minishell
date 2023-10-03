@@ -6,7 +6,7 @@
 #    By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/03 15:56:30 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/10/03 17:16:02 by jede-ara         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb -fsanitize=address #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb #-fsanitize=address #-Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parcer envp exec exec/builtins exec/rdr exec/pipes parcer/lexer parcer/lexer/lexer_tokens print_start quotes
+_SUBFOLDERS		= parser envp exec builtins rdr pipes lexer tokens print_start quotes destroy
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -45,19 +45,18 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free prompts signal destroy\
 					lexer token \
-					parcer cmdcat ast syntax\
-					extra_tokens output_tokens input_tokens lexer_utils\
+					parser cmdcat ast ast_utils ast_lexer syntax list_endnull\
+					extra_tokens output_tokens input_tokens lexer_utils add_tokens create_nodes fd_token\
 					env_list env_arr \
-					exec_cmd execve execve_utils \
-					pipe pipe_utils\
-					init_rdr rdr_in rdr_out rdr_app rdr_heredoc rdr_utils \
-					child_aux \
+					exec_cmd execve execve_utils child_aux \
+					pipe pipe_utils rdr_input rdr_output \
+					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils \
 					echo pwd env unset cd export utils_export  utils_builtins exit\
 					print_img utils list_quotes
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
-_HEADERS		= structs.h defines.h minishell.h
+_HEADERS		= structs.h defines.h minishell.h exec.h lexer.h parser.h pipes.h quotes.h rdr.h structs.h builtins.h tokens.h
 HDR				= $(addprefix $(INCLUDE)/, $(_HEADERS))
 
 #---------------------------------  RULES  --------------------------------------

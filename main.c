@@ -14,7 +14,6 @@
 
 int	g_ex_status = 0;
 
-
 //* Esta função pode ser útil para mais funções, ela recebe uma str e procura
 	//* uma variavel de ambiente com esse nome
 char    *get_envvar(char *str, t_env *env_list)
@@ -81,7 +80,7 @@ void	init_prompt(t_main	*main)
 	{
 		signals(0);
 		//prompt = get_prompt_msg(main);
-		input = readline(" minishell -> ");
+		input = readline("minishell -> ");
 		//free(prompt);
 		if (!input)
 			ft_exit(NULL, false, *main);
@@ -96,8 +95,7 @@ void	init_prompt(t_main	*main)
 		//if (main->quotes.error)
 		//	break ;
 		lexer(main);
-		//if (syntax_analysis(main) == true)
-		parcer(main);
+		parser(main);
 		//destroy(main);
 		free(input);
 	}

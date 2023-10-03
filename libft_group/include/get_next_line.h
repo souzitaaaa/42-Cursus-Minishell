@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:49:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/01 16:55:31 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/09/29 11:50:03 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 char	*get_next_line(int fd, bool free_static);
 char	*gnl_strjoin(char *temp, char **to_read);
-void	ft_strccpy(char *dst, char *src, char c);
+void	gnl_strccpy(char *dst, char *src, char c);
 size_t	gnl_strclen(const char *str, char c);
 int		count_nl(char *str);
 
