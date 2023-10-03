@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 11:56:28 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:29:48 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	parser(t_main *main)
 		return ;
 	}
 	cmdcat(&main->tokens);
-	print_tokens(&main->tokens);
 	if(find_pipes(main->tokens))
 	{
 		test_ast(main->tokens, &main->ast);

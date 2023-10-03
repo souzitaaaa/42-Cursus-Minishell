@@ -47,11 +47,6 @@ void	search_extra_tokens(t_main *main, int *i)
 					n_len = 0;
 			}
 		}
-		if (main->input_prompt[*i] == '\'' || main->input_prompt[*i] == '\"')
-		{
-			//quotes_treatment(main, i, start);
-			return ;
-		}
 		if (special_chr(main->input_prompt[*i]) == false)
 		{
 			(*i)++;
@@ -67,7 +62,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	}
 	main->flags.rdr_treated = false;
 	str = ft_substr(main->input_prompt, start, (*i - start) - n_len);
-	printf("str on extra: %s\n", str);
+	//printf("str on extra: %s\n", str);
 	add_token(main, STRING, i, str);
 	free(str);
 	(*i)--;

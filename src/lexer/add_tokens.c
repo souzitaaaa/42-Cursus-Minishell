@@ -47,3 +47,14 @@ int add_prev_token(t_main *main, int *i, char *str)
 	insert_node(&main->tokens, new, index);
 				printf("\033[1;32m\t\t(End add_prev_token)\033[0m\n");
 }
+
+int	add_token_quotes(t_main *main, t_type token, int *i, char **result, bool expand)
+{
+	t_node	*new;
+
+	new = create_n_quotes(main, token, i, result, expand);
+	if (!new)
+		return (1);
+	insert_last(&main->tokens, new);
+	return (0);
+}
