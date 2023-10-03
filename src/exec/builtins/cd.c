@@ -6,27 +6,17 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/26 19:14:19 by jenny            ###   ########.fr       */
+/*   Updated: 2023/09/26 19:44:19 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-/*Echo:
-•	comando echo nao printa \n - ok
-•	quantos mais argumentos são corridos mais \n existem no output
-•	echo -na ola nao funciona, nao printa o ola na mesma linha que o prompt (mas o bash escreve tudo e dá uma quebra de linha)
-•	echo -nnnnnnnnn -nnnnnnnnna nao funciona, nao esta a printar o -nnnnnnnnna  na mesma linha que o prompt - ok
+/*
 Export:
 •	export 2=mario nao pode funcionar - FAZER MENSAGENS DE ERRO 
-•	export PATH=ola coloca o programa a receber input  deixa de funcionar - ja muda o valor da variavel
-•	export PAT=olaaaaaaaaaaaaaaaaaaa da heap use after free - ja muda o valor da variavel
-(ultils_export.c linha 83)
-•	export ola= ; se tentar unset ola a variável continua presente - já tira a variavel
-Unset: 
-Dar unset em várias variáveis de uma vez - ok 
-
-- TEM UM SEG FAULT QUANDO FAÇO >a cd .. e cd . (nao sei em qual ordem e situação)*/
+• TEM UM SEG FAULT QUANDO FAÇO >a cd .. e cd . (nao sei em qual ordem e situação)
+*/
 
 char	*only_cd(t_main *main, bool  child)
 {
@@ -109,7 +99,6 @@ void cd(char *path, t_main *main, bool child)
 	}
 	else
 	{
-		//atualizar o prev quando dá cd -
 		if (ft_strcmp(path, "-") == 0)
 		{
 			if (main->prev)
