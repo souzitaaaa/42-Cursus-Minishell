@@ -1,0 +1,14 @@
+a
+b
+c
+d
+includes
+libft_group
+main.c
+Makefile
+minishell
+new_file
+obj
+README.md
+src
+test

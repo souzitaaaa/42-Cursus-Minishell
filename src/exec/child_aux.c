@@ -60,27 +60,16 @@ int	ft_fork(t_main *main)
 
 //*Esta função espera pelos processos child no final dos pipes serem todos executados e seta o exit code respetivo
 //*Por ordem de abertura dos processos!
-/*void	wait_estatus_p(t_main *main, t_ast ast)
+void	wait_estatus_p(t_main *main, t_ast ast)
 {
 	t_ast_node *node;
-	bool first_time;
-	int counter;
 
-	first_time = true;
 	node = get_beg(&ast);
-	counter = 0;
-	while(counter < ast.size)
+	while(node != NULL)
 	{
-		if(first_time)
-		{
+		if(node->left)
 			wait_estatus(node->left->pid, main);
-			first_time = false;
-		}
-		else
-		{
-			wait_estatus(node->right->pid, main);
-			counter++;
-			node = node->prev;
-		}
+		wait_estatus(node->right->pid, main);
+		node = node->prev;
 	}
-}*/
+}

@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/29 12:10:07 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:19:19 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 	char    *aux;
 	bool	run = true;
 
-			printf("fd to insert: %s\n", fd);
+			//printf("fd to insert: %s\n", fd);
 	while (special_chr(main->input_prompt[*i]) == true
 		|| is_space(main->input_prompt[*i]) == true)
 		(*i)++;
@@ -126,7 +126,7 @@ int    get_fd_rdr(t_main *main, int *i)
 	int     start = *i;
 	char    *str;
 
-				printf("\033[1;32m\t\t(Get_fd_rdr)\033[0m\n");
+				//printf("\033[1;32m\t\t(Get_fd_rdr)\033[0m\n");
 	while (main->input_prompt[*i])
 	{
 		printf("Char to compare: %c\n", main->input_prompt[*i]);
@@ -145,7 +145,7 @@ int    get_fd_rdr(t_main *main, int *i)
 						break ;
 					fd_tokens(main, i, str, main->input_prompt[*i]);
 					main->flags.rdr_treated = true;
-					printf("\033[1;32m\t\t(End get_fd_rdr special)\033[0m\n");
+					//printf("\033[1;32m\t\t(End get_fd_rdr special)\033[0m\n");
 					return (*i - start);
 				}
 			}
@@ -153,6 +153,6 @@ int    get_fd_rdr(t_main *main, int *i)
 				return (*i - start);
 		}
 	}
-				printf("\033[1;32m\t\t(End get_fd_rdr)\033[0m\n");
+				//printf("\033[1;32m\t\t(End get_fd_rdr)\033[0m\n");
 	return (*i - start);
 }
