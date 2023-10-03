@@ -24,7 +24,7 @@ void create_new_node(t_main *main, int open_quote_type, int open_quote_position,
     new_node->end = i;
     insert_last_quotes(&main->quotes, new_node);
     printf("tamanho da lista --> %i\n", main->quotes.size);
-    
+
 }
 
 int check_quotes(char c, int quotes)
@@ -71,7 +71,7 @@ int check_quotes_print(t_main *main)
 				// main->quotes.end = i;
 				open_quote_position = -1; // Reset da posição da aspa de abertura
                 open_quote_type = '\0';   // Reset do tipo da aspa de abertura
-            }   
+            }
         }
         //printf("Character: %c, index: %i ,quotes state: %d\n", c, i, quotes_analises);
         i++;
@@ -84,7 +84,7 @@ int check_quotes_print(t_main *main)
         //!main->quotes.error = 1;
         return(0);
     }
-    print_quotes(&main->quotes);
+    //print_quotes(&main->quotes);
     //printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
 }

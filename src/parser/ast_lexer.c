@@ -86,11 +86,8 @@ void	right_create_list_out(t_lexer *list_out, t_node *aux, t_lexer tokens)
 
 	init_list_ast(list_out);
 	counter = 0;
-	//printf("%p, %c, %s\n", aux, aux->token.type, aux->token.arr[0]);
-	printf("%p, %c, %s\n", tokens.head, tokens.head->token.type, tokens.head->token.arr[0]);
 	while(aux->token.type != PIPE && aux != tokens.head)
 	{
-		//printf("%p, %c, %s\n", aux, aux->token.type, aux->token.arr[0]);
 		if(aux->token.type == OUT || aux->token.type == APPEND)
 		{
 			new_node = node_dup(aux);

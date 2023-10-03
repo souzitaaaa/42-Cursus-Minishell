@@ -66,18 +66,12 @@ void	create_ast(t_lexer tokens, t_ast *ast)
 	aux = tokens.head;
 	while(ast->counter++ < tokens.size)
 	{
-		printf("chega aqui 3\n");
 		while(aux->token.type != PIPE && ast->counter++ < tokens.size) //encontro o pipe
 			aux = aux->next;
-		printf("chega aqui\n");
 		if(aux->token.type == PIPE)
 		{
 			if(ast->size == 0)
-			{
-				printf("chega aqui 1\n");
-				//printf("token: %s\n", aux->token.arr[0]);
 				last_op = insert_first_ast(aux, tokens);
-			}
 			else
 				last_op = insert_ast(aux, last_op, ast->size, tokens);
 			ast->size++;

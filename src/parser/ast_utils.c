@@ -72,13 +72,9 @@ void	insert_l_right(t_leaf **leaf, t_node *pipe, t_lexer tokens)
 	t_lexer	list_in;
 	t_lexer list_out;
 
-	printf("chega aqui 4\n");
 	*leaf = malloc(sizeof(t_leaf));
 	(*leaf)->token = find_cmd_right(pipe->next, tokens);
-	printf("chega aqui 10\n");
 	right_create_list_in(&list_in, pipe->next, tokens);
-	printf("chega aqui 11\n");
-	printf("pipe next: %s\n", pipe->next->token.arr[0]);
 	right_create_list_out(&list_out, pipe->next, tokens);
 	(*leaf)->left = list_in.head;
 	(*leaf)->right = list_out.head;
