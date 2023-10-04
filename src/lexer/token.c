@@ -85,18 +85,3 @@ void	check_expansion(t_main *main, char **arr)
 		i++;
 	}
 }
-
-//* Vai devolver o node do respetivo index em que queremos trabalhar
-t_node *get_node_index(t_lexer *tokens, int index_wanted)
-{
-	int     count = 0;
-	t_node *aux = tokens->head;
-
-	while(count++ < tokens->size)
-	{
-		if (aux->index == index_wanted)
-			return (aux);
-		aux = aux->next;
-	}
-	return (NULL);
-}

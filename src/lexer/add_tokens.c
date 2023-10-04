@@ -32,7 +32,7 @@ int add_prev_token(t_main *main, int *i, char *str)
 				printf("Adding str: %s\n", str);
 	int index_wanted = main->tokens.size - 2;
 				printf("index_wanted: %i\n", index_wanted);
-	t_node  *token_insert = get_node_index(&main->tokens, index_wanted);
+	t_node  *token_insert = get_node(main->tokens, index_wanted);
 				print_arr(token_insert->token.arr);
 				printf("token.arr size: %li\n", ft_arrlen(token_insert->token.arr));
 	char    **temp = ft_calloc(ft_arrlen(token_insert->token.arr) + 2, sizeof(char *));

@@ -79,7 +79,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 			aux_index = aux->index;
 			temp = ft_arrjoin(temp, aux->token.arr);
 			remove_node(tokens, aux->index);
-			aux = find_node(*tokens, aux_index);
+			aux = get_node(*tokens, aux_index);
 			cmdcat = true;
 		}
 		else
@@ -99,7 +99,7 @@ void	cmdcat(t_lexer *tokens)
 	while(aux->next != tokens->head)
 	{
 		cmd_index = find_first_cmd(aux, tokens->size);
-		aux = find_node(*tokens, cmd_index);
+		aux = get_node(*tokens, cmd_index);
 		if(cmd_index == -1) //*Se não houver cmd, acaba aqui;
 			return ;
 		cmdpipecat(tokens, aux, cmd_index);
