@@ -12,7 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-
 int	get_max(int a, int b)
 {
 	if (a > b)

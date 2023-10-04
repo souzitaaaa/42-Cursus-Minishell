@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 12:36:47 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:14:49 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ UTILS_BUILTINS
 int		ft_isnbr(const char *str);
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
+int     validations_ch(char *str, int fd, char *command);
 
 #endif

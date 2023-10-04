@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/04 10:18:55 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:26:09 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,15 @@ int		add_token(t_main *main, t_type token, int *i, char *str);
 int     add_prev_token(t_main *main, int *i, char *str);
 char	*expand(t_main *main, char *cmp);
 void	check_expansion(t_main *main, char **arr);
+
+/*
+!LIST.C
+*/
+void		shift_index(t_lexer *stack);
+void		put_head_node(t_lexer *stack, t_node *new);
+t_node		*remove_head(t_lexer *stack);
+void		insert_head(t_lexer *stack, t_node *new);
+void		insert_last(t_lexer *stack, t_node *new);
 
 
 #endif

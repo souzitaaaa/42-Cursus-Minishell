@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/29 11:48:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:15:19 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/*fazer uma funcao que dá erro em: - + * = % ? / | \ () e não adicionar
-export -=jenny : bash: export: -=: invalid option
-export: usage: export [-nf] [name[=value] ...] or export -p
-export+=jenny : bash: export: `+=jenny': not a valid identifier
-export *=jenny: bash: export: `*=jenny': not a valid identifier
-export =jenny: bash: export: `=jenny': not a valid identifier(o nosso faz: minishell: zsh: bad assignment)
-export %=jenny: bash: export: `%=jenny': not a valid identifier
-export ?=jenny: bash: export: `?=jenny': not a valid identifier
-export /=export: bash: export: `/=export': not a valid identifier
-export |=export: bash: =export: command not found
-export \=export: bash: export: `=export': not a valid identifier
-export (=export: bash: syntax error near unexpected token `=export'
-export )=export: bash: syntax error near unexpected token `)'*/
 
 void swap_var(t_var *var1, t_var *var2)
 {
@@ -91,8 +77,11 @@ void ft_export(t_env *exp)
 void export(t_main *main, char **array, bool child)
 {
 	int	i;
+	int exit_code;
+    int error;
 
     i = 1;
+    exit_code = 0;
     if (array[1] == 0)
 	{
 		if (main->flags.not_print == false)
@@ -102,7 +91,14 @@ void export(t_main *main, char **array, bool child)
     {
         while(array[i] != NULL)
         {
-            if (array[i][0] == '=') //fazer uma funcao que dá erro em: - + * = % ? / | \ ()
+			error = validations_ch(array[i], STDERR_FILENO, array[0]);
+            if(error)
+            {
+                exit_code = error;
+                i++;
+                continue ;
+            }
+            if (array[i][0] == '=')
 			{
 				if (main->flags.not_print == false)
 					error_export(STDERR_FILENO);
@@ -129,6 +125,7 @@ void export(t_main *main, char **array, bool child)
         }
     }
     if (child)
-        exit(0);
-    set_exit_code(main, 0);
+        exit(exit_code);
+    set_exit_code(main, exit_code);
 }
+

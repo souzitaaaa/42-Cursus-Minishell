@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:14:01 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:43:39 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:10:35 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,27 @@
 # include "minishell.h"
 
 /*
-!SYNTAX
-*/
-bool    syntax_analysis(t_main *main);
-
-/*
 !PARSER
 */
 void	parser(t_main *main);
-void	test_ast(t_lexer tokens, t_ast *ast);
+
+/*
+!SYNTAX
+*/
+bool    syntax_analysis(t_lexer tokens);
 
 /*
 !CMDCAT
 */
 void	cmdcat(t_lexer *tokens);
 
+//!AST
+void	create_ast(t_lexer tokens, t_ast *ast);
+void	print_ast(t_ast	ast); //!FUNCAO DE DEBUG
+
 //!AST_ULTIS
-void	insert_l_left(t_leave **leave, t_node *pipe);
-void	insert_l_right(t_leave **leave, t_node *pipe, t_lexer tokens);
+void	insert_l_left(t_leaf **leave, t_node *pipe);
+void	insert_l_right(t_leaf **leave, t_node *pipe, t_lexer tokens);
 
 //!AST_LEXER
 void	left_create_list_in(t_lexer *list_in, t_node *aux);

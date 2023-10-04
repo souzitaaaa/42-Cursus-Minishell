@@ -12,8 +12,10 @@
 
 #include "../../includes/minishell.h"
 
+extern int	g_ex_status;
+
 //*Esta função chama as funções que executam os rdr guardados no token enviado
-void	exec_rdr(t_token token, t_main *main, int hd_fd)
+void	exec_rdr(t_token token, t_main *main, int hd)
 {
 	if(token.type == IN)
 		rdr_in(token.arr, main);
@@ -22,7 +24,7 @@ void	exec_rdr(t_token token, t_main *main, int hd_fd)
 	if(token.type == APPEND)
 		rdr_app(token.arr, main);
 	if(token.type == HEREDOC)
-		rdr_hd(token, main, hd_fd);
+		rdr_hd(token, main, hd);
 }
 
 void	find_exec_cmd_parent(t_lexer tokens, t_main *main)
@@ -61,11 +63,10 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 }
 
 //*Esta função percorre a lista tokens, executa os here_doc, guarda o fd do último hd executado,
-//*seta a bool hd a verdadeiro caso exista alguum hd e devolve o index do último hd executado
-int	exec_hd(t_lexer tokens, t_main *main, int *hd_fd, bool *hd)
+//*seta a bool hd a verdadeiro caso exista algum hd e o guarda o index do último hd executado
+void	exec_hd(t_lexer tokens, t_main *main, bool *hd)
 {
 	t_node *aux;
-	int	index;
 	int	counter;
 
 	aux = tokens.head;
@@ -77,20 +78,21 @@ int	exec_hd(t_lexer tokens, t_main *main, int *hd_fd, bool *hd)
 			if(!*hd)
 				*hd = true;
 			else
-				close(*hd_fd);
+				close(main->hd.fd);
 			if(aux->token.arr[1] == NULL)
-				*hd_fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
+				main->hd.fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
 			else
-				*hd_fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
-			index = aux->index;
+				main->hd.fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
+			main->hd.index = aux->index;
 		}
+		if (g_ex_status == 130)
+			break ;
 		aux = aux->next;
 	}
-	return(index);
 }
 
 //*Esta função percorre a lista tokens e faz todas as redireções in, out e app e a do ultimo hd
-void	ft_redirect(t_lexer	tokens, t_main *main, int hd_fd, int index)
+void	ft_redirect(t_lexer	tokens, t_main *main)
 {
 	t_node *aux;
 	int	counter;
@@ -99,13 +101,13 @@ void	ft_redirect(t_lexer	tokens, t_main *main, int hd_fd, int index)
 	counter = 0;
 	while(counter < tokens.size)
 	{
-		if(aux->token.type == STRING || (aux->token.type == HEREDOC && aux->index != index))
+		if(aux->token.type == STRING || (aux->token.type == HEREDOC && aux->index != main->hd.index))
 		{
 			counter++;
 			if(counter < tokens.size)
 				aux = aux->next;
 		}
-		exec_rdr(aux->token, main, hd_fd);
+		exec_rdr(aux->token, main, main->hd.fd);
 		aux = aux->next;
 		counter++;
 	}
@@ -137,22 +139,22 @@ void	init_rdr(t_lexer tokens, t_main *main)
 {
 	int pid;
 	bool hd;
-	int index;
-	int hd_fd;
 
 	hd = false;
-	index = exec_hd(tokens, main, &hd_fd, &hd);
+	exec_hd(tokens, main, &hd);
+	if (g_ex_status == 130)
+		return ;
 	signals(1);
 	pid = ft_fork(main);
 	if (pid == 0)
 	{
-		ft_redirect(tokens, main, hd_fd, index);
+		ft_redirect(tokens, main);
 		if(hd)
-			close(hd_fd);
+			close(main->hd.fd);
 		find_exec_cmd(tokens, main);
 		exit(0);
 	}
-	else
+	else //!DESMECESSARIO
 	{
 		if(check_cmd(tokens))
 		{
@@ -160,7 +162,7 @@ void	init_rdr(t_lexer tokens, t_main *main)
 			find_exec_cmd_parent(tokens, main);//uma função que chama versões do cd, unset e export, que não imprimem nada (servem para atualizar as variaveis de ambiente e o cd tem que fazer o chdir)
 		}
 		if(hd)
-			close(hd_fd);
+			close(main->hd.fd);
 	}
 	wait_estatus(pid, main);
 }

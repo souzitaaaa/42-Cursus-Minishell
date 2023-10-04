@@ -18,39 +18,62 @@ t_ast_node	*get_beg(t_ast *ast)
 	t_ast_node	*aux;
 
 	aux = ast->head;
-
-	ast->counter = 0;
-	while(ast->counter++ < ast->size - 1)
-		aux = aux->left;
+	while(aux->left_n)
+		aux = aux->left_n;
 	return(aux);
 }
 
 //*Esta função redireciona o stdout para o writing end do pipe (fd[1]) e executa o comando
-void	write_to_pipe(int *fd, char **cmd, t_main *main)
+void	write_to_pipe(int *fd, t_leaf *cmd, t_main *main)
 {
 	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
+	if(cmd->left)
+		ft_redirect_in(cmd->left, main, cmd->hd);
+	if(cmd->right)
+		ft_redirect_out(cmd->right, main);
+	else
+		dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	exec_cmd(cmd, main, true);
+	if (cmd->token.type == STRING && !main->flags.rdr_err)
+		exec_cmd(cmd->token.arr, main, true);
+	else
+		exit(0);
 }
 
 //*Esta função redireciona o stdin para o reading end do pipe anterior (fd[0])
 //*Redireciona o stdout para o writing end do pipe seguinte (next_fd[1])
 //*Executa o comando
-void	pipe_read_and_write(int *fd, int *next_fd, char **cmd, t_main *main)
+void	pipe_read_and_write(int *fd, int *next_fd, t_leaf *cmd, t_main *main)
 {
 	close(next_fd[0]);
-	dup2(fd[0], STDIN_FILENO);
+	if(cmd->left)
+		ft_redirect_in(cmd->left, main, cmd->hd);
+	else
+		dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
-	dup2(next_fd[1], STDOUT_FILENO);
+	if(cmd->right)
+		ft_redirect_out(cmd->right, main);
+	else
+		dup2(next_fd[1], STDOUT_FILENO);
 	close(next_fd[1]);
-	exec_cmd(cmd, main, true);
+	if (cmd->token.type == STRING && !main->flags.rdr_err)
+		exec_cmd(cmd->token.arr, main, true);
+	else
+		exit(0);
 }
 
 //*Esta função redireciona o stdin para o reading end do pipe (fd[0]) e executa o comando
-void	read_from_pipe(int *fd, char **cmd, t_main *main)
+void	read_from_pipe(int *fd, t_leaf *cmd, t_main *main)
 {
-	dup2(fd[0], STDIN_FILENO);
+	if(cmd->left)
+		ft_redirect_in(cmd->left, main, cmd->hd);
+	else
+		dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
-	exec_cmd(cmd, main, true);
+	if(cmd->right)
+		ft_redirect_out(cmd->right, main);
+	if (cmd->token.type == STRING && !main->flags.rdr_err)
+		exec_cmd(cmd->token.arr, main, true);
+	else
+		exit(0);
 }
