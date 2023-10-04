@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/03 17:15:28 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:57:41 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	unset(t_main *main, char **array, bool child)
 	while (array[i]  != NULL)
 	{
 		error = validations_ch(array[i], STDERR_FILENO, array[0]);
-            if(error)
-            {
-                exit_code = error;
-                i++;
-                continue ;
-            }
+        if(error)
+        {
+			exit_code = error;
+			i++;
+			continue ;
+		}
 		unset_env(main, array[i]);
 		unset_exp(main, array[i]);
 		i++;

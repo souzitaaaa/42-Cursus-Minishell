@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:04:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/29 11:48:01 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:55:06 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void    echo(char **command, t_main *main, bool child)
 		count = 1;
 		if (flag)
 		{
-			ft_printf("\n");
 			count = 2;
 			while (command[count])
 			{
