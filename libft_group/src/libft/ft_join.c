@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_join.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/09/06 23:22:40 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/03 17:36:01 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,41 @@ char	**ft_arrjoin(char **s1, char **s2)
 	ft_arrlcpy(new_s, s1, (s1_len + 1));
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
 	return (new_s);
+}
+
+char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2)
+{
+	size_t	arr1_len;
+	size_t	arr2_len;
+	char	**new_arr;
+
+	if (!arr1 || !str || !arr2)
+		return (0);
+	arr1_len = ft_arrlen(arr1);
+	arr2_len = ft_arrlen(arr2);
+	new_arr = malloc((arr1_len + arr2_len + 2) * sizeof(char *));
+	if (!new_arr)
+		return (0);
+	ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
+	new_arr[arr1_len] = str;
+	ft_arrlcpy(new_arr + arr1_len + 1, arr2, (arr2_len + 1));
+	return (new_arr);
+}
+
+char	**ft_arrstrjoin(char	**arr, char	*str)
+{
+	size_t	arr_len;
+	char	**new_arr;
+
+	if (!arr || !str)
+		return (0);
+	arr_len = ft_arrlen(arr);
+	new_arr = malloc((arr_len + 2) * sizeof(char *));
+	if (!new_arr)
+		return (0);
+	ft_arrlcpy(new_arr, arr, (arr_len + 1));
+	new_arr[arr_len] = str;
+	return (new_arr);
 }
 /*
 int	main(void)

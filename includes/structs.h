@@ -205,6 +205,15 @@ typedef struct s_prompt
 	char	*pwd;
 }t_prompt;
 
+typedef struct s_len
+{
+	int		pipe;
+	int		in;
+	int		out;
+	int		squote;
+	int		dquote;
+}t_len;
+
 /*
 !MAIN STRUCT
 */
