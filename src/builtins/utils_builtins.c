@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:05:04 by jenny             #+#    #+#             */
-/*   Updated: 2023/10/04 15:08:20 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/06 14:44:16 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	refresh_oldpwd(t_main *main, char *str)
 	if (modify_var_env(main, oldpwd) == false)
 		insert_var_env(main, oldpwd);
 }
-//adicionar erro quando for export 3=batata por exemplo
+
 int	validations_ch(char *str, int fd, char *command) 
 {
     int i = 0;
@@ -71,7 +71,7 @@ int	validations_ch(char *str, int fd, char *command)
         ft_putstr_fd("': invalid option\n", fd);
 		return (2);
     }
-	else if (str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
+	else if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
 	{
         ft_putstr_fd("minishell: ", fd);
 		ft_putstr_fd(command, fd);

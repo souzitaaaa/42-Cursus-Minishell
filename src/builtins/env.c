@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:48:13 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/29 11:48:05 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:30:40 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 void env(t_env *env, t_main *main, bool child, char **command)
 {
 	t_var	*current;
-
+	
+	 if (env->size == 0)
+	 {
+        ft_printf("minishell: env: No such file or directory\n");
+        if (child)
+            exit(127);
+        set_exit_code(main, 127);
+        return;
+    }
 	if (command[1] != NULL)
 	{
 		if (child)
@@ -25,7 +33,6 @@ void env(t_env *env, t_main *main, bool child, char **command)
 	}
 	current = env->head;
 	env->i = 0;
-	ft_printf("size env: %d\n", env->size);
 	while (env->i++ < env->size)
 	{
 		ft_printf("%d: ", current->index);
