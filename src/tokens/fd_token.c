@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/03 14:19:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:30:45 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 			run = false;
 	}
 	aux = ft_substr(main->input_prompt, start, (*i - start));
-	fd = ft_strjoin(fd, " ");
-	fd = ft_strjoin(fd, aux);
+	fd = ft_strjoinfree(fd, " ");
+	fd = ft_strjoinfree(fd, aux);
 	add_token(main, token, i, fd);
 	if (token == HEREDOC || token == IN)
 		check_quotes_heredoc(&main->tokens);

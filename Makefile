@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/03 17:16:02 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/10/04 14:54:58 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ OBJDIR			= obj
 NAME 			= minishell
 
 _FILES 			= error_msg exit_code init list free prompts signal destroy\
-					lexer token \
+					lexer expansion \
 					parser cmdcat ast ast_utils ast_lexer syntax list_endnull\
 					extra_tokens output_tokens input_tokens lexer_utils add_tokens create_nodes fd_token\
 					env_list env_arr \

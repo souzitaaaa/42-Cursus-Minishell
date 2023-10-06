@@ -49,8 +49,9 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		str = get_next_line(STDIN_FILENO, false);
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
+		//!ver a bool das quotes
 		//!if(!quotes)
-			//!str = expand_line(str, quotes);
+			//!str = expand_line(str);
 		write(fd, str, strlen(str));
 		ft_free_str(&str);
 	}
