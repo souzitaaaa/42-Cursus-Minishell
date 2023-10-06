@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:02:07 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:26 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:05:57 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 */
 int		check_quotes(char c, int quotes);
 int		check_quotes_print(t_main *main);
+char *remove_empty_quotes(char *prompt);
 
 /*
 !QUOTES LIST.C

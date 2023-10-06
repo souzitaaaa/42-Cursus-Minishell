@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/01 14:49:34 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/06 13:05:22 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ void    init_bool(t_bool *flags)
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas sempre que se inicia o prompt
 // Ou seja, as estruturas relacionadas com o imput
 //! Dar free sempre que se inicia novamente
+
 void	init_input(t_main *main, char *input)
 {
-		main->input_prompt = input;
+		main->input_prompt = remove_empty_quotes(input);
 		init_list(&main->tokens, main);
 		ini_quotes(&main->quotes);
 		init_ast(&main->ast);
