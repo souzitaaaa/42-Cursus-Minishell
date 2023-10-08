@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:33:34 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/06 14:35:56 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/08 12:51:55 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void cd(char *path, t_main *main, bool child)
 	{
 		new_path = only_cd(main, child);
 		change_dir(new_path, main, child);
-		//colocar aqui a validação se nao tiver HOME, cd nao deve funcionar
+		//colocar aqui a validação se nao tiver HOME/OLDPWD, cd nao deve funcionar
 		dir = change_dir(new_path, main, child);
 		if (dir == 0)
 			{

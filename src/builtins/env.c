@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 22:48:13 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/06 14:30:40 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/08 14:58:52 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void env(t_env *env, t_main *main, bool child, char **command)
 	env->i = 0;
 	while (env->i++ < env->size)
 	{
-		ft_printf("%d: ", current->index);
 		ft_printf("%s\n", current->var);
 		current = current->next;
 	}
