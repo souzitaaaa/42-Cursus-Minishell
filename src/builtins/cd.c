@@ -23,7 +23,7 @@ char	*only_cd(t_main *main, bool  child)
 	if (home == NULL)
 	{
 		if (main->flags.not_print == false)
-			error_cd(STDERR_FILENO);
+			error_cd(STDERR_FILENO, "HOME");
 		if (child)
 			exit(1);
 		set_exit_code(main, 1);
@@ -84,14 +84,26 @@ void cd(char *path, t_main *main, bool child)
 	getcwd(current, 4096);
 	if (path == NULL)
 	{
-		new_path = only_cd(main, child);
-		change_dir(new_path, main, child);
-		dir = change_dir(new_path, main, child);
-		if (dir == 0)
-			{
-				main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-			}
+		if (verify_var(main, "HOME"))
+		{
+			new_path = only_cd(main, child);
+			change_dir(new_path, main, child);
+			dir = change_dir(new_path, main, child);
+			if (dir == 0)
+				{
+					main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+					ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+				}
+		}
+		else
+		{
+			if (main->flags.not_print == false)
+				error_cd(STDERR_FILENO, "HOME");
+			if (child)
+					exit(1);
+			set_exit_code(main, 1);
+			return ;
+		}
 	}
 	else
 	{
@@ -99,26 +111,39 @@ void cd(char *path, t_main *main, bool child)
 		{
 			if (main->prev)
 			{
-				dir = change_dir(main->prev, main, child);
-				if (dir == 0)
+				if (verify_var(main, "OLDPWD"))
+				{
+					dir = change_dir(main->prev, main, child);
+					if (dir == 0)
+					{
+						if (main->flags.not_print == false)
+							ft_printf("%s\n", main->prev);
+						main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
+						ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
+						path_pwd = ft_calloc(sizeof(char), 4096);
+						getcwd(path_pwd, 4096);
+						refresh_pwd(main, path_pwd);
+						refresh_oldpwd(main, main->prev);
+					}
+				}
+				else
 				{
 					if (main->flags.not_print == false)
-						ft_printf("%s\n", main->prev);
-					main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-					ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-					path_pwd = ft_calloc(sizeof(char), 4096);
-					getcwd(path_pwd, 4096);
-					refresh_pwd(main, path_pwd);
-					refresh_oldpwd(main, main->prev);
+						error_cd(STDERR_FILENO, "OLDPWD");
+					if (child)
+						exit(1);
+					set_exit_code(main, 1);
+					return ;
 				}
 			}
 			else
 			{
 				if (main->flags.not_print == false)
-					error_cd(STDERR_FILENO);
+					error_cd(STDERR_FILENO, "OLDPWD");
 				if (child)
 					exit(1);
 				set_exit_code(main, 1);
+				return ;
 			}
 		}
 		else

@@ -110,3 +110,5 @@ bool	verify_var(t_main *main, char *str)
 	}
 	return (false);
 }
+
+//OLDPWD=/nfs/homes/jede-ara/Documents/42/minishell
