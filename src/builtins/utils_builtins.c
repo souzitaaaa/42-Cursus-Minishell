@@ -96,3 +96,17 @@ int	validations_ch(char *str, int fd, char *command)
     }
 	return (0);
 }
+
+bool	verify_var(t_main *main, char *str)
+{
+	int		count = 0;
+	t_var	*aux = main->env_list.head;
+
+	while (count++ < main->env_list.size)
+	{
+		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
+			return(true);
+		aux = aux->next;
+	}
+	return (false);
+}
