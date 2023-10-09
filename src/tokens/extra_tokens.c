@@ -47,11 +47,6 @@ void	search_extra_tokens(t_main *main, int *i)
 					n_len = 0;
 			}
 		}
-		if (main->input_prompt[*i] == '\'' || main->input_prompt[*i] == '\"')
-		{
-			//quotes_treatment(main, i, start);
-			return ;
-		}
 		if (special_chr(main->input_prompt[*i]) == false)
 		{
 			(*i)++;

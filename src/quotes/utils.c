@@ -24,7 +24,6 @@ void create_new_node(t_main *main, int open_quote_type, int open_quote_position,
     new_node->end = i;
     insert_last_quotes(&main->quotes, new_node);
     printf("tamanho da lista --> %i\n", main->quotes.size);
-
 }
 
 int check_quotes(char c, int quotes)
@@ -45,28 +44,28 @@ int check_quotes(char c, int quotes)
 
 int check_quotes_print(t_main *main)
 {
-    int quotes_analises = 0;
-    int i = 0;
-    int open_quote_position = -1; // Posição da aspa de abertura
-    char open_quote_type = '\0';  // Tipo da aspa de abertura
-    //printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
-    while (main->input_prompt[i] != '\0')
-    {
-        char c = main->input_prompt[i];
-        quotes_analises = check_quotes(c, quotes_analises);
-        if (c == SQUOTE || c == DQUOTE)
-        {
-            if ((quotes_analises == 1 || quotes_analises == 2) && open_quote_position == -1)
-            {
-                open_quote_position = i;
-                open_quote_type = c;
-            }
-            else if (quotes_analises == 0 && open_quote_position != -1)
-            {
-                printf("Open quote of type %c at position %d, Close quote at position %d\n", open_quote_type, open_quote_position, i);
-                create_new_node(main, open_quote_type, open_quote_position, i);
-                // }
-                // main->quotes.type = open_quote_type;
+	int quotes_analises = 0;
+	int i = 0;
+	int open_quote_position = -1; // Posição da aspa de abertura
+	char open_quote_type = '\0';  // Tipo da aspa de abertura
+	//printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
+	while (main->input_prompt[i] != '\0')
+	{
+		char c = main->input_prompt[i];
+		quotes_analises = check_quotes(c, quotes_analises);
+		if (c == SQUOTE || c == DQUOTE)
+		{
+			if ((quotes_analises == 1 || quotes_analises == 2) && open_quote_position == -1)
+			{
+				open_quote_position = i;
+				open_quote_type = c;
+			}
+			else if (quotes_analises == 0 && open_quote_position != -1)
+			{
+				printf("Open quote of type %c at position %d, Close quote at position %d\n", open_quote_type, open_quote_position, i);
+				create_new_node(main, open_quote_type, open_quote_position, i);
+				// }
+				// main->quotes.type = open_quote_type;
 				// main->quotes.start = open_quote_position;
 				// main->quotes.end = i;
 				open_quote_position = -1; // Reset da posição da aspa de abertura

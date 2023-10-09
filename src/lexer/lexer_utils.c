@@ -69,17 +69,17 @@ void    print_tokens(t_lexer *tokens)
 			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");
 }
 
-t_node	*find_node(t_lexer tokens, int index)
+//* Vai devolver o node do respetivo index em que queremos trabalhar
+t_node *get_node(t_lexer tokens, int index_wanted)
 {
-	int	counter;
-	t_node *aux;
+	int     count = 0;
+	t_node *aux = tokens.head;
 
-	counter = 0;
-	aux = tokens.head;
-	while(counter < index && counter < tokens.size)
-    {
-        aux = aux->next;
-        counter++;
-    }
-	return (aux);
+	while(count++ < tokens.size)
+	{
+		if (aux->index == index_wanted)
+			return (aux);
+		aux = aux->next;
+	}
+	return (NULL);
 }

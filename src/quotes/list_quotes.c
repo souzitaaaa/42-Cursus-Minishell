@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/28 16:30:01 by joe              ###   ########.fr       */
+/*   Updated: 2023/10/09 18:04:54 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void    print_quotes(t_quotes *quotes)
 	int count = 0;
 	t_node_quotes  *aux = quotes->head;
 
-				printf("\033[1;32m\t\t(Printing quotes)\033[0m\n");
+				printf("\033[1;36m\t\t(Printing quotes)\033[0m\n");
 	while (count++ < quotes->size)
 	{
 		printf("\033[1;34m[INDEX] \033[0m %i\n", aux->index);
@@ -101,5 +101,5 @@ void    print_quotes(t_quotes *quotes)
 		printf("\033[1;34m[END]  \033[0m %i\n\n", aux->end);
 		aux = aux->next;
 	}
-			printf("\033[1;32m\t\t(End printing quotes)\033[0m\n");
+			printf("\033[1;36m\t\t(End printing quotes)\033[0m\n");
 }
