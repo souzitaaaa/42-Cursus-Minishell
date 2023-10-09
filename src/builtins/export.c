@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:47:44 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/03 17:15:19 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/08 14:59:16 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ void ft_export(t_env *exp)
     current = exp->head;
     exp->i = 0;
     sort_ascii(exp);
-	ft_printf("size exp: %d\n", exp->size);
     while (exp->i++ < exp->size)
     {
-		ft_printf("%d: ", current->index);
         temp = ft_calloc(sizeof(char),ft_strclen(current->var, '=') + 2);
         ft_strlcpy(temp, current->var, ft_strclen(current->var, '=') + 2);
         ft_printf("declare -x %s", temp);

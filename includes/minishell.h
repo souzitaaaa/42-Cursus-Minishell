@@ -77,7 +77,7 @@ void	ft_wait(t_main *main);
 */
 void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
-void	error_cd(int fd);
+void	error_cd(int fd, char *str);
 void	error_export(int fd);
 void	error_quotes(int fd);
 void	error_msg_fd(char *str, int fd);
