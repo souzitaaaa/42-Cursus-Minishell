@@ -45,26 +45,26 @@ int check_quotes(char c, int quotes)
 
 char *remove_empty_quotes(char *prompt)
 {
-    int i = 0;
-    int j = 0;
+	int i = 0;
+	int j = 0;
+	char *result;
 
-    char *result = (char *)malloc(strlen(prompt) + 1);
-    if (result == NULL)
-        exit(1);
-    while (prompt[i] != '\0')
+	result = ft_calloc(strlen(prompt) + 1, sizeof(char));
+	if (result == NULL)
+		exit(1);
+	while (prompt[i] != '\0')
 	{
-        if ((prompt[i] == '\"' && prompt[i + 1] == '\"') || (prompt[i] == '\'' && prompt[i + 1] == '\''))
-            i += 2;
+		if ((prompt[i] == '\"' && prompt[i + 1] == '\"') || (prompt[i] == '\'' && prompt[i + 1] == '\''))
+			i += 2;
 		else
 		{
-            result[j] = prompt[i];
-            i++;
-            j++;
-        }
-    }
-    result[j] = '\0';
-	//free(prompt);
-    return result;
+			result[j] = prompt[i];
+			i++;
+			j++;
+		}
+	}
+	result[j] = '\0';
+	return result;
 }
 
 int check_quotes_print(t_main *main)
