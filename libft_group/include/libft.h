@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/03 17:36:11 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/05 20:12:49 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,16 @@ size_t	ft_arrlen(char **arr);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_arrlcpy(char **dst, char **src, size_t size);
 void	ft_strccpy(char *dst, char *src, char c);
-//FT_JOIN.C
+//FT_STRJOIN.C
 char	*ft_strjoin(char *str, const char *str2);
 char	*ft_strjoinfree(char const *s1, char const *s2);
+//FT_ARRJOIN.C
 char	**ft_arrjoin(char **s1, char **s2);
-char	**ft_arrstrarrjoin(char **arr1, char *str, char **arr2);
+char	**ft_arrnl_joinfree(char **s1, char **s2);
+char	**ft_arrjoinfree(char **s1, char **s2);
+char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2);
 char	**ft_arrstrjoin(char	**arr, char	*str);
+char	**ft_strarrjoin(char *str, char	**arr);
 
 /*
 ft_printf

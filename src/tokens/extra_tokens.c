@@ -63,7 +63,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	main->flags.rdr_treated = false;
 	str = ft_substr(main->input_prompt, start, (*i - start) - n_len);
 	//printf("str on extra: %s\n", str);
-	add_token(main, STRING, i, str);
+	add_token(main, STRING, str);
 	free(str);
 	(*i)--;
 }

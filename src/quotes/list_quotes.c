@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/02 15:46:27 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:43:27 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,16 @@ void	insert_head_quotes(t_quotes *stack, t_node_quotes *new)
 }
 void	insert_last_quotes(t_quotes *stack, t_node_quotes *new)
 {
-	static int	index = 0;
 
 	if (stack->head == NULL)
-	{
-		index = 0;
 		put_head_node_quotes(stack, new);
-	}
 	else
 	{
-		index++;
 		stack->head->prev->next = new;
 		new->prev = stack->head->prev;
 		new->next = stack->head;
 		stack->head->prev = new;
 	}
-	new->index = index;
 	stack->size++;
 }
 

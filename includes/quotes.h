@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:02:07 by joe               #+#    #+#             */
-/*   Updated: 2023/10/06 13:05:57 by joe              ###   ########.fr       */
+/*   Updated: 2023/10/04 13:31:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,14 @@
 /*
 !QUOTES.C
 */
+void	create_quotes_node(t_quotes *quotes, int open_quote_type, int open_quote_position, int i);
 int		check_quotes(char c, int quotes);
 int		check_quotes_print(t_main *main);
-char *remove_empty_quotes(char *prompt);
+
+/*
+!QUOTES_SUBSTR
+*/
+void	quotes_substr(t_quotes *quotes, char *str);
 
 /*
 !QUOTES LIST.C
