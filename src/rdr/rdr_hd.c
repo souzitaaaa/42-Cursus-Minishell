@@ -36,6 +36,25 @@ int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 	return(0);
 }
 
+char	*expand_line(t_main *main, char *str)
+{
+	char	*out;
+	int		i = 0;
+	printf("str hd: %s\n", str);
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$')
+		{
+			printf("$ founded at %i with %s", i, str + i);
+			out = expand_more(main, str + i);
+			printf("after expand: %s\n", out);
+		}
+		i++;
+	}
+	return (str);
+}
+
 int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 {
 	char	*str;
@@ -49,9 +68,8 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		str = get_next_line(STDIN_FILENO, false);
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
-		//!ver a bool das quotes
-		//!if(!quotes)
-			//!str = expand_line(str);
+		if(!quotes)
+			str = expand_line(main, str);
 		write(fd, str, strlen(str));
 		ft_free_str(&str);
 	}
