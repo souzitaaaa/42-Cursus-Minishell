@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:59:38 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/21 13:45:27 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:19:15 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_atoi(const char *str)
 {

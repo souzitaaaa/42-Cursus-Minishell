@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 16:36:18 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/12 13:08:03 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:19:15 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

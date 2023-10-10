@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_arrjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:16:57 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/05 20:20:36 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:19:15 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	**ft_arrjoin(char **s1, char **s2)
 {

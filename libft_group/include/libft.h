@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/05 20:12:49 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:39:13 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ Libraries
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include "get_next_line.h"
+# include <stdbool.h>
+# include "get_next_line.h"
 
 /*
 libft

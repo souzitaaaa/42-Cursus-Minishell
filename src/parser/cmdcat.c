@@ -70,6 +70,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	int aux_index;
 	bool cmdcat;
 
+	cmdcat = false;
 	temp = aux->token.arr;
 	aux = aux->next;
 	while(aux->token.type != PIPE && aux != tokens->head)

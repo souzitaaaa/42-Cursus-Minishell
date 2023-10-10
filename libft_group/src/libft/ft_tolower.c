@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:11:40 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/09 17:13:30 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:19:15 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 int	ft_tolower(int c)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/05 18:30:42 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:09:05 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	lexer(t_main *main);
 char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 t_node	*create_n_quotes(t_main *main, t_type token, int *i, char **result, bool expand);
 int		add_token_quotes(t_main *main, t_type token, int *i, char **result, bool expand);
+int		get_min(int a, int b);
 
 /*
 !AUX_QUOTES
@@ -56,7 +57,7 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2);
 /*
 !TOKEN.C
 */
-char	*expand(t_main *main, char *cmp);
+char	*expand(t_main *main, char *cmp, bool ignore);
 void	check_expansion(t_main *main, char **arr);
 
 /*
