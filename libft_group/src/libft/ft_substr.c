@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:08:46 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/02/13 17:44:48 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:18:59 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 char	*ft_substr(char const *str, unsigned int start, size_t len)
 {

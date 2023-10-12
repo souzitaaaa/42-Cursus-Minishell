@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:29:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/04 16:19:01 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:57:34 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {

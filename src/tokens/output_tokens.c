@@ -40,7 +40,7 @@ void    get_rdr_out(t_main *main, int *i, t_type token, char *fd)
 	}
     str = ft_substr(main->input_prompt, start, (*i - start));
     //printf("str: %s\n", str);
-    add_token(main, token, i, str);
+    add_token(main, token, str);
     //if (*i < main->tokens.str_len)
         //main->flags.put_node_behind = true;
     (*i)--;

@@ -6,11 +6,11 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 15:39:24 by dinoguei          #+#    #+#             */
-/*   Updated: 2022/11/21 13:52:42 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/10 15:39:08 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 static int	counter(const char *str, char c)
 {
@@ -72,15 +72,15 @@ char	**ft_split(char const *str, char c)
 /*
 int	main(void)
 {
-	char	*teste = "Mik a sa Ack er man";
-	char	*c = " ";
+	char	*teste = "   $USER   $PWD  ";
+	char	*c = "$";
 	char	**p;
 
 	printf("Original:\n");
 	printf("%s\n", teste);
 	printf("Prints made during the function:\n");
-	p = ft_split(teste, *c);
+	p = ft_split(teste, *c, true);
 	printf("By the function:\n");
-	printf("%ld\n", p);
+	print_arr(p);
 }
-*/
+-*/
