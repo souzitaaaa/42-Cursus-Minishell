@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aux_quotes.c                                       :+:      :+:    :+:   */
+/*   join_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/05 20:28:22 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:56:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,18 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2)
 	ft_arrlcpy(new_arr + arr1_len, arr2 + 1, (arr2_len));
 	print_arr(new_arr);
 	return (new_arr);
+}
+
+char *join_expanded(char *str, char *expanded, int len)
+{
+	char *result;
+	char *before;
+	
+	result = ft_calloc(ft_strlen(str) - len + ft_strlen(expanded) + 1, sizeof(char ));
+	before = ft_substr(str, 0, ft_strclen(str, '$'));
+	result = ft_strjoin(before, expanded);
+	printf("result: %s\n", result);
+	//free(before);
+	result = ft_strjoinfree(result, str + ft_strclen(str, '$') + len);
+	return(result);
 }
