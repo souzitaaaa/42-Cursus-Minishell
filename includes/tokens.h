@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:19:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/09/29 12:38:04 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:07:20 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 */
 void	search_extra_tokens(t_main *main, int *i);
 bool	special_chr(char c);
+bool	check_index_quotes(t_main *main, int *i);
 
 /*
 !OUTPUT_TOKENS.C

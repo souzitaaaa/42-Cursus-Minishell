@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/12 14:57:11 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:58:30 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2);
 !TOKEN.C
 */
 char	*expand(t_main *main, char *cmp, bool ignore);
-void	check_expansion(t_main *main, char **arr);
+char	*expand_more(t_main *main, char *str);
+void	check_expansion_arr(t_main *main, char **arr);
+char	*check_expansion_str(t_main *main, char *str, bool ignore);
 
 /*
 !LIST.C

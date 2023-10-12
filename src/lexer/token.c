@@ -200,7 +200,7 @@ char	*expand(t_main *main, char *cmp, bool ignore)
 
 //* Esta funcao vai verificar se nos comandos foi inserido um $ para poder
 	//* prosseguir com a expansao
-void	check_expansion(t_main *main, char **arr)
+void	check_expansion_arr(t_main *main, char **arr)
 {
 	int i = 0;
 	int j;

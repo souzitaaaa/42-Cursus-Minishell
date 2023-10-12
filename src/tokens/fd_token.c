@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/12 14:58:10 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:08:35 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 	{
 		if (is_space(main->input_prompt[*i]) == false)
 			(*i)++;
-		else
+		else if (check_index_quotes(main, i) == false)
 			run = false;
+		else
+			(*i)++;
 	}
 	aux = ft_substr(main->input_prompt, start, (*i - start));
 	fd = ft_strjoin(fd, " ");

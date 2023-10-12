@@ -27,8 +27,10 @@ void    get_rdr_in(t_main *main, int *i, t_type token, char *fd)
 	{
 		if (is_space(main->input_prompt[*i]) == false)
 			(*i)++;
-		else
+		else if (check_index_quotes(main, i) == false)
 			run = false;
+		else
+			(*i)++;
 	}
     str = ft_substr(main->input_prompt, start, (*i - start));
     add_token(main, token, str);

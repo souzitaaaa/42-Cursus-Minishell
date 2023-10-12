@@ -31,6 +31,8 @@ bool    check_more_var(char *str)
 {
 	int i = 1;
 	
+	if(*str == ' ')
+		i = ft_strclen(str, '$') + 1;
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$')
@@ -52,13 +54,11 @@ char    *ft_arr_to_str(char **arr)
 		i++;
 	}
 	printf("total arr_len: %i\n", arr_len);
-	out = malloc(sizeof(char *) * arr_len + 1);
-	
-	out = "\0";
+	out = ft_calloc(arr_len + 1, sizeof(char *));
 	i = 0;
 	while (arr[i])
 	{
-		out = ft_strjoinfree(out, arr[i]);
+		out = ft_strjoin(out, arr[i]);
 		i++;
 	}
 	printf("Str pós juntar: %s\n", out);
@@ -73,14 +73,17 @@ char	*expand_more(t_main *main, char *str)
 	char    *expanded = NULL;
 	char    **arr;
 	int i = 0;
+	int dif;
 	
 	arr = ft_split(str, 36);
 			printf("Arr das vars: \n");
 			print_arr(arr);
+	if (*str == ' ')
+		i = 1;
 	while (arr[i])
 	{
 		printf("Var a analisar: %s\n", arr[i]);
-		if (ft_strncmp(arr[i], "$?", ft_strlen(arr[i])) == 0)
+		if (ft_strncmp(arr[i], "$?", 2) == 0)
 		{
 			printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", arr[i], main->exit_code);
 			expanded = malloc(sizeof(char) * get_number_len(main->exit_code));
@@ -94,11 +97,23 @@ char	*expand_more(t_main *main, char *str)
 		count = 0;
 		while (count++ < main->env_list.size)
 		{
-			if (ft_strncmp(arr[i], aux->var, ft_strlen(arr[i])) == 0)
+			if (ft_strncmp(arr[i], aux->var, ft_strclen(aux->var, '=')) == 0)
 			{
 				printf("Encontrada variavel de ambiente: %s\n\tNa envp: %s\n", arr[i], aux->var);
-				expanded = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(arr[i]) + 1);
-				ft_strlcpy(expanded, aux->var + ft_strlen(arr[i]), ft_strlen(aux->var) - ft_strlen(arr[i]) + 1);
+				expanded = ft_calloc(ft_strlen(aux->var) - ft_strclen(arr[i], ' ')  + 1, sizeof(char));
+				dif = ft_strlen(arr[i]) - ft_strclen(arr[i], ' ');
+				if (dif > 0)
+				{
+					printf("Dif function\n");
+					ft_strlcpy(expanded, aux->var + ft_strclen(arr[i], ' '), ft_strlen(aux->var) - ft_strclen(arr[i], ' ') + 1);
+					char *space = ft_calloc(dif + 1, sizeof(char));
+					ft_memset(space, ' ', dif);
+					printf("space after: %s.\n", space);
+					printf("Expanded in dif function: %s\n", expanded);	
+					expanded = ft_strjoinfree(expanded, space);
+				}
+				else
+					ft_strlcpy(expanded, aux->var + ft_strclen(arr[i], ' '), ft_strlen(aux->var) - ft_strclen(arr[i], ' ') + 1);
 				printf("Expanded: %s\n", expanded);
 				ft_free_str(&arr[i]);
 				arr[i] = ft_strdup(expanded + 1);
@@ -122,7 +137,7 @@ char	*expand_more(t_main *main, char *str)
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
 	//* ela vai percorrer a lista das env ate achar uma identica ao valor que lhe manda-mos
 	//* quando encontrar vai copiar oque esta depois do = para dentro dessa str
-char	*expand(t_main *main, char *cmp)
+char	*expand(t_main *main, char *cmp, bool ignore)
 {
 	int		count = 0;
 	t_var	*aux = main->env_list.head;
@@ -130,9 +145,13 @@ char	*expand(t_main *main, char *cmp)
 	char    *str;
 	int     i = 0;
 
-	while (is_space(cmp[i]) == true && cmp[i])
-		i++;
+	if (ignore == false)
+	{
+		while (is_space(cmp[i]) == true && cmp[i])
+			i++;
+	}
 	str = ft_substr(cmp, i, ft_strlen(cmp) - i);
+	printf("str: .%s.\n", str);
 	if (check_more_var(str) == true)
 	{
 		expanded = expand_more(main, str);
@@ -140,27 +159,37 @@ char	*expand(t_main *main, char *cmp)
 	}
 	printf("\033[1;32m\t\t[Expanding 1]\033[0m\n");
 	printf("str: %s and str + 1: %s\n", str, str + 1);
-	if (ft_strncmp(str, "$?", ft_strlen(str)) == 0)
+	if (ft_strncmp(str, "$?", 2) == 0)
 	{
 		printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", str, main->exit_code);
 		expanded = malloc(sizeof(char) * get_number_len(main->exit_code));
 		expanded = ft_itoa(main->exit_code);
+		if (str + 2)
+			expanded = ft_strjoinfree(expanded, str + 2);
 		return (expanded);
 	}
 	while (count++ < main->env_list.size)
 	{
-		if (ft_strncmp(str + 1, aux->var, ft_strlen(str) - 1) == 0)
+		if (ft_strncmp(str + ft_strclen(str, '$') + 1, aux->var, ft_strclen(aux->var, '=')) == 0)
 		{
 			printf("Encontrada variavel de ambiente: %s\n\tNa envp: %s\n", str, aux->var);
-			if (ft_strlen(str + 1) == ft_strclen(aux->var, '='))
+			expanded = ft_calloc(ft_strclen(str, '$') + ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 2, sizeof(char *));
+			if (ft_strclen(str, '$') > 0)
 			{
-				expanded = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(str) + 1);
-				ft_strlcpy(expanded, aux->var + ft_strlen(str), ft_strlen(aux->var) - ft_strlen(str) + 1);
-					printf("\033[1;32m\t\t[End expanding 2]\033[0m\n");
-				return (expanded);
+				printf("Dif function\n");
+				ft_strlcpy(expanded, aux->var + ft_strclen(aux->var, '=') + 1, ft_strlen(aux->var) - ft_strclen(str, '$') + 1);
+				char *space = ft_calloc(ft_strclen(str, '$') + 1, sizeof(char));
+				ft_memset(space, ' ', ft_strclen(str, '$'));
+				printf("space after: %s.\n", space);
+				printf("Expanded in dif function: %s\n", expanded);	
+				//! tratar do free da expanded
+				expanded = ft_strjoin(space, expanded);
+				free(space);
 			}
 			else
-				break;
+				ft_strlcpy(expanded, aux->var + ft_strclen(aux->var, '=') + 1, ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 2);
+			printf("\033[1;32m\t\t[End expanding 2]\033[0m\n");
+			return (expanded);
 		}
 		aux = aux->next;
 	}
@@ -170,7 +199,7 @@ char	*expand(t_main *main, char *cmp)
 
 //* Esta funcao vai verificar se nos comandos foi inserido um $ para poder
 	//* prosseguir com a expansao
-void	check_expansion(t_main *main, char **arr)
+void	check_expansion_arr(t_main *main, char **arr)
 {
 	int i = 0;
 	int j;
@@ -181,9 +210,22 @@ void	check_expansion(t_main *main, char **arr)
 		while (arr[i][j])
 		{
 			if (ft_strchr("$", arr[i][j]))
-				arr[i] = expand(main, arr[i]);
+				arr[i] = expand(main, arr[i], false);
 			j++;
 		}
 		i++;
 	}
+}
+
+char	*check_expansion_str(t_main *main, char *str, bool ignore)
+{
+	int i = 0;
+
+	while (str[i])
+	{
+		if (ft_strchr("$", str[i]))
+			return (expand(main, str, ignore));
+		i++;
+	}
+	return (str);
 }

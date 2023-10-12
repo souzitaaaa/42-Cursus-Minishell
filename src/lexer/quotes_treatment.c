@@ -19,7 +19,6 @@ char	**str_to_arr(char *str)
 	result = ft_calloc(2, sizeof(char *));
 	result[0] = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	ft_strlcpy(result[0], str, ft_strlen(str) + 1);
-	result[1] = "\0";
 	return(result);
 }
 
@@ -61,7 +60,7 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 		result = ft_split(temp, ' ');
 		ft_free_str(&temp);
 		if(main->flags.hd == false)
-			check_expansion(main, result);
+			check_expansion_arr(main, result);
 		return (result);
 	}
 	return (NULL);
@@ -99,7 +98,7 @@ char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		join.before = NULL;
 	join.str = ft_substr(str, aux->start + 1, (aux->end - aux->start) - 1);
 	//join.str = str_expand(join.str, main);
-	join.str = expand(main, join.str, true);
+	join.str = check_expansion_str(main, join.str, true);
 	len = get_min(ft_strclen(str + aux->end + 1, SQUOTE), ft_strclen(str + aux->end + 1, DQUOTE));
 	join.after = out_of_quotes(str, aux->end + 1, len, main);
 	if(join.before == NULL && join.after == NULL)

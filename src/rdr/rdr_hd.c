@@ -36,25 +36,6 @@ int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 	return(0);
 }
 
-char	*expand_line(t_main *main, char *str)
-{
-	char	*out;
-	int		i = 0;
-	printf("str hd: %s\n", str);
-
-	while (str[i] != '\0')
-	{
-		if (str[i] == '$')
-		{
-			printf("$ founded at %i with %s", i, str + i);
-			out = expand_more(main, str + i);
-			printf("after expand: %s\n", out);
-		}
-		i++;
-	}
-	return (str);
-}
-
 int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 {
 	char	*str;
