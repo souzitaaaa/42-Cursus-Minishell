@@ -13,7 +13,46 @@
 #include "../../includes/minishell.h"
 
 //!redirects seguidos,  redirect e pipe por esta ordem -> ver com o diogo
+bool    syntax_followed_rdrs(t_lexer tokens)
+{
+    t_node  *aux;
+    int count = 0;
+
+	aux = tokens.head;
+	while (count++ < tokens.size - 1)
+	{
+		if ((aux->token.type == OUT || aux->token.type == IN
+			|| aux->token.type == HEREDOC || aux->token.type == APPEND)
+				&& (aux->next->token.type == OUT || aux->next->token.type == IN
+					|| aux->next->token.type == HEREDOC || aux->next->token.type == APPEND))
+		{
+		    ft_putstr_fd("minishell: syntax error near unexpected token `<<'\n", 2);
+		    return (false);
+		}
+		aux = aux->next;
+	}
+	return (true);
+}
+
 //*pipes seguidos
+bool    syntax_double_pipe(t_lexer tokens)
+{
+    t_node  *aux;
+    int count = 0;
+
+	aux = tokens.head;
+	while (count++ < tokens.size - 1)
+	{
+		if (aux->token.type == PIPE && aux->next->token.type == PIPE)
+		{
+		    ft_putstr_fd("minishell: syntax error near unexpected token `||'\n", 2);
+		    return (false);
+		}
+		aux = aux->next;
+	}
+	return (true);
+}
+
 
 //*Começar em pipe
 bool    syntax_first_node(t_lexer tokens)
@@ -23,10 +62,9 @@ bool    syntax_first_node(t_lexer tokens)
 	aux = tokens.head;
 	if (aux->token.type == PIPE)
 	{
-	    printf("minishell: syntax error near unexpected token `|'\n");
+	    ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 	    return (false);
 	}
-	//printf("syntax on tthe out is right\n");
 	return (true);
 }
 
@@ -38,10 +76,9 @@ bool    syntax_last_node(t_lexer tokens)
 	aux = tokens.head->prev;
 	if ((aux->token.type != STRING && *aux->token.arr == 0) || aux->token.type == PIPE)
 	{
-	    printf("minishell: syntax error near unexpected token 'newline'\n");
+	    ft_putstr_fd("minishell: syntax error near unexpected token 'newline'\n", 2);
 	    return (false);
 	}
-	//printf("syntax on tthe out is right\n");
 	return (true);
 }
 
@@ -51,6 +88,10 @@ bool	syntax_analysis(t_lexer tokens)
 	if (syntax_first_node(tokens) == false)
         return (false);
     if (syntax_last_node(tokens) == false)
+        return (false);
+    if (syntax_double_pipe(tokens) == false)
+        return (false);
+	if (syntax_followed_rdrs(tokens) == false)
         return (false);
     return (true);
 }
