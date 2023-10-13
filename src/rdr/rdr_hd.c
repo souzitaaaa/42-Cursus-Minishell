@@ -49,10 +49,13 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		str = get_next_line(STDIN_FILENO, false);
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
-		//!if(!quotes)
-			//!str = expand_line(str, quotes);
+		printf("str after: .%s.\n", str);
+		if(!quotes)
+			str = expand(main, str);
+		printf("str: %s\n", str);
 		write(fd, str, strlen(str));
-		ft_free_str(&str);
+		if(*str)
+			ft_free_str(&str);
 	}
 	return(line);
 }

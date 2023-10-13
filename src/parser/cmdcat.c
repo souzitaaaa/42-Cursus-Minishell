@@ -15,13 +15,13 @@
 //*encontra o primeiro comando e devolve o seu index
 int	find_first_cmd(t_node *aux, int size)
 {
-	int counter;
-
-	counter = 0;
 	while(1)
 	{
 		if(aux->token.type == STRING)
+		{
+			printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
 			return (aux->index);
+		}
 		if(aux->index == size - 1)
 			break ;
 		aux = aux->next;
@@ -70,17 +70,20 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	int aux_index;
 	bool cmdcat;
 
+	cmdcat = false;
 	temp = aux->token.arr;
 	aux = aux->next;
 	while(aux->token.type != PIPE && aux != tokens->head)
 	{
 		if(aux->token.type == STRING)
 		{
+			cmdcat = true;
 			aux_index = aux->index;
 			temp = ft_arrjoin(temp, aux->token.arr);
 			remove_node(tokens, aux->index);
 			aux = get_node(*tokens, aux_index);
-			cmdcat = true;
+			if(aux == NULL)
+				break ;
 		}
 		else
 			aux = aux->next;
@@ -99,9 +102,11 @@ void	cmdcat(t_lexer *tokens)
 	while(aux->next != tokens->head)
 	{
 		cmd_index = find_first_cmd(aux, tokens->size);
-		aux = get_node(*tokens, cmd_index);
 		if(cmd_index == -1) //*Se não houver cmd, acaba aqui;
 			return ;
+		aux = get_node(*tokens, cmd_index);
+		printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
+		printf("passa aqui\n");
 		cmdpipecat(tokens, aux, cmd_index);
 		while(aux->token.type != PIPE && aux->next != tokens->head)
 			aux = aux->next;

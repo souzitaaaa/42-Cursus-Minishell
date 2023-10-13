@@ -21,6 +21,21 @@ bool	special_chr(char c)
 	return false;
 }
 
+bool	check_index_quotes(t_main *main, int *i)
+{
+	t_node_quotes *aux;
+	int count = 0;
+
+	aux = main->quotes.head;
+	while (count++ < main->quotes.size)
+	{
+		if (aux->start < *i && aux->end > *i)
+			return (true);
+		aux = aux->next;
+	}
+	return (false);
+}
+
 //* Esta funcao vai procurar pelo que nao for special char
 	//* para guardar numa str e mandar para a struct
 void	search_extra_tokens(t_main *main, int *i)
@@ -52,8 +67,10 @@ void	search_extra_tokens(t_main *main, int *i)
 			(*i)++;
 			extra = true;
 		}
+		else if (check_index_quotes(main, i) == false)
+				run = false;
 		else
-			run = false;
+			(*i)++;
 	}
 	if (main->flags.rdr_treated == true && extra == false)
 	{
@@ -63,7 +80,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	main->flags.rdr_treated = false;
 	str = ft_substr(main->input_prompt, start, (*i - start) - n_len);
 	//printf("str on extra: %s\n", str);
-	add_token(main, STRING, i, str);
+	add_token(main, STRING, str);
 	free(str);
 	(*i)--;
 }

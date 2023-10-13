@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:28:56 by dinoguei          #+#    #+#              #
-#    Updated: 2023/10/09 18:03:50 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/10/13 18:25:10 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,8 @@ SRCS = libft/ft_isalpha.c \
 		libft/ft_calloc.c \
 		libft/ft_strdup.c \
 		libft/ft_substr.c \
-		libft/ft_join.c \
+		libft/ft_strjoin.c \
+		libft/ft_arrjoin.c \
 		libft/ft_strtrim.c \
 		libft/ft_split.c \
 		libft/ft_itoa.c \

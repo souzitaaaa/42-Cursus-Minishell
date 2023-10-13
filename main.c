@@ -73,7 +73,7 @@ char    *get_envvar(char *str, t_env *env_list)
 //! Ver uma forma de ter sempre o prompt quando se da unset ou se muda as variaveis
 void	init_prompt(t_main	*main)
 {
-	char	*input = NULL;
+	char	*input;
 	//char	*prompt = NULL;
 
 	while (1)
@@ -92,8 +92,8 @@ void	init_prompt(t_main	*main)
 			set_exit_code(main, g_ex_status);
 			g_ex_status = 0;
 		}
-		//if (main->quotes.error)
-		//	break ;
+		if (check_quotes_print(main))
+			continue ;
 		lexer(main);
 		parser(main);
 		//destroy(main);
@@ -111,10 +111,4 @@ int	main(int argc, char **argv, char **envp)
 	//print_intro();
 	init_main(&main, envp);
 	init_prompt(&main);
-	//tratar aspas
-	//lexer
-	//se nao tiver carecteres expeciais vai logo para a exec_cmd;
-	//analise sintatica --> se for falso da ERRO
-	//AST
-	//init_exec
 }
