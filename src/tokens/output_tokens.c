@@ -24,15 +24,20 @@ bool    is_space(char c)
 void    get_rdr_out(t_main *main, int *i, t_type token, char *fd)
 {
     int     start = 0;
-    char    *str;
+    char    *str ;
     bool	run = true;
 
-    while (special_chr(main->input_prompt[*i]) == true
+    /*while (special_chr(main->input_prompt[*i]) == true
         || is_space(main->input_prompt[*i]) == true)
+        (*i)++;*/
+    while (is_space(main->input_prompt[*i]) == true)
         (*i)++;
     start = *i;
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{
+        if (special_chr(main->input_prompt[*i]) == true
+            && check_index_quotes(main, i) == false)
+            break ;
 		if (is_space(main->input_prompt[*i]) == false)
 			(*i)++;
 		else if (check_index_quotes(main, i) == false)
@@ -53,9 +58,12 @@ void    search_output_tokens(t_main *main, int *i, char *str)
 {
     if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
 	{
-		(*i)++;
+		(*i) += 2;
 		get_rdr_out(main, i, APPEND, str);
 	}
 	else
+	{
+	    (*i)++;
 	    get_rdr_out(main, i, OUT, str);
+	}
 }
