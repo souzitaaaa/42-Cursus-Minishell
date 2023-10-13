@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/13 15:59:02 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:05:09 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void    check_quotes_heredoc(t_lexer *lexer)
 			}
 			j++;
 		}
-
 	}
 }
 
@@ -85,8 +84,6 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 	fd = ft_strjoin(fd, " ");
 	fd = ft_strjoin(fd, aux);
 	add_token(main, token, fd);
-	if (token == HEREDOC || token == IN)
-		check_quotes_heredoc(&main->tokens);
 	//if (*i < main->tokens.str_len)
 	//    main->flags.put_node_behind = true;
 	//(*i)--;

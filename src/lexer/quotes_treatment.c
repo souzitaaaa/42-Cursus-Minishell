@@ -80,7 +80,7 @@ char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 	join.str = ft_substr(str, aux->start + 1, (aux->end - aux->start) - 1);
 	//join.str = str_expand(join.str, main);
 	if (aux->type == DQUOTE)
-		join.str = expand(main, join.str);
+		join.str = check_expansion_str(main, join.str);
 	len = get_min(ft_strclen(str + aux->end + 1, SQUOTE), ft_strclen(str + aux->end + 1, DQUOTE));
 	join.after = out_of_quotes(str, aux->end + 1, len, main);
 	if(join.before == NULL && join.after == NULL)

@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 
-char	**quotes_split_expand(char *str, t_main *main, t_type token)
+char	**quotes_split_expand(char *str, t_main *main, t_type token, bool *quote_hd)
 {
 	char		**result;
 	t_quotes	quotes;
@@ -30,6 +30,7 @@ char	**quotes_split_expand(char *str, t_main *main, t_type token)
 	}
 	else
 	{
+		*quote_hd = true;
 		result = quotes_treatment(quotes, str, main);
 		//free_quotes();
 	}
@@ -41,32 +42,18 @@ t_node	*create_n(t_main *main, t_type token, char *str)
 {
 	t_node	*new;
 	char	**arr;
+	bool    quote_hd;
 
 	(void)main;
+	quote_hd = false;
 	new = malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->token.type = token;
-	arr = quotes_split_expand(str, main, token);
+	arr = quotes_split_expand(str, main, token, &quote_hd);
 	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	free(arr);
-	new->token.quotes = false;
+	new->token.quotes = quote_hd;
 	return (new);
 }
-
-/*t_node	*create_n_quotes(t_main *main, t_type token, int *i, char **result, bool expand)
-{
-	t_node	*new;
-
-	(void)main;
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->token.type = token;
-	new->token.arr = ft_calloc(ft_arrlen(result) + 1, sizeof(char *));
-	ft_arrlcpy(new->token.arr, result, ft_arrlen(result) + 1);
-	new->token.quotes = false;
-	//! falta o free da arr
-	return (new);
-}*/

@@ -38,6 +38,14 @@ char	*expand_more(t_main *main, char *str)
 	return (out);
 }
 
+int     get_min_len(char *str, int i)
+{
+	int min =  0;
+	min = get_min(ft_strclen(str + i + 1, ' '), ft_strclen(str + i + 1, SQUOTE));
+	min = get_min(min, ft_strclen(str + i + 1, '\n'));
+	return (min);
+}
+
 char	*expand_var(t_main *main, char *str, int i)
 {
 	int		count;
@@ -49,7 +57,7 @@ char	*expand_var(t_main *main, char *str, int i)
 	count = 0;
 	while (count++ < main->env_list.size)
 	{
-		if (ft_strncmp(str + i + 1, aux->var, get_max(ft_strclen(aux->var, '='), get_min(ft_strclen(str + i + 1, ' '), ft_strclen(str + i + 1, SQUOTE)))) == 0)
+		if (ft_strncmp(str + i + 1, aux->var, get_max(ft_strclen(aux->var, '='), get_min_len(str, i))) == 0)
 		{
 			printf("Encontrada variavel de ambiente: %s\n\tNa envp: %s\n", str, aux->var);
 			expanded = ft_calloc(ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 1, sizeof(char *));
@@ -61,6 +69,7 @@ char	*expand_var(t_main *main, char *str, int i)
 		aux = aux->next;
 	}
 	out = join_expanded(str, "\0", ft_strclen(str, ' ') - i);
+	return (out);
 }
 
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
@@ -94,7 +103,7 @@ char	*expand(t_main *main, char *str)
 
 //* Esta funcao vai verificar se nos comandos foi inserido um $ para poder
 	//* prosseguir com a expansao
-void	check_expansion(t_main *main, char **arr)
+void	check_expansion_arr(t_main *main, char **arr)
 {
 	int i = 0;
 
@@ -105,4 +114,11 @@ void	check_expansion(t_main *main, char **arr)
 		i++;
 	}
 	del_emptyline(arr);
+}
+
+char	*check_expansion_str(t_main *main, char *str)
+{
+	if (ft_strchr(str, '$'))
+			return (expand(main, str));
+	return (str);
 }
