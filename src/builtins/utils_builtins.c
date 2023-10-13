@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 14:05:04 by jenny             #+#    #+#             */
-/*   Updated: 2023/10/03 17:15:37 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/06 14:44:16 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	validations_ch(char *str, int fd, char *command)
         ft_putstr_fd("': invalid option\n", fd);
 		return (2);
     }
-	else if (str[1] < '0' || str[1] > '9' || str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
+	else if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
 	{
         ft_putstr_fd("minishell: ", fd);
 		ft_putstr_fd(command, fd);
@@ -96,3 +96,19 @@ int	validations_ch(char *str, int fd, char *command)
     }
 	return (0);
 }
+
+bool	verify_var(t_main *main, char *str)
+{
+	int		count = 0;
+	t_var	*aux = main->env_list.head;
+
+	while (count++ < main->env_list.size)
+	{
+		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
+			return(true);
+		aux = aux->next;
+	}
+	return (false);
+}
+
+//OLDPWD=/nfs/homes/jede-ara/Documents/42/minishell

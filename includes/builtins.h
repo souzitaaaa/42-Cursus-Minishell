@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/03 17:14:49 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/09 16:13:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int		ft_isnbr(const char *str);
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
 int     validations_ch(char *str, int fd, char *command);
+bool	verify_var(t_main *main, char *str);
 
 #endif
