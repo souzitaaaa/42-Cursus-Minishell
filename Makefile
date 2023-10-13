@@ -6,7 +6,7 @@
 #    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/13 17:49:59 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/10/13 18:18:01 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-fsanitize=address #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -Werror #-fsanitize=address 
 NPD				= --no-print-directory
 RD				= -lreadline
 

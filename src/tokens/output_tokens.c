@@ -21,7 +21,7 @@ bool    is_space(char c)
 }
 
 //* Aqui vai identificar para onde se vai mandar o output do caracter
-void    get_rdr_out(t_main *main, int *i, t_type token, char *fd)
+void    get_rdr_out(t_main *main, int *i, t_type token)
 {
     int     start = 0;
     char    *str ;
@@ -54,16 +54,16 @@ void    get_rdr_out(t_main *main, int *i, t_type token, char *fd)
 }
 
 //* Esta funcao identifica os caracteres de output, quer append quer redirect
-void    search_output_tokens(t_main *main, int *i, char *str)
+void    search_output_tokens(t_main *main, int *i)
 {
     if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
 	{
 		(*i) += 2;
-		get_rdr_out(main, i, APPEND, str);
+		get_rdr_out(main, i, APPEND);
 	}
 	else
 	{
 	    (*i)++;
-	    get_rdr_out(main, i, OUT, str);
+	    get_rdr_out(main, i, OUT);
 	}
 }

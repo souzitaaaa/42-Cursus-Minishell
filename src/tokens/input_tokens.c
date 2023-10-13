@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 //* Aqui vai identificar para onde se vai mandar o input do caracter
-void    get_rdr_in(t_main *main, int *i, t_type token, char *fd)
+void    get_rdr_in(t_main *main, int *i, t_type token)
 {
     int     start = 0;
     char    *str;
@@ -45,16 +45,16 @@ void    get_rdr_in(t_main *main, int *i, t_type token, char *fd)
 }
 
 //* Esta funcao identifica os caracteres de input, quer heredoc ou in
-void    search_input_tokens(t_main *main, int *i, char *str)
+void    search_input_tokens(t_main *main, int *i)
 {
     if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
 	{
 		(*i) += 2;
-		get_rdr_in(main, i, HEREDOC, str);
+		get_rdr_in(main, i, HEREDOC);
 	}
 	else
 	{
 		(*i)++;
-	    get_rdr_in(main, i, IN, str);
+	    get_rdr_in(main, i, IN);
 	}
 }

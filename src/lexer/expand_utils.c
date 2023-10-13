@@ -39,7 +39,7 @@ int	get_number_len(int n)
 	return (len);
 }
 
-char	*expand_exitcode(t_main *main, char *str, int i)
+char	*expand_exitcode(t_main *main, char *str)
 {
     char *expanded;
     char *out;

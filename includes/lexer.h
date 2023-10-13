@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/13 17:45:29 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:13:54 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	*check_expansion_str(t_main *main, char *str);
 char    *ft_arr_to_str(char **arr, char *str);
 bool    check_more_var(char *str, int i);
 int     get_number_len(int n);
-char	*expand_exitcode(t_main *main, char *str, int i);
+char	*expand_exitcode(t_main *main, char *str);
 void	check_expansion(t_main *main, char **arr);
 void	del_emptyline(char **arr);
 

@@ -19,9 +19,9 @@ void search_tokens(t_main *main, int *i)
 	if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
 		add_token(main, PIPE,"|");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
-		search_input_tokens(main, i, "");
+		search_input_tokens(main, i);
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
-		search_output_tokens(main, i, "");
+		search_output_tokens(main, i);
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] != ' ')
 		search_extra_tokens(main, i);
 }

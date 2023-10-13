@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/13 18:05:09 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/13 18:16:30 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
         || is_space(main->input_prompt[*i]) == true)
         (*i)++;*/
     while (is_space(main->input_prompt[*i]) == true)
+    {
         (*i)++;
+    }
 	start = *i;
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{

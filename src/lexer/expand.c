@@ -94,7 +94,7 @@ char	*expand(t_main *main, char *str)
 	if (str[i + 1] == ' '  || str[i + 1] == '\0')
 		return (str);
 	if (ft_strncmp(str + i, "$?", 2) == 0)
-		out = expand_exitcode(main, str, i);
+		out = expand_exitcode(main, str);
 	else
 		out = expand_var(main, str, i);
 			printf("\033[1;32m\t\t[End expanding 1]\033[0m\n");
