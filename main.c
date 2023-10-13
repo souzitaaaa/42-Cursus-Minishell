@@ -83,10 +83,7 @@ void	init_prompt(t_main	*main)
 		input = readline("minishell -> ");
 		//free(prompt);
 		if (!input)
-		{
-			printf("exit\n");
 			ft_exit(NULL, false, *main);
-		}
 		main->line++;
 		add_history(input);
 		init_input(main, input);

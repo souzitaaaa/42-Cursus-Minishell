@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/12 17:28:01 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/13 16:20:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,20 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2);
 char    *join_expanded(char *str, char *expanded, int len);
 
 /*
-!TOKEN.C
+!EXPAND.C
 */
 char	*expand(t_main *main, char *str);
 void	check_expansion(t_main *main, char **arr);
+
+/*
+!EXPAND_UTILS.C
+*/
+char    *ft_arr_to_str(char **arr, char *str);
+bool    check_more_var(char *str, int i);
+int     get_number_len(int n);
+char	*expand_exitcode(t_main *main, char *str, int i);
+void	check_expansion(t_main *main, char **arr);
+void	del_emptyline(char **arr);
 
 /*
 !LIST.C
@@ -69,6 +79,7 @@ void		put_head_node(t_lexer *stack, t_node *new);
 t_node		*remove_head(t_lexer *stack);
 void		insert_head(t_lexer *stack, t_node *new);
 void		insert_last(t_lexer *stack, t_node *new);
+
 
 
 #endif

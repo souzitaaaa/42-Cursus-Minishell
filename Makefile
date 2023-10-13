@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/12 15:57:53 by marvin           ###   ########.fr        #
+#    Updated: 2023/10/13 16:15:53 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init free prompts signal destroy \
 					print_img utils list_quotes quotes_substr \
-					list lexer expand lexer_utils add_tokens create_nodes quotes_treatment join_utils \
+					list lexer expand expand_utils lexer_utils add_tokens create_nodes quotes_treatment join_utils \
 					extra_tokens output_tokens input_tokens fd_token \
 					parser cmdcat ast ast_utils ast_lexer syntax list_endnull \
 					env_list env_arr \
