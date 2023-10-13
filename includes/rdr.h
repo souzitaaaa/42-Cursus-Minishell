@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:08:17 by joe               #+#    #+#             */
-/*   Updated: 2023/10/01 16:25:44 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/13 17:04:13 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	rdr_app(char **arr, t_main *main);
 /*
 !RDR_HD
 */
+int     get_max(int a, int b);
 int		open_hd(char *lim, bool quotes, t_main *main);
 void	rdr_hd(t_token token, t_main *main, int fd);
 

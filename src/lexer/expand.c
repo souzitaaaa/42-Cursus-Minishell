@@ -49,7 +49,7 @@ char	*expand_var(t_main *main, char *str, int i)
 	count = 0;
 	while (count++ < main->env_list.size)
 	{
-		if (ft_strncmp(str + i + 1, aux->var, ft_strclen(aux->var, '=')) == 0)
+		if (ft_strncmp(str + i + 1, aux->var, get_max(ft_strclen(aux->var, '='), get_min(ft_strclen(str + i + 1, ' '), ft_strclen(str + i + 1, SQUOTE)))) == 0)
 		{
 			printf("Encontrada variavel de ambiente: %s\n\tNa envp: %s\n", str, aux->var);
 			expanded = ft_calloc(ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 1, sizeof(char *));
@@ -101,9 +101,7 @@ void	check_expansion(t_main *main, char **arr)
 	while (arr[i])
 	{
 		if (ft_strchr(arr[i], '$'))
-		{
 			arr[i] = expand(main, arr[i]);
-		}
 		i++;
 	}
 	del_emptyline(arr);
