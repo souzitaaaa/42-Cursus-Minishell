@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:29:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/10 15:19:15 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:57:34 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	dest[j] = '\0';
 	return (lendest + lensrc);
 }
-/*
+
 int	main(void)
 {
 	char	teste[] = "Mio ";
@@ -50,4 +50,4 @@ int	main(void)
 	printf("By the original:\n");
 	printf("invalid\n");
 }
-*/
+

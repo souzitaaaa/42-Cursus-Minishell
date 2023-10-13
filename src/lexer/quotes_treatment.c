@@ -41,7 +41,7 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 		result = ft_split(temp, ' ');
 		ft_free_str(&temp);
 		if(main->flags.hd == false)
-			check_expansion(main, result);
+			check_expansion_arr(main, result);
 		return (result);
 	}
 	return (NULL);
