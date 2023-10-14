@@ -18,7 +18,7 @@ void env(t_env *env, t_main *main, bool child, char **command)
 	
 	 if (env->size == 0)
 	 {
-        ft_printf("minishell: env: No such file or directory\n");
+        ft_printf("minishell: env: No such file or directory\n"); //!ESCREVER PARA O STDERR
         if (child)
             exit(127);
         set_exit_code(main, 127);

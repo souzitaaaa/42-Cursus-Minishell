@@ -16,7 +16,7 @@ char	**str_to_arr(char *str)
 {
 	char **result;
 
-	printf("entra aqui\n");
+	//printf("entra aqui\n");
 	result = ft_calloc(2, sizeof(char *));
 	result[0] = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	ft_strlcpy(result[0], str, ft_strlen(str) + 1);
@@ -91,8 +91,8 @@ char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		result = check_join(join, str[aux->start - 1] , 0);
 	else
 		result = check_join(join, str[aux->start - 1] , str[aux->end + 1]);
-	print_arr(result);
-	printf("oi\n");
+	//print_arr(result);
+	//printf("oi\n");
 	return (result);
 }
 

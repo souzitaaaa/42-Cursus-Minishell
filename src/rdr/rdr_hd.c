@@ -49,10 +49,8 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		str = get_next_line(STDIN_FILENO, false);
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
-		printf("str after: .%s.\n", str);
 		if(!quotes)
-			str = expand(main, str);
-		printf("str: %s\n", str);
+			str = check_expansion_str(main, str);
 		write(fd, str, strlen(str));
 		if(*str)
 			ft_free_str(&str);

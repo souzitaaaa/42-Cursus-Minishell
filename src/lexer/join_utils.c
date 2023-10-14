@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/12 16:56:06 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/14 13:23:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2)
 	str = ft_strjoinfree(str, arr2[0]);
 	arr1[arr1_len -1] = ft_strjoinfree(arr1[arr1_len -1], str);
 	ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
-	print_arr(new_arr);
+	//print_arr(new_arr);
 	ft_arrlcpy(new_arr + arr1_len, arr2 + 1, (arr2_len));
-	print_arr(new_arr);
+	//print_arr(new_arr);
 	return (new_arr);
 }
 
@@ -89,7 +89,7 @@ char *join_expanded(char *str, char *expanded, int len)
 	result = ft_calloc(ft_strlen(str) - len + ft_strlen(expanded) + 1, sizeof(char ));
 	before = ft_substr(str, 0, ft_strclen(str, '$'));
 	result = ft_strjoin(before, expanded);
-	printf("result: %s\n", result);
+	//printf("result: %s\n", result);
 	//free(before);
 	result = ft_strjoinfree(result, str + ft_strclen(str, '$') + len);
 	return(result);
