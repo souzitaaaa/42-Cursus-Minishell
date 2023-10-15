@@ -72,9 +72,11 @@ char	*expand_var(t_main *main, char *str, int i)
 	return (out);
 }
 
+
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
 	//* ela vai percorrer a lista das env ate achar uma identica ao valor que lhe manda-mos
 	//* quando encontrar vai copiar oque esta depois do = para dentro dessa str
+//!DAR FREE A STR
 char	*expand(t_main *main, char *str)
 {
 	char	*expanded;
@@ -107,6 +109,8 @@ void	check_expansion_arr(t_main *main, char **arr)
 {
 	int i = 0;
 
+	if(main->flags.hd)
+		return ;
 	while (arr[i])
 	{
 		if (ft_strchr(arr[i], '$'))
@@ -116,9 +120,15 @@ void	check_expansion_arr(t_main *main, char **arr)
 	del_emptyline(arr);
 }
 
-char	*check_expansion_str(t_main *main, char *str)
+char	*check_expansion_str(t_main *main, char *str, bool hd)
 {
+	if(main->flags.hd)
+		return(str);
 	if (ft_strchr(str, '$'))
-			return (expand(main, str));
-	return (str);
+	{
+		str = expand(main, str);
+		if (hd && str[ft_strlen(str) - 1] != '\n')
+			str = ft_strjoinfree(str, "\n");
+	}
+	return(str);
 }

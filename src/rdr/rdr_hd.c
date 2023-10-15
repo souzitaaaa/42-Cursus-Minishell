@@ -50,7 +50,7 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
 		if(!quotes)
-			str = check_expansion_str(main, str);
+			str = check_expansion_str(main, str, true);
 		write(fd, str, strlen(str));
 		if(*str)
 			ft_free_str(&str);
