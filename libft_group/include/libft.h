@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/13 18:25:24 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/16 21:16:42 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_strccpy(char *dst, char *src, char c);
 //FT_STRJOIN.C
 char	*ft_strjoin(char *str, const char *str2);
 char	*ft_strjoinfree(char const *s1, char const *s2);
+char	*ft_strjoinfree2(char const *s1, char const *s2);
 //FT_ARRJOIN.C
 char	**ft_arrjoin(char **s1, char **s2);
 char	**ft_arrnl_joinfree(char **s1, char **s2);

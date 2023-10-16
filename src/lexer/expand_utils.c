@@ -55,7 +55,7 @@ char    *ft_arr_to_str(char **arr, char *str)
 {
 	int     i = 0;
 	char    *out;
-	
+
 	if(str[ft_strlen(str) - 1] == '$')
 		out = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	else
@@ -83,15 +83,20 @@ void	del_emptyline(char **arr)
 		if(arr[i][0] == '\0')
 		{
 			if(arr[i + 1] == NULL)
-				arr[i] = NULL;
+			{
+				ft_free_str(&arr[i]);
+			}
 			else
 			{
 				j = i;
 				while (arr[j + 1])
 				{
-					arr[j] = arr[j + 1];
+					ft_free_str(&arr[j]);
+					arr[j] = ft_calloc(ft_strlen(arr[j + 1]) + 1, sizeof(char *));
+					ft_strlcpy(arr[j], arr[j + 1], ft_strlen(arr[j + 1]) + 1);
 					j++;
 				}
+				ft_free_str(&arr[j]);
 				arr[j] = NULL;
 			}
 		}

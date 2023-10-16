@@ -90,8 +90,8 @@ char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		result = check_join(join, str[aux->start - 1] , 0);
 	else
 		result = check_join(join, str[aux->start - 1] , str[aux->end + 1]);
-	//print_arr(result);
-	//printf("oi\n");
+	free(join.before);
+	free(join.after);
 	return (result);
 }
 
@@ -119,6 +119,7 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 			else
 				result = ft_arrjoinfree(result, temp);
 		}
+		free(temp);
 		aux = aux->next;
 	}
 	return (result);
