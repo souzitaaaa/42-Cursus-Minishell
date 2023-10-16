@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 16:15:35 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/16 17:30:49 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ UTILS_EXPORT
 */
 void    insert_var_exp(t_main *main, char *str);
 void    insert_var_env(t_main *main, char *str);
-//bool    modify_var_exp(t_main *main, char *str);
-//bool    modify_var_env(t_main *main, char *str);
 bool	modify_var(t_env *list, char *str);
 void	copy_exp(t_main *main);
 
@@ -70,7 +68,7 @@ UTILS_BUILTINS
 int		ft_isnbr(const char *str);
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
-int     validations_ch(char *str, int fd, char *command);
+int		validations_ch(char *str, int fd, char *command); 
 bool	verify_var(t_main *main, char *str);
 
 #endif
