@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-//colocar a validação se nao tiver HOME, se der unset no HOME por exemplo, cd nao deve funcionar
-//Se der unset no OLDPWD o cd - nao deve funcionar
 
 char	*only_cd(t_main *main, bool  child)
 {
