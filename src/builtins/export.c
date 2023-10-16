@@ -25,9 +25,10 @@ void swap_var(t_var *var1, t_var *var2)
 
 void sort_ascii(t_env *exp)
 {
-    int count = 0;
+    int count;
     t_var *current;
 
+	count = 0;
     current = exp->head;
     while (count < exp->size - 1)
     {
@@ -89,7 +90,8 @@ void export(t_main *main, char **array, bool child)
     {
         while(array[i] != NULL)
         {
-			error = validations_ch(array[i], STDERR_FILENO, array[0]);
+			if (main->flags.not_print == false)
+				error = validations_ch(array[i], STDERR_FILENO, array[0]);
             if(error)
             {
                 exit_code = error;
@@ -108,14 +110,14 @@ void export(t_main *main, char **array, bool child)
             {
                 if (!ft_strchr(array[i], '='))
                 {
-					if (modify_var_exp(main, array[i]) == false)
+					if (modify_var(&main->export_list, array[i]) == false)
                			insert_var_exp(main, array[i]);
                 }
             	else
 				{
-					if (modify_var_exp(main, array[i]) == false)
+					if (modify_var(&main->export_list, array[i]) == false)
                			insert_var_exp(main, array[i]);
-					if (modify_var_env(main, array[i]) == false)
+					if (modify_var(&main->env_list, array[i]) == false)
                			insert_var_env(main, array[i]);
 				}
             }

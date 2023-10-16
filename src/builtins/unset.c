@@ -15,6 +15,7 @@
 void	shift_index_env(t_env *stack)
 {
 	t_var	*element;
+
 	stack->head->index = 0;
 	element = stack->head->next;
 	while (element != stack->head)
@@ -35,14 +36,12 @@ void    remove_var(t_env *env, int index)
     else
     {
         while (env->i++ < index)
-        {
             current = current->next;
-        }
-            current->next->prev = current->prev;
-            current->prev->next = current->next;
-            if (index == 0)
-                env->head = current->next;
-            shift_index_env(env);
+        current->next->prev = current->prev;
+        current->prev->next = current->next;
+        if (index == 0)
+			env->head = current->next;
+		shift_index_env(env);
     }
     env->size--;
     free(current);
@@ -50,10 +49,12 @@ void    remove_var(t_env *env, int index)
 
 int	unset_env(t_main *main, char *str)
 {
-	int		count = 0;
+	int		count;
 	int		index;
-	t_var	*aux = main->env_list.head;
+	t_var	*aux;
 
+	count = 0;
+	aux = main->env_list.head;
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -70,9 +71,11 @@ int	unset_env(t_main *main, char *str)
 
 void	unset_exp(t_main *main, char *str)
 {
-	int		count = 0;
-	t_var	*aux = main->export_list.head;
+	int		count;
+	t_var	*aux;
 
+	count = 0;
+	aux = main->export_list.head;
 	while (count++ < main->export_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -86,16 +89,16 @@ void	unset_exp(t_main *main, char *str)
 
 void	unset(t_main *main, char **array, bool child)
 {
-	int		i;
-	int exit_code;
-    int error;
+	int	i;
+	int	exit_code;
+    int	error;
 
 	i = 1;
 	exit_code = 0;
 	while (array[i]  != NULL)
 	{
 		error = validations_ch(array[i], STDERR_FILENO, array[0]);
-        if(error)
+        if (error)
         {
 			exit_code = error;
 			i++;

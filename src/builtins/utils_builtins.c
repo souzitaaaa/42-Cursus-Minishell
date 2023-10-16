@@ -42,26 +42,28 @@ void	refresh_pwd(t_main *main, char *str)
 	char	*pwd;
 
 	pwd = ft_strjoin("PWD=", str);
-	if (modify_var_exp(main, pwd) == false)
+	if (modify_var(&main->export_list, pwd) == false)
 		insert_var_exp(main, pwd);
-	if (modify_var_env(main, pwd) == false)
+	if (modify_var(&main->env_list, pwd) == false)
 		insert_var_env(main, pwd);
 }
+
 void	refresh_oldpwd(t_main *main, char *str)
 {
 	char	*oldpwd;
 
 	oldpwd = ft_strjoin("OLDPWD=", str);
-	if (modify_var_exp(main, oldpwd) == false)
+	if (modify_var(&main->export_list, oldpwd) == false)
 		insert_var_exp(main, oldpwd);
-	if (modify_var_env(main, oldpwd) == false)
+	if (modify_var(&main->env_list, oldpwd) == false)
 		insert_var_env(main, oldpwd);
 }
 
 int	validations_ch(char *str, int fd, char *command) 
 {
-    int i = 0;
+    int i;
 	
+	i = 0;
 	if (str[i] == '-')
 	{
         ft_putstr_fd("minishell: ", fd);
@@ -100,8 +102,10 @@ int	validations_ch(char *str, int fd, char *command)
 bool	verify_var(t_main *main, char *str)
 {
 	int		count = 0;
-	t_var	*aux = main->env_list.head;
+	t_var	*aux;
 
+	count = 0;
+	aux = main->env_list.head;
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -110,5 +114,3 @@ bool	verify_var(t_main *main, char *str)
 	}
 	return (false);
 }
-
-//OLDPWD=/nfs/homes/jede-ara/Documents/42/minishell

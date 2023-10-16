@@ -61,6 +61,12 @@ void	error_export(int fd)
 	ft_putendl_fd("zsh: bad assignment", fd);
 }
 
+void	error_env(int fd)
+{
+	ft_putstr_fd("minishell: ", fd);
+	ft_putendl_fd("env: No such file or directory", fd);
+}
+
 void	error_quotes(int fd)
 {
 	ft_putstr_fd("minishell: ", fd);
