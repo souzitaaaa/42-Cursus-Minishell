@@ -103,7 +103,7 @@ int check_quotes_print(t_main *main)
     }
     if (quotes_analises == 1 || quotes_analises == 2)
     {
-        error_quotes(STDERR_FILENO);
+        error_syntax("newline");
         set_exit_code(main, 2);
         return(2);
     }

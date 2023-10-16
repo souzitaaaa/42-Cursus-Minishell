@@ -25,8 +25,7 @@ char	**quotes_split_expand(char *str, t_main *main, t_type token, bool *quote_hd
 	if (quotes.head == NULL)
 	{
 		result = ft_split(str, ' ');
-		if(token != HEREDOC)
-			check_expansion_arr(main, result);
+		check_expansion_arr(main, result);
 	}
 	else
 	{

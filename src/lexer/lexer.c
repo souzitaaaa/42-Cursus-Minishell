@@ -32,8 +32,8 @@ void search_tokens(t_main *main, int *i)
 void	lexer(t_main *main)
 {
 	int i;
-				printf("\033[1;33m\t\t\t[Lexer function]\033[0m\n");
-				printf("Input: %s Size: %i\n", main->input_prompt, main->tokens.str_len);
+				//printf("\033[1;33m\t\t\t[Lexer function]\033[0m\n");
+				//printf("Input: %s Size: %i\n", main->input_prompt, main->tokens.str_len);
 	i = 0;
 	while(main->input_prompt[i] && i <= main->tokens.str_len)
 	{

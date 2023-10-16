@@ -19,7 +19,7 @@ int	find_first_cmd(t_node *aux, int size)
 	{
 		if(aux->token.type == STRING)
 		{
-			printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
+			//printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
 			return (aux->index);
 		}
 		if(aux->index == size - 1)
@@ -105,8 +105,8 @@ void	cmdcat(t_lexer *tokens)
 		if(cmd_index == -1) //*Se não houver cmd, acaba aqui;
 			return ;
 		aux = get_node(*tokens, cmd_index);
-		printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
-		printf("passa aqui\n");
+		//printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
+		//printf("passa aqui\n");
 		cmdpipecat(tokens, aux, cmd_index);
 		while(aux->token.type != PIPE && aux->next != tokens->head)
 			aux = aux->next;

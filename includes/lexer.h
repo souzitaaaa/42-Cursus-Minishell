@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/13 18:23:42 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/15 16:56:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char    *join_expanded(char *str, char *expanded, int len);
 char	*expand(t_main *main, char *cmp);
 char	*expand_more(t_main *main, char *str);
 void	check_expansion_arr(t_main *main, char **arr);
-char	*check_expansion_str(t_main *main, char *str);
+char    *check_expansion_str(t_main *main, char *str, bool hd);
 
 /*
 !EXPAND_UTILS.C

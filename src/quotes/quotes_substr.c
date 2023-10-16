@@ -41,5 +41,5 @@ void	quotes_substr(t_quotes *quotes, char *str)
         //printf("Character: %c, index: %i ,quotes state: %d\n", c, i, quotes_analises);
         i++;
     }
-	print_quotes(quotes);
+	//print_quotes(quotes);
 }

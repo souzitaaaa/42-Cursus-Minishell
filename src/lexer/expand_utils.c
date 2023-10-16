@@ -44,7 +44,7 @@ char	*expand_exitcode(t_main *main, char *str)
     char *expanded;
     char *out;
 
-	printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", str, main->exit_code);
+	//printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", str, main->exit_code);
 	expanded = ft_calloc(get_number_len(main->exit_code), sizeof(char));
 	expanded = ft_itoa(main->exit_code);
 	out = join_expanded(str, expanded, 2);
@@ -68,7 +68,7 @@ char    *ft_arr_to_str(char **arr, char *str)
 	}
 	if(str[ft_strlen(str) - 1] == '$')
 		out[ft_strlen(out)] = '$';
-	printf("Str pós juntar: %s\n", out);
+	//printf("Str pós juntar: %s\n", out);
 	return (out);
 }
 

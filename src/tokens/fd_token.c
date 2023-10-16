@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/13 18:16:30 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/14 13:22:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int    get_fd_rdr(t_main *main, int *i)
 				//printf("\033[1;32m\t\t(Get_fd_rdr)\033[0m\n");
 	while (main->input_prompt[*i])
 	{
-		printf("Char to compare: %c\n", main->input_prompt[*i]);
+		//printf("Char to compare: %c\n", main->input_prompt[*i]);
 		if (main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57)
 			(*i)++;
 		else
