@@ -110,7 +110,7 @@ void export(t_main *main, char **array, bool child)
             {
                 if (!ft_strchr(array[i], '='))
                 {
-					if (modify_var(&main->export_list, array[i]) == false)
+					if (verify_var(main, array[i]) == false)
                			insert_var_exp(main, array[i]);
                 }
             	else

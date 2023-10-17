@@ -27,38 +27,6 @@ int	ft_isnbr(const char *str)
 	return(1);
 }
 
-int	unset_cd(t_main *main, char *str)
-{
-	int	index;
-
-	print_var(main->env_list);
-	index = unset_env(main, str);
-	unset_exp(main, str);
-	return (index);
-}
-
-void	refresh_pwd(t_main *main, char *str)
-{
-	char	*pwd;
-
-	pwd = ft_strjoin("PWD=", str);
-	if (modify_var(&main->export_list, pwd) == false)
-		insert_var_exp(main, pwd);
-	if (modify_var(&main->env_list, pwd) == false)
-		insert_var_env(main, pwd);
-}
-
-void	refresh_oldpwd(t_main *main, char *str)
-{
-	char	*oldpwd;
-
-	oldpwd = ft_strjoin("OLDPWD=", str);
-	if (modify_var(&main->export_list, oldpwd) == false)
-		insert_var_exp(main, oldpwd);
-	if (modify_var(&main->env_list, oldpwd) == false)
-		insert_var_env(main, oldpwd);
-}
-
 int	validations_ch(char *str, int fd, char *command) 
 {
     int i;

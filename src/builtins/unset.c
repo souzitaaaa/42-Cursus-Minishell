@@ -25,26 +25,26 @@ void	shift_index_env(t_env *stack)
 	}
 }
 
-void    remove_var(t_env *env, int index)
+void	remove_var(t_env *env, int index)
 {
-	t_var   *current;
+	t_var	*current;
 
-    current = env->head;
-    env->i = 0;
-    if (env->size == 1)
+	current = env->head;
+	env->i = 0;
+	if (env->size == 1)
 		env->head = NULL;
-    else
-    {
-        while (env->i++ < index)
-            current = current->next;
-        current->next->prev = current->prev;
-        current->prev->next = current->next;
-        if (index == 0)
+	else
+	{
+		while (env->i++ < index)
+			current = current->next;
+		current->next->prev = current->prev;
+		current->prev->next = current->next;
+		if (index == 0)
 			env->head = current->next;
 		shift_index_env(env);
-    }
-    env->size--;
-    free(current);
+	}
+	env->size--;
+	free(current);
 }
 
 int	unset_env(t_main *main, char *str)
@@ -61,7 +61,7 @@ int	unset_env(t_main *main, char *str)
 		{
 			index = aux->index;
 			remove_var(&main->env_list, aux->index);
-			return(index);
+			return (index);
 		}
 		aux = aux->next;
 	}
@@ -91,15 +91,15 @@ void	unset(t_main *main, char **array, bool child)
 {
 	int	i;
 	int	exit_code;
-    int	error;
+	int	error;
 
 	i = 1;
 	exit_code = 0;
-	while (array[i]  != NULL)
+	while (array[i] != NULL)
 	{
 		error = validations_ch(array[i], STDERR_FILENO, array[0]);
-        if (error)
-        {
+		if (error)
+		{
 			exit_code = error;
 			i++;
 			continue ;
@@ -109,7 +109,6 @@ void	unset(t_main *main, char **array, bool child)
 		i++;
 	}
 	if (child)
-        exit(exit_code);
-    set_exit_code(main, exit_code);
+		exit(exit_code);
+	set_exit_code(main, exit_code);
 }
-

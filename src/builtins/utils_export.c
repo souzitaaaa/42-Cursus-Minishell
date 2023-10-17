@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/16 16:23:46 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/17 16:46:05 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ void    insert_var_env(t_main *main, char *str)
     	aux = var_node(str);
 		add_var(&main->env_list, aux, -1);
 	}
-}
-
-void	put_head_var(t_env *env, t_var *new)
-{
-	env->head = new;
-	new->next = env->head;
-	new->prev = env->head;
 }
 
 bool	modify_var(t_env *list, char *str)

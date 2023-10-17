@@ -12,23 +12,23 @@
 
 #include "../../includes/minishell.h"
 
-void env(t_env *env, t_main *main, bool child, char **command)
+void	env(t_env *env, t_main *main, bool child, char **command)
 {
 	t_var	*current;
-	
-	 if (env->size == 0)
-	 {
+
+	if (env->size == 0)
+	{
 		if (main->flags.not_print == false)
-       		error_env(STDOUT_FILENO);
+			error_env(STDOUT_FILENO);
 		if (child)
-            exit(127);
-        set_exit_code(main, 127);
-        return;
-    }
+			exit(127);
+		set_exit_code(main, 127);
+		return ;
+	}
 	if (command[1] != NULL)
 	{
 		if (child)
-    		exit(127);
+			exit(127);
 		set_exit_code(main, 127);
 		return ;
 	}
@@ -40,6 +40,6 @@ void env(t_env *env, t_main *main, bool child, char **command)
 		current = current->next;
 	}
 	if (child)
-        exit(0);
+		exit(0);
 	set_exit_code(main, 0);
 }
