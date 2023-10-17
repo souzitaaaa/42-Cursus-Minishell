@@ -14,26 +14,6 @@
 
 int	g_ex_status = 0;
 
-//* Esta função pode ser útil para mais funções, ela recebe uma str e procura
-	//* uma variavel de ambiente com esse nome
-char    *get_envvar(char *str, t_env *env_list)
-{
-	int count = 0;
-	t_var *aux = env_list->head;
-	char *out = NULL;
-
-	while(count++ < env_list->size)
-	{
-		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
-		{
-			out = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(str));
-			ft_strlcpy(out, aux->var + ft_strlen(str) + 1, ft_strlen(aux->var) - ft_strlen(str));
-			return(out);
-		}
-		aux = aux->next;
-	}
-	return(NULL);
-}
 
 // //*Inicia a struct para o tratamento do prompt
 // void	init_struct_prompt(t_main *main)

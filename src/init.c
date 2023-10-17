@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/01 14:49:34 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:56:13 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	init_main(t_main *main, char **envp)
 	init_env(&main->env_list);
 	init_env(&main->export_list);
 	set_env_list(main, envp);
-	main->prev = NULL;
 	copy_exp(main);
 	main->env_arr = ft_calloc(sizeof(char *), 1);
 	main->exit_code = 0;

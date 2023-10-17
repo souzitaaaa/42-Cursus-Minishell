@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/17 16:46:05 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:55:55 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	copy_exp(t_main *main)
 		main->export_list.i++;
 		aux = aux->next;
 	}
-	if (main->prev == NULL)
+	if (!verify_var(main, "OLDPWD"))
 	{
 		new = var_node("OLDPWD");
 		add_var(&main->export_list, new, -1);

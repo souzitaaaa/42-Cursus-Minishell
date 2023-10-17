@@ -67,8 +67,28 @@ int change_dir(char *path, t_main *main, bool child)
 		if (child)
 			exit(1);
 		set_exit_code(main, 1);
+		return (1);
 	}
 	return (0);
+}
+
+char    *get_envvar(char *str, t_env *env_list)
+{
+	int count = 0;
+	t_var *aux = env_list->head;
+	char *out;
+
+	while(count++ < env_list->size)
+	{
+		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
+		{
+			out = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(str));
+			ft_strlcpy(out, aux->var + ft_strlen(str) + 1, ft_strlen(aux->var) - ft_strlen(str));
+			return(out);
+		}
+		aux = aux->next;
+	}
+	return(NULL);
 }
 
 void cd(char *path, t_main *main, bool child)
@@ -77,21 +97,23 @@ void cd(char *path, t_main *main, bool child)
 	int		dir;
 	char	*current;
 	char	*path_pwd;
+	char	*prev;
 
 	current = ft_calloc(sizeof(char), 4096);
 	getcwd(current, 4096);
 	if (path == NULL)
 	{
-		if (verify_var(main, "HOME"))
+		new_path = get_envvar("HOME", &main->env_list);
+		if (new_path)
 		{
-			new_path = only_cd(main, child);
-			change_dir(new_path, main, child);
 			dir = change_dir(new_path, main, child);
 			if (dir == 0)
-				{
-					main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-					ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-				}
+			{
+				path_pwd = ft_calloc(sizeof(char), 4096);
+				getcwd(path_pwd, 4096);
+				refresh_pwd(main, path_pwd);
+				refresh_oldpwd(main, current);
+			}
 		}
 		else
 		{
@@ -107,31 +129,18 @@ void cd(char *path, t_main *main, bool child)
 	{
 		if (ft_strcmp(path, "-") == 0)
 		{
-			if (main->prev)
+			prev = get_envvar("OLDPWD", &main->env_list);
+			if(prev)
 			{
-				if (verify_var(main, "OLDPWD"))
-				{
-					dir = change_dir(main->prev, main, child);
-					if (dir == 0)
-					{
-						if (main->flags.not_print == false)
-							ft_printf("%s\n", main->prev);
-						main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-						ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
-						path_pwd = ft_calloc(sizeof(char), 4096);
-						getcwd(path_pwd, 4096);
-						refresh_pwd(main, path_pwd);
-						refresh_oldpwd(main, main->prev);
-					}
-				}
-				else
+				dir = change_dir(prev, main, child);
+				if (dir == 0)
 				{
 					if (main->flags.not_print == false)
-						error_cd(STDERR_FILENO, "OLDPWD");
-					if (child)
-						exit(1);
-					set_exit_code(main, 1);
-					return ;
+						ft_printf("%s\n", prev);
+					path_pwd = ft_calloc(sizeof(char), 4096);
+					getcwd(path_pwd, 4096);
+					refresh_pwd(main, path_pwd);
+					refresh_oldpwd(main, current);
 				}
 			}
 			else
@@ -150,12 +159,10 @@ void cd(char *path, t_main *main, bool child)
 			dir = change_dir(new_path, main, child);
 			if (dir == 0)
 			{
-				main->prev = ft_calloc(sizeof(char), ft_strlen(current) + 1);
-				ft_strlcpy(main->prev, current, ft_strlen(current) + 1);
 				path_pwd = ft_calloc(sizeof(char), 4096);
 				getcwd(path_pwd, 4096);
 				refresh_pwd(main, path_pwd);
-				refresh_oldpwd(main, main->prev);
+				refresh_oldpwd(main, current);
 			}
 		}
 		if (child)
