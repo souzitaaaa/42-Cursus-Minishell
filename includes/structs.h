@@ -41,7 +41,6 @@ typedef struct s_hd
 typedef struct s_frees
 {
 	bool            lexer_s;
-	bool            prompt_s;
 } t_free;
 
 /*

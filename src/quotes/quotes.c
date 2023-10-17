@@ -75,6 +75,7 @@ int check_quotes_print(t_main *main)
 	char open_quote_type = '\0';  // Tipo da aspa de abertura
 	//printf("\033[1;35m\t\t[Quotes analises]\033[0m\n");
 	main->input_prompt = remove_empty_quotes(main->input_prompt);
+	main->tokens.str_len = ft_strlen(main->input_prompt);
 	while (main->input_prompt[i] != '\0')
 	{
 		char c = main->input_prompt[i];

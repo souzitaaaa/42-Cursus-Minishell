@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/15 17:20:40 by marvin           ###   ########.fr        #
+#    Updated: 2023/10/16 16:19:53 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb -Werror #-fsanitize=address 
+CFLAGS			= -Wall -Wextra -g -ggdb -Werror #-fsanitize=address
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -43,8 +43,9 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init free prompts signal destroy \
+_FILES 			= error_msg exit_code init signal\
 					print_img quotes list_quotes quotes_substr \
+					destroy free_structs\
 					list lexer expand expand_utils join_utils lexer_utils add_tokens create_nodes quotes_treatment \
 					extra_tokens output_tokens input_tokens fd_token \
 					parser cmdcat ast ast_utils ast_lexer syntax list_endnull \

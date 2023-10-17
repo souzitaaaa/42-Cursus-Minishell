@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:03:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/29 12:37:04 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:53:42 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	execution(char **cmd, t_main *main);
 /*
 !EXECVE_UTILS
 */
-void	error_execve(char *str);
+void	error_execve(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
 
 

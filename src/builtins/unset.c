@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/13 18:21:58 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:15:22 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void    remove_var(t_env *env, int index)
             shift_index_env(env);
     }
     env->size--;
+	ft_free_str(&current->var);
     free(current);
 }
 
@@ -105,8 +106,6 @@ void	unset(t_main *main, char **array, bool child)
 		unset_exp(main, array[i]);
 		i++;
 	}
-	if (child)
-        exit(exit_code);
-    set_exit_code(main, exit_code);
+	exit_child(main, exit_code, child);
 }
 

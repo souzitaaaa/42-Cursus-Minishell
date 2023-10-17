@@ -31,7 +31,7 @@ char	**quotes_split_expand(char *str, t_main *main, t_type token, bool *quote_hd
 	{
 		*quote_hd = true;
 		result = quotes_treatment(quotes, str, main);
-		//free_quotes();
+		free_quotes(&quotes);
 	}
 	main->flags.hd = false;
 	return (result);
@@ -52,6 +52,7 @@ t_node	*create_n(t_main *main, t_type token, char *str)
 	arr = quotes_split_expand(str, main, token, &quote_hd);
 	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	//free(str);
 	free(arr);
 	new->token.quotes = quote_hd;
 	return (new);

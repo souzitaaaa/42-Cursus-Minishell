@@ -18,7 +18,7 @@ char	*expand_more(t_main *main, char *str)
 	int i = 0;
 	char **arr;
 	char *out;
-	
+
 	arr = ft_split(str, 36);
 			//printf("Arr das vars: \n");
 			//print_arr(arr);
@@ -26,7 +26,7 @@ char	*expand_more(t_main *main, char *str)
 	{
 		if (i != 0 || (i == 0 && *str == '$'))
 		{
-			arr[i] = ft_strjoin("$", arr[i]); //!DAR FREE AO ARR[i]
+			arr[i] = ft_strjoinfree2("$", arr[i]);
 			arr[i] = expand(main, arr[i]);
 		}
 		i++;
@@ -34,7 +34,8 @@ char	*expand_more(t_main *main, char *str)
 			//printf("Arr das vars depois de expandir: \n");
 			//print_arr(arr);
 	out = ft_arr_to_str(arr, str);
-	//!free(arr); ou ft_array_free(&arr);
+	ft_free_str(&str);
+	ft_free_array(&arr);
 	return (out);
 }
 
@@ -63,7 +64,7 @@ char	*expand_var(t_main *main, char *str, int i)
 			expanded = ft_calloc(ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 1, sizeof(char *));
 			ft_strlcpy(expanded, aux->var + ft_strclen(aux->var, '=') + 1, ft_strlen(aux->var) - ft_strclen(aux->var, '=') + 2);
 			out = join_expanded(str, expanded, ft_strclen(aux->var, '=') + 1);
-			//printf("\033[1;32m\t\t[End expanding 2]\033[0m\n");
+			ft_free_str(&expanded);
 			return (out);
 		}
 		aux = aux->next;
@@ -76,7 +77,6 @@ char	*expand_var(t_main *main, char *str, int i)
 //* Vai tratar de expandir a string para a o seu respetivo valor na variavel de ambiente
 	//* ela vai percorrer a lista das env ate achar uma identica ao valor que lhe manda-mos
 	//* quando encontrar vai copiar oque esta depois do = para dentro dessa str
-//!DAR FREE A STR
 char	*expand(t_main *main, char *str)
 {
 	char	*expanded;
@@ -100,6 +100,7 @@ char	*expand(t_main *main, char *str)
 	else
 		out = expand_var(main, str, i);
 			//printf("\033[1;32m\t\t[End expanding 1]\033[0m\n");
+	ft_free_str(&str);
 	return(out);
 }
 
