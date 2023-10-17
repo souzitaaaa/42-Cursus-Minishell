@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 18:06:56 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:18:49 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	env(t_env *env, t_main *main, bool child, char **command);
 /*
 !EXIT
 */
-void	ft_exit(char **command, bool child, t_main *main);
+void	ft_exit(char **command, bool child, t_main *main, bool input);
 void	exit_child(t_main *main, int exit_code, bool child);
 
 /*

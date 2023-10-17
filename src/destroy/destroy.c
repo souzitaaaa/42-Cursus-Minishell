@@ -16,17 +16,15 @@ void    destroy_input(t_main *main)
 {
 	ft_free_str(&main->input_prompt);
 	free_quotes(&main->quotes);
-	//if(main->ast.head == NULL)
-    //	free_lexer(&main->tokens, true);
-	//else
-		free_lexer(&main->tokens, true);
+	free_lexer(&main->tokens);
 	ft_free_array(&main->env_arr);
 	//TODO: free_ast()
 }
 
-void    destroy_main(t_main *main)
+void    destroy_main(t_main *main, bool input)
 {
-	destroy_input(main);
+	if(input)
+		destroy_input(main);
 	free_env(&main->env_list);
 	free_env(&main->export_list);
 	ft_free_str(&main->prev); //!Vamos utilizar??

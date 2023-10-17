@@ -20,17 +20,5 @@ int	add_token(t_main *main, t_type token, char *str)
 	if (!new)
 		return (1);
 	insert_last(&main->tokens, new);
-	main->flags.free_flag.lexer_s = true;
 	return (0);
 }
-
-/*int	add_token_quotes(t_main *main, t_type token, int *i, char **result, bool expand)
-{
-	t_node	*new;
-
-	new = create_n_quotes(main, token, i, result, expand);
-	if (!new)
-		return (1);
-	insert_last(&main->tokens, new);
-	return (0);
-}*/

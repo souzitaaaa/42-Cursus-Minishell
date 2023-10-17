@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_structs.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:10:51 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 16:57:02 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:15:24 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_quotes(t_quotes *stack)
 	stack->size = 0;
 }
 
-void	free_lexer(t_lexer *stack, bool free_arr)
+void	free_lexer(t_lexer *stack)
 {
 	t_node	*element;
 	t_node	*temp;
@@ -44,8 +44,7 @@ void	free_lexer(t_lexer *stack, bool free_arr)
 	counter = 0;
 	while (counter++ < stack->size)
 	{
-		if(free_arr)
-			ft_free_array(&element->token.arr);
+		ft_free_array(&element->token.arr);
 		temp = element;
 		element = element->next;
 		free(temp);

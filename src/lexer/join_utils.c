@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 21:35:06 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:02:18 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ char	**ft_arrstrnl_arrjoin(char	**arr1, char	*str, char	**arr2)
 		return (0);
 	arr1[arr1_len - 1] = ft_strjoinfree(arr1[arr1_len -1], str);
 	if(!arr2)
+	{
+		free(new_arr);
 		return(arr1);
+	}
 	ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
 	ft_arrlcpy(new_arr + arr1_len, arr2, (arr2_len + 1));
 	return (new_arr);
@@ -73,7 +76,7 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2)
 	if (!new_arr)
 		return (0);
 	str = ft_strjoinfree(str, arr2[0]);
-	arr1[arr1_len -1] = ft_strjoinfree(arr1[arr1_len -1], str);
+	arr1[arr1_len -1] = ft_strjoinfree3(arr1[arr1_len -1], str);
 	ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
 	ft_arrlcpy(new_arr + arr1_len, arr2 + 1, (arr2_len));
 	return (new_arr);
@@ -87,6 +90,5 @@ char *join_expanded(char *str, char *expanded, int len)
 	before = ft_substr(str, 0, ft_strclen(str, '$'));
 	result = ft_strjoinfree(before, expanded);
 	result = ft_strjoinfree(result, str + ft_strclen(str, '$') + len);
-	printf("result: %s\n", result);
 	return(result);
 }
