@@ -36,25 +36,16 @@ typedef struct s_hd
 } t_hd;
 
 /*
-!FREE
-*/
-typedef struct s_frees
-{
-	bool            lexer_s;
-} t_free;
-
-/*
 !BOOL
 */
 typedef struct s_bool
 {
-	bool			put_node_behind;
+	bool			put_node_behind; //!APAGAR
 	bool			rdr_treated;
 	bool			rdr_err;
 	bool			signal;
 	bool			not_print;
 	bool			hd;
-	t_free          free_flag;
 } t_bool;
 
 /*

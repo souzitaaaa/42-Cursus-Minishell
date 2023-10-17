@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_structs.c                                     :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:10:51 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 16:57:02 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/17 14:35:08 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_quotes(t_quotes *stack)
 	stack->size = 0;
 }
 
-void	free_lexer(t_lexer *stack, bool free_arr)
+void	free_lexer(t_lexer *stack)
 {
 	t_node	*element;
 	t_node	*temp;
@@ -44,14 +44,30 @@ void	free_lexer(t_lexer *stack, bool free_arr)
 	counter = 0;
 	while (counter++ < stack->size)
 	{
-		if(free_arr)
-			ft_free_array(&element->token.arr);
+		ft_free_array(&element->token.arr);
 		temp = element;
 		element = element->next;
 		free(temp);
 	}
 	stack->head = NULL;
 	stack->size = 0;
+}
+
+void	free_list(t_node **head)
+{
+	t_node	*element;
+	t_node	*temp;
+
+	if (*head == NULL)
+		return ;
+	element = *head;
+	while (element != NULL)
+	{
+		temp = element;
+		element = element->next;
+		free(temp);
+	}
+	*head = NULL;
 }
 
 void	free_env(t_env *stack)

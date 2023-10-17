@@ -20,7 +20,6 @@ int	add_token(t_main *main, t_type token, char *str)
 	if (!new)
 		return (1);
 	insert_last(&main->tokens, new);
-	main->flags.free_flag.lexer_s = true;
 	return (0);
 }
 
