@@ -73,7 +73,7 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 		close(heredoc_fd[0]);
 		hd_line = read_stdin(heredoc_fd[1], lim, quotes, main);
 		close(heredoc_fd[1]);
-		destroy_main(main);
+		destroy_main(main, true);
 		exit(hd_line);
 	}
 	signals(-1);

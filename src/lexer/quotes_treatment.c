@@ -49,20 +49,48 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 
 char	**check_join(t_join join, char before, char after)
 {
-	char **result;
+	char	**result;
 
 	if (join.before == NULL && join.after == NULL)
+	{
+		printf("0\n");
 		result = str_to_arr(join.str);
+		ft_free_str(&join.str);
+	}
 	else
 	{
 			if((before == ' ' || before == 0) && (after == ' ' || after == 0))
+			{
+				printf("1\n");
 				result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
+				free(join.before);
+				free(join.after);
+			}
 			else if (before == ' ' || before == 0)
+			{
+				printf("2\n");
 				result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
+				free(join.before);
+				ft_free_array(&join.after);
+			}
 			else if (after == ' ' || after == 0)
+			{
+				printf("3\n");
 				result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
+				ft_free_str(&join.str);
+				if(after == ' ')
+				{
+					free(join.after);
+					free(join.before);
+				}
+			}
 			else
+			{
+				printf("4\n");
 				result = ft_arrstrarrjoin(join.before, join.str, join.after);
+				free(join.before);
+				ft_free_array(&join.after);
+			}
 	}
 	return(result);
 }
@@ -90,8 +118,6 @@ char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		result = check_join(join, str[aux->start - 1] , 0);
 	else
 		result = check_join(join, str[aux->start - 1] , str[aux->end + 1]);
-	free(join.before);
-	free(join.after);
 	return (result);
 }
 
