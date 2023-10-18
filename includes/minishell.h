@@ -85,6 +85,7 @@ void	error_quotes(int fd);
 void	error_syntax(char *token);
 void	error_msg_fd(char *str, int fd);
 void	error_msg_hd(char *str, int fd, int line);
+void	error_with_arg(int fd, char *str);
 
 /*
 !EXIT_CODE.C

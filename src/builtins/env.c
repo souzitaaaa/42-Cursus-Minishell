@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+/*A env percorre a lista de variaveis de ambiente e imprime ela quando chamada, se a lista tiver vazia ou 
+o env for chamado com argumentos dá erro*/
 void	env(t_env *env, t_main *main, bool child, char **command)
 {
 	t_var	*current;
@@ -25,6 +27,8 @@ void	env(t_env *env, t_main *main, bool child, char **command)
 	}
 	if (command[1] != NULL)
 	{
+		if (main->flags.not_print == false)
+			error_with_arg(STDOUT_FILENO, command[1]);
 		exit_child(main, 127, child);
 		return ;
 	}

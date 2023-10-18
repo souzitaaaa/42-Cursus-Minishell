@@ -12,6 +12,7 @@
 
 #include "../../includes/minishell.h"
 
+/*Essa função é para saber se é um numero*/
 int	ft_isnbr(const char *str)
 {
 	if (*str == '-' || *str == '+')
@@ -27,49 +28,10 @@ int	ft_isnbr(const char *str)
 	return(1);
 }
 
-int	validations_ch(char *str, int fd, char *command) 
-{
-    int i;
-	
-	i = 0;
-	if (str[i] == '-')
-	{
-        ft_putstr_fd("minishell: ", fd);
-		ft_putstr_fd(command, fd);
-		ft_putstr_fd(": '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("': invalid option\n", fd);
-		return (2);
-    }
-	else if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
-	{
-        ft_putstr_fd("minishell: ", fd);
-		ft_putstr_fd(command, fd);
-		ft_putstr_fd(": '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("': not a valid identifier\n", fd);
-		return (1);
-    }
-	else if (str[i] == '(')
-	{
-        ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd("syntax error near unexpected token 'newline'\n", fd);
-		return (258);
-    }
-	else if (str[i] == ')')
-	{
-        ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd("syntax error near unexpected token '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("'\n", fd);
-		return (258);
-    }
-	return (0);
-}
-
+/*Essa função verifica se a variável dada na str já existe na env_lista*/
 bool	verify_var(t_main *main, char *str)
 {
-	int		count = 0;
+	int		count;
 	t_var	*aux;
 
 	count = 0;

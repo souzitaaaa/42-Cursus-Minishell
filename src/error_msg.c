@@ -67,6 +67,13 @@ void	error_env(int fd)
 	ft_putendl_fd("env: No such file or directory", fd);
 }
 
+void	error_with_arg(int fd, char *str)
+{
+	ft_putstr_fd("env: ", fd);
+	ft_putstr_fd(str, fd);
+	ft_putendl_fd(": No such file or directory", fd);
+}
+
 //void	error_quotes(int fd)
 void	error_syntax(char *token)
 {
@@ -75,3 +82,4 @@ void	error_syntax(char *token)
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
 }
+

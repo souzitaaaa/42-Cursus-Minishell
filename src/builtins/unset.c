@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/18 16:10:57 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/18 19:15:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 /*Essa função recebe um ponteiro para a estrutura t_env como argumento e atualiza
 o index dos elementos na lista, precisamos saber o index para dar unset*/
-
 void	shift_index_env(t_env *stack)
 {
 	t_var	*element;
