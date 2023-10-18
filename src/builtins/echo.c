@@ -51,7 +51,5 @@ void	echo(char **command, t_main *main, bool child)
 	}
 	if (!flag)
 		ft_printf("\n");
-	if (child)
-		exit(0);
-	set_exit_code(main, 0);
+	exit_child(main, 0, child);
 }

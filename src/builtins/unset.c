@@ -6,11 +6,14 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/18 15:47:26 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/18 16:10:57 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/*Essa função recebe um ponteiro para a estrutura t_env como argumento e atualiza
+o index dos elementos na lista, precisamos saber o index para dar unset*/
 
 void	shift_index_env(t_env *stack)
 {
@@ -25,6 +28,7 @@ void	shift_index_env(t_env *stack)
 	}
 }
 
+/*Essa funcao remove um nó da lista de acordo com o index dele usando a funcao shift_index_env*/
 void	remove_var(t_env *env, int index)
 {
 	t_var	*current;
@@ -47,6 +51,8 @@ void	remove_var(t_env *env, int index)
 	free(current);
 }
 
+/*Essa função percorre a env_list e compara se a variável dada no input é a mesma encontrada na lista, 
+se sim ela remove*/
 int	unset_env(t_main *main, char *str)
 {
 	int		count;
@@ -69,6 +75,8 @@ int	unset_env(t_main *main, char *str)
 	return (index);
 }
 
+/*Essa função percorre a export_list e compara se a variável dada no input é a mesma encontrada na lista, 
+se sim ela remove*/
 void	unset_exp(t_main *main, char *str)
 {
 	int		count;
@@ -87,6 +95,8 @@ void	unset_exp(t_main *main, char *str)
 	}
 }
 
+/*Essa funcao valida se a variavel que esta tentando ser removida é valida, se for ela dá unset da 
+variavel nas duas listas: env_list e export_list. Se não, dá uma mensagem de erro adaptada para cada situação*/
 void	unset(t_main *main, char **array, bool child)
 {
 	int	i;

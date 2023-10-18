@@ -20,16 +20,12 @@ void	env(t_env *env, t_main *main, bool child, char **command)
 	{
 		if (main->flags.not_print == false)
 			error_env(STDOUT_FILENO);
-		if (child)
-			exit(127);
-		set_exit_code(main, 127);
+		exit_child(main, 127, child);
 		return ;
 	}
 	if (command[1] != NULL)
 	{
-		if (child)
-			exit(127);
-		set_exit_code(main, 127);
+		exit_child(main, 127, child);
 		return ;
 	}
 	current = env->head;
@@ -39,7 +35,5 @@ void	env(t_env *env, t_main *main, bool child, char **command)
 		ft_printf("%s\n", current->var);
 		current = current->next;
 	}
-	if (child)
-		exit(0);
-	set_exit_code(main, 0);
+	exit_child(main, 0, child);
 }

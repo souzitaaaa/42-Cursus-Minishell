@@ -22,7 +22,7 @@ void	ft_exit(char **command, bool child, t_main *main, bool input)
 {
 	int exit_code;
 
-	rl_clear_history();
+	//rl_clear_history();
 	if (!child)
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if(!command)

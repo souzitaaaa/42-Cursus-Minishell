@@ -60,9 +60,7 @@ int change_dir(char *path, t_main *main, bool child)
 	{
 		if (main->flags.not_print == false)
 			error_msg_file(path, STDERR_FILENO);
-		if (child)
-			exit(1);
-		set_exit_code(main, 1);
+		exit_child(main, 1, child);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:17:24 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/18 15:47:22 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/18 16:04:30 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,5 @@ void	pwd(t_main *main, bool child)
 	getcwd(pwd, 4096);
 	ft_printf("%s\n", pwd);
 	free(pwd);
-	if (child)
-		exit(0);
-	set_exit_code(main, 0);
+	exit_child(main, 0, child);
 }
