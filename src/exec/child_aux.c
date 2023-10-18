@@ -43,7 +43,7 @@ void	error_fp(int result, int exit_code, t_main *main)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putendl_fd(strerror(exit_code), STDERR_FILENO);
 		set_exit_code(main, exit_code);
-		ft_exit(NULL, false, *main);
+		ft_exit(NULL, false, main, true);
 	}
 }
 

@@ -152,7 +152,7 @@ void	init_rdr(t_lexer tokens, t_main *main)
 		if(hd)
 			close(main->hd.fd);
 		find_exec_cmd(tokens, main);
-		exit(0);
+		exit_child(main, 0, true);
 	}
 	else //!DESMECESSARIO
 	{

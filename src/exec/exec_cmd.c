@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/26 17:15:09 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/17 19:17:22 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_cmd(char **command, t_main *main, bool child)
 	else if (ft_strcmp(command[0], "unset") == 0)
 		unset(main, command, child);
 	else if (ft_strcmp(command[0], "exit") == 0)
-		ft_exit(command, child, *main);
+		ft_exit(command, child, main, true);
    	else
        exec_other_cmd(command, main, child);
 }

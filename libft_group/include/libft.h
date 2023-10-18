@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/09 18:04:07 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/17 19:02:43 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ Libraries
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include "get_next_line.h"
+# include <stdbool.h>
+# include "get_next_line.h"
 
 /*
 libft
@@ -66,12 +67,18 @@ size_t	ft_arrlen(char **arr);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_arrlcpy(char **dst, char **src, size_t size);
 void	ft_strccpy(char *dst, char *src, char c);
-//FT_JOIN.C
+//FT_STRJOIN.C
 char	*ft_strjoin(char *str, const char *str2);
 char	*ft_strjoinfree(char const *s1, char const *s2);
+char	*ft_strjoinfree2(char const *s1, char const *s2);
+char	*ft_strjoinfree3(char const *s1, char const *s2);
+//FT_ARRJOIN.C
 char	**ft_arrjoin(char **s1, char **s2);
-char	**ft_arrstrarrjoin(char **arr1, char *str, char **arr2);
+char	**ft_arrnl_joinfree(char **s1, char **s2);
+char	**ft_arrjoinfree(char **s1, char **s2);
+char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2);
 char	**ft_arrstrjoin(char	**arr, char	*str);
+char	**ft_strarrjoin(char *str, char	**arr);
 
 /*
 ft_printf

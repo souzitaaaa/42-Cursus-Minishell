@@ -21,6 +21,7 @@ void    remove_node(t_lexer *lexer, int index)
             shift_index(lexer);
     }
     lexer->size--;
+	free(current->token.arr); //! Liberto assim porque passei a informacao para outro lado e preciso dela
     free(current);
 }
 

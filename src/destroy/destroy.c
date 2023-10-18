@@ -12,51 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-void	destroy_token(t_node *node)
+void    destroy_input(t_main *main)
 {
-	int	i;
-
-	i = 0;
-	while(node->token.arr[i] != NULL)
-	{
-		free(node->token.arr[i]);
-		i++;
-	}
-	free(node->token.arr);
+	ft_free_str(&main->input_prompt);
+	free_quotes(&main->quotes);
+	free_lexer(&main->tokens);
+	ft_free_array(&main->env_arr);
+	//TODO: free_ast()
 }
 
-void	free_lexer(t_lexer *stack)
+void    destroy_main(t_main *main, bool input)
 {
-	t_node	*element;
-	t_node	*temp;
-	int		counter;
-
-	if (stack->head == NULL)
-		return ;
-	element = stack->head;
-	counter = 0;
-	while (counter++ < stack->size)
-	{
-		destroy_token(element);
-		temp = element;
-		element = element->next;
-		free(temp);
-	}
-	stack->head = NULL;
-	stack->size = 0;
-}
-
-void    free_prompt(t_prompt *prompt_list)
-{
-    free(prompt_list->out);
-    free(prompt_list->pwd);
-    free(prompt_list->logname);
-}
-
-void    destroy(t_main *main)
-{
-    if (main->flags.free_flag.prompt_s == true)
-        free_prompt(&main->prompt_list);
-    if (main->flags.free_flag.lexer_s == true)
-        free_lexer(&main->tokens);
+	if(input)
+		destroy_input(main);
+	free_env(&main->env_list);
+	free_env(&main->export_list);
+	ft_free_str(&main->prev); //!Vamos utilizar??
 }

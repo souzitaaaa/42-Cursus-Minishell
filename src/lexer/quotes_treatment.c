@@ -12,126 +12,141 @@
 
 #include "../../includes/minishell.h"
 
-void    single_quotes(t_main *main, int *i, int start, t_node_quotes *aux)
+char	**str_to_arr(char *str)
 {
-	char    *str;
-	char    *out;
-			printf("\033[1;35m\t\t(Single quotes treatment)\033[0m\n");
-		printf("Start on the str: %c\n", main->input_prompt[aux->start]);
-		printf("End on the str: %c\n", main->input_prompt[aux->end]);
-	out = ft_substr(main->input_prompt, start, (aux->start - start));
-		printf("aux out: %s\n", out);
-	str = ft_substr(main->input_prompt, aux->start + 1, (aux->end - aux->start) - 1);
-		printf("str: %s\n", str);
-	out = ft_strjoin(out, str);
-		printf("out: %s\n", out);
-	add_token_quotes(main, STRING, i, out, false);
-	(*i) = aux->end;
-			printf("\033[1;35m\t\t(End single quotes treatment)\033[0m\n");
+	char **result;
+
+	//printf("entra aqui\n");
+	result = ft_calloc(2, sizeof(char *));
+	result[0] = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	ft_strlcpy(result[0], str, ft_strlen(str) + 1);
+	return(result);
 }
 
-int	get_min(t_len *len_out)
+int	get_min(int a, int b)
 {
-	int	min = len_out->pipe;
-	if (len_out->in < min)
-		min = len_out->in;
-	if (len_out->out < min)
-		min = len_out->out;
-	if (len_out->squote < min)
-		min = len_out->squote;
-	if (len_out->dquote < min)
-		min = len_out->dquote;
-	printf("min: %i\n", min);
-	return (min);
+	if (a < b)
+		return (a);
+	return (b);
 }
 
-int	get_len_out(t_main *main, t_node_quotes *aux)
+char	**out_of_quotes(char *str, int start, int len, t_main *main)
 {
-	t_len len_out;
-
-	len_out.pipe = ft_strclen(main->input_prompt + aux->end + 1, '|');
-	printf("pipe: %i\n", len_out.pipe);
-	len_out.in = ft_strclen(main->input_prompt + aux->end + 1, '<');
-	printf("in: %i\n", len_out.in);
-	len_out.out = ft_strclen(main->input_prompt + aux->end + 1, '>');
-	printf("out: %i\n", len_out.out);
-	len_out.squote = ft_strclen(main->input_prompt + aux->end + 1, SQUOTE);
-	printf("squote: %i\n", len_out.squote);
-	len_out.dquote = ft_strclen(main->input_prompt + aux->end + 1, DQUOTE);
-	printf("dquote: %i\n", len_out.dquote);
-	return (get_min(&len_out));
-}
-
-void    double_quotes(t_main *main, int *i, int start, t_node_quotes *aux)
-{
-	char    *str;
-	char	**before;
-	char	**after;
-	char    *out;
-	int     j = 0;
+	char	*temp;
 	char	**result;
 
-			printf("\033[1;35m\t\t(Double quotes treatment)\033[0m\n");
-
-		printf("Start on the str: %c\n", main->input_prompt[aux->start]);
-		printf("End on the str: %c\n", main->input_prompt[aux->end]);
-	out = ft_substr(main->input_prompt, start, (aux->start - start));
-		printf("before out: %s\n", out);
-	before = ft_split(out, ' ');;
-	free(out);
-	check_expansion(main, before);
-	str = ft_substr(main->input_prompt, aux->start + 1, (aux->end - aux->start) - 1);
-	while (str[j] != '\0')
+	if (len > 0)
 	{
-		if (ft_strchr("$", str[j]))
-		{
-			str = expand(main, str);
-			break ;
-		}
-		j++;
-	}
-	printf("str: %s\n", str);
-	if (get_len_out(main, aux) > 0)
-	{
-		out = ft_substr(main->input_prompt, aux->end + 1, get_len_out(main, aux));
-		printf("after out: %s\n", out);
-		after = ft_split(out, ' ');
-		free(out);
-		check_expansion(main, after);
-		result = ft_arrstrarrjoin(before, str, after);
-	}
-	else
-		result = ft_arrstrjoin(before, str);
-	add_token_quotes(main, STRING, i, result, true);
-	(*i) = aux->end;
-		printf("\033[1;35m\t\t(End double quotes treatment)\033[0m\n");
-}
-
-t_node_quotes *get_node_quote(t_quotes *quotes, int *i)
-{
-	int		count = 0;
-	t_node_quotes *aux = quotes->head;
-
-	while(count++ < quotes->size)
-	{
-		if (aux->start == *i)
-			return (aux);
-		aux = aux->next;
+		temp = ft_substr(str, start, len);
+		result = ft_split(temp, ' ');
+		ft_free_str(&temp);
+		if(main->flags.hd == false)
+			check_expansion_arr(main, result);
+		return (result);
 	}
 	return (NULL);
 }
 
-void    quotes_treatment(t_main *main, int *i, int start)
+char	**check_join(t_join join, char before, char after)
+{
+	char	**result;
+
+	if (join.before == NULL && join.after == NULL)
+	{
+		printf("0\n");
+		result = str_to_arr(join.str);
+		ft_free_str(&join.str);
+	}
+	else
+	{
+			if((before == ' ' || before == 0) && (after == ' ' || after == 0))
+			{
+				printf("1\n");
+				result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
+				free(join.before);
+				free(join.after);
+			}
+			else if (before == ' ' || before == 0)
+			{
+				printf("2\n");
+				result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
+				free(join.before);
+				ft_free_array(&join.after);
+			}
+			else if (after == ' ' || after == 0)
+			{
+				printf("3\n");
+				result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
+				ft_free_str(&join.str);
+				if(after == ' ')
+				{
+					free(join.after);
+					free(join.before);
+				}
+			}
+			else
+			{
+				printf("4\n");
+				result = ft_arrstrarrjoin(join.before, join.str, join.after);
+				free(join.before);
+				ft_free_array(&join.after);
+			}
+	}
+	return(result);
+}
+
+char    **ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
+{
+	t_join	join;
+	char	**result;
+	int		len;
+
+	if(first)
+		join.before = out_of_quotes(str, 0, aux->start, main);
+	else
+		join.before = NULL;
+	join.str = ft_substr(str, aux->start + 1, (aux->end - aux->start) - 1);
+	if (aux->type == DQUOTE)
+		join.str = check_expansion_str(main, join.str, false);
+	len = get_min(ft_strclen(str + aux->end + 1, SQUOTE), ft_strclen(str + aux->end + 1, DQUOTE));
+	join.after = out_of_quotes(str, aux->end + 1, len, main);
+	if(join.before == NULL && join.after == NULL)
+		result = check_join(join, 0, 0);
+	else if(join.before == NULL)
+		result = check_join(join, 0, str[aux->end + 1]);
+	else if(join.after == NULL)
+		result = check_join(join, str[aux->start - 1] , 0);
+	else
+		result = check_join(join, str[aux->start - 1] , str[aux->end + 1]);
+	return (result);
+}
+
+char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 {
 	t_node_quotes *aux;
+	char	**temp;
+	char	**result;
 
-			printf("\033[1;35m\t[Quotes treatment]\033[0m\n");
-				print_quotes(&main->quotes);
-		aux = get_node_quote(&main->quotes, i);
-				printf("type/start/end -> %c %i %i\n", aux->type, aux->start, aux->end);
-		if (aux->type == SQUOTE)
-			single_quotes(main, i, start, aux);
+	result = ft_calloc(1, sizeof(char *));
+	aux = quotes.head;
+	quotes.counter = 0;
+	while(quotes.counter++ < quotes.size)
+	{
+		if(aux->index == 0)
+		{
+			temp = ft_quotes(aux, str, main, true);
+			result = ft_arrnl_joinfree(result, temp);
+		}
 		else
-			double_quotes(main, i, start, aux);
-		printf("\033[1;35m\t[End quotes treatment]\033[0m\n");
+		{
+			temp = ft_quotes(aux, str, main, false);
+			if(str[aux->start - 1] == ' ')
+				result = ft_arrnl_joinfree(result, temp);
+			else
+				result = ft_arrjoinfree(result, temp);
+		}
+		free(temp);
+		aux = aux->next;
+	}
+	return (result);
 }

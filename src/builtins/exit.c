@@ -12,33 +12,45 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_exit(char **command, bool child, t_main main)
+void	free_and_exit(t_main *main, int exit_code, bool input)
+{
+	destroy_main(main, input);
+	exit(exit_code);
+}
+
+void	ft_exit(char **command, bool child, t_main *main, bool input)
 {
 	int exit_code;
 
-	//!clear history
-	//free_all(); //!É PARA DAR FREE AQUI
+	rl_clear_history();
 	if (!child)
 		ft_putendl_fd("exit", STDERR_FILENO);
-	if (!command)
-		exit(main.exit_code);
-	if (!command[1])
-		exit(main.exit_code);
-	if (ft_isnbr(command[1]) && command[2] == NULL)
+	if(!command)
+		free_and_exit(main, main->exit_code, input);
+	if(!command[1])
+		free_and_exit(main, main->exit_code, input);
+	if(ft_isnbr(command[1]) && command[2] == NULL)
 	{
 		exit_code = ft_atoi(command[1]);
-		exit((unsigned char)exit_code);
+		free_and_exit(main, (unsigned char)exit_code, input);
 	}
 	if (ft_isnbr(command[1]) && command[2])
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
-		exit(1);
+		free_and_exit(main, 1, input);
 	}
 	if (!ft_isnbr(command[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(command[1], STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
-		exit(2);
+		free_and_exit(main, 2, input);
 	}
+}
+
+void	exit_child(t_main *main, int exit_code, bool child)
+{
+	set_exit_code(main, exit_code);
+	if (child)
+		ft_exit(NULL, true, main, true);
 }

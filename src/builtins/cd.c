@@ -22,9 +22,7 @@ char	*only_cd(t_main *main, bool  child)
 	{
 		if (main->flags.not_print == false)
 			error_cd(STDERR_FILENO, "HOME");
-		if (child)
-			exit(1);
-		set_exit_code(main, 1);
+		exit_child(main, 1, child);
 		return (NULL);
 	}
 	aux = ft_substr(home, 1, ft_strlen(home) - 1);
@@ -44,9 +42,7 @@ char *find_home(char *path, t_main *main, bool child)
 		{
 			if (main->flags.not_print == false)
 				error_msg_file(path, STDERR_FILENO);
-			if (child)
-				exit(1);
-			set_exit_code(main, 1);
+			exit_child(main, 1, child);
 			return (NULL);
 		}
 		aux = ft_substr(path, 1, ft_strlen(path) - 1);
@@ -119,9 +115,7 @@ void cd(char *path, t_main *main, bool child)
 		{
 			if (main->flags.not_print == false)
 				error_cd(STDERR_FILENO, "HOME");
-			if (child)
-					exit(1);
-			set_exit_code(main, 1);
+			exit_child(main, 1, child);
 			return ;
 		}
 	}
@@ -147,9 +141,7 @@ void cd(char *path, t_main *main, bool child)
 			{
 				if (main->flags.not_print == false)
 					error_cd(STDERR_FILENO, "OLDPWD");
-				if (child)
-					exit(1);
-				set_exit_code(main, 1);
+				exit_child(main, 1, child);
 				return ;
 			}
 		}
@@ -165,8 +157,6 @@ void cd(char *path, t_main *main, bool child)
 				refresh_oldpwd(main, current);
 			}
 		}
-		if (child)
-			exit(0);
-		set_exit_code(main, 0);
+		exit_child(main, 0, child);
 	}
 }

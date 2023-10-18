@@ -6,7 +6,7 @@
 /*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 17:30:49 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/18 15:46:00 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	env(t_env *env, t_main *main, bool child, char **command);
 /*
 !EXIT
 */
-void	ft_exit(char **command, bool child, t_main main);
+void	ft_exit(char **command, bool child, t_main *main, bool input);
+void	exit_child(t_main *main, int exit_code, bool child);
 
 /*
 !EXPORT

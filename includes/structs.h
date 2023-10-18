@@ -16,6 +16,16 @@
 # include "minishell.h"
 
 /*
+!JOIN
+*/
+typedef struct s_join
+{
+	char	**before;
+	char	*str;
+	char	**after;
+} t_join;
+
+/*
 !HD
 */
 typedef struct s_hd
@@ -31,7 +41,6 @@ typedef struct s_hd
 typedef struct s_frees
 {
 	bool            lexer_s;
-	bool            prompt_s;
 } t_free;
 
 /*

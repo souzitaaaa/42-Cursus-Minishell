@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/03 14:19:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:43:49 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void    check_quotes_heredoc(t_lexer *lexer)
 			}
 			j++;
 		}
-
 	}
 }
 
@@ -63,50 +62,62 @@ void    get_fd_out(t_main *main, int *i, t_type token, char *fd)
 	bool	run = true;
 
 			//printf("fd to insert: %s\n", fd);
-	while (special_chr(main->input_prompt[*i]) == true
-		|| is_space(main->input_prompt[*i]) == true)
-		(*i)++;
+	/*while (special_chr(main->input_prompt[*i]) == true
+        || is_space(main->input_prompt[*i]) == true)
+        (*i)++;*/
+    while (is_space(main->input_prompt[*i]) == true)
+    {
+        (*i)++;
+    }
 	start = *i;
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{
+		if (special_chr(main->input_prompt[*i]) == true
+			&& check_index_quotes(main, i) == false)
+            break ;
 		if (is_space(main->input_prompt[*i]) == false)
 			(*i)++;
-		else
+		else if (check_index_quotes(main, i) == false)
 			run = false;
+		else
+			(*i)++;
 	}
 	aux = ft_substr(main->input_prompt, start, (*i - start));
-	fd = ft_strjoin(fd, " ");
-	fd = ft_strjoin(fd, aux);
-	add_token(main, token, i, fd);
-	if (token == HEREDOC || token == IN)
-		check_quotes_heredoc(&main->tokens);
-	//if (*i < main->tokens.str_len)
-	//    main->flags.put_node_behind = true;
-	//(*i)--;
+	fd = ft_strjoinfree(fd, " ");
+	fd = ft_strjoinfree(fd, aux);
+	add_token(main, token, fd);
+	free(aux);
+	free(fd);
 }
 
 //* Identifica qual o tipo de token do fd
-void    fd_tokens(t_main *main, int *i, char *str, char token)
+void    fd_tokens(t_main *main, int *i, char *fd, char token)
 {
 	if (token == OUT)
 	{
 		if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == OUT)
 		{
-			(*i)++;
-			get_fd_out(main, i, APPEND, str);
+			(*i) += 2;
+			get_fd_out(main, i, APPEND, fd);
 		}
 		else
-			get_fd_out(main, i, OUT, str);
+		{
+			(*i)++;
+			get_fd_out(main, i, OUT, fd);
+		}
 	}
 	else
 	{
 		if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
 		{
-			(*i)++;
-			get_fd_out(main, i, HEREDOC, str);
+			(*i) += 2;
+			get_fd_out(main, i, HEREDOC, fd);
 		}
 		else
-			get_fd_out(main, i, IN, str);
+		{
+			(*i)++;
+			get_fd_out(main, i, IN, fd);
+		}
 	}
 
 }
@@ -129,7 +140,6 @@ int    get_fd_rdr(t_main *main, int *i)
 				//printf("\033[1;32m\t\t(Get_fd_rdr)\033[0m\n");
 	while (main->input_prompt[*i])
 	{
-		printf("Char to compare: %c\n", main->input_prompt[*i]);
 		if (main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57)
 			(*i)++;
 		else
@@ -137,7 +147,7 @@ int    get_fd_rdr(t_main *main, int *i)
 			if (special_chr(main->input_prompt[*i]) == true)
 			{
 				if (ft_strncmp(main->input_prompt + *i, "|", 1) == 0)
-					return (*i - start);
+					break ;
 				else
 				{
 					str = ft_substr(main->input_prompt, start, (*i - start));
@@ -145,14 +155,11 @@ int    get_fd_rdr(t_main *main, int *i)
 						break ;
 					fd_tokens(main, i, str, main->input_prompt[*i]);
 					main->flags.rdr_treated = true;
-					//printf("\033[1;32m\t\t(End get_fd_rdr special)\033[0m\n");
-					return (*i - start);
 				}
 			}
 			else
-				return (*i - start);
+				break ;
 		}
 	}
-				//printf("\033[1;32m\t\t(End get_fd_rdr)\033[0m\n");
 	return (*i - start);
 }

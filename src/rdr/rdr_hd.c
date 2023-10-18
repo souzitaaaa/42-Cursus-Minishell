@@ -49,10 +49,11 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		str = get_next_line(STDIN_FILENO, false);
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
-		//!if(!quotes)
-			//!str = expand_line(str, quotes);
+		if(!quotes)
+			str = check_expansion_str(main, str, true);
 		write(fd, str, strlen(str));
-		ft_free_str(&str);
+		if(*str)
+			ft_free_str(&str);
 	}
 	return(line);
 }
@@ -72,6 +73,7 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 		close(heredoc_fd[0]);
 		hd_line = read_stdin(heredoc_fd[1], lim, quotes, main);
 		close(heredoc_fd[1]);
+		destroy_main(main, true);
 		exit(hd_line);
 	}
 	signals(-1);

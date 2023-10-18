@@ -102,9 +102,7 @@ void export(t_main *main, char **array, bool child)
 			{
 				if (main->flags.not_print == false)
 					error_export(STDERR_FILENO);
-                if (child)
-                    exit(2);
-                set_exit_code(main, 2);
+                exit_child(main, 2, child);
 			}
 			else
             {
@@ -124,8 +122,6 @@ void export(t_main *main, char **array, bool child)
             i++;
         }
     }
-    if (child)
-        exit(exit_code);
-    set_exit_code(main, exit_code);
+    exit_child(main, exit_code, child);
 }
 

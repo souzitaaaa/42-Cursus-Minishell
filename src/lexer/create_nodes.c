@@ -12,56 +12,48 @@
 
 #include "../../includes/minishell.h"
 
-t_node	*create_n(t_main *main, t_type token, int *i, char *str)
+
+char	**quotes_split_expand(char *str, t_main *main, t_type token, bool *quote_hd)
+{
+	char		**result;
+	t_quotes	quotes;
+
+	ini_quotes(&quotes);
+	quotes_substr(&quotes, str);
+	if(token == HEREDOC)
+		main->flags.hd = true;
+	if (quotes.head == NULL)
+	{
+		result = ft_split(str, ' ');
+		check_expansion_arr(main, result);
+	}
+	else
+	{
+		*quote_hd = true;
+		result = quotes_treatment(quotes, str, main);
+		free_quotes(&quotes);
+	}
+	main->flags.hd = false;
+	return (result);
+}
+
+t_node	*create_n(t_main *main, t_type token, char *str)
 {
 	t_node	*new;
 	char	**arr;
+	bool    quote_hd;
 
 	(void)main;
-	(void)index;
+	quote_hd = false;
 	new = malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->token.type = token;
-	//meter aqui o tratamento de quotes
-	arr = ft_split(str, 32);
-	check_expansion(main, arr);
+	arr = quotes_split_expand(str, main, token, &quote_hd);
 	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
-	new->token.quotes = false;
-	return (new);
-}
-
-t_node	*create_n_prev(t_main *main, t_type token, char **arr)
-{
-	t_node	*new;
-
-	(void)main;
-	(void)index;
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->token.type = token;
-	check_expansion(main, arr);
-	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
-	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
-	new->token.quotes = false;
-	//! falta o free da arr
-	return (new);
-}
-
-t_node	*create_n_quotes(t_main *main, t_type token, int *i, char **result, bool expand)
-{
-	t_node	*new;
-
-	(void)main;
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->token.type = token;
-	new->token.arr = ft_calloc(ft_arrlen(result) + 1, sizeof(char *));
-	ft_arrlcpy(new->token.arr, result, ft_arrlen(result) + 1);
-	new->token.quotes = false;
-	//! falta o free da arr
+	//free(str);
+	free(arr);
+	new->token.quotes = quote_hd;
 	return (new);
 }

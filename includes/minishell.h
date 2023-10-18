@@ -61,6 +61,7 @@ void	print_intro(void);
 void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
+void		ini_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C
@@ -81,6 +82,7 @@ void	error_cd(int fd, char *str);
 void	error_export(int fd);
 void	error_env(int fd);
 void	error_quotes(int fd);
+void	error_syntax(char *token);
 void	error_msg_fd(char *str, int fd);
 void	error_msg_hd(char *str, int fd, int line);
 

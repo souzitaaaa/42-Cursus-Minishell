@@ -58,7 +58,7 @@ void	error_cd(int fd, char *str)
 void	error_export(int fd)
 {
 	ft_putstr_fd("minishell: ", fd);
-	ft_putendl_fd("zsh: bad assignment", fd);
+	ft_putendl_fd("bad assignment", fd);
 }
 
 void	error_env(int fd)
@@ -67,8 +67,11 @@ void	error_env(int fd)
 	ft_putendl_fd("env: No such file or directory", fd);
 }
 
-void	error_quotes(int fd)
+//void	error_quotes(int fd)
+void	error_syntax(char *token)
 {
-	ft_putstr_fd("minishell: ", fd);
-	ft_putendl_fd(SYNTAX_ERROR, fd);
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(SYNTAX_ERROR, STDERR_FILENO);
+	ft_putstr_fd(token, STDERR_FILENO);
+	ft_putendl_fd("'", STDERR_FILENO);
 }

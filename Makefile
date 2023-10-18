@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/10/17 16:44:06 by jede-ara         ###   ########.fr        #
+=======
+#    Updated: 2023/10/16 16:19:53 by rimarque         ###   ########.fr        #
+>>>>>>> origin
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +30,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb #-fsanitize=address #-Werror
+CFLAGS			= -Wall -Wextra -g -ggdb -Werror #-fsanitize=address
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -43,16 +47,22 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init list free prompts signal destroy\
-					lexer token \
-					parser cmdcat ast ast_utils ast_lexer syntax list_endnull\
-					extra_tokens output_tokens input_tokens lexer_utils add_tokens create_nodes fd_token\
+_FILES 			= error_msg exit_code init signal\
+					print_img quotes list_quotes quotes_substr \
+					destroy free_structs\
+					list lexer expand expand_utils join_utils lexer_utils add_tokens create_nodes quotes_treatment \
+					extra_tokens output_tokens input_tokens fd_token \
+					parser cmdcat ast ast_utils ast_lexer syntax list_endnull \
 					env_list env_arr \
 					exec_cmd execve execve_utils child_aux \
 					pipe pipe_utils rdr_input rdr_output \
 					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils \
+<<<<<<< HEAD
 					echo pwd env unset cd export utils_export  utils_builtins utils_cd exit\
 					print_img utils list_quotes
+=======
+					echo pwd env unset cd export utils_export utils_builtins exit
+>>>>>>> origin
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))
