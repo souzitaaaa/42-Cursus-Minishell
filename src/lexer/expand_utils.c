@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 //*A partir da posição seguinte ao 1o $ verifica se há mais $
-bool    check_more_var(char *str, int i)
+bool	check_more_var(char *str, int i)
 {
 	while (str[i] != '\0')
 	{
@@ -24,6 +24,7 @@ bool    check_more_var(char *str, int i)
 	return (false);
 }
 
+//* Função para descobrir o tamanho de um número
 int	get_number_len(int n)
 {
 	int	len;
@@ -39,24 +40,26 @@ int	get_number_len(int n)
 	return (len);
 }
 
+//* Função de ajuda da expand que trata da expansão
+//*  do exit code
 char	*expand_exitcode(t_main *main, char *str)
 {
-    char *expanded;
-    char *out;
+	char	*expanded;
+	char	*out;
 
-	//printf("Encontrada variavel de ambiente: %s\n\tExit code: %i\n", str, main->exit_code);
 	expanded = ft_calloc(get_number_len(main->exit_code), sizeof(char));
 	expanded = ft_itoa(main->exit_code);
 	out = join_expanded(str, expanded, 2);
 	return (out);
 }
 
-char    *ft_arr_to_str(char **arr, char *str)
+//* Função que transforma uma array numa string
+char	*ft_arr_to_str(char **arr, char *str)
 {
-	int     i = 0;
-	char    *out;
+	int		i;
+	char	*out;
 
-	if(str[ft_strlen(str) - 1] == '$')
+	if (str[ft_strlen(str) - 1] == '$')
 		out = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 	else
 		out = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
@@ -66,40 +69,7 @@ char    *ft_arr_to_str(char **arr, char *str)
 		out = ft_strjoinfree(out, arr[i]);
 		i++;
 	}
-	if(str[ft_strlen(str) - 1] == '$')
+	if (str[ft_strlen(str) - 1] == '$')
 		out[ft_strlen(out)] = '$';
-	//printf("Str pós juntar: %s\n", out);
 	return (out);
-}
-
-void	del_emptyline(char **arr)
-{
-	int	i;
-	int j;
-
-	i = 0;
-	while(arr[i])
-	{
-		if(arr[i][0] == '\0')
-		{
-			if(arr[i + 1] == NULL)
-			{
-				ft_free_str(&arr[i]);
-			}
-			else
-			{
-				j = i;
-				while (arr[j + 1])
-				{
-					ft_free_str(&arr[j]);
-					arr[j] = ft_calloc(ft_strlen(arr[j + 1]) + 1, sizeof(char *));
-					ft_strlcpy(arr[j], arr[j + 1], ft_strlen(arr[j + 1]) + 1);
-					j++;
-				}
-				ft_free_str(&arr[j]);
-				arr[j] = NULL;
-			}
-		}
-		i++;
-	}
 }
