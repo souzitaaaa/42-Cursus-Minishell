@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/15 16:56:49 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/18 17:05:01 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,38 @@
 # include "minishell.h"
 
 /*
-!ADD_TOKENS
+!ADD_TOKENS.C
 */
 int		add_token(t_main *main, t_type token, char *str);
-
-/*
-!CREATE_NODES
-*/
 t_node	*create_n(t_main *main, t_type token, char *str);
-t_node	*create_n_prev(t_main *main, t_type token, char **arr);
+char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd);
 
 /*
-!LEXER_UTILS
+!EXPAND_UTILS.C
 */
-void    remove_node(t_lexer *lexer, int index);
-void    insert_node(t_lexer *lexer, t_node *new, int index);
-void    print_tokens(t_lexer *tokens);
-t_node *get_node(t_lexer tokens, int index_wanted);
+bool	check_more_var(char *str, int i);
+int	get_number_len(int n);
+char	*expand_exitcode(t_main *main, char *str);
+char	*ft_arr_to_str(char **arr, char *str);
 
 /*
-!LEXER.C
+!EXPAND_UTILS2.C
 */
-void	lexer(t_main *main);
+void    del_emptyline_while(char **arr, int *j);
+void	del_emptyline(char **arr);
+void	check_expansion_arr(t_main *main, char **arr);
+char	*check_expansion_str(t_main *main, char *str, bool hd);
 
 /*
-!QUOTES_TREATMENT.C
+!EXPAND.C
 */
-char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
-t_node	*create_n_quotes(t_main *main, t_type token, int *i, char **result, bool expand);
-int		add_token_quotes(t_main *main, t_type token, int *i, char **result, bool expand);
-int		get_min(int a, int b);
+char	*expand(t_main *main, char *cmp);
+int     get_min_len(char *str, int i);
+char	*expand_more(t_main *main, char *str);
+char	*expand_var(t_main *main, char *str, int i);
 
 /*
-!JOIN_UTILS
+!JOIN_UTILS.C
 */
 char	**ft_arrnl_strarrjoin(char	**arr1, char	*str, char	**arr2);
 char	**ft_arrstrnl_arrjoin(char	**arr1, char	*str, char	**arr2);
@@ -56,22 +55,19 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2);
 char    *join_expanded(char *str, char *expanded, int len);
 
 /*
-!EXPAND.C
+!LEXER_UTILS.C
 */
-char	*expand(t_main *main, char *cmp);
-char	*expand_more(t_main *main, char *str);
-void	check_expansion_arr(t_main *main, char **arr);
-char    *check_expansion_str(t_main *main, char *str, bool hd);
+void    remove_node(t_lexer *lexer, int index);
+void    insert_node(t_lexer *lexer, t_node *new, int index);
+void    print_tokens(t_lexer *tokens);
+t_node *get_node(t_lexer tokens, int index_wanted);
+bool	special_chr(char c);
 
 /*
-!EXPAND_UTILS.C
+!LEXER.C
 */
-char    *ft_arr_to_str(char **arr, char *str);
-bool    check_more_var(char *str, int i);
-int     get_number_len(int n);
-char	*expand_exitcode(t_main *main, char *str);
-void	check_expansion(t_main *main, char **arr);
-void	del_emptyline(char **arr);
+void	lexer(t_main *main);
+void search_tokens(t_main *main, int *i);
 
 /*
 !LIST.C
@@ -82,6 +78,18 @@ t_node		*remove_head(t_lexer *stack);
 void		insert_head(t_lexer *stack, t_node *new);
 void		insert_last(t_lexer *stack, t_node *new);
 
+/*
+!QUOTES_TREATMENT.C
+*/
+char	**out_of_quotes(char *str, int start, int len, t_main *main);
+char	**check_join(t_join join, char before, char after);
+char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first);
+char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 
+/*
+!QUOTES_UTILS.C
+*/
+char	**str_to_arr(char *str);
+int     get_min(int a, int b);
 
 #endif

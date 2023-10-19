@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/16 16:19:53 by rimarque         ###   ########.fr        #
+#    Updated: 2023/10/18 16:29:01 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parser envp exec builtins rdr pipes lexer tokens print_start quotes destroy
+_SUBFOLDERS		= parser envp exec builtins rdr pipes lexer lexer/tokens print_start quotes destroy
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -46,7 +46,7 @@ NAME 			= minishell
 _FILES 			= error_msg exit_code init signal\
 					print_img quotes list_quotes quotes_substr \
 					destroy free_structs\
-					list lexer expand expand_utils join_utils lexer_utils add_tokens create_nodes quotes_treatment \
+					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils\
 					extra_tokens output_tokens input_tokens fd_token \
 					parser cmdcat ast ast_utils ast_lexer syntax list_endnull \
 					env_list env_arr \
