@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:20:42 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/17 15:21:41 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 23:57:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void    free_ast(t_ast	*ast)
 			free_list(&aux->left->right);
 			free(aux->right);
 			free(aux->left);
+			free(aux);
 		}
 		else
 		{
