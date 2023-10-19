@@ -81,6 +81,15 @@ typedef struct s_env
 !TOKENS
 */
 
+typedef struct s_extra
+{
+	int		start;
+	bool	fd;
+	bool	run;
+	bool	extra;
+	int		n_len;
+}t_extra;
+
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {

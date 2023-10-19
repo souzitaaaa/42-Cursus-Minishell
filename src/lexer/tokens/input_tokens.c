@@ -10,26 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 //* Aqui vai identificar para onde se vai mandar o input do caracter
-void    get_rdr_in(t_main *main, int *i, t_type token)
+void	get_rdr_in(t_main *main, int *i, t_type token)
 {
-    int     start = 0;
-    char    *str;
-    bool	run = true;
+	int		start;
+	char	*str;
+	bool	run;
 
-    /*while (special_chr(main->input_prompt[*i]) == true
-        || is_space(main->input_prompt[*i]) == true)
-        (*i)++;*/
-    while (is_space(main->input_prompt[*i]) == true)
-        (*i)++;
-    start = *i;
+	start = 0;
+	run = true;
+	while (is_space(main->input_prompt[*i]) == true)
+		(*i)++;
+	start = *i;
 	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
 	{
 		if (special_chr(main->input_prompt[*i]) == true
 			&& check_index_quotes(main, i) == false)
-            break ;
+			break ;
 		if (is_space(main->input_prompt[*i]) == false)
 			(*i)++;
 		else if (check_index_quotes(main, i) == false)
@@ -37,23 +36,21 @@ void    get_rdr_in(t_main *main, int *i, t_type token)
 		else
 			(*i)++;
 	}
-    str = ft_substr(main->input_prompt, start, (*i - start));
-    add_token(main, token, str);
-    (*i)--;
+	str = ft_substr(main->input_prompt, start, (*i - start));
+	add_token(main, token, str);
+	(*i)--;
 	free(str);
 }
 
 //* Esta funcao identifica os caracteres de input, quer heredoc ou in
-void    search_input_tokens(t_main *main, int *i)
+void	search_input_tokens(t_main *main, int *i)
 {
-    if (*i + 1 <= main->tokens.str_len && main->input_prompt[*i + 1] == IN)
-	{
+	t_type	type;
+
+	type = get_type(main, i, IN);
+	if (type == HEREDOC)
 		(*i) += 2;
-		get_rdr_in(main, i, HEREDOC);
-	}
 	else
-	{
 		(*i)++;
-	    get_rdr_in(main, i, IN);
-	}
+	get_rdr_in(main, i, type);
 }
