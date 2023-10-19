@@ -33,6 +33,7 @@ typedef struct s_hd
 	bool		flag;
 	int			fd;
 	int			index;
+	char		*str;
 } t_hd;
 
 /*

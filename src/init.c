@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/19 19:08:56 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 20:53:47 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_input(t_main *main, char *input)
 	init_ast(&main->ast);
 	main->hd.fd = 0;
 	main->hd.index = 0;
+	main->hd.str = NULL;
 }
 
 //* Inicia as variaveis da estrutura principal (t_main) que têm que ser iniciadas apenas uma vez

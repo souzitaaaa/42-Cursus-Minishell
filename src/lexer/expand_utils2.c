@@ -39,6 +39,11 @@ char	*check_expansion_str(t_main *main, char *str, bool hd)
 	if (ft_strchr(str, '$'))
 	{
 		str = expand(main, str);
+		if(*str == '\0' && hd)
+		{
+			free(str);
+			return(NULL);
+		}
 		if (hd && str[ft_strlen(str) - 1] != '\n')
 			str = ft_strjoinfree(str, "\n");
 	}
@@ -55,7 +60,7 @@ void	del_emptyline_while(char **arr, int *j)
 	(*j)++;
 }
 
-//* Função para apagar todas as linhas vazias da 
+//* Função para apagar todas as linhas vazias da
 //*  array dos tokens
 void	del_emptyline(char **arr)
 {

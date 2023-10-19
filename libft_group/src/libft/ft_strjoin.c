@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/17 19:02:32 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:04:02 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strjoinfree(char const *s1, char const *s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
+	new_s = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (!new_s)
 		return (0);
 	ft_strlcpy(new_s, s1, (s1_len + 1));

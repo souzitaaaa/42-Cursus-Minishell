@@ -50,6 +50,8 @@
 */
 extern int	g_ex_status;
 
+t_main	*return_main(t_main	*main);
+
 /*
 !PRINT_START
 */
