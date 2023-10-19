@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/19 18:28:01 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:30:23 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**ft_arrstrnl_arrjoin(char	**arr1, char	*str, char	**arr2)
 	if (!new_arr)
 		return (0);
 	arr1[arr1_len - 1] = ft_strjoinfree3(arr1[arr1_len -1], str);
-	if(!arr2)
+	if (!arr2)
 	{
 		free(new_arr);
 		return (arr1);

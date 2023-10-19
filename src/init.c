@@ -6,14 +6,14 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 17:49:56 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 19:08:56 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
-void	ini_quotes(t_quotes *quotes)
+void	init_quotes(t_quotes *quotes)
 {
 	quotes->head = NULL;
 	quotes->size = 0;
@@ -63,7 +63,7 @@ void	init_input(t_main *main, char *input)
 {
 	main->input_prompt = input;
 	init_bool(&main->flags);
-	ini_quotes(&main->quotes);
+	init_quotes(&main->quotes);
 	init_lexer(&main->tokens);
 	init_ast(&main->ast);
 	main->hd.fd = 0;

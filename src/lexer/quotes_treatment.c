@@ -32,46 +32,23 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 char	**check_join(t_join join, char before, char after)
 {
 	char	**result;
+	bool	free_bef;
 
-	if (join.before == NULL && join.after == NULL)
+	free_bef = false;
+	if ((before == ' ' || before == 0) && (after == ' ' || after == 0))
+		result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
+	else if (before == ' ' || before == 0)
+		result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
+	else if (after == ' ' || after == 0)
 	{
-		result = str_to_arr(join.str);
-		ft_free_str(&join.str);
+		free_bef = true;
+		result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
 	}
 	else
-	{
-			if((before == ' ' || before == 0) && (after == ' ' || after == 0))
-			{
-				printf("1\n");
-				result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
-				free(join.before);
-				free(join.after);
-			}
-			else if (before == ' ' || before == 0)
-			{
-				printf("2\n");
-				result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
-				free(join.before);
-				free(join.after);
-			}
-			else if (after == ' ' || after == 0)
-			{
-				printf("3\n");
-				result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
-				if(after == ' ')
-				{
-					free(join.after);
-					free(join.before);
-				}
-			}
-			else
-			{
-				printf("4\n");
-				result = ft_arrstrarrjoin(join.before, join.str, join.after);
-				free(join.before);
-				free(join.after);
-			}
-	}
+		result = ft_arrstrarrjoin(join.before, join.str, join.after);
+	if (after != 0 || free_bef == false)
+		free(join.before);
+	free(join.after);
 	return (result);
 }
 
@@ -92,7 +69,7 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 			ft_strclen(str + aux->end + 1, DQUOTE));
 	join.after = out_of_quotes(str, aux->end + 1, len, main);
 	if (join.before == NULL && join.after == NULL)
-		result = check_join(join, 0, 0);
+		result = str_to_arr(join.str);
 	else if (join.before == NULL)
 		result = check_join(join, 0, str[aux->end + 1]);
 	else if (join.after == NULL)
@@ -110,7 +87,6 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 
 	result = ft_calloc(1, sizeof(char *));
 	aux = quotes.head;
-	quotes.counter = 0;
 	while (quotes.counter++ < quotes.size)
 	{
 		if (aux->index == 0)
