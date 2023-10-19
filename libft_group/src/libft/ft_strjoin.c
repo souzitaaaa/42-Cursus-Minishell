@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/16 21:14:51 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:04:02 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strjoinfree(char const *s1, char const *s2)
 		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
+	new_s = ft_calloc(s1_len + s2_len + 1, sizeof(char));
 	if (!new_s)
 		return (0);
 	ft_strlcpy(new_s, s1, (s1_len + 1));
@@ -70,6 +70,25 @@ char	*ft_strjoinfree2(char const *s1, char const *s2)
 		return (0);
 	ft_strlcpy(new_s, s1, (s1_len + 1));
 	ft_strlcpy((new_s + s1_len), s2, (s2_len + 1));
+	ft_free_str((char **)&s2);
+	return (new_s);
+}
+char	*ft_strjoinfree3(char const *s1, char const *s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_s;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!new_s)
+		return (0);
+	ft_strlcpy(new_s, s1, (s1_len + 1));
+	ft_strlcpy((new_s + s1_len), s2, (s2_len + 1));
+	ft_free_str((char **)&s1);
 	ft_free_str((char **)&s2);
 	return (new_s);
 }

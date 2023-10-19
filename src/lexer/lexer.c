@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
@@ -13,11 +13,11 @@
 #include "../../includes/minishell.h"
 
 //* Cerebro da separacao de tokens, vai ver oque tem a string nesse index
-	//* e posteriormente tratar de mandar, tudo tratado para a lista
-void search_tokens(t_main *main, int *i)
+//*  e posteriormente tratar de mandar, tudo tratado para a lista
+void	search_tokens(t_main *main, int *i)
 {
 	if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
-		add_token(main, PIPE,"|");
+		add_token(main, PIPE, "|");
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
 		search_input_tokens(main, i);
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
@@ -26,19 +26,16 @@ void search_tokens(t_main *main, int *i)
 		search_extra_tokens(main, i);
 }
 
-
 //* Funcao main do lexer, vai simplesmente iniciar a lista e
-	//* percorrer a str de input para fazer a divisao de tokens
+//*  percorrer a str de input para fazer a divisao de tokens
 void	lexer(t_main *main)
 {
-	int i;
-				//printf("\033[1;33m\t\t\t[Lexer function]\033[0m\n");
-				//printf("Input: %s Size: %i\n", main->input_prompt, main->tokens.str_len);
+	int	i;
+
 	i = 0;
-	while(main->input_prompt[i] && i <= main->tokens.str_len)
+	while (main->input_prompt[i] && i <= main->tokens.str_len)
 	{
 		search_tokens(main, &i);
 		i++;
 	}
-	print_tokens(&main->tokens);
 }

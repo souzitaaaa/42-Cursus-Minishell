@@ -47,7 +47,7 @@ void	init_prompt(t_main	*main)
 		signals(0);
 		input = readline("minishell -> ");
 		if (!input)
-			ft_exit(NULL, false, main);
+			ft_exit(NULL, false, main, false);
 		main->line++;
 		add_history(input);
 		init_input(main, input);

@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:16:57 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 21:04:36 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:18:43 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**ft_arrjoinfree(char **s1, char **s2)
 		return (0);
 	if(s1_len > 0)
 	{
-		s1[s1_len - 1] = ft_strjoinfree(s1[s1_len -1], s2[0]);
+		s1[s1_len - 1] = ft_strjoinfree3(s1[s1_len -1], s2[0]);
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
 	}
 	free(s1);
