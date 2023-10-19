@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/17 19:02:18 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:19:12 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_arrnl_strarrjoin(char	**arr1, char	*str, char	**arr2)
 		return (0);
 	if(arr1)
 		ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
-	str = ft_strjoinfree(str, arr2[0]);
+	str = ft_strjoinfree3(str, arr2[0]);
 	new_arr[arr1_len] = str;
 	ft_arrlcpy(new_arr + arr1_len + 1, arr2 + 1, (arr2_len));
 	return (new_arr);
@@ -50,7 +50,7 @@ char	**ft_arrstrnl_arrjoin(char	**arr1, char	*str, char	**arr2)
 	new_arr = ft_calloc((arr1_len + arr2_len + 1), sizeof(char *));
 	if (!new_arr)
 		return (0);
-	arr1[arr1_len - 1] = ft_strjoinfree(arr1[arr1_len -1], str);
+	arr1[arr1_len - 1] = ft_strjoinfree3(arr1[arr1_len -1], str);
 	if(!arr2)
 	{
 		free(new_arr);
@@ -75,7 +75,7 @@ char	**ft_arrstrarrjoin(char	**arr1, char	*str, char	**arr2)
 	new_arr = malloc((arr1_len + arr2_len + 2) * sizeof(char *));
 	if (!new_arr)
 		return (0);
-	str = ft_strjoinfree(str, arr2[0]);
+	str = ft_strjoinfree3(str, arr2[0]);
 	arr1[arr1_len -1] = ft_strjoinfree3(arr1[arr1_len -1], str);
 	ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
 	ft_arrlcpy(new_arr + arr1_len, arr2 + 1, (arr2_len));

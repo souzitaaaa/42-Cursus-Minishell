@@ -71,13 +71,12 @@ char	**check_join(t_join join, char before, char after)
 				printf("2\n");
 				result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
 				free(join.before);
-				ft_free_array(&join.after);
+				free(join.after);
 			}
 			else if (after == ' ' || after == 0)
 			{
 				printf("3\n");
 				result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
-				ft_free_str(&join.str);
 				if(after == ' ')
 				{
 					free(join.after);
@@ -89,7 +88,7 @@ char	**check_join(t_join join, char before, char after)
 				printf("4\n");
 				result = ft_arrstrarrjoin(join.before, join.str, join.after);
 				free(join.before);
-				ft_free_array(&join.after);
+				free(join.after);
 			}
 	}
 	return(result);
@@ -141,9 +140,15 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 		{
 			temp = ft_quotes(aux, str, main, false);
 			if(str[aux->start - 1] == ' ')
+			{
+				printf("mete o que tu quiseres\n");
 				result = ft_arrnl_joinfree(result, temp);
+			}
 			else
+			{
+				printf("meu amor\n");
 				result = ft_arrjoinfree(result, temp);
+			}
 		}
 		free(temp);
 		aux = aux->next;
