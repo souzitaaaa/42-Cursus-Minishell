@@ -17,9 +17,8 @@ void    destroy_input(t_main *main)
 	ft_free_str(&main->input_prompt);
 	free_quotes(&main->quotes);
 	free_lexer(&main->tokens);
+	free_ast(&main->ast);
 	ft_free_array(&main->env_arr);
-	//ft_free_str(&main->hd.str);
-	//TODO: free_ast()
 }
 
 void    destroy_main(t_main *main, bool input)

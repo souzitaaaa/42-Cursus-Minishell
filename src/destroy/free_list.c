@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_structs.c                                     :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:10:51 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/17 19:15:24 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/19 22:48:09 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,23 @@ void	free_lexer(t_lexer *stack)
 	}
 	stack->head = NULL;
 	stack->size = 0;
+}
+
+void	free_list(t_node **head)
+{
+	t_node	*element;
+	t_node	*temp;
+
+	if (*head == NULL)
+		return ;
+	element = *head;
+	while (element != NULL)
+	{
+		temp = element;
+		element = element->next;
+		free(temp);
+	}
+	*head = NULL;
 }
 
 void	free_env(t_env *stack)

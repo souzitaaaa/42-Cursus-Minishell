@@ -1,0 +1,16 @@
+a
+b
+c
+d
+includes
+libft_group
+main.c
+Makefile
+minishell
+minishell.dSYM
+obj
+quick
+readline.supp
+README.md
+ sjafhsja
+src
