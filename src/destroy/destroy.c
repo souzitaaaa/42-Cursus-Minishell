@@ -18,6 +18,7 @@ void    destroy_input(t_main *main)
 	free_quotes(&main->quotes);
 	free_lexer(&main->tokens);
 	ft_free_array(&main->env_arr);
+	//ft_free_str(&main->hd.str);
 	//TODO: free_ast()
 }
 

@@ -19,6 +19,7 @@ void	remove_node(t_lexer *lexer, int index)
 	int		count;
 
 	current = lexer->head;
+	count = 0;
 	if (lexer->size == 1)
 		lexer->head = NULL;
 	else

@@ -48,10 +48,13 @@ void signal_handler_child(int sig)
 
 void signal_handler_hd(int sig)
 {
+    t_main *main;
+
     if (sig == SIGINT)
     {
         ft_printf("\n");
-        exit(0);
+        main = return_main(NULL);
+        ft_exit(NULL, true, main, true);
     }
 }
 

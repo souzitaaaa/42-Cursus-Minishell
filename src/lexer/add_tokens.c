@@ -21,7 +21,7 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 	char		**result;
 	t_quotes	quotes;
 
-	ini_quotes(&quotes);
+	init_quotes(&quotes);
 	quotes_substr(&quotes, str);
 	if (token == HEREDOC)
 		main->flags.hd = true;
