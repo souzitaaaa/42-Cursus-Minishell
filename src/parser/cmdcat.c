@@ -70,8 +70,9 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	int aux_index;
 	bool cmdcat;
 
+	temp = ft_calloc(1, sizeof(char *));
 	cmdcat = false;
-	temp = aux->token.arr;
+	temp = ft_arrjoin(temp, aux->token.arr);
 	aux = aux->next;
 	while(aux->token.type != PIPE && aux != tokens->head)
 	{
@@ -108,6 +109,7 @@ void	cmdcat(t_lexer *tokens)
 		//printf("index: %d, str: %s\n", aux->index, aux->token.arr[0]);
 		//printf("passa aqui\n");
 		cmdpipecat(tokens, aux, cmd_index);
+		aux = get_node(*tokens, cmd_index);
 		while(aux->token.type != PIPE && aux->next != tokens->head)
 			aux = aux->next;
 		if(aux->next == tokens->head)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/09 16:15:30 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/20 15:04:24 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void    insert_var_exp(t_main *main, char *str)
     	aux = var_node(str);
 		add_var(&main->export_list, aux, -1);
 	}
+	ft_free_str(&temp);
 }
 
 void    insert_var_env(t_main *main, char *str)
@@ -38,6 +39,7 @@ void    insert_var_env(t_main *main, char *str)
     	aux = var_node(str);
 		add_var(&main->env_list, aux, -1);
 	}
+	ft_free_str(&temp);
 }
 
 void	put_head_var(t_env *env, t_var *new)

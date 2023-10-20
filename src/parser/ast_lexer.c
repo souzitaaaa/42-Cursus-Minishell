@@ -7,9 +7,7 @@ t_node	*node_dup(t_node *src)
 	dst = malloc(sizeof(t_node));
 	if (!dst)
 		return (NULL);
-	dst->token.type = src->token.type;
-	dst->token.arr = ft_arrdup(src->token.arr);
-	dst->token.quotes = src->token.quotes;
+	dst->token = src->token;
 	return (dst);
 }
 

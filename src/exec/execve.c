@@ -111,4 +111,3 @@ void	exec_other_cmd(char **cmd, t_main *main, bool child)
 	}
 	ft_free_array(&main->env_arr);
 }
-

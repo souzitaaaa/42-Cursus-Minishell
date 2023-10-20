@@ -55,7 +55,7 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 	{
 		str = readline("> ");
 		if (read_stdin_aux(str, lim, main, &line) == -1)
-			break;
+			break ;
 		if(!quotes)
 			str = check_expansion_str(main, str, true);
 		if(str == NULL)
