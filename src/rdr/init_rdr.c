@@ -53,11 +53,9 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 	int	counter;
 
 	if(main->flags.rdr_err)
-		exit(1);
+		exit_child(main, 1, true);
 	aux = tokens.head;
 	counter = 0;
-	if(main->flags.rdr_err)
-		exit(main->exit_code);
 	while(counter++ < tokens.size)
 	{
 		if(aux->token.type == STRING)

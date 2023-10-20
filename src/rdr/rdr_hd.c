@@ -12,6 +12,15 @@
 
 #include "../../includes/minishell.h"
 
+t_main	*return_main(t_main	*main)
+{
+	static t_main *static_main;
+
+	if (main)
+		static_main = main;
+	return (static_main);
+}
+
 int	get_max(int a, int b)
 {
 	if (a > b)
@@ -19,13 +28,12 @@ int	get_max(int a, int b)
 	return (b);
 }
 
-
 int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 {
 	if(!str)
 	{
-			error_msg_hd(lim,  main->fd.stdout, main->line);
-			return(-1);
+		error_msg_hd(lim,  main->fd.stdout, main->line);
+		return(-1);
 	}
 	(*line)++;
 	if (!ft_strncmp(lim, str, get_max(ft_strlen(lim), ft_strclen(str, '\n'))))
@@ -38,20 +46,25 @@ int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 
 int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 {
-	char	*str;
 	int		line;
+	char	*str;
 
 	str = "\0";
 	line = 0;
 	while (1)
 	{
-		write(main->fd.stdout, "> ", 2);
-		str = get_next_line(STDIN_FILENO, false);
+		str = readline("> ");
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break;
 		if(!quotes)
 			str = check_expansion_str(main, str, true);
-		write(fd, str, strlen(str));
+		if(str == NULL)
+		{
+			write(fd, "\n", 1);
+			continue ;
+		}
+		else
+			write(fd, str, 1);
 		if(*str)
 			ft_free_str(&str);
 	}
@@ -68,13 +81,14 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 	signals(2);
 	pid = fork();
 	error_fp(pid, errno, main);
+	return_main(main);
 	if(pid == 0)
 	{
 		close(heredoc_fd[0]);
 		hd_line = read_stdin(heredoc_fd[1], lim, quotes, main);
 		close(heredoc_fd[1]);
 		destroy_main(main, true);
-		exit(hd_line);
+		exit_child(main, hd_line, true);
 	}
 	signals(-1);
 	close(heredoc_fd[1]);

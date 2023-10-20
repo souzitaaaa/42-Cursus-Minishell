@@ -37,7 +37,7 @@ void	write_to_pipe(int *fd, t_leaf *cmd, t_main *main)
 	if (cmd->token.type == STRING && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
-		exit(0);
+		exit_child(main, 0, true);
 }
 
 //*Esta função redireciona o stdin para o reading end do pipe anterior (fd[0])
@@ -59,7 +59,7 @@ void	pipe_read_and_write(int *fd, int *next_fd, t_leaf *cmd, t_main *main)
 	if (cmd->token.type == STRING && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
-		exit(0);
+		exit_child(main, 0, true);
 }
 
 //*Esta função redireciona o stdin para o reading end do pipe (fd[0]) e executa o comando
@@ -75,5 +75,5 @@ void	read_from_pipe(int *fd, t_leaf *cmd, t_main *main)
 	if (cmd->token.type == STRING && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
-		exit(0);
+		exit_child(main, 0, true);
 }

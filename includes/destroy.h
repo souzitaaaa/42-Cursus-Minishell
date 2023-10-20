@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 12:41:52 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/17 19:16:54 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/19 23:52:07 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@
 # include "minishell.h"
 
 /*
-!FREE_STRUCTS.C
+!FREE_LIST.C
 */
 void	free_quotes(t_quotes *stack);
 void	free_lexer(t_lexer *stack);
 void	free_env(t_env *stack);
+void	free_list(t_node **head);
+
+/*
+!FREE_AST.C
+*/
+void    free_ast(t_ast	*ast);
 
 /*
 !DESTROY
