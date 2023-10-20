@@ -13,7 +13,8 @@
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
-void	create_quotes_node(t_quotes *quotes, int open_quote_type, int open_quote_position, int i)
+void	create_quotes_node(t_quotes *quotes, int open_quote_type, \
+int open_quote_position, int i)
 {
 	t_node_quotes	*new_node;
 

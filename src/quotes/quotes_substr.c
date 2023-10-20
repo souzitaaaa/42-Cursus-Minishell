@@ -36,15 +36,15 @@ void	verify_quotes_str(t_quotes *quotes, t_variables_quotes *s_var_quotes)
 
 void	quotes_substr(t_quotes *quotes, char *str)
 {
-	t_variables_quotes s_var_quotes;
+	t_variables_quotes	s_var_quotes;
 
 	ini_variables_quotes(&s_var_quotes);
 	while (str[s_var_quotes.i] != '\0')
 	{
 		s_var_quotes.c = str[s_var_quotes.i];
-		s_var_quotes.quotes_analises = check_quotes(s_var_quotes.c, s_var_quotes.quotes_analises);
+		s_var_quotes.quotes_analises = check_quotes(s_var_quotes.c, \
+		s_var_quotes.quotes_analises);
 		verify_quotes_str(quotes, &s_var_quotes);
 		s_var_quotes.i++;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/20 16:32:40 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:00:07 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,18 @@ int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 	while (main->input_prompt[s_var_quotes->i] != '\0')
 	{
 		s_var_quotes->c = main->input_prompt[s_var_quotes->i];
-		s_var_quotes->quotes_analises = check_quotes(s_var_quotes->c, s_var_quotes->quotes_analises);
+		s_var_quotes->quotes_analises = check_quotes(s_var_quotes->c, \
+		s_var_quotes->quotes_analises);
 		verify_quotes(main, s_var_quotes);
 		s_var_quotes->i++;
 	}
 	if (update_erro_quotes(s_var_quotes->quotes_analises, main))
 		return (2);
-	print_quotes(&main->quotes);
 	return (0);
 }
 
 void	verify_quotes(t_main *main, t_variables_quotes *s_var_quotes)
 {
-	printf("posicao: %i", s_var_quotes->i);
-	printf("posicao: %i", s_var_quotes->open_quote_type);
-	printf("posicao: %i", s_var_quotes->open_quote_type);
-
 	if (s_var_quotes->c == SQUOTE || s_var_quotes->c == DQUOTE)
 	{
 		if ((s_var_quotes->quotes_analises == 1 \
@@ -73,9 +69,9 @@ void	verify_quotes(t_main *main, t_variables_quotes *s_var_quotes)
 			s_var_quotes->open_quote_position = -1;
 			s_var_quotes->open_quote_type = '\0';
 		}
-		
 	}
 }
+
 int	update_erro_quotes(int quotes_analises, t_main *main)
 {
 	if (quotes_analises == 1 || quotes_analises == 2)
