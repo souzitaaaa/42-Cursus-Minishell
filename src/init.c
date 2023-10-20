@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/19 22:50:22 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:39:57 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	init_main(t_main *main, char **envp)
 	init_env(&main->env_list);
 	init_env(&main->export_list);
 	set_env_list(main, envp);
-	main->prev = NULL;
 	copy_exp(main);
 	main->env_arr = NULL;
 	main->exit_code = 0;

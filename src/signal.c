@@ -80,5 +80,5 @@ void signals(int options)
         signal(SIGINT, signal_handler_hd);
 	else if(options == -1)
 		signal(SIGINT, signal_handler_nothing);
-    signal(SIGQUIT, SIG_IGN);  // Ignora o sinal SIGQUIT
+    //signal(SIGQUIT, SIG_IGN);  // Ignora o sinal SIGQUIT
 }

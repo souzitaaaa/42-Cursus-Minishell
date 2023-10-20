@@ -90,7 +90,6 @@ typedef enum s_type
 	HEREDOC = 'H',   // <<
 	OUT = '>',       // >
 	APPEND = 'A',    // >>
-	COMERCIAL = '&', // &
 	STRING = 'S',    // Comando
 	EMPTY = 'E',	 // Vazio
 }t_type;
@@ -233,7 +232,6 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
-	char			*prev;
 	int				exit_code;
 	int				line;
 	t_lexer			tokens;

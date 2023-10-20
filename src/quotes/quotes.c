@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 14:51:38 by joe               #+#    #+#             */
-/*   Updated: 2023/08/28 18:33:45 by joe              ###   ########.fr       */
+/*   Created: 2023/10/18 15:53:46 by jenny             #+#    #+#             */
+/*   Updated: 2023/10/18 15:53:46 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int check_quotes_print(t_main *main)
         set_exit_code(main, 2);
         return(2);
     }
-    //print_quotes(&main->quotes);
+    print_quotes(&main->quotes);
     //printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
 }
