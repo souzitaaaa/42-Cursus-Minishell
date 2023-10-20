@@ -50,6 +50,8 @@
 */
 extern int	g_ex_status;
 
+t_main	*return_main(t_main	*main);
+
 /*
 !PRINT_START
 */
@@ -61,7 +63,7 @@ void	print_intro(void);
 void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
-void		ini_quotes(t_quotes *quotes);
+void		init_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C

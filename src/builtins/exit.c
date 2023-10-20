@@ -15,6 +15,8 @@
 void	free_and_exit(t_main *main, int exit_code, bool input)
 {
 	destroy_main(main, input);
+	if (main->flags.rdr_err)
+		exit(1);
 	exit(exit_code);
 }
 
