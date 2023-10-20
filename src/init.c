@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/16 17:49:56 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:02:06 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	ini_quotes(t_quotes *quotes)
 	quotes->head = NULL;
 	quotes->size = 0;
 	quotes->counter = 0;
+}
+
+void	ini_variables_quotes(t_variables_quotes *s_var_quotes)
+{
+	s_var_quotes->i = 0;
+    s_var_quotes->quotes_analises	= 0;
+    s_var_quotes->open_quote_position = -1;
+	s_var_quotes->open_quote_type	= '\0';
+	s_var_quotes->c = '\0';
 }
 
 void	init_ast(t_ast	*ast)

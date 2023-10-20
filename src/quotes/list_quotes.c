@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_quotes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/13 18:20:30 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:26:14 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ void	insert_head_quotes(t_quotes *stack, t_node_quotes *new)
 	shift_index_quotes(stack);
 	stack->size++;
 }
+
 void	insert_last_quotes(t_quotes *stack, t_node_quotes *new)
 {
-
 	if (stack->head == NULL)
 		put_head_node_quotes(stack, new);
 	else
@@ -79,21 +79,4 @@ void	insert_last_quotes(t_quotes *stack, t_node_quotes *new)
 		stack->head->prev = new;
 	}
 	stack->size++;
-}
-
-void    print_quotes(t_quotes *quotes)
-{
-	int count = 0;
-	t_node_quotes  *aux = quotes->head;
-
-				printf("\033[1;36m\t\t(Printing quotes)\033[0m\n");
-	while (count++ < quotes->size)
-	{
-		printf("\033[1;34m[INDEX] \033[0m %i\n", aux->index);
-		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->type);
-		printf("\033[1;34m[START]  \033[0m %i\n", aux->start);
-		printf("\033[1;34m[END]  \033[0m %i\n\n", aux->end);
-		aux = aux->next;
-	}
-			printf("\033[1;36m\t\t(End printing quotes)\033[0m\n");
 }

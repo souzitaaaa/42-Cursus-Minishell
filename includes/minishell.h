@@ -95,6 +95,7 @@ void	set_exit_code(t_main *main, int exit_code);
 void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
+void	    ini_variables_quotes(t_variables_quotes *s_var_quotes);
 
 /*
 !PROMPT
