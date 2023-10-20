@@ -108,7 +108,7 @@ int check_quotes_print(t_main *main)
         set_exit_code(main, 2);
         return(2);
     }
-    //print_quotes(&main->quotes);
+    print_quotes(&main->quotes);
     //printf("\033[1;35m\t\t[End quotes analises]\033[0m\n");
     return 0;
 }

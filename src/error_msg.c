@@ -74,7 +74,6 @@ void	error_with_arg(int fd, char *str)
 	ft_putendl_fd(": No such file or directory", fd);
 }
 
-//void	error_quotes(int fd)
 void	error_syntax(char *token)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);

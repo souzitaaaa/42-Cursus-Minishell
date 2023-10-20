@@ -22,7 +22,7 @@ void	cd(char *path, t_main *main, bool child)
 
 	current = ft_calloc(sizeof(char), 4096);
 	getcwd(current, 4096);
-	if (path == NULL)
+	if (path == NULL || (path[0] == '~' && path[1] == '\0')) // cd sozinho e cd ~
 	{
 		new_path = get_envvar("HOME", &main->env_list);
 		if (new_path)
@@ -44,7 +44,7 @@ void	cd(char *path, t_main *main, bool child)
 			return ;
 		}
 	}
-	else
+	else // cd -
 	{
 		if (ft_strcmp(path, "-") == 0)
 		{
@@ -70,10 +70,9 @@ void	cd(char *path, t_main *main, bool child)
 				return ;
 			}
 		}
-		else
+		else //cd normal
 		{
-			new_path = find_home(path, main, child);
-			dir = change_dir(new_path, main, child);
+			dir = change_dir(path, main, child);
 			if (dir == 0)
 			{
 				path_pwd = ft_calloc(sizeof(char), 4096);

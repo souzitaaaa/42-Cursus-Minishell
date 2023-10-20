@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/18 18:17:18 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/20 16:55:47 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,6 @@ void	refresh_oldpwd(t_main *main, char *str)
 		insert_var_exp(main, oldpwd);
 	if (modify_var(&main->env_list, oldpwd) == false)
 		insert_var_env(main, oldpwd);
-}
-
-/*Essa funcao encontra a variavel HOME, a funcao getenv é usada para buscar o HOME*/
-char	*find_home(char *path, t_main *main, bool child)
-{
-	char	*home;
-	char	*aux;
-
-	if (path[0] == '~')
-	{
-		home = getenv("HOME");
-		if (home == NULL)
-		{
-			if (main->flags.not_print == false)
-				error_msg_file(path, STDERR_FILENO);
-			exit_child(main, 1, child);
-			return (NULL);
-		}
-		aux = ft_substr(path, 1, ft_strlen(path) - 1);
-		free(aux);
-		return (home);
-	}
-	return (ft_strdup(path));
 }
 
 /*Essa variavel é usada para mudar de diretorio, o chdir é usado para mudar o diretório atual para o
@@ -96,3 +73,10 @@ char	*get_envvar(char *str, t_env *env_list)
 	}
 	return (NULL);
 }
+/*void	check_cd(char *command)
+{
+	if ()
+	
+	else
+		cd()	
+}*/
