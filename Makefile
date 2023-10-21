@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
+#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/20 16:52:51 by jcruz-da         ###   ########.fr        #
+#    Updated: 2023/10/21 11:25:30 by joe              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ NAME 			= minishell
 
 _FILES 			= error_msg exit_code init signal\
 					print_img quotes list_quotes quotes_substr list_print\
-					destroy free_structs\
+					destroy free_list free_ast\
 					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils\
 					extra_tokens output_tokens input_tokens fd_token \
 					parser cmdcat ast ast_utils ast_lexer syntax list_endnull \
