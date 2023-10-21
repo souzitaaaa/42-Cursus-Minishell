@@ -6,7 +6,7 @@
 /*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/21 13:22:14 by joe              ###   ########.fr       */
+/*   Updated: 2023/10/21 14:50:16 by joe              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,15 @@ int	start_with_quotes(t_main *main, int fd)
 	while (main->input_prompt[i] == ' ')
 		i++;
 	if (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE)
-	{
-		quote = main->input_prompt[i];
-		i++;
-		if (main->input_prompt[i] != quote)
-			return (1);
-		while (main->input_prompt[i] != '\0' && main->input_prompt[i] == quote)
+	{	
+		while (main->input_prompt[i] != '\0' && (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE))//Para pular as quotes
 			i++;
-		if (main->input_prompt[i] != quote)
-			return (1);
-		if (main->input_prompt[i] == '\0')
-			return (1);
-		return (0);
+		if(main->input_prompt[i] == ' ' && main->input_prompt[i] != '\0')
+			return (0);
 	}
 	else
 		return (1);
 }
-
 int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 {
 	if (!start_with_quotes(main, 1))
