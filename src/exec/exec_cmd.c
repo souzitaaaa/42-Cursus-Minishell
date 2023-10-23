@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/20 16:50:51 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:06:24 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_cmd(char **command, t_main *main, bool child)
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		pwd(main, child);
 	else if (ft_strcmp(command[0], "cd") == 0)
-		check_cd(command, main, child);
+		cd(command[1], main, child);
 	else if (ft_strcmp(command[0], "env") == 0)
 		env(&main->env_list, main, child, command);
 	else if (ft_strcmp(command[0], "export") == 0)
