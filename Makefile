@@ -6,7 +6,7 @@
 #    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/23 15:59:34 by jcruz-da         ###   ########.fr        #
+#    Updated: 2023/10/23 19:14:46 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init signal\
+_FILES 			= error_msg error_msg_2 exit_code  init init_2 signal\
 					print_img quotes list_quotes quotes_substr list_print\
 					destroy free_list free_ast\
 					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils\
