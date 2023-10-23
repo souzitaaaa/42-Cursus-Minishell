@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/21 14:50:16 by joe              ###   ########.fr       */
+/*   Updated: 2023/10/23 15:53:54 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_quotes(t_quotes *quotes)
 	printf("\033[1;36m\t\t(End printing quotes)\033[0m\n");
 }
 
-int	start_with_quotes(t_main *main, int fd)
+void	start_with_quotes(t_main *main, bool *cmd_error)
 {
 	int		i;
 	char	quote;
@@ -44,16 +44,17 @@ int	start_with_quotes(t_main *main, int fd)
 	{	
 		while (main->input_prompt[i] != '\0' && (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE))//Para pular as quotes
 			i++;
-		if(main->input_prompt[i] == ' ' && main->input_prompt[i] != '\0')
-			return (0);
+		if(main->input_prompt[i] == ' ' || main->input_prompt[i] == '\0')
+			*cmd_error = true;
 	}
-	else
-		return (1);
 }
+
 int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 {
-	if (!start_with_quotes(main, 1))
-		return (0);
+	bool cmd_error;
+
+	cmd_error = false;
+	start_with_quotes(main, &cmd_error);
 	main->input_prompt = remove_empty_quotes(main->input_prompt);
 	main->tokens.str_len = ft_strlen(main->input_prompt);
 	ini_variables_quotes(s_var_quotes);
@@ -67,6 +68,12 @@ int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 	}
 	if (update_erro_quotes(s_var_quotes->quotes_analises, main))
 		return (2);
+	if(cmd_error)
+	{
+		error_msg_cmd("\0", STDERR_FILENO);
+		set_exit_code(main, 127);
+		return(127);
+	}
 	return (0);
 }
 
