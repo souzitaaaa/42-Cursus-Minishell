@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/23 09:28:28 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/23 17:00:51 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ UTILS_CD
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
 char	*find_home(char *path, t_main *main, bool child);
-int		change_dir(char *path, t_main *main, bool child);
+int     change_dir(char *path, t_main *main);
 char	*get_envvar(char *str, t_env *env_list);
 bool	check_cd(char **command, t_main *main, bool child);
 

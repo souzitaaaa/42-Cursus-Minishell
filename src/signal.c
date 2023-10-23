@@ -31,7 +31,7 @@ void signal_handler(int sig)
     {
         g_ex_status = 130;       // Define o status de saída para 130
         ft_printf("\n");         // Escreve uma nova linha
-        //rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
+        rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
         rl_on_new_line();        // Move o cursor para uma nova linha
         rl_redisplay();          // Redisplay o prompt
     }

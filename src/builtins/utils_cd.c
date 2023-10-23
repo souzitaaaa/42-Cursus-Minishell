@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/23 13:01:37 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/23 20:37:13 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*Essa funcao atualiza o pwd, toda vez que o pwd é mudado chamamos ela para atualizar o path novo*/
+/*Essa funcao atualiza o pwd, toda vez que o pwd é mudado chamamos ela para
+atualizar o path novo*/
 void	refresh_pwd(t_main *main, char *str)
 {
 	char	*pwd;
@@ -24,7 +25,8 @@ void	refresh_pwd(t_main *main, char *str)
 		insert_var_env(main, pwd);
 }
 
-/*Essa funcao atualiza o oldpwd, toda vez que o oldpwd é mudado chamamos ela para atualizar o path novo*/
+/*Essa funcao atualiza o oldpwd, toda vez que o oldpwd é mudado chamamos
+ela para atualizar o path novo*/
 void	refresh_oldpwd(t_main *main, char *str)
 {
 	char	*oldpwd;
@@ -36,23 +38,21 @@ void	refresh_oldpwd(t_main *main, char *str)
 		insert_var_env(main, oldpwd);
 }
 
-/*Essa variavel é usada para mudar de diretorio, o chdir é usado para mudar o diretório atual para o
-caminho especificado pelo parâmetro path*/
-int	change_dir(char *path, t_main *main, bool child)
+/*Essa variavel é usada para mudar de diretorio, o chdir é usado para mudar
+o diretório atual para o caminho especificado pelo parâmetro path*/
+int	change_dir(char *path, t_main *main)
 {
-	if (chdir(path) == 0)
-		set_exit_code(main, 0);
-	else
+	if (chdir(path) != 0)
 	{
 		if (main->flags.not_print == false)
 			error_msg_file(path, STDERR_FILENO);
-		exit_child(main, 1, child);
 		return (1);
 	}
 	return (0);
 }
 
-/*Essa função recebe uma str e procura uma variável de ambiente com o nome especificado*/
+/*Essa função recebe uma str e procura uma variável de ambiente com o nome
+especificado*/
 char	*get_envvar(char *str, t_env *env_list)
 {
 	int		count;
@@ -66,7 +66,8 @@ char	*get_envvar(char *str, t_env *env_list)
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
 		{
 			out = malloc(sizeof(char) * ft_strlen(aux->var) - ft_strlen(str));
-			ft_strlcpy(out, aux->var + ft_strlen(str) + 1, ft_strlen(aux->var) - ft_strlen(str));
+			ft_strlcpy(out, aux->var + ft_strlen(str) + 1, ft_strlen(aux->var)
+				- ft_strlen(str));
 			return (out);
 		}
 		aux = aux->next;
@@ -78,7 +79,9 @@ bool	check_cd(char **command, t_main *main, bool child)
 {
 	char	*path;
 
+	//printf("ENTRA AQUI\n");
 	path = NULL;
+	//print_arr(command);
 	if (command[1] != NULL)
 		path = command[1];
 	if (command[2] != NULL)

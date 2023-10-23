@@ -24,7 +24,8 @@ void	swap_var(t_var *var1, t_var *var2)
 	var2->var = temp;
 }
 
-/*Essa funcao percorre a lista de variaveis e ordena de acordo com a tabela ascii*/
+/*Essa funcao percorre a lista de variaveis e ordena de acordo com a
+tabela ascii*/
 void	sort_ascii(t_env *exp)
 {
 	int		count;
@@ -70,8 +71,8 @@ void	print_value(char *var)
 	free (aux);
 }
 
-/*Essa função ordena a lista de variaveis de ambiente de acordo com a tabela ascii e imprime de acordo com a
-formatação da export*/
+/*Essa função ordena a lista de variaveis de ambiente de acordo com a tabela
+ascii e imprime de acordo com a formatação da export*/
 void	sort_print_export(t_env *exp)
 {
 	t_var	*current;
@@ -142,36 +143,30 @@ void	sort_print_export(t_env *exp)
 					if (modify_var(&main->env_list, array[i]) == false)
 						insert_var_env(main, array[i]);
 				}
-			}
-			i++;
-		}
-	}
+			}127
 	exit_child(main, exit_code, child);
 }*/
-
-void	variable_treatment(t_main *main, char *variable, bool child) 
+int	variable_treatment(t_main *main, char *variable) 
 {
 	if (variable[0] == '=')
 	{
 		if (main->flags.not_print == false)
 			error_export(STDERR_FILENO);
-		exit_child(main, 2, child);
+		return (2);
+	}
+	if (!ft_strchr(variable, '='))
+	{
+		if (verify_var(main, variable) == false)
+			insert_var_exp(main, variable);
 	}
 	else
 	{
-		if (!ft_strchr(variable, '='))
-		{
-			if (verify_var(main, variable) == false)
-				insert_var_exp(main, variable);
-		}
-		else
-		{
-			if (modify_var(&main->export_list, variable) == false)
-				insert_var_exp(main, variable);
-			if (modify_var(&main->env_list, variable) == false)
-				insert_var_env(main, variable);
-		}
+		if (modify_var(&main->export_list, variable) == false)
+			insert_var_exp(main, variable);
+		if (modify_var(&main->env_list, variable) == false)
+			insert_var_env(main, variable);
 	}
+	return (0);
 }
 
 void	export(t_main *main, char **array, bool child)
@@ -197,7 +192,7 @@ void	export(t_main *main, char **array, bool child)
 			if (error)
 				exit_code = error;
 			else
-				variable_treatment(main, array[i], child);
+				exit_code = variable_treatment(main, array[i]);
 			i++;
 		}
 	}
