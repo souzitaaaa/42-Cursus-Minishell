@@ -25,63 +25,63 @@ extern int	g_ex_status;
  *
  * @param sig O número do sinal recebido, geralmente SIGINT.
  */
-void signal_handler(int sig)
+void	signal_handler(int sig)
 {
-    if (sig == SIGINT)
-    {
-        g_ex_status = 130;       // Define o status de saída para 130
-        ft_printf("\n");         // Escreve uma nova linha
-        rl_replace_line("", 0);  // Substitui a linha atual por uma string vazia
-        rl_on_new_line();        // Move o cursor para uma nova linha
-        rl_redisplay();          // Redisplay o prompt
-    }
-}
-
-void signal_handler_child(int sig)
-{
-    if (sig == SIGINT)
-    {
-        g_ex_status = 130;
-        ft_printf("\n");
-    }
-    else if (sig == SIGQUIT)
-    {
-        g_ex_status = 131;
-        ft_printf("Quit (core dumped)\n");
+	if (sig == SIGINT)
+	{
+		g_ex_status = 130;
+		ft_printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
 }
 
-void signal_handler_hd(int sig)
+void	signal_handler_child(int sig)
 {
-    t_main *main;
-
-    if (sig == SIGINT)
-    {
-        ft_printf("\n");
-        main = return_main(NULL);
-        ft_exit(NULL, true, main, true);
-    }
+	if (sig == SIGINT)
+	{
+		g_ex_status = 130;
+		ft_printf("\n");
+	}
+	else if (sig == SIGQUIT)
+	{
+		g_ex_status = 131;
+		ft_printf("Quit (core dumped)\n");
+	}
 }
 
-void signal_handler_nothing(int sig)
+void	signal_handler_hd(int sig)
 {
-    if (sig == SIGINT)
-        g_ex_status = 130;
+	t_main	*main;
+
+	if (sig == SIGINT)
+	{
+		ft_printf("\n");
+		main = return_main(NULL);
+		ft_exit(NULL, true, main, true);
+	}
 }
 
-void signals(int options)
+void	signal_handler_nothing(int sig)
 {
-    if(options != 1)
-        signal(SIGQUIT, SIG_IGN);
-    if(options == 0)
-        signal(SIGINT, signal_handler);
-    else if(options == 1)
-    {
-        signal(SIGINT, signal_handler_child);
-        signal(SIGQUIT, signal_handler_child);
-    }
-    else if(options == 2)
-        signal(SIGINT, signal_handler_hd);
-	else if(options == -1)
+	if (sig == SIGINT)
+		g_ex_status = 130;
+}
+
+void	signals(int options)
+{
+	if (options != 1)
+		signal(SIGQUIT, SIG_IGN);
+	if (options == 0)
+		signal(SIGINT, signal_handler);
+	else if (options == 1)
+	{
+		signal(SIGINT, signal_handler_child);
+		signal(SIGQUIT, signal_handler_child);
+	}
+	else if (options == 2)
+		signal(SIGINT, signal_handler_hd);
+	else if (options == -1)
 		signal(SIGINT, signal_handler_nothing);
 }

@@ -8,7 +8,7 @@ int	g_ex_status = 0;
 void	init_prompt(t_main	*main, t_variables_quotes *s_var_quotes)
 {
 	char	*input;
-	//char	*prompt = NULL;
+	
 
 	while (1)
 	{

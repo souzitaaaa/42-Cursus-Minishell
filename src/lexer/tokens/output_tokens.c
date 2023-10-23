@@ -15,7 +15,7 @@
 //* Funcao de ajuda para a get_rdr_out que verifica
 bool	is_space(char c)
 {
-	if (ft_strchr(" ", c))
+	if (c == ' ' || c =='\t')
 		return (true);
 	return (false);
 }

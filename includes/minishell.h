@@ -101,7 +101,9 @@ void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
 void	    ini_variables_quotes(t_variables_quotes *s_var_quotes);
-
+void	    init_input(t_main *main, char *input);
+void	    init_ast(t_ast	*ast);
+void	    init_lexer(t_lexer *stack);
 /*
 !PROMPT
 */
