@@ -13,7 +13,7 @@
 #include "../../includes/minishell.h"
 
 //* Remove nodes num index especifico
-void	remove_node(t_lexer *lexer, int index)
+void	remove_node(t_lexer *lexer, int index, bool ft_free)
 {
 	t_node	*current;
 	int		count;
@@ -33,7 +33,10 @@ void	remove_node(t_lexer *lexer, int index)
 		shift_index(lexer);
 	}
 	lexer->size--;
-	free(current->token.arr);
+	if(ft_free)
+		ft_free_array(&current->token.arr);
+	else
+		free(current->token.arr);
 	free(current);
 }
 

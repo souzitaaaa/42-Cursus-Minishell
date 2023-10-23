@@ -58,7 +58,7 @@ void	insert_temp(t_lexer *tokens, int index, char **temp)
 {
 	t_node *new;
 
-	remove_node(tokens, index);
+	remove_node(tokens, index, true);
 	new = create_n_cmd(temp);
 	insert_node(tokens, new, index);
 }
@@ -70,9 +70,8 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	int aux_index;
 	bool cmdcat;
 
-	temp = ft_calloc(1, sizeof(char *));
 	cmdcat = false;
-	temp = ft_arrjoin(temp, aux->token.arr);
+	temp = ft_arrdup(aux->token.arr);
 	aux = aux->next;
 	while(aux->token.type != PIPE && aux != tokens->head)
 	{
@@ -81,7 +80,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 			cmdcat = true;
 			aux_index = aux->index;
 			temp = ft_arrjoin(temp, aux->token.arr);
-			remove_node(tokens, aux->index);
+			remove_node(tokens, aux->index, false);
 			aux = get_node(*tokens, aux_index);
 			if(aux == NULL)
 				break ;
@@ -91,6 +90,8 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	}
 	if (cmdcat)
 		insert_temp(tokens, index, temp);
+	else
+		ft_free_array(&temp);
 }
 
 //*Esta função junta os tipos S todos no mesmo nó, para que entre pipes só haja um tipo S (comando)

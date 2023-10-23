@@ -64,7 +64,7 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 			continue ;
 		}
 		else
-			write(fd, str, 1);
+			write(fd, str, ft_strlen(str));
 		if(*str)
 			ft_free_str(&str);
 	}
@@ -87,7 +87,6 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 		close(heredoc_fd[0]);
 		hd_line = read_stdin(heredoc_fd[1], lim, quotes, main);
 		close(heredoc_fd[1]);
-		destroy_main(main, true);
 		exit_child(main, hd_line, true);
 	}
 	signals(-1);
