@@ -27,5 +27,4 @@ void    destroy_main(t_main *main, bool input)
 		destroy_input(main);
 	free_env(&main->env_list);
 	free_env(&main->export_list);
-	ft_free_str(&main->prev); //!Vamos utilizar??
 }

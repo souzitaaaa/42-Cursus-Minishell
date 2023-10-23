@@ -12,18 +12,23 @@
 
 #include "../../includes/minishell.h"
 
-void env(t_env *env, t_main *main, bool child, char **command)
+/*A env percorre a lista de variaveis de ambiente e imprime ela quando chamada, se a lista tiver vazia ou 
+o env for chamado com argumentos dá erro*/
+void	env(t_env *env, t_main *main, bool child, char **command)
 {
 	t_var	*current;
 
-	 if (env->size == 0)
-	 {
-        ft_printf("minishell: env: No such file or directory\n"); //!ESCREVER PARA O STDERR
-        exit_child(main, 127, child);
-        return;
-    }
+	if (env->size == 0)
+	{
+		if (main->flags.not_print == false)
+			error_env(STDOUT_FILENO);
+		exit_child(main, 127, child);
+		return ;
+	}
 	if (command[1] != NULL)
 	{
+		if (main->flags.not_print == false)
+			error_with_arg(STDOUT_FILENO, command[1]);
 		exit_child(main, 127, child);
 		return ;
 	}

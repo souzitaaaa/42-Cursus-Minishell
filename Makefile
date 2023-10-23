@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joe <joe@student.42.fr>                    +#+  +:+       +#+         #
+#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/21 11:25:30 by joe              ###   ########.fr        #
+#    Updated: 2023/10/23 15:59:34 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ _FILES 			= error_msg exit_code init signal\
 					exec_cmd execve execve_utils child_aux \
 					pipe pipe_utils rdr_input rdr_output \
 					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils \
-					echo pwd env unset cd export utils_export utils_builtins exit
+					echo pwd env unset cd export utils_export  utils_builtins utils_cd exp_unset_error exit\
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

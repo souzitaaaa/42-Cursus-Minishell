@@ -12,6 +12,7 @@
 
 #include "../../includes/minishell.h"
 
+/*Essa função é para saber se é um numero*/
 int	ft_isnbr(const char *str)
 {
 	if (*str == '-' || *str == '+')
@@ -27,81 +28,14 @@ int	ft_isnbr(const char *str)
 	return(1);
 }
 
-int	unset_cd(t_main *main, char *str)
-{
-	int	index;
-
-	print_var(main->env_list);
-	index = unset_env(main, str);
-	unset_exp(main, str);
-	return (index);
-}
-
-void	refresh_pwd(t_main *main, char *str)
-{
-	char	*pwd;
-
-	pwd = ft_strjoin("PWD=", str);
-	if (modify_var_exp(main, pwd) == false)
-		insert_var_exp(main, pwd);
-	if (modify_var_env(main, pwd) == false)
-		insert_var_env(main, pwd);
-}
-void	refresh_oldpwd(t_main *main, char *str)
-{
-	char	*oldpwd;
-
-	oldpwd = ft_strjoin("OLDPWD=", str);
-	if (modify_var_exp(main, oldpwd) == false)
-		insert_var_exp(main, oldpwd);
-	if (modify_var_env(main, oldpwd) == false)
-		insert_var_env(main, oldpwd);
-}
-
-int	validations_ch(char *str, int fd, char *command) 
-{
-    int i = 0;
-	
-	if (str[i] == '-')
-	{
-        ft_putstr_fd("minishell: ", fd);
-		ft_putstr_fd(command, fd);
-		ft_putstr_fd(": '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("': invalid option\n", fd);
-		return (2);
-    }
-	else if ((str[i] >= '0' && str[i] <= '9') || str[i] == '+' || str[i] == '*' || str[i] == '%' || str[i] == '?' || str[i] == '/' || str[i] == '\\')
-	{
-        ft_putstr_fd("minishell: ", fd);
-		ft_putstr_fd(command, fd);
-		ft_putstr_fd(": '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("': not a valid identifier\n", fd);
-		return (1);
-    }
-	else if (str[i] == '(')
-	{
-        ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd("syntax error near unexpected token 'newline'\n", fd);
-		return (258);
-    }
-	else if (str[i] == ')')
-	{
-        ft_putstr_fd("minishell: ", fd);
-        ft_putstr_fd("syntax error near unexpected token '", fd);
-        ft_putstr_fd(str, fd);
-        ft_putstr_fd("'\n", fd);
-		return (258);
-    }
-	return (0);
-}
-
+/*Essa função verifica se a variável dada na str já existe na env_lista*/
 bool	verify_var(t_main *main, char *str)
 {
-	int		count = 0;
-	t_var	*aux = main->env_list.head;
+	int		count;
+	t_var	*aux;
 
+	count = 0;
+	aux = main->env_list.head;
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
@@ -110,5 +44,3 @@ bool	verify_var(t_main *main, char *str)
 	}
 	return (false);
 }
-
-//OLDPWD=/nfs/homes/jede-ara/Documents/42/minishell

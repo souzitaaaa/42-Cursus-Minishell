@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
 /*   Updated: 2023/10/20 16:52:58 by jcruz-da         ###   ########.fr       */
+=======
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
+/*   Updated: 2023/10/20 17:39:57 by jede-ara         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +92,6 @@ void	init_main(t_main *main, char **envp)
 	init_env(&main->env_list);
 	init_env(&main->export_list);
 	set_env_list(main, envp);
-	main->prev = NULL;
 	copy_exp(main);
 	main->env_arr = NULL;
 	main->exit_code = 0;
