@@ -12,7 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-void	insert_first_op(t_ast_node **op, t_node *pipe, t_leaf *l_left, t_leaf *l_right)
+void	insert_first_op(t_ast_node **op, t_node *pipe,
+			t_leaf *l_left, t_leaf *l_right)
 {
 	*op = malloc(sizeof(t_ast_node));
 	(*op)->token = pipe->token;
@@ -23,7 +24,8 @@ void	insert_first_op(t_ast_node **op, t_node *pipe, t_leaf *l_left, t_leaf *l_ri
 	(*op)->index = 0;
 }
 
-void	insert_op(t_ast_node **op, t_node *pipe, t_ast_node **last_op, t_leaf *l_right)
+void	insert_op(t_ast_node **op, t_node *pipe,
+		t_ast_node **last_op, t_leaf *l_right)
 {
 	*op = malloc(sizeof(t_ast_node));
 	(*op)->token = pipe->token;
@@ -43,10 +45,11 @@ t_ast_node	*insert_first_ast(t_node *pipe, t_lexer tokens)
 	insert_l_left(&l_left, pipe);
 	insert_l_right(&l_right, pipe, tokens);
 	insert_first_op(&op, pipe, l_left, l_right);
-	return(op);
+	return (op);
 }
 
-t_ast_node *insert_ast(t_node *pipe, t_ast_node *last_op, int size, t_lexer tokens)
+t_ast_node	*insert_ast(t_node *pipe, t_ast_node *last_op,
+				int size, t_lexer tokens)
 {
 	t_ast_node	*op;
 	t_leaf		*l_right;
@@ -54,7 +57,7 @@ t_ast_node *insert_ast(t_node *pipe, t_ast_node *last_op, int size, t_lexer toke
 	insert_l_right(&l_right, pipe, tokens);
 	insert_op(&op, pipe, &last_op, l_right);
 	op->index = size;
-	return(op);
+	return (op);
 }
 
 void	create_ast(t_lexer tokens, t_ast *ast)
@@ -62,15 +65,14 @@ void	create_ast(t_lexer tokens, t_ast *ast)
 	t_node		*aux;
 	t_ast_node	*last_op;
 
-
 	aux = tokens.head;
-	while(ast->counter++ < tokens.size)
+	while (ast->counter++ < tokens.size)
 	{
-		while(aux->token.type != PIPE && ast->counter++ < tokens.size) //encontro o pipe
+		while (aux->token.type != PIPE && ast->counter++ < tokens.size)
 			aux = aux->next;
-		if(aux->token.type == PIPE)
+		if (aux->token.type == PIPE)
 		{
-			if(ast->size == 0)
+			if (ast->size == 0)
 				last_op = insert_first_ast(aux, tokens);
 			else
 				last_op = insert_ast(aux, last_op, ast->size, tokens);
@@ -81,7 +83,7 @@ void	create_ast(t_lexer tokens, t_ast *ast)
 	ast->head = last_op;
 }
 
-void    print_ast(t_ast	ast)
+/*void    print_ast(t_ast	ast)
 {
 	int	count = 0;
 	t_ast_node  *aux = ast.head;
@@ -134,4 +136,4 @@ void    print_ast(t_ast	ast)
 		if(aux->left_n)
 			aux = aux->left_n;
 	}
-}
+}*/
