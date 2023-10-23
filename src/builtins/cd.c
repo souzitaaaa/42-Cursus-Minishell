@@ -174,6 +174,6 @@ void	cd(char *path, t_main *main, bool child)
 		error = previous_path(current, main);
 	else
 		error = regular_cd(current, path, main);
-	exit_child(main, error, child);
 	free(current);
+	exit_child(main, error, child);
 }
