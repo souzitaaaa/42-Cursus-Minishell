@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/20 16:50:51 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:54:15 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,4 @@ void	exec_cmd(char **command, t_main *main, bool child)
    	else
        exec_other_cmd(command, main, child);
 }
+

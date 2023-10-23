@@ -96,7 +96,7 @@ void	sort_print_export(t_env *exp)
 	}
 }
 
-void	export(t_main *main, char **array, bool child)
+/*void	export(t_main *main, char **array, bool child)
 {
 	int	i;
 	int	exit_code;
@@ -143,6 +143,61 @@ void	export(t_main *main, char **array, bool child)
 						insert_var_env(main, array[i]);
 				}
 			}
+			i++;
+		}
+	}
+	exit_child(main, exit_code, child);
+}*/
+
+void	variable_treatment(t_main *main, char *variable, bool child) 
+{
+	if (variable[0] == '=')
+	{
+		if (main->flags.not_print == false)
+			error_export(STDERR_FILENO);
+		exit_child(main, 2, child);
+	}
+	else
+	{
+		if (!ft_strchr(variable, '='))
+		{
+			if (verify_var(main, variable) == false)
+				insert_var_exp(main, variable);
+		}
+		else
+		{
+			if (modify_var(&main->export_list, variable) == false)
+				insert_var_exp(main, variable);
+			if (modify_var(&main->env_list, variable) == false)
+				insert_var_env(main, variable);
+		}
+	}
+}
+
+void	export(t_main *main, char **array, bool child)
+{
+	int	i;
+	int	exit_code;
+	int	error;
+
+	i = 1;
+	exit_code = 0;
+	error = 0;
+	if (array[1] == 0 || ft_strcmp(array[1], ";") == 0)
+	{
+		if (main->flags.not_print == false)
+			sort_print_export(&main->export_list);
+	}
+	else
+	{
+		while (array[i] != NULL)
+		{
+			if (main->flags.not_print == false)
+				error = validations_ch(array[i], STDERR_FILENO, array[0]);
+			if (error)
+				exit_code = error;
+			else
+				variable_treatment(main, array[i], child);
 			i++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/20 16:55:47 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:01:37 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,24 @@ char	*get_envvar(char *str, t_env *env_list)
 	}
 	return (NULL);
 }
-/*void	check_cd(char *command)
+
+bool	check_cd(char **command, t_main *main, bool child)
 {
-	if ()
-	
+	char	*path;
+
+	path = NULL;
+	if (command[1] != NULL)
+		path = command[1];
+	if (command[2] != NULL)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putendl_fd("cd: too many arguments", STDERR_FILENO);
+		exit_child(main, 1, child);
+		return (false);
+	}
 	else
-		cd()	
-}*/
+	{
+		cd(path, main, child);
+		return (true);
+	}
+}
