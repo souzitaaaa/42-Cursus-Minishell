@@ -54,17 +54,3 @@ void	error_cd(int fd, char *str)
 	ft_putstr_fd(str, fd);
 	ft_putendl_fd(" not set", fd);
 }
-
-void	error_export(int fd)
-{
-	ft_putstr_fd("minishell: ", fd);
-	ft_putendl_fd("bad assignment", fd);
-}
-
-void	error_syntax(char *token)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(SYNTAX_ERROR, STDERR_FILENO);
-	ft_putstr_fd(token, STDERR_FILENO);
-	ft_putendl_fd("'", STDERR_FILENO);
-}

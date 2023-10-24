@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:47:38 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/01 18:06:19 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/18 15:50:58 by jenny            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@
 void	ft_redirect_in(t_node	*head, t_main *main, t_hd hd)
 {
 	t_node *aux;
-	int	counter;
 
 	aux = head;
-	counter = 0;
 	while(aux != NULL)
 	{
 		if(aux->token.type == HEREDOC && aux->index != hd.index)
 			aux = aux->next;
 		exec_rdr(aux->token, main, hd.fd);
 		aux = aux->next;
-		counter++;
 	}
 	if(hd.flag)
 		close(hd.fd);

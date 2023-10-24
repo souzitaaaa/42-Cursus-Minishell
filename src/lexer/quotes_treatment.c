@@ -20,7 +20,8 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 	if (len > 0)
 	{
 		temp = ft_substr(str, start, len);
-		result = ft_split(temp, ' ');
+		//result = ft_split_tab(temp);
+		result = ft_split(temp, ' ');/* */
 		ft_free_str(&temp);
 		if (main->flags.hd == false)
 			check_expansion_arr(main, result);

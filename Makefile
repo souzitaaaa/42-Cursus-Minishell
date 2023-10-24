@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/23 22:43:37 by rimarque         ###   ########.fr        #
+#    Updated: 2023/10/24 12:36:56 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			= -Wall -Wextra -g -ggdb -Werror #-fsanitize=address
+CFLAGS			=  -g -ggdb #-fsanitize=address -Wall -Wextra -Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -43,17 +43,17 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg exit_code init signal\
-					print_img quotes list_quotes quotes_substr \
-					destroy free_list free_ast \
-					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils \
+_FILES 			= error_msg error_msg_2 exit_code  init init_2 signal\
+					print_img quotes list_quotes quotes_substr list_print\
+					destroy free_list free_ast\
+					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils\
 					extra_tokens output_tokens input_tokens fd_token \
 					parser cmdcat cmdcat_utils ast ast_utils ast_list ast_list_utils syntax syntax_utils list_endnull \
 					env_list env_arr \
 					exec_cmd execve execve_utils child_aux \
 					pipe pipe_utils rdr_input rdr_output \
 					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils \
-					echo pwd env unset cd export utils_export utils_builtins exit
+					echo pwd env unset cd export utils_export  utils_builtins utils_cd exp_unset_error exit\
 
 OBJ				= $(_FILES:%=%.o)
 TARGET			= $(addprefix $(OBJDIR)/, $(OBJ))

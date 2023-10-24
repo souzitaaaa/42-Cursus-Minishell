@@ -27,6 +27,7 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 		main->flags.hd = true;
 	if (quotes.head == NULL)
 	{
+		//result = ft_split_tab(str);
 		result = ft_split(str, ' ');
 		check_expansion_arr(main, result);
 	}

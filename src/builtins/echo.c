@@ -12,64 +12,46 @@
 
 #include "../../includes/minishell.h"
 
-int echo_newline(char *command)
+/*Essa função verifica se há -n*/
+int	echo_newline(char *command)
 {
-    int count;
+	int	count;
 
-    if (ft_strncmp(command, "-n", 2))
-		return (0);
-    count = 2;
-    while (command[count])
-    {
-        if (command[count] != 'n')
-			return (0);
-        count++;
-    }
-	return (1);
-}
-void    echo(char **command, t_main *main, bool child)
-{
-    int flag;
-    int count;
-	if (command[1] == NULL)
-		ft_printf("\n");
-	else
+	count = 0;
+	if (ft_strcmp(command, "-n") == 0)
+		return (1);
+	if (ft_strncmp(command, "-n", 2) == 0)
 	{
-
-		flag = 0;
-		count = 1;
-		while (command[count] && echo_newline(command[count]))
-		{
-			flag = 1;
+		count = 2;
+		while (command[count] && command[count] == 'n')
 			count++;
-		}
-		count = 1;
-		if (flag)
-		{
-			count = 2;
-			while (command[count])
-			{
-				if(ft_strcmp(command[count], "-n"))
-				{
-					ft_printf("%s", command[count]);
-					if (command[count + 1])
-						ft_printf(" ");
-				}
-				count++;
-			}
-		}
-		while (command[count])
-		{
-			if (!flag)
-			{
-				ft_printf("%s", command[count]);
-				if (command[count + 1])
-					ft_printf(" ");
-			}
-			count++;
-		}
-		if (!flag)
-			ft_printf("\n");
-		exit_child(main, 0, child);
+		if (!command[count])
+			return (1);
 	}
+	return (0);
+}
+
+/*A função echo imprime o que for mandado logo depois do comando, se tiver -n dá um \n*/
+void	echo(char **command, t_main *main, bool child)
+{
+	int	count;
+	int	flag;
+
+	count = 1;
+	flag = 0;
+	while (command[count] && echo_newline(command[count]))
+	{
+		flag = 1;
+		count++;
+	}
+	while (command[count])
+	{
+		ft_printf("%s", command[count]);
+		if (command[count + 1])
+			ft_printf(" ");
+		count++;
+	}
+	if (!flag)
+		ft_printf("\n");
+	exit_child(main, 0, child);
 }

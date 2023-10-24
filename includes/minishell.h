@@ -82,9 +82,12 @@ void	error_msg_cmd(char *str, int fd);
 void	error_msg_file(char *str, int fd);
 void	error_cd(int fd, char *str);
 void	error_export(int fd);
+void	error_env(int fd);
+void	error_quotes(int fd);
 void	error_syntax(char *token);
 void	error_msg_fd(char *str, int fd);
 void	error_msg_hd(char *str, int fd, int line);
+void	error_with_arg(int fd, char *str);
 
 /*
 !EXIT_CODE.C
@@ -97,7 +100,10 @@ void	set_exit_code(t_main *main, int exit_code);
 void		init_env(t_env *stack);
 void		init_input(t_main *main, char *input);
 void		init_main(t_main *main, char ** env);
-
+void	    ini_variables_quotes(t_variables_quotes *s_var_quotes);
+void	    init_input(t_main *main, char *input);
+void	    init_ast(t_ast	*ast);
+void	    init_lexer(t_lexer *stack);
 /*
 !PROMPT
 */
