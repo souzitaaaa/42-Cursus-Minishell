@@ -12,7 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-//*Esta função espera pelo processo identificado pelo pid (process id) e seta o exit status
+//*Esta função espera pelo processo identificado pelo
+//pid (process id) e seta o exit status
 void	wait_estatus(int pid, t_main *main)
 {
 	int	exit_status;
@@ -34,7 +35,8 @@ void	wait_set_line(int pid, t_main *main)
 }
 
 //*Esta função faz o handle do erro das funções fork e pipe
-//*Se o resultado for -1, imprime o erro respetivo e sai com o exit code respetivo
+//*Se o resultado for -1, imprime o erro respetivo
+//e sai com o exit code respetivo
 //*O exit_code que recebe corresponde ao errno
 void	error_fp(int result, int exit_code, t_main *main)
 {
@@ -58,16 +60,17 @@ int	ft_fork(t_main *main)
 	return (pid);
 }
 
-//*Esta função espera pelos processos child no final dos pipes serem todos executados e seta o exit code respetivo
+//*Esta função espera pelos processos child no final dos pipes
+//serem todos executados e seta o exit code respetivo
 //*Por ordem de abertura dos processos!
 void	wait_estatus_p(t_main *main, t_ast ast)
 {
-	t_ast_node *node;
+	t_ast_node	*node;
 
 	node = get_beg(&ast);
-	while(node != NULL)
+	while (node != NULL)
 	{
-		if(node->left)
+		if (node->left)
 			wait_estatus(node->left->pid, main);
 		wait_estatus(node->right->pid, main);
 		node = node->prev;
