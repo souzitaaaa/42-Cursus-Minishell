@@ -71,7 +71,7 @@ void	fork_btwn_pipes(int *fd, int *next_fd, t_leaf *leaf, t_main *main)
 //*Espera pelos processos filhos e guarda o exit status
 void	last_fork(int *fd, t_leaf *leaf, t_main *main, t_ast ast)
 {
-	int pid;
+	int	pid;
 
 	pid = ft_fork(main);
 	if (pid == 0)
@@ -114,7 +114,7 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 //(redirecionando o input para o reading end do pipe (fd[0]))
 void	pipex(t_ast *ast, t_main *main)
 {
-	int		fd[2];
+	int			fd[2];
 	t_ast_node	*node;
 
 	node = get_beg(ast);

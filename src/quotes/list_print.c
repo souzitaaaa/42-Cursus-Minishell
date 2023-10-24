@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/23 15:53:54 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:54:29 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,19 @@ void	start_with_quotes(t_main *main, bool *cmd_error)
 	while (main->input_prompt[i] == ' ')
 		i++;
 	if (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE)
-	{	
-		while (main->input_prompt[i] != '\0' && (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE))//Para pular as quotes
+	{
+		while (main->input_prompt[i] != '\0'
+			&& (main->input_prompt[i] == SQUOTE
+				|| main->input_prompt[i] == DQUOTE))
 			i++;
-		if(main->input_prompt[i] == ' ' || main->input_prompt[i] == '\0')
+		if (main->input_prompt[i] == ' ' || main->input_prompt[i] == '\0')
 			*cmd_error = true;
 	}
 }
 
 int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 {
-	bool cmd_error;
+	bool	cmd_error;
 
 	cmd_error = false;
 	start_with_quotes(main, &cmd_error);
@@ -68,11 +70,11 @@ int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 	}
 	if (update_erro_quotes(s_var_quotes->quotes_analises, main))
 		return (2);
-	if(cmd_error)
+	if (cmd_error)
 	{
 		error_msg_cmd("\0", STDERR_FILENO);
 		set_exit_code(main, 127);
-		return(127);
+		return (127);
 	}
 	return (0);
 }
