@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 16:10:51 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/19 22:48:09 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:15:50 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,3 @@ void	free_env(t_env *stack)
 	stack->head = NULL;
 	stack->size = 0;
 }
-
