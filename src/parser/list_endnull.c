@@ -40,7 +40,6 @@ void	insert_head_endnull(t_lexer *stack, t_node *new)
 	{
 		new->next = stack->head;
 		new->prev = NULL;
-		//stack->head->prev->next = new;
 		stack->head->prev = new;
 		stack->head = new;
 	}
@@ -49,7 +48,7 @@ void	insert_head_endnull(t_lexer *stack, t_node *new)
 
 void	insert_last_endnull(t_lexer *stack, t_node *new, int index)
 {
-	t_node *aux;
+	t_node	*aux;
 
 	aux = stack->head;
 	if (stack->head == NULL)
@@ -57,20 +56,19 @@ void	insert_last_endnull(t_lexer *stack, t_node *new, int index)
 	else
 	{
 		new->next = NULL;
-		while(aux->next)
+		while (aux->next)
 			aux = aux->next;
-		//stack->head->prev->next = new;
 		aux->next = new;
 		new->prev = aux;
 	}
-	if(index == -1)
+	if (index == -1)
 		new->index = stack->size;
 	else
 		new->index = index;
 	stack->size++;
 }
 
-void    print_list_endnull(t_node *head)
+/*void    print_list_endnull(t_node *head)
 {
 	t_node  *aux = head;
 
@@ -87,4 +85,4 @@ void    print_list_endnull(t_node *head)
           //  break ;
 	}
 			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");
-}
+}*/

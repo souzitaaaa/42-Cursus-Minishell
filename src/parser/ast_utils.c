@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ast_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/23 23:01:58 by rimarque          #+#    #+#             */
+/*   Updated: 2023/10/23 23:01:58 by rimarque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 //*Encontra o comando à esquerda do pipe
 //*Recebe o node à esquerda do pipe
 //*Anda para o nó anterior até encontrar o comando
@@ -8,20 +18,20 @@
 //*Se não existir comando, cria e devolve um token de tipo EMPTY
 t_token	find_cmd_left(t_node *aux)
 {
-	t_token token;
+	t_token	token;
 
-	while(1)
+	while (1)
 	{
-		if(aux->token.type == STRING)
+		if (aux->token.type == STRING)
 			return (aux->token);
-		if(aux->index == 0)
+		if (aux->index == 0)
 			break ;
 		aux = aux->prev;
 	}
 	token.arr = NULL;
 	token.quotes = 0;
 	token.type = EMPTY;
-	return(token);
+	return (token);
 }
 
 //*Esta função cria e insere a leaf à esquerda do operator (pipe)
@@ -32,7 +42,7 @@ t_token	find_cmd_left(t_node *aux)
 void	insert_l_left(t_leaf **leaf, t_node *pipe)
 {
 	t_lexer	list_in;
-	t_lexer list_out;
+	t_lexer	list_out;
 
 	*leaf = malloc(sizeof(t_leaf));
 	(*leaf)->token = find_cmd_left(pipe->prev);
@@ -49,28 +59,30 @@ void	insert_l_left(t_leaf **leaf, t_node *pipe)
 
 //*Encontra o comando à direita do pipe
 //*Recebe o node à direita do pipe
-//*Anda para o próximo nó até encontrar o comando ou até emcontrar o próximo pipe
+//*Anda para o próximo nó até encontrar o comando
+//ou até encontrar o próximo pipe
 //*Quando encontra o comando, devolve o token correspendente
 //*Se não existir comando, cria e devolve um token de tipo EMPTY
 t_token	find_cmd_right(t_node *aux, t_lexer tokens)
 {
-	t_token token;
-	while(aux->token.type != PIPE && aux != tokens.head)
+	t_token	token;
+
+	while (aux->token.type != PIPE && aux != tokens.head)
 	{
-		if(aux->token.type == STRING)
+		if (aux->token.type == STRING)
 			return (aux->token);
 		aux = aux->next;
 	}
 	token.arr = NULL;
 	token.quotes = 0;
 	token.type = EMPTY;
-	return(token);
+	return (token);
 }
 
 void	insert_l_right(t_leaf **leaf, t_node *pipe, t_lexer tokens)
 {
 	t_lexer	list_in;
-	t_lexer list_out;
+	t_lexer	list_out;
 
 	*leaf = malloc(sizeof(t_leaf));
 	(*leaf)->token = find_cmd_right(pipe->next, tokens);

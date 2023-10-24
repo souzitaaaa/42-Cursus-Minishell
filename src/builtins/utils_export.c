@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/18 18:01:41 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/24 12:37:21 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	insert_var_exp(t_main *main, char *str)
 		aux = var_node(str);
 		add_var(&main->export_list, aux, -1);
 	}
+	ft_free_str(&temp);
 }
 
 /*Essa função insere a variável na env_list*/
@@ -40,6 +41,7 @@ void	insert_var_env(t_main *main, char *str)
 		aux = var_node(str);
 		add_var(&main->env_list, aux, -1);
 	}
+	ft_free_str(&temp);
 }
 
 /*Essa função percorre a lista, procura se o nome da variavel é o mesmo até o sinal de =, se sim ela modifica a variavel */

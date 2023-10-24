@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/18 17:05:01 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:30:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char    *join_expanded(char *str, char *expanded, int len);
 /*
 !LEXER_UTILS.C
 */
-void    remove_node(t_lexer *lexer, int index);
+void	remove_node(t_lexer *lexer, int index, bool ft_free);
 void    insert_node(t_lexer *lexer, t_node *new, int index);
 void    print_tokens(t_lexer *tokens);
 t_node *get_node(t_lexer tokens, int index_wanted);
