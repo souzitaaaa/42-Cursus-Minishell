@@ -33,7 +33,7 @@ void	remove_node(t_lexer *lexer, int index, bool ft_free)
 		shift_index(lexer);
 	}
 	lexer->size--;
-	if(ft_free)
+	if (ft_free)
 		ft_free_array(&current->token.arr);
 	else
 		free(current->token.arr);
@@ -67,7 +67,6 @@ void	insert_node(t_lexer *lexer, t_node *new, int index)
 	lexer->size++;
 }
 
-
 void    print_tokens(t_lexer *tokens)
 {
 	int count = 0;
@@ -85,7 +84,6 @@ void    print_tokens(t_lexer *tokens)
 	}
 			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");
 }
-
 
 //* Vai devolver o node do respetivo index em que queremos trabalhar
 t_node	*get_node(t_lexer tokens, int index_wanted)
