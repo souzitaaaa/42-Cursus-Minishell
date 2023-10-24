@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 23:00:31 by joe               #+#    #+#             */
-/*   Updated: 2023/09/28 17:13:55 by joe              ###   ########.fr       */
+/*   Updated: 2023/10/24 16:35:36 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ COLORS
 # define CMD_ERROR "command not found"
 # define FILE_ERROR "No such file or directory"
 # define FD_ERROR "Bad file descriptor"
-# define HD_ERROR "here-document at line 1 delimited by end-of-file"
+# define IS_D "Is a directory"
+# define P_D "Permission denied"
 
 # define SQUOTE 39
 # define DQUOTE 34

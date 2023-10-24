@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 12:08:19 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:55:06 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	remove_var(t_env *env, int index)
 		shift_index_env(env);
 	}
 	env->size--;
+	ft_free_str(&current->var);
 	free(current);
 }
 
@@ -96,7 +97,7 @@ void	unset_exp(t_main *main, char *str)
 	}
 }
 
-/*Essa funcao valida se a variavel que esta tentando ser removida é valida, 
+/*Essa funcao valida se a variavel que esta tentando ser removida é valida,
 se for ela dá unset da variavel nas duas listas: env_list e export_list.
 Se não, dá uma mensagem de erro adaptada para cada situação*/
 void	unset(t_main *main, char **array, bool child)

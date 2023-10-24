@@ -1,50 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/24 12:45:00 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:46:55 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
-void	init_quotes(t_quotes *quotes)
+void	init_std(t_std *fd)
 {
-	quotes->head = NULL;
-	quotes->size = 0;
-	quotes->counter = 0;
+	fd->stdin = dup(STDIN_FILENO);
+	fd->stdout = dup(STDOUT_FILENO);
+	fd->stderr = dup(STDERR_FILENO);
 }
 
-void	ini_variables_quotes(t_variables_quotes *s_var_quotes)
+void	init_bool(t_bool *flags)
 {
-	s_var_quotes->i = 0;
-	s_var_quotes->quotes_analises = 0;
-	s_var_quotes->open_quote_position = -1;
-	s_var_quotes->open_quote_type = '\0';
-	s_var_quotes->c = '\0';
+	flags->put_node_behind = false;
+	flags->rdr_treated = false;
+	flags->rdr_err = false;
+	flags->signal = false;
+	flags->not_print = false;
+	flags->hd = false;
 }
 
-void	init_ast(t_ast	*ast)
+//! Dar free sempre que se inicia novamente
+void	init_input(t_main *main, char *input)
 {
-	ast->head = NULL;
-	ast->counter = 0;
-	ast->size = 0;
+	main->input_prompt = input;
+	init_bool(&main->flags);
+	init_quotes(&main->quotes);
+	init_lexer(&main->tokens);
+	init_ast(&main->ast);
+	main->hd.fd = 0;
+	main->hd.index = 0;
+	main->hd.str = NULL;
 }
 
-void	init_lexer(t_lexer *stack)
+void	init_main(t_main *main, char **envp)
 {
-	stack->head = NULL;
-	stack->size = 0;
-}
-
-void	init_env(t_env *stack)
-{
-	stack->head = NULL;
-	stack->size = 0;
-	stack->i = 0;
+	init_env(&main->env_list);
+	init_env(&main->export_list);
+	set_env_list(main, envp);
+	copy_exp(main);
+	main->env_arr = NULL;
+	main->path_pwd = NULL;
+	main->exit_code = 0;
+	main->line = 0;
+	main->error = 0;
+	init_std(&main->fd);
+	main->flags.signal = false;
 }
