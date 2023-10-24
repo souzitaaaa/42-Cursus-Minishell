@@ -27,16 +27,16 @@ int	only_cd(char *current, t_main *main)
 			getcwd(main->path_pwd, 4096);
 			refresh_pwd(main, main->path_pwd);
 			refresh_oldpwd(main, current);
+			ft_free_str(&new_path);
+			ft_free_str(&main->path_pwd);
 			return (0);
 		}
+		ft_free_str(&new_path);
 		return (1);
 	}
-	else
-	{
-		if (main->flags.not_print == false)
-			error_cd(STDERR_FILENO, "HOME");
-		return (1);
-	}
+	if (main->flags.not_print == false)
+		error_cd(STDERR_FILENO, "HOME");
+	return (1);
 }
 
 int	previous_path(char *current, t_main *main)
@@ -56,16 +56,16 @@ int	previous_path(char *current, t_main *main)
 			getcwd(main->path_pwd, 4096);
 			refresh_pwd(main, main->path_pwd);
 			refresh_oldpwd(main, current);
+			ft_free_str(&prev);
+			ft_free_str(&main->path_pwd);
 			return (0);
 		}
+		ft_free_str(&prev);
 		return (1);
 	}
-	else
-	{
-		if (main->flags.not_print == false)
-			error_cd(STDERR_FILENO, "OLDPWD");
-		return (1);
-	}
+	if (main->flags.not_print == false)
+		error_cd(STDERR_FILENO, "OLDPWD");
+	return (1);
 }
 
 int	regular_cd(char *current, char *path, t_main *main)
@@ -79,6 +79,7 @@ int	regular_cd(char *current, char *path, t_main *main)
 		getcwd(main->path_pwd, 4096);
 		refresh_pwd(main, main->path_pwd);
 		refresh_oldpwd(main, current);
+		ft_free_str(&main->path_pwd);
 		return (0);
 	}
 	return (1);

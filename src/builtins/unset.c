@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 12:08:19 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 13:02:30 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	remove_var(t_env *env, int index)
 		shift_index_env(env);
 	}
 	env->size--;
+	free(current->var);
 	free(current);
 }
 
