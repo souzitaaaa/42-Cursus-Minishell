@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:46 by jenny             #+#    #+#             */
-/*   Updated: 2023/10/19 15:05:57 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:37:19 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	error_token(int fd, char *str)
 	ft_putstr_fd("'\n", fd);
 }
 
-/*Essa função é usada para validar caracteres na unset e na export, se for os caracteres informados tem
-devolver erros especificos*/
+/*Essa função é usada para validar caracteres na unset e na export,
+se for os caracteres informados tem devolver erros especificos*/
 int	validations_ch(char *str, int fd, char *command)
 {
 	if (str[0] == '`')
@@ -52,7 +52,10 @@ int	validations_ch(char *str, int fd, char *command)
 		invalid_option(fd, command, str);
 		return (2);
 	}
-	else if ((str[0] >= '0' && str[0] <= '9') || str[0] == '+' || str[0] == '*' || str[0] == '%' || str[0] == '?' || str[0] == '/' || str[0] == '\\' || str[0] == '.' || str[0] == ',' || str[0] == ':' || str[0] == '`')
+	else if ((str[0] >= '0' && str[0] <= '9') || str[0] == '+'
+		|| str[0] == '*' || str[0] == '%' || str[0] == '?'
+		|| str[0] == '/' || str[0] == '\\' || str[0] == '.'
+		|| str[0] == ',' || str[0] == ':' || str[0] == '`')
 	{
 		invalid_identifier(fd, command, str);
 		return (1);

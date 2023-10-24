@@ -18,14 +18,14 @@ int	ft_isnbr(const char *str)
 	if (*str == '-' || *str == '+')
 		str++;
 	if (*str == '\0')
-		return(0);
+		return (0);
 	while (*str)
 	{
 		if (*str < '0' || *str > '9')
-			return(0);
+			return (0);
 		str++;
 	}
-	return(1);
+	return (1);
 }
 
 /*Essa função verifica se a variável dada na str já existe na env_lista*/
@@ -39,7 +39,7 @@ bool	verify_var(t_main *main, char *str)
 	while (count++ < main->env_list.size)
 	{
 		if (ft_strncmp(str, aux->var, ft_strlen(str)) == 0)
-			return(true);
+			return (true);
 		aux = aux->next;
 	}
 	return (false);

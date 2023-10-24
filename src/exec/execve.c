@@ -72,7 +72,6 @@ char	*ft_pathname(int *flag, char **envp, char **cmd)
 void	execution(char **cmd, t_main *main)
 {
 	char	*pathname;
-	int		error;
 	int		flag;
 
 	pathname = ft_pathname(&flag, main->env_arr, cmd);
