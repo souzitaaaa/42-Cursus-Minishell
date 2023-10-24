@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-void    destroy_input(t_main *main)
+void	destroy_input(t_main *main)
 {
 	ft_free_str(&main->input_prompt);
 	free_quotes(&main->quotes);
@@ -21,9 +21,9 @@ void    destroy_input(t_main *main)
 	ft_free_array(&main->env_arr);
 }
 
-void    destroy_main(t_main *main, bool input)
+void	destroy_main(t_main *main, bool input)
 {
-	if(input)
+	if (input)
 		destroy_input(main);
 	free_env(&main->env_list);
 	free_env(&main->export_list);

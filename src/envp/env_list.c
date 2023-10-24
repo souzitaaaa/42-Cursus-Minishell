@@ -14,14 +14,11 @@
 
 t_var	*var_node(const char *var)
 {
-    t_var	*new_node;
+	t_var	*new_node;
 
 	new_node = (t_var *)malloc(sizeof(t_var));
 	if (new_node == NULL)
-	{
-		//ft_error();
 		exit(0);
-	}
 	new_node->var = ft_strdup(var);
 	return (new_node);
 }
@@ -62,18 +59,18 @@ void	set_env_list(t_main *main, char **envp)
 	}
 	unset_env(main, "OLDPWD");
 }
-//!APAGAR
+
+/*
 void	print_var(t_env env)
 {
 	t_var	*current;
-	
+
 	env.i = 0;
 	current = env.head;
-	printf("size: %d\n", env.size);
     while (env.i++ < env.size)
     {
 		printf("%d: ", current->index);
         printf("%s\n", current->var);
         current = current->next;
     }
-}
+}*/
