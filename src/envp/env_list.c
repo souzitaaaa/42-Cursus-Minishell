@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/09/21 16:40:31 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/24 18:06:04 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_var	*var_node(const char *var)
+t_var	*var_node(char *var)
 {
 	t_var	*new_node;
 
 	new_node = (t_var *)malloc(sizeof(t_var));
-	if (new_node == NULL)
-		exit(0);
+	if (!new_node)
+		return (NULL);
 	new_node->var = ft_strdup(var);
+	//ft_free_str(&var);
 	return (new_node);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 17:59:48 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:05:45 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	refresh_pwd(t_main *main, char *str)
 		insert_var(&main->export_list, pwd);
 	if (modify_var(&main->env_list, pwd) == false)
 		insert_var(&main->env_list, pwd);
+	ft_free_str(&pwd);
 }
 
 /*Essa funcao atualiza o oldpwd, toda vez que o oldpwd é mudado chamamos
@@ -36,6 +37,7 @@ void	refresh_oldpwd(t_main *main, char *str)
 		insert_var(&main->export_list, oldpwd);
 	if (modify_var(&main->env_list, oldpwd) == false)
 		insert_var(&main->env_list, oldpwd);
+	ft_free_str(&oldpwd);
 }
 
 /*Essa variavel é usada para mudar de diretorio, o chdir é usado para mudar
