@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/24 15:54:29 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:17:26 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	start_with_quotes(t_main *main, bool *cmd_error)
 	char	quote;
 
 	i = 0;
-	while (main->input_prompt[i] == ' ')
+	while (main->input_prompt[i] == ' ' || main->input_prompt[i] == '\t')
 		i++;
 	if (main->input_prompt[i] == SQUOTE || main->input_prompt[i] == DQUOTE)
 	{
@@ -46,7 +46,9 @@ void	start_with_quotes(t_main *main, bool *cmd_error)
 			&& (main->input_prompt[i] == SQUOTE
 				|| main->input_prompt[i] == DQUOTE))
 			i++;
-		if (main->input_prompt[i] == ' ' || main->input_prompt[i] == '\0')
+		if (main->input_prompt[i] == ' '
+			|| main->input_prompt[i] == '\0'
+			|| main->input_prompt[i] == '\t')
 			*cmd_error = true;
 	}
 }
