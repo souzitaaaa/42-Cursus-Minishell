@@ -31,7 +31,8 @@ int	echo_newline(char *command)
 	return (0);
 }
 
-/*A função echo imprime o que for mandado logo depois do comando, se tiver -n dá um \n*/
+/*A função echo imprime o que for mandado logo depois do comando, se tiver -n
+dá um \n*/
 void	echo(char **command, t_main *main, bool child)
 {
 	int	count;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 12:36:30 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:25:46 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	exec_cmd(char **command, t_main *main, bool child)
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		pwd(main, child);
 	else if (ft_strcmp(command[0], "cd") == 0)
-		cd(command[1], main, child);
+		check_cd(command, main, child);
 	else if (ft_strcmp(command[0], "env") == 0)
 		env(&main->env_list, main, child, command);
 	else if (ft_strcmp(command[0], "export") == 0)

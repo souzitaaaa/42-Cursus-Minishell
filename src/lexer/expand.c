@@ -43,6 +43,7 @@ int	get_min_len(char *str, int i)
 	min = get_min(ft_strclen(str + i + 1, ' '),
 			ft_strclen(str + i + 1, SQUOTE));
 	min = get_min(min, ft_strclen(str + i + 1, '\n'));
+	min = get_min(min, ft_strclen(str + i + 1, '\t'));
 	return (min);
 }
 
@@ -70,7 +71,8 @@ char	*expand_var(t_main *main, char *str, int i)
 		}
 		aux = aux->next;
 	}
-	out = join_expanded(str, "\0", ft_strclen(str, ' ') - i);
+	out = join_expanded(str, "\0",
+			get_min(ft_strclen(str, ' '), ft_strclen(str, '\t')) - i);
 	return (out);
 }
 
@@ -90,7 +92,8 @@ char	*expand(t_main *main, char *str)
 		expanded = expand_more(main, str);
 		return (expanded);
 	}
-	if (str[i + 1] == ' ' || str[i + 1] == '\0')
+	if (str[i + 1] == ' ' || str[i + 1] == '\0'
+		|| str[i + 1] == '\t')
 		return (str);
 	if (ft_strncmp(str + i, "$?", 2) == 0)
 		out = expand_exitcode(main, str);

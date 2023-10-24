@@ -47,9 +47,9 @@ char	*expand_exitcode(t_main *main, char *str)
 	char	*expanded;
 	char	*out;
 
-	expanded = ft_calloc(get_number_len(main->exit_code), sizeof(char));
 	expanded = ft_itoa(main->exit_code);
 	out = join_expanded(str, expanded, 2);
+	free(expanded);
 	return (out);
 }
 
