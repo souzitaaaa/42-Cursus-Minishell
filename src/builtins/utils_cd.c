@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/20 16:55:47 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:32:34 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	change_dir(char *path, t_main *main, bool child)
 	else
 	{
 		if (main->flags.not_print == false)
-			error_msg_file(path, STDERR_FILENO);
+			error_msg_file(path, STDERR_FILENO, FILE_ERROR);
 		exit_child(main, 1, child);
 		return (1);
 	}
@@ -76,7 +76,7 @@ char	*get_envvar(char *str, t_env *env_list)
 /*void	check_cd(char *command)
 {
 	if ()
-	
+
 	else
-		cd()	
+		cd()
 }*/

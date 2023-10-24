@@ -37,7 +37,7 @@ void	 set_rdr_err(t_main *main)
 void	rdr_error(char *str, t_main *main, int options)
 {
 	if (options == 0)
-		error_msg_file(str, STDERR_FILENO);
+		error_msg_file(str, STDERR_FILENO, FILE_ERROR);
 	if (options == 1)
 		error_msg_fd(str, STDERR_FILENO);
 	set_rdr_err(main); //parar os rdr exceto o here doc

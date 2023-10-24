@@ -101,5 +101,4 @@ void	exec_other_cmd(char **cmd, t_main *main, bool child)
 		wait_estatus(pid, main);
 		waitpid(pid, &exit_status, 0);
 	}
-	ft_free_array(&main->env_arr);
 }

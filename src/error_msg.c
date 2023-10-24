@@ -20,12 +20,12 @@ void	error_msg_cmd(char	*str, int fd)
 	ft_putendl_fd(CMD_ERROR, fd);
 }
 
-void	error_msg_file(char *str, int fd)
+void	error_msg_file(char *file, int fd, char *msg)
 {
 	ft_putstr_fd("minishell: ", fd);
-	ft_putstr_fd(str, fd);
+	ft_putstr_fd(file, fd);
 	ft_putstr_fd(": ", fd);
-	ft_putendl_fd(FILE_ERROR, fd);
+	ft_putendl_fd(msg, fd);
 }
 
 void	error_msg_fd(char *str, int fd)
