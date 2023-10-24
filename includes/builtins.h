@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jenny <jenny@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/18 18:09:37 by jenny            ###   ########.fr       */
+/*   Updated: 2023/10/24 11:48:50 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	unset(t_main *main, char **array, bool child);
 /*
 UTILS_EXPORT
 */
-void    insert_var_exp(t_main *main, char *str);
-void    insert_var_env(t_main *main, char *str);
+void	swap_var(t_var *var1, t_var *var2);
+void	sort_ascii(t_env *exp);
+void	insert_var(t_env *list, char *str);
 bool	modify_var(t_env *list, char *str);
 void	copy_exp(t_main *main);
 
@@ -69,14 +70,15 @@ UTILS_CD
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
 char	*find_home(char *path, t_main *main, bool child);
-int		change_dir(char *path, t_main *main, bool child);
+int     change_dir(char *path, t_main *main);
 char	*get_envvar(char *str, t_env *env_list);
+void	check_cd(char **command, t_main *main, bool child);
 
 /*
 UTILS_BUILTINS
 */
 int		ft_isnbr(const char *str);
-int		validations_ch(char *str, int fd, char *command); 
+int		validations_ch(char *str, int fd, char *command);
 bool	verify_var(t_main *main, char *str);
 
 #endif

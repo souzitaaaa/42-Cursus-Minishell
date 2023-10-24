@@ -38,10 +38,7 @@ void	find_exec_cmd_parent(t_lexer tokens, t_main *main)
 	{
 
 		if(aux->token.type == STRING)
-		{
-			print_arr(aux->token.arr);
 			exec_cmd(aux->token.arr, main, false);
-		}
 		aux = aux->next;
 	}
 }
