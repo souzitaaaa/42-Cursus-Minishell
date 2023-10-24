@@ -45,7 +45,7 @@ void	init_prompt(t_main	*main, t_variables_quotes *s_var_quotes)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main				main;
-	t_variables_quote	s_var_quotes;
+	t_variables_quotes	s_var_quotes;
 
 	(void)argc;
 	(void)argv;

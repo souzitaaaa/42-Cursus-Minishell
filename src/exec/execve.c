@@ -75,9 +75,9 @@ void	execution(char **cmd, t_main *main)
 	int		flag;
 
 	pathname = ft_pathname(&flag, main->env_arr, cmd);
-	error = execve((const char *)pathname,
-		(char **const)cmd, main->env_arr);
-	if (error == -1)
+	main->error = execve((const char *)pathname,
+			(char **const)cmd, main->env_arr);
+	if (main->error == -1)
 		error_execve(cmd[0], main);
 	free_pathname(pathname, flag);
 }

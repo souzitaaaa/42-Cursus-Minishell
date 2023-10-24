@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/24 15:00:58 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:39:16 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	stop_beeing_fd(t_main *main, int *i)
 	{
 		if (ft_strncmp(main->input_prompt + *i, "|", 1) == 0)
 			return ;
-		else
-			main->flags.is_fd = false;
 	}
 	*i = index;
 }

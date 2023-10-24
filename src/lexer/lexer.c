@@ -23,7 +23,7 @@ void	search_tokens(t_main *main, int *i)
 	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
 		search_output_tokens(main, i);
 	else if (*i <= main->tokens.str_len
-		&& is_space(main->input_prompt[*i] == false))
+		&& is_space(main->input_prompt[*i]) == false)
 		search_extra_tokens(main, i);
 }
 
@@ -39,5 +39,4 @@ void	lexer(t_main *main)
 		search_tokens(main, &i);
 		i++;
 	}
-	print_tokens(&main->tokens);
 }
