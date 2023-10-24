@@ -232,8 +232,10 @@ typedef struct s_main
 {
 	char 			*input_prompt;
 	char			**env_arr;
+	char			*path_pwd;
 	int				exit_code;
 	int				line;
+	int				error;
 	t_lexer			tokens;
 	t_env			export_list;
 	t_env			env_list;

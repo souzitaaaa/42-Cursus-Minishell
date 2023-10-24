@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/23 23:19:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:45:58 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	refresh_pwd(t_main *main, char *str)
 
 	pwd = ft_strjoin("PWD=", str);
 	if (modify_var(&main->export_list, pwd) == false)
-		insert_var_exp(main, pwd);
+		insert_var(&main->export_list, pwd);
 	if (modify_var(&main->env_list, pwd) == false)
-		insert_var_env(main, pwd);
+		insert_var(&main->env_list, pwd);
 }
 
 /*Essa funcao atualiza o oldpwd, toda vez que o oldpwd é mudado chamamos
@@ -33,9 +33,9 @@ void	refresh_oldpwd(t_main *main, char *str)
 
 	oldpwd = ft_strjoin("OLDPWD=", str);
 	if (modify_var(&main->export_list, oldpwd) == false)
-		insert_var_exp(main, oldpwd);
+		insert_var(&main->export_list, oldpwd);
 	if (modify_var(&main->env_list, oldpwd) == false)
-		insert_var_env(main, oldpwd);
+		insert_var(&main->env_list, oldpwd);
 }
 
 /*Essa variavel é usada para mudar de diretorio, o chdir é usado para mudar

@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/20 17:39:57 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:06:23 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ void	init_main(t_main *main, char **envp)
 	set_env_list(main, envp);
 	copy_exp(main);
 	main->env_arr = NULL;
+	main->path_pwd = NULL;
 	main->exit_code = 0;
+	main->error = 0;
 	main->line = 0;
 	init_std(&main->fd); //*É AQUI! Se nao estou a fazer dup(1) e o 1 já foi redirecionado
 	main->flags.signal = false;

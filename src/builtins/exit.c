@@ -22,16 +22,16 @@ void	free_and_exit(t_main *main, int exit_code, bool input)
 
 void	ft_exit(char **command, bool child, t_main *main, bool input)
 {
-	int exit_code;
+	int	exit_code;
 
-	//rl_clear_history();
+	rl_clear_history();
 	if (!child)
 		ft_putendl_fd("exit", STDERR_FILENO);
-	if(!command)
+	if (!command)
 		free_and_exit(main, main->exit_code, input);
-	if(!command[1])
+	if (!command[1])
 		free_and_exit(main, main->exit_code, input);
-	if(ft_isnbr(command[1]) && command[2] == NULL)
+	if (ft_isnbr(command[1]) && command[2] == NULL)
 	{
 		exit_code = ft_atoi(command[1]);
 		free_and_exit(main, (unsigned char)exit_code, input);

@@ -12,43 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-/*Essa função faz o swap para conseguir ordenar a lista*/
-void	swap_var(t_var *var1, t_var *var2)
-{
-	char	*temp;
-
-	temp = ft_strdup(var1->var);
-	free (var1->var);
-	var1->var = ft_strdup(var2->var);
-	free (var2->var);
-	var2->var = temp;
-}
-
-/*Essa funcao percorre a lista de variaveis e ordena de acordo com a
-tabela ascii*/
-void	sort_ascii(t_env *exp)
-{
-	int		count;
-	t_var	*current;
-
-	count = 0;
-	current = exp->head;
-	while (count < exp->size - 1)
-	{
-		if (ft_strcmp(current->var, current->next->var) > 0)
-		{
-			swap_var(current, current->next);
-			count = 0;
-			current = exp->head;
-		}
-		else
-		{
-			count++;
-			current = current->next;
-		}
-	}
-}
-
 /*Imprime o valor da variavel, tudo que esta antes do sinal de =*/
 void	print_variable(char *var)
 {
@@ -97,56 +60,7 @@ void	sort_print_export(t_env *exp)
 	}
 }
 
-/*void	export(t_main *main, char **array, bool child)
-{
-	int	i;
-	int	exit_code;
-	int	error;
-
-	i = 1;
-	exit_code = 0;
-	error = 0;
-	if (array[1] == 0 || ft_strcmp(array[1], ";") == 0)
-	{
-		if (main->flags.not_print == false)
-			sort_print_export(&main->export_list);
-	}
-	else
-	{
-		while(array[i] != NULL)
-		{
-			if (main->flags.not_print == false)
-				error = validations_ch(array[i], STDERR_FILENO, array[0]);
-			if (error)
-			{
-				exit_code = error;
-				i++;
-				continue ;
-			}
-			if (array[i][0] == '=')
-			{
-				if (main->flags.not_print == false)
-					error_export(STDERR_FILENO);
-				exit_child(main, 2, child);
-			}
-			else
-			{
-				if (!ft_strchr(array[i], '='))
-				{
-					if (verify_var(main, array[i]) == false)
-						insert_var_exp(main, array[i]);
-				}
-				else
-				{
-					if (modify_var(&main->export_list, array[i]) == false)
-						insert_var_exp(main, array[i]);
-					if (modify_var(&main->env_list, array[i]) == false)
-						insert_var_env(main, array[i]);
-				}
-			}127
-	exit_child(main, exit_code, child);
-}*/
-int	variable_treatment(t_main *main, char *variable) 
+int	variable_treatment(t_main *main, char *variable)
 {
 	if (variable[0] == '=')
 	{
@@ -157,27 +71,24 @@ int	variable_treatment(t_main *main, char *variable)
 	if (!ft_strchr(variable, '='))
 	{
 		if (verify_var(main, variable) == false)
-			insert_var_exp(main, variable);
+			insert_var(&main->export_list, variable);
 	}
 	else
 	{
 		if (modify_var(&main->export_list, variable) == false)
-			insert_var_exp(main, variable);
+			insert_var(&main->export_list, variable);
 		if (modify_var(&main->env_list, variable) == false)
-			insert_var_env(main, variable);
+			insert_var(&main->env_list, variable);
 	}
 	return (0);
 }
 
 void	export(t_main *main, char **array, bool child)
 {
-	int	i;
 	int	exit_code;
-	int	error;
 
-	i = 1;
+	main->env_list.i = 1;
 	exit_code = 0;
-	error = 0;
 	if (array[1] == 0 || ft_strcmp(array[1], ";") == 0)
 	{
 		if (main->flags.not_print == false)
@@ -185,15 +96,16 @@ void	export(t_main *main, char **array, bool child)
 	}
 	else
 	{
-		while (array[i] != NULL)
+		while (array[main->env_list.i] != NULL)
 		{
 			if (main->flags.not_print == false)
-				error = validations_ch(array[i], STDERR_FILENO, array[0]);
-			if (error)
-				exit_code = error;
+				main->error = validations_ch(array[main->env_list.i],
+						STDERR_FILENO, array[0]);
+			if (main->error)
+				exit_code = main->error;
 			else
-				exit_code = variable_treatment(main, array[i]);
-			i++;
+				exit_code = variable_treatment(main, array[main->env_list.i]);
+			main->env_list.i++;
 		}
 	}
 	exit_child(main, exit_code, child);

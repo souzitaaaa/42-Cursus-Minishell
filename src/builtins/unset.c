@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/23 19:51:35 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 12:08:19 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,16 @@ void	unset(t_main *main, char **array, bool child)
 {
 	int	i;
 	int	exit_code;
-	int	error;
 
 	i = 1;
 	exit_code = 0;
 	while (array[i] != NULL)
 	{
 		if (main->flags.not_print == false)
-			error = validations_ch(array[i], STDERR_FILENO, array[0]);
-		if (error)
+			main->error = validations_ch(array[i], STDERR_FILENO, array[0]);
+		if (main->error)
 		{
-			exit_code = error;
+			exit_code = main->error;
 			i++;
 			continue ;
 		}

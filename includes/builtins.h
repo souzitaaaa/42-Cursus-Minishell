@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/23 23:13:35 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:48:50 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ void	unset(t_main *main, char **array, bool child);
 /*
 UTILS_EXPORT
 */
-void    insert_var_exp(t_main *main, char *str);
-void    insert_var_env(t_main *main, char *str);
+void	swap_var(t_var *var1, t_var *var2);
+void	sort_ascii(t_env *exp);
+void	insert_var(t_env *list, char *str);
 bool	modify_var(t_env *list, char *str);
 void	copy_exp(t_main *main);
 
