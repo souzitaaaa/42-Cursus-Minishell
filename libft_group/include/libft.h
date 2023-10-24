@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/17 19:02:43 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:43:59 by jcruz-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,7 @@ void	print_matrix(char ***matrix);
 void	ft_free_str(char **str);
 void	ft_free_array(char	***array);
 void	ft_free_matrix(char	****matrix);
+
+char **ft_split_tab(char *str);
 
 #endif

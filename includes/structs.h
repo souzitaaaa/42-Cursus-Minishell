@@ -223,6 +223,16 @@ typedef struct s_len
 	int		dquote;
 }t_len;
 
+
+typedef struct s_var_quotes
+{
+    int		i;
+    int		quotes_analises;
+    int		open_quote_position;
+	int		open_quote_type;
+	char	c;
+} t_variables_quotes;
+
 /*
 !MAIN STRUCT
 */

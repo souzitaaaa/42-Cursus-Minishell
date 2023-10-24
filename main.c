@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: joe <joe@student.42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 17:30:54 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/08/28 18:11:10 by joe              ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "includes/minishell.h"
 
 int	g_ex_status = 0;
@@ -17,10 +5,10 @@ int	g_ex_status = 0;
 
 //* Vai iniciar o prompt para correr o programa
 //! Ver uma forma de ter sempre o prompt quando se da unset ou se muda as variaveis
-void	init_prompt(t_main	*main)
+void	init_prompt(t_main	*main, t_variables_quotes *s_var_quotes)
 {
 	char	*input;
-	//char	*prompt = NULL;
+	
 
 	while (1)
 	{
@@ -36,7 +24,7 @@ void	init_prompt(t_main	*main)
 			set_exit_code(main, g_ex_status);
 			g_ex_status = 0;
 		}
-		if (check_quotes_print(main))
+		if (check_quotes_print(main,s_var_quotes))
 			continue ;
 		lexer(main);
 		parser(main);
@@ -48,10 +36,11 @@ void	init_prompt(t_main	*main)
 int	main(int argc, char **argv, char **envp)
 {
 	t_main	main;
+	t_variables_quotes s_var_quotes;
 
 	(void)argc;
 	(void)argv;
 	//print_intro();
 	init_main(&main, envp);
-	init_prompt(&main);
+	init_prompt(&main, &s_var_quotes);
 }

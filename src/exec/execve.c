@@ -84,7 +84,7 @@ void	execution(char **cmd, t_main *main)
 void	exec_other_cmd(char **cmd, t_main *main, bool child)
 {
 	int	pid;
-	int exit_status;
+	int	exit_status;
 
 	set_env_arr(main);
 	if (child)
@@ -94,13 +94,10 @@ void	exec_other_cmd(char **cmd, t_main *main, bool child)
 		signals(1);
 		pid = fork();
 		error_fp(pid, errno, main);
-		if(pid == 0)
-		{
+		if (pid == 0)
 			execution(cmd, main);
-		}
 		wait_estatus(pid, main);
 		waitpid(pid, &exit_status, 0);
 	}
 	ft_free_array(&main->env_arr);
 }
-

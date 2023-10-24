@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 10:28:56 by dinoguei          #+#    #+#              #
-#    Updated: 2023/10/13 18:25:10 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/10/23 19:48:53 by jcruz-da         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ SRCS = libft/ft_isalpha.c \
 		extras/ft_atol.c \
 		extras/ft_print.c \
 		extras/ft_strtrimall.c \
-		extras/ft_free.c
+		extras/ft_free.c \
+		extras/ft_split_tab.c \
 
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o)
 
