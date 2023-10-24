@@ -14,10 +14,10 @@
 
 void	ft_redirect_out(t_node	*head, t_main *main)
 {
-	t_node *aux;
+	t_node	*aux;
 
 	aux = head;
-	while(aux != NULL)
+	while (aux != NULL)
 	{
 		exec_rdr(aux->token, main, 0);
 		aux = aux->next;

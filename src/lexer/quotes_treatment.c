@@ -20,8 +20,7 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 	if (len > 0)
 	{
 		temp = ft_substr(str, start, len);
-		//result = ft_split_tab(temp);
-		result = ft_split(temp, ' ');/* */
+		result = ft_split_tab(temp);
 		ft_free_str(&temp);
 		if (main->flags.hd == false)
 			check_expansion_arr(main, result);
@@ -36,11 +35,12 @@ char	**check_join(t_join join, char before, char after)
 	bool	free_bef;
 
 	free_bef = false;
-	if ((before == ' ' || before == 0) && (after == ' ' || after == 0))
+	if ((before == ' ' || before == 0 || before == '\t')
+		&& (after == ' ' || after == 0 || after == '\t'))
 		result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
-	else if (before == ' ' || before == 0)
+	else if (before == ' ' || before == 0 || before == '\t')
 		result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
-	else if (after == ' ' || after == 0)
+	else if (after == ' ' || after == 0 || after == '\t')
 	{
 		free_bef = true;
 		result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
@@ -98,7 +98,7 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 		else
 		{
 			temp = ft_quotes(aux, str, main, false);
-			if (str[aux->start - 1] == ' ')
+			if (str[aux->start - 1] == ' ' || str[aux->start - 1] == '\t')
 				result = ft_arrnl_joinfree(result, temp);
 			else
 				result = ft_arrjoinfree(result, temp);

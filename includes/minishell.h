@@ -79,7 +79,7 @@ void	ft_wait(t_main *main);
 !ERROR_MSG
 */
 void	error_msg_cmd(char *str, int fd);
-void	error_msg_file(char *str, int fd);
+void	error_msg_file(char *file, int fd, char *msg);
 void	error_cd(int fd, char *str);
 void	error_export(int fd);
 void	error_env(int fd);

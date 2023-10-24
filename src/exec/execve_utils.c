@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 21:46:02 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/24 12:33:38 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:39:03 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,19 @@ void	free_pathname(char	*pathname, int flag)
 //*O exit code e sempre 127
 void	error_execve(char *str, t_main *main)
 {
-	if (access((const char *)str, X_OK) == -1)
+	if(!ft_strncmp("./", str, 2) && str[2] == '\0')
 	{
-		printf("LOGO RESOLVO\n");
+		error_msg_file(str, STDERR_FILENO, IS_D);
 		exit_child(main, 126, true);
 	}
-	if (!ft_strchr(str, '/') && ft_strncmp("./", str, 2))
+	if (!access((const char *)str, F_OK))
+	{
+		error_msg_file(str, STDERR_FILENO, P_D);
+		exit_child(main, 126, true);
+	}
+	if (!ft_strchr(str, '/'))
 		error_msg_cmd(str, STDERR_FILENO);
 	else
-		error_msg_file(str, STDERR_FILENO);
-	ft_free_array(&main->env_arr);
+		error_msg_file(str, STDERR_FILENO, FILE_ERROR);
 	exit_child(main, 127, true);
 }

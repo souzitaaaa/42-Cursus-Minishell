@@ -15,12 +15,11 @@
 //* Funcao de ajuda para a get_rdr_out que verifica
 bool	is_space(char c)
 {
-	if (c == ' ' || c =='\t')
+	if (c == ' ' || c == '\t')
 		return (true);
 	return (false);
 }
 
-//str[i] == ' '
 //* Aqui vai identificar para onde se vai mandar o output do caracter
 void	get_rdr_out(t_main *main, int *i, t_type token)
 {

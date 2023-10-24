@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 15:10:49 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:06:04 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_var	*var_node(char *var)
 {
-    t_var	*new_node;
+	t_var	*new_node;
 
 	new_node = (t_var *)malloc(sizeof(t_var));
 	if (!new_node)
@@ -60,18 +60,18 @@ void	set_env_list(t_main *main, char **envp)
 	}
 	unset_env(main, "OLDPWD");
 }
-//!APAGAR
+
+/*
 void	print_var(t_env env)
 {
 	t_var	*current;
-	
+
 	env.i = 0;
 	current = env.head;
-	printf("size: %d\n", env.size);
     while (env.i++ < env.size)
     {
 		printf("%d: ", current->index);
         printf("%s\n", current->var);
         current = current->next;
     }
-}
+}*/

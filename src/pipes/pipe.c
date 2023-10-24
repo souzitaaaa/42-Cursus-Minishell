@@ -14,17 +14,16 @@
 
 bool	check_hd(t_node *head)
 {
-	t_node *aux;
+	t_node	*aux;
 
 	aux = head;
-
-	while(aux != NULL)
+	while (aux != NULL)
 	{
-		if(aux->token.type == HEREDOC)
-			return(true);
+		if (aux->token.type == HEREDOC)
+			return (true);
 		aux = aux->next;
 	}
-	return(false);
+	return (false);
 }
 
 //*Abre um processo filho
@@ -40,7 +39,7 @@ void	first_fork(int *fd, t_leaf *leaf, t_main *main)
 		write_to_pipe(fd, leaf, main);
 	else
 	{
-		if(leaf->hd.flag)
+		if (leaf->hd.flag)
 			close(leaf->hd.fd);
 		leaf->pid = pid;
 	}
@@ -56,7 +55,7 @@ void	fork_btwn_pipes(int *fd, int *next_fd, t_leaf *leaf, t_main *main)
 		pipe_read_and_write(fd, next_fd, leaf, main);
 	else
 	{
-		if(leaf->hd.flag)
+		if (leaf->hd.flag)
 			close(leaf->hd.fd);
 		leaf->pid = pid;
 	}
@@ -72,14 +71,14 @@ void	fork_btwn_pipes(int *fd, int *next_fd, t_leaf *leaf, t_main *main)
 //*Espera pelos processos filhos e guarda o exit status
 void	last_fork(int *fd, t_leaf *leaf, t_main *main, t_ast ast)
 {
-	int pid;
+	int	pid;
 
 	pid = ft_fork(main);
 	if (pid == 0)
 		read_from_pipe(fd, leaf, main);
 	else
 	{
-		if(leaf->hd.flag)
+		if (leaf->hd.flag)
 			close(leaf->hd.fd);
 		leaf->pid = pid;
 	}
@@ -93,7 +92,7 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 
 	while (node->prev)
 	{
-		error_fp(pipe(next_fd) , errno, main);
+		error_fp(pipe(next_fd), errno, main);
 		fork_btwn_pipes(fd, next_fd, node->right, main);
 		error_fp(pipe(fd), errno, main);
 		close(fd[1]);
@@ -110,18 +109,19 @@ void	mltp_pipes(int	*fd, t_ast *ast, t_ast_node *node, t_main *main)
 //*Executa o primeiro comando dentro de um processo filho
 //(redirecionando o output para o writing end do pipe (fd[1]))
 //*Se houver mais que um pipe, chama a função mltp_pipes
-//*Se houver apenas um pipe, executa o segundo e ultimo comando dentro de outro processo filho
+//*Se houver apenas um pipe, executa o segundo e ultimo comando
+//* dentro de outro processo filho
 //(redirecionando o input para o reading end do pipe (fd[0]))
 void	pipex(t_ast *ast, t_main *main)
 {
-	int	fd[2];
+	int			fd[2];
 	t_ast_node	*node;
 
 	node = get_beg(ast);
 	error_fp(pipe(fd), errno, main);
 	signals(1);
 	first_fork(fd, node->left, main);
-	if(ast->size > 1)
+	if (ast->size > 1)
 		mltp_pipes(fd, ast, node, main);
 	else
 		last_fork(fd, node->right, main, *ast);

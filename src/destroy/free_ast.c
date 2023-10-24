@@ -12,18 +12,20 @@
 
 #include "../../includes/minishell.h"
 
-void    free_ast(t_ast	*ast)
+//*Ultimo ast_node/pipe da lista (primeiro da ordem de execucao)
+void	free_ast(t_ast	*ast)
 {
-	int	count = 0;
-	t_ast_node  *aux;
+	int			count;
+	t_ast_node	*aux;
 	t_ast_node	*temp;
 
+	count = 0;
 	if (ast->head == NULL)
 		return ;
 	aux = ast->head;
 	while (count++ < ast->size)
 	{
-		if(aux->left) //*Ultimo ast_node/pipe da lista (primeiro da ordem de execucao)
+		if (aux->left)
 		{
 			free_list(&aux->right->left);
 			free_list(&aux->right->right);

@@ -39,10 +39,10 @@ char	*check_expansion_str(t_main *main, char *str, bool hd)
 	if (ft_strchr(str, '$'))
 	{
 		str = expand(main, str);
-		if(*str == '\0' && hd)
+		if (*str == '\0' && hd)
 		{
 			free(str);
-			return(NULL);
+			return (NULL);
 		}
 		if (hd && str[ft_strlen(str) - 1] != '\n')
 			str = ft_strjoinfree(str, "\n");
