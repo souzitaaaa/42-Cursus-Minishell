@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:42:36 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 17:55:16 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:59:48 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	change_dir(char *path, t_main *main)
 	if (chdir(path) != 0)
 	{
 		if (main->flags.not_print == false)
-			error_msg_file(path, STDERR_FILENO);
+			error_msg_file(path, STDERR_FILENO, FILE_ERROR);
 		return (1);
 	}
 	return (0);
