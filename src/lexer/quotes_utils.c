@@ -22,10 +22,3 @@ char	**str_to_arr(char *str)
 	ft_free_str(&str);
 	return (result);
 }
-
-int	get_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}

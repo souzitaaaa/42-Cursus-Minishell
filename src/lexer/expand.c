@@ -35,18 +35,6 @@ char	*expand_more(t_main *main, char *str)
 	return (out);
 }
 
-int	get_min_len(char *str, int i)
-{
-	int		min;
-
-	min = 0;
-	min = get_min(ft_strclen(str + i + 1, ' '),
-			ft_strclen(str + i + 1, SQUOTE));
-	min = get_min(min, ft_strclen(str + i + 1, '\n'));
-	min = get_min(min, ft_strclen(str + i + 1, '\t'));
-	return (min);
-}
-
 char	*expand_var(t_main *main, char *str, int i)
 {
 	int		count;

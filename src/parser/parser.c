@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/24 12:36:34 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/25 09:09:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	parser(t_main *main)
 		exec_cmd(main->tokens.head->token.arr, main, false);
 		return ;
 	}
+	print_tokens(&main->tokens);
 	cmdcat(&main->tokens);
 	if (find_pipes(main->tokens))
 	{
