@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:08:17 by joe               #+#    #+#             */
-/*   Updated: 2023/10/13 17:04:13 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:04:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ void	rdr_in(char **arr, t_main *main);
 void	rdr_out(char **arr, t_main *main);
 
 /*
-!RDR_ERROR
+!RDR_UTILS
 */
-void	rdr_error(char *str, t_main *main, int options);
+void	exec_rdr(t_token token, t_main *main, int hd);
+void    rdr_error(char *str, t_main *main, int options);
+bool    ft_isexit(t_lexer tokens);
+bool	check_cmd(t_lexer tokens);
+void	find_exec_cmd_parent(t_lexer tokens, t_main *main);
 
 #endif

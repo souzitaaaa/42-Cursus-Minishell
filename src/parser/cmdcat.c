@@ -12,13 +12,13 @@
 
 #include "../../includes/minishell.h"
 
-int	cmdarrcat(t_lexer *tokens, t_node *aux, char **temp, bool *cmdcat)
+int	cmdarrcat(t_lexer *tokens, t_node *aux, char ***temp, bool *cmdcat)
 {
 	int	index;
 
 	*cmdcat = true;
 	index = aux->index;
-	temp = ft_arrjoin(temp, aux->token.arr);
+	*temp = ft_arrjoin(*temp, aux->token.arr);
 	remove_node(tokens, aux->index, false);
 	return (index);
 }
@@ -37,7 +37,11 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	{
 		if (aux->token.type == STRING)
 		{
-			aux_index = cmdarrcat(tokens, aux, temp, &cmdcat);
+			printf("temp:\n");
+			print_arr(temp);
+			aux_index = cmdarrcat(tokens, aux, &temp, &cmdcat);
+			printf("temp:\n");
+			print_arr(temp);
 			aux = get_node(*tokens, aux_index);
 			if (aux == NULL)
 				break ;
