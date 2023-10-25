@@ -58,7 +58,7 @@ void	signal_handler_hd(int sig)
 	if (sig == SIGINT)
 	{
 		ft_printf("\n");
-		main = return_main(NULL);
+		main = get_main(NULL);
 		ft_exit(NULL, true, main, true);
 	}
 }

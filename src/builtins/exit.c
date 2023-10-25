@@ -12,6 +12,11 @@
 
 #include "../../includes/minishell.h"
 
+void	set_exit_code(t_main *main, int exit_code)
+{
+	main->exit_code = exit_code;
+}
+
 void	free_and_exit(t_main *main, int exit_code, bool input)
 {
 	destroy_main(main, input);

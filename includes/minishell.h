@@ -50,8 +50,6 @@
 */
 extern int	g_ex_status;
 
-t_main	*return_main(t_main	*main);
-
 /*
 !PRINT_START
 */
@@ -90,11 +88,6 @@ void	error_msg_hd(char *str, int fd, int line);
 void	error_with_arg(int fd, char *str);
 
 /*
-!EXIT_CODE.C
-*/
-void	set_exit_code(t_main *main, int exit_code);
-
-/*
 !INIT.C
 */
 void		init_env(t_env *stack);
@@ -104,13 +97,13 @@ void	    ini_variables_quotes(t_variables_quotes *s_var_quotes);
 void	    init_input(t_main *main, char *input);
 void	    init_ast(t_ast	*ast);
 void	    init_lexer(t_lexer *stack);
+
 /*
-!PROMPT
+!GET.C
 */
-void	prompt_diogo(t_prompt *prompt_list);
-void	prompt_rita(t_prompt *prompt_list);
-void    prompt_jenny(t_prompt *prompt_list);
-void	prompt_jo(t_prompt *prompt_list);
-void    prompt_default(t_prompt *prompt_list);
+t_main  *get_main(t_main	*main);
+int		get_max(int a, int b);
+int     get_min(int a, int b);
+int     get_min_len(char *str, int i);
 
 #endif

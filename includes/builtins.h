@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 11:29:40 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/24 11:48:50 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:41:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	env(t_env *env, t_main *main, bool child, char **command);
 /*
 !EXIT
 */
+void	set_exit_code(t_main *main, int exit_code);
 void	ft_exit(char **command, bool child, t_main *main, bool input);
 void	exit_child(t_main *main, int exit_code, bool child);
 
@@ -56,7 +57,7 @@ int		unset_env(t_main *main, char *str);
 void	unset(t_main *main, char **array, bool child);
 
 /*
-UTILS_EXPORT
+!UTILS_EXPORT
 */
 void	swap_var(t_var *var1, t_var *var2);
 void	sort_ascii(t_env *exp);
@@ -65,7 +66,7 @@ bool	modify_var(t_env *list, char *str);
 void	copy_exp(t_main *main);
 
 /*
-UTILS_CD
+!UTILS_CD
 */
 void	refresh_pwd(t_main *main, char *str);
 void	refresh_oldpwd(t_main *main, char *str);
@@ -75,7 +76,7 @@ char	*get_envvar(char *str, t_env *env_list);
 void	check_cd(char **command, t_main *main, bool child);
 
 /*
-UTILS_BUILTINS
+!UTILS_BUILTINS
 */
 int		ft_isnbr(const char *str);
 int		validations_ch(char *str, int fd, char *command);

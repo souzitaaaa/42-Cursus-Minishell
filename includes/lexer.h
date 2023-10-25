@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/23 19:30:48 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:16:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ char	*ft_arr_to_str(char **arr, char *str);
 void    del_emptyline_while(char **arr, int *j);
 void	del_emptyline(char **arr);
 void	check_expansion_arr(t_main *main, char **arr);
-char	*check_expansion_str(t_main *main, char *str, bool hd);
+char	*check_expansion_str(t_main *main, char *str);
 
 /*
 !EXPAND.C
 */
 char	*expand(t_main *main, char *cmp);
-int     get_min_len(char *str, int i);
 char	*expand_more(t_main *main, char *str);
 char	*expand_var(t_main *main, char *str, int i);
 
@@ -90,6 +89,5 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 !QUOTES_UTILS.C
 */
 char	**str_to_arr(char *str);
-int     get_min(int a, int b);
 
 #endif

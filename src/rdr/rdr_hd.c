@@ -12,22 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-t_main	*return_main(t_main	*main)
-{
-	static t_main	*static_main;
-
-	if (main)
-		static_main = main;
-	return (static_main);
-}
-
-int	get_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 {
 	if (!str)
@@ -57,15 +41,11 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 		if (read_stdin_aux(str, lim, main, &line) == -1)
 			break ;
 		if (!quotes)
-			str = check_expansion_str(main, str, true);
-		if (str == NULL)
-		{
-			write(fd, "\n", 1);
-			continue ;
-		}
-		else
+			str = check_expansion_str(main, str);
+		if(str)
 			write(fd, str, ft_strlen(str));
-		if (*str)
+		write(fd, "\n", 1);
+		if (str)
 			ft_free_str(&str);
 	}
 	return (line);
@@ -81,7 +61,7 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 	signals(2);
 	pid = fork();
 	error_fp(pid, errno, main);
-	return_main(main);
+	get_main(main);
 	if (pid == 0)
 	{
 		close(heredoc_fd[0]);
