@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:08:17 by joe               #+#    #+#             */
-/*   Updated: 2023/10/25 10:04:00 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/25 10:35:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	rdr_app(char **arr, t_main *main);
 /*
 !RDR_HD
 */
-int     get_max(int a, int b);
 int		open_hd(char *lim, bool quotes, t_main *main);
 void	rdr_hd(t_token token, t_main *main, int fd);
 

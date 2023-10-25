@@ -32,20 +32,19 @@ void	check_expansion_arr(t_main *main, char **arr)
 
 //* Esta funcao vai verificar se existe um $ numa string
 //*  para poder prosseguir com a expansao
-char	*check_expansion_str(t_main *main, char *str, bool hd)
+char	*check_expansion_str(t_main *main, char *str)
 {
 	if (main->flags.hd)
 		return (str);
 	if (ft_strchr(str, '$'))
 	{
 		str = expand(main, str);
-		if (*str == '\0' && hd)
+		if (*str == '\0')
 		{
+			printf("entra aqui\n");
 			free(str);
 			return (NULL);
 		}
-		if (hd && str[ft_strlen(str) - 1] != '\n')
-			str = ft_strjoinfree(str, "\n");
 	}
 	return (str);
 }

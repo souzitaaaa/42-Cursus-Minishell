@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 18:19:10 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/01 17:50:40 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:49:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-bool	check_hd(t_node *head)
-{
-	t_node	*aux;
-
-	aux = head;
-	while (aux != NULL)
-	{
-		if (aux->token.type == HEREDOC)
-			return (true);
-		aux = aux->next;
-	}
-	return (false);
-}
 
 //*Abre um processo filho
 //*Executa o primeiro comando dentro de um processo filho

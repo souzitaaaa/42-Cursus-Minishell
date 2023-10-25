@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/25 08:33:34 by marvin           ###   ########.fr        #
+#    Updated: 2023/10/25 10:46:27 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ OBJDIR			= obj
 #--------------------------------- FILES  ---------------------------------------
 NAME 			= minishell
 
-_FILES 			= error_msg error_msg_2 init init_utils signal\
-					print_img quotes list_quotes quotes_substr list_print\
+_FILES 			= error_msg error_msg_2 init init_utils signal get \
+					print_img quotes list_quotes quotes_substr list_print \
 					destroy free_list free_ast\
 					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_utils\
 					extra_tokens output_tokens input_tokens fd_token tokens_utils\
