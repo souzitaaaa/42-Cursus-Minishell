@@ -34,7 +34,12 @@ void	init_prompt(t_main	*main, t_variables_quotes *s_var_quotes)
 			g_ex_status = 0;
 		}
 		if (check_quotes_print(main, s_var_quotes))
+		{
+			destroy_input(main);
 			continue ;
+		}
+		printf("imput:%s\n", main->input);
+		print_quotes(&main->quotes);
 		lexer(main);
 		parser(main);
 		destroy_input(main);

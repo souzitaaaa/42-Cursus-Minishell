@@ -1,1 +1,34 @@
 ola tudo bem
+total 280
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 1234
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 2
+-rw-r--r--  1 jede-ara 2022_porto     24 Oct 25 16:23 3
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 321
+-rw-r--r--  1 jede-ara 2022_porto      8 Oct 25 16:51 a
+-rw-r--r--  1 jede-ara 2022_porto     11 Oct 25 16:23 abcd
+-rw-r--r--  1 jede-ara 2022_porto     21 Oct 25 16:23 abcdefg
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 b
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 blablabla
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 b.txt
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:53 c
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 24 18:03 cd
+-rw-r--r--  1 jede-ara 2022_porto     13 Oct 25 16:23 d
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 error
+drwxr-xr-x  2 jede-ara 2022_porto   4096 Oct 25 16:23 includes
+drwxr-xr-x  5 jede-ara 2022_porto   4096 Oct 25 16:23 libft_group
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 lsaldh
+-rw-r--r--  1 jede-ara 2022_porto   1744 Oct 24 18:03 main.c
+-rw-r--r--  1 jede-ara 2022_porto   3780 Oct 25 16:23 Makefile
+-rwxr-xr-x  1 jede-ara 2022_porto 224056 Oct 25 16:52 minishell
+drwxr-xr-x  3 jede-ara 2022_porto   4096 Oct 23 16:45 minishell.dSYM
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 naoexiste
+drwxr-xr-x  2 jede-ara 2022_porto   4096 Oct 25 16:52 obj
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 olamundo
+-rw-r--r--  1 jede-ara 2022_porto     12 Oct 25 16:22 out
+-rw-r--r--  1 jede-ara 2022_porto    136 Oct 24 18:03 readline.supp
+-rw-r--r--  1 jede-ara 2022_porto     11 Oct 23 16:45 README.md
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 rita
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 24 18:03 s
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 16:23 sdgj
+drwxr-xr-x 12 jede-ara 2022_porto   4096 Oct 25 16:23 src
+-rw-r--r--  1 jede-ara 2022_porto      0 Oct 25 14:23 test

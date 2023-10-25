@@ -41,12 +41,11 @@ typedef struct s_hd
 */
 typedef struct s_bool
 {
-	bool			put_node_behind; //!APAGAR
 	bool			rdr_treated;
 	bool			rdr_err;
-	bool			signal;
 	bool			not_print;
 	bool			hd;
+	bool			free;
 } t_bool;
 
 /*
@@ -240,7 +239,7 @@ typedef struct s_var_quotes
 //* que seja informacao no nosso programa
 typedef struct s_main
 {
-	char 			*input_prompt;
+	char 			*input;
 	char			**env_arr;
 	char			*path_pwd;
 	int				exit_code;

@@ -16,14 +16,14 @@
 //*  e posteriormente tratar de mandar, tudo tratado para a lista
 void	search_tokens(t_main *main, int *i)
 {
-	if (*i <= main->tokens.str_len && main->input_prompt[*i] == PIPE)
+	if (*i <= main->tokens.str_len && main->input[*i] == PIPE)
 		add_token(main, PIPE, "|");
-	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == IN)
+	else if (*i <= main->tokens.str_len && main->input[*i] == IN)
 		search_input_tokens(main, i);
-	else if (*i <= main->tokens.str_len && main->input_prompt[*i] == OUT)
+	else if (*i <= main->tokens.str_len && main->input[*i] == OUT)
 		search_output_tokens(main, i);
 	else if (*i <= main->tokens.str_len
-		&& is_space(main->input_prompt[*i]) == false)
+		&& is_space(main->input[*i]) == false)
 		search_extra_tokens(main, i);
 }
 
@@ -34,9 +34,10 @@ void	lexer(t_main *main)
 	int	i;
 
 	i = 0;
-	while (main->input_prompt[i] && i <= main->tokens.str_len)
+	while (i < main->tokens.str_len)
 	{
 		search_tokens(main, &i);
 		i++;
 	}
+	print_tokens(&main->tokens);
 }

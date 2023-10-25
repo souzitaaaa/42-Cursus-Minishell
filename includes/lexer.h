@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/25 11:16:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/25 21:05:00 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void		insert_last(t_lexer *stack, t_node *new);
 !QUOTES_TREATMENT.C
 */
 char	**out_of_quotes(char *str, int start, int len, t_main *main);
-char	**check_join(t_join join, char before, char after);
 char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first);
 char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 

@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 18:06:04 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:20:49 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_var	*var_node(char *var)
 	if (!new_node)
 		return (NULL);
 	new_node->var = ft_strdup(var);
-	//ft_free_str(&var);
 	return (new_node);
 }
 
