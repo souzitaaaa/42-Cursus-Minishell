@@ -229,11 +229,7 @@ typedef struct s_var_quotes
 */
 typedef struct s_main
 {
-<<<<<<< HEAD
-	char			*input_prompt;
-=======
 	char 			*input;
->>>>>>> origin/main
 	char			**env_arr;
 	char			*path_pwd;
 	int				exit_code;
