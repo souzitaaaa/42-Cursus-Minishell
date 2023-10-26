@@ -6,7 +6,7 @@
 /*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 17:48:04 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/24 18:05:40 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/25 17:32:03 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,5 @@ void	unset(t_main *main, char **array, bool child)
 		unset_exp(main, array[i]);
 		i++;
 	}
-	if (child)
-		exit(exit_code);
-	set_exit_code(main, exit_code);
+	exit_child(main, exit_code, child);
 }

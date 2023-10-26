@@ -36,14 +36,28 @@ void	init_vars(t_extra *a, int *i)
 	a->n_len = 0;
 }
 
+bool	validation_fd(t_main *main, int *i)
+{
+	if (*i > 0)
+	{
+		if (main->input[*i - 1] == '-')
+			return (true);
+	}
+	if (*i > 0 && *i < main->tokens.str_len - 1)
+	{
+		if (ft_isalpha(main->input[*i - 1]) == 1
+					&& special_chr(main->input[*i + 1]) == true)
+			return (true);
+	}
+	return (false);
+}
+
 bool	extra_tokens_while(t_main *main, t_extra *a, int *i)
 {
-	if ((main->input_prompt[*i] >= 48
-			&& main->input_prompt[*i] <= 57) && a->fd == true)
+	if ((main->input[*i] >= 48
+			&& main->input[*i] <= 57) && a->fd == true)
 	{
-		if (main->input_prompt[*i - 1] == '-'
-			|| (ft_isalpha(main->input_prompt[*i - 1]) == 1
-				&& special_chr(main->input_prompt[*i + 1]) == true))
+		if (validation_fd(main, i))
 			a->fd = false;
 		else
 		{
@@ -54,7 +68,7 @@ bool	extra_tokens_while(t_main *main, t_extra *a, int *i)
 				a->n_len = 0;
 		}
 	}
-	if (special_chr(main->input_prompt[*i]) == false)
+	if (special_chr(main->input[*i]) == false)
 		a->extra = true;
 	else if (check_index_quotes(main, i) == false)
 		return (true);
@@ -69,7 +83,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	t_extra	a;
 
 	init_vars(&a, i);
-	while (*i <= main->tokens.str_len && main->input_prompt[*i])
+	while (*i <= main->tokens.str_len && main->input[*i])
 	{
 		if (extra_tokens_while(main, &a, i) == true)
 			break ;
@@ -82,7 +96,7 @@ void	search_extra_tokens(t_main *main, int *i)
 		return ;
 	}
 	main->flags.rdr_treated = false;
-	str = ft_substr(main->input_prompt, a.start, (*i - a.start) - a.n_len);
+	str = ft_substr(main->input, a.start, (*i - a.start) - a.n_len);
 	add_token(main, STRING, str);
 	free(str);
 	(*i)--;

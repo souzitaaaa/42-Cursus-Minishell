@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/24 15:39:16 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:38:44 by jede-ara         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	get_fd_out(t_main *main, int *i, t_type token, char *fd)
 	bool	run;
 
 	run = true;
-	while (is_space(main->input_prompt[*i]) == true)
+	while (is_space(main->input[*i]) == true)
 		(*i)++;
 	start = *i;
-	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
+	while (*i <= main->tokens.str_len && run && main->input[*i])
 	{
-		if (special_chr(main->input_prompt[*i]) == true
+		if (special_chr(main->input[*i]) == true
 			&& check_index_quotes(main, i) == false)
 			break ;
-		if (is_space(main->input_prompt[*i]) == false)
+		if (is_space(main->input[*i]) == false)
 			(*i)++;
 		else if (check_index_quotes(main, i) == false)
 			run = false;
@@ -35,7 +35,7 @@ void	get_fd_out(t_main *main, int *i, t_type token, char *fd)
 			(*i)++;
 	}
 	fd = ft_strjoinfree(fd, " ");
-	fd = ft_strjoinfree3(fd, ft_substr(main->input_prompt,
+	fd = ft_strjoinfree3(fd, ft_substr(main->input,
 				start, (*i - start)));
 	add_token(main, token, fd);
 	free(fd);
@@ -70,10 +70,13 @@ int	get_fd_file_name(t_main *main, int start, int *i)
 {
 	char	*str;
 
-	str = ft_substr(main->input_prompt, start, (*i - start));
+	str = ft_substr(main->input, start, (*i - start));
 	if (check_valid_fd(str) == false)
+	{
+		ft_free_str(&str);
 		return (*i - start);
-	fd_tokens(main, i, str, main->input_prompt[*i]);
+	}
+	fd_tokens(main, i, str, main->input[*i]);
 	main->flags.rdr_treated = true;
 	return (*i - start);
 }
@@ -83,11 +86,11 @@ void	stop_beeing_fd(t_main *main, int *i)
 	int		index;
 
 	index = *i + 1;
-	if (main->input_prompt[index] >= 48 && main->input_prompt[index] <= 57)
+	if (main->input[index] >= 48 && main->input[index] <= 57)
 		index++;
-	if (special_chr(main->input_prompt[*i]) == true)
+	if (special_chr(main->input[*i]) == true)
 	{
-		if (ft_strncmp(main->input_prompt + *i, "|", 1) == 0)
+		if (ft_strncmp(main->input + *i, "|", 1) == 0)
 			return ;
 	}
 	*i = index;
@@ -99,15 +102,15 @@ int	get_fd_rdr(t_main *main, int *i)
 	int		start;
 
 	start = *i;
-	while (main->input_prompt[*i])
+	while (main->input[*i])
 	{
-		if (main->input_prompt[*i] >= 48 && main->input_prompt[*i] <= 57)
+		if (main->input[*i] >= 48 && main->input[*i] <= 57)
 			(*i)++;
 		else
 		{
-			if (special_chr(main->input_prompt[*i]) == true)
+			if (special_chr(main->input[*i]) == true)
 			{
-				if (ft_strncmp(main->input_prompt + *i, "|", 1) == 0)
+				if (ft_strncmp(main->input + *i, "|", 1) == 0)
 					break ;
 				else
 					return (get_fd_file_name(main, start, i));

@@ -19,12 +19,6 @@ void	error_export(int fd)
 	ft_putendl_fd("bad assignment", fd);
 }
 
-void	error_env(int fd)
-{
-	ft_putstr_fd("minishell: ", fd);
-	ft_putendl_fd("env: No such file or directory", fd);
-}
-
 void	error_with_arg(int fd, char *str)
 {
 	ft_putstr_fd("env: ", fd);
@@ -39,4 +33,3 @@ void	error_syntax(char *token)
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
 }
-

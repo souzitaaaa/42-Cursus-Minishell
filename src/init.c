@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 20:05:27 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:59:23 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,14 @@ void	init_bool(t_bool *flags)
 {
 	flags->rdr_treated = false;
 	flags->rdr_err = false;
-	flags->signal = false;
 	flags->not_print = false;
 	flags->hd = false;
+	flags->free = false;
 }
 
-//! Dar free sempre que se inicia novamente
 void	init_input(t_main *main, char *input)
 {
-	main->input_prompt = input;
+	main->input = input;
 	init_bool(&main->flags);
 	init_quotes(&main->quotes);
 	init_lexer(&main->tokens);
@@ -54,5 +53,5 @@ void	init_main(t_main *main, char **envp)
 	main->line = 0;
 	main->error = 0;
 	init_std(&main->fd);
-	main->flags.signal = false;
+	main->flags.rdr_err = false;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 20:00:03 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/19 22:04:02 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:30:56 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ char	*ft_strjoinfree(char const *s1, char const *s2)
 	size_t	s2_len;
 	char	*new_s;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return ((char *)s2);
+	if(!s2)
+		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	new_s = ft_calloc(s1_len + s2_len + 1, sizeof(char));
@@ -61,8 +63,10 @@ char	*ft_strjoinfree2(char const *s1, char const *s2)
 	size_t	s2_len;
 	char	*new_s;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return ((char *)s2);
+	if(!s2)
+		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));
@@ -80,8 +84,10 @@ char	*ft_strjoinfree3(char const *s1, char const *s2)
 	size_t	s2_len;
 	char	*new_s;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return ((char *)s2);
+	if(!s2)
+		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	new_s = (char *) malloc((s1_len + s2_len + 1) * sizeof(char));

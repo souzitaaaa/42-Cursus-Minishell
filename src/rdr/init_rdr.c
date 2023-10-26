@@ -13,7 +13,6 @@
 #include "../../includes/minishell.h"
 
 extern int	g_ex_status;
-
 //*Esta função percorre a lista tokens, executa os
 //* here_doc, guarda o fd do último hd executado,
 //* seta a bool hd a verdadeiro caso exista algum hd

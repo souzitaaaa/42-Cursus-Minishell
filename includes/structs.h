@@ -43,10 +43,10 @@ typedef struct s_bool
 {
 	bool			rdr_treated;
 	bool			rdr_err;
-	bool			signal;
 	bool			not_print;
 	bool			hd;
-}	t_bool;
+	bool			free;
+} t_bool;
 
 /*
 !ENV
@@ -229,7 +229,11 @@ typedef struct s_var_quotes
 */
 typedef struct s_main
 {
+<<<<<<< HEAD
 	char			*input_prompt;
+=======
+	char 			*input;
+>>>>>>> origin/main
 	char			**env_arr;
 	char			*path_pwd;
 	int				exit_code;
