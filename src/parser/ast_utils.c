@@ -22,7 +22,7 @@ t_token	find_cmd_left(t_node *aux)
 
 	while (1)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 			return (aux->token);
 		if (aux->index == 0)
 			break ;
@@ -69,7 +69,7 @@ t_token	find_cmd_right(t_node *aux, t_lexer tokens)
 
 	while (aux->token.type != PIPE && aux != tokens.head)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 			return (aux->token);
 		aux = aux->next;
 	}

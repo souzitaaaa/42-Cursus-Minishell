@@ -35,7 +35,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	aux = aux->next;
 	while (aux->token.type != PIPE && aux != tokens->head)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 		{
 			aux_index = cmdarrcat(tokens, aux, &temp, &cmdcat);
 			aux = get_node(*tokens, aux_index);
