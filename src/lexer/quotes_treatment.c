@@ -119,8 +119,6 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 	{
 		result = check_join(join, str[aux->start - 1], str[aux->end + 1]);
 	}
-	//printf("result:\n");
-	//print_arr(result);
 	return (result);
 }
 
