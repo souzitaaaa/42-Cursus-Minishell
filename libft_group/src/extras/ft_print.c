@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcruz-da <jcruz-da@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 13:33:23 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/23 20:07:09 by jcruz-da         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:36:34 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ void	print_arr(char **arr)
 	size_t	i;
 
 	i = 0;
+	if (!arr)
+	{
+		printf("arr null\n");
+		return ;
+	}
 	while (arr[i])
 	{
 		ft_putstr_fd(arr[i], 1);

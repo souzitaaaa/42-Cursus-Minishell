@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmdcat_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 21:57:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/23 22:34:29 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:32:47 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	find_first_cmd(t_node *aux, int size)
 {
 	while (1)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 			return (aux->index);
 		if (aux->index == size - 1)
 			break ;

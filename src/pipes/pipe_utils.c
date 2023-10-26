@@ -35,7 +35,8 @@ void	write_to_pipe(int *fd, t_leaf *cmd, t_main *main)
 	else
 		dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
-	if (cmd->token.type == STRING && !main->flags.rdr_err)
+	if (cmd->token.type == STRING
+		&& cmd->token.arr && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
 		exit_child(main, 0, true);
@@ -57,7 +58,8 @@ void	pipe_read_and_write(int *fd, int *next_fd, t_leaf *cmd, t_main *main)
 	else
 		dup2(next_fd[1], STDOUT_FILENO);
 	close(next_fd[1]);
-	if (cmd->token.type == STRING && !main->flags.rdr_err)
+	if (cmd->token.type == STRING
+		&& cmd->token.arr && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
 		exit_child(main, 0, true);
@@ -74,7 +76,8 @@ void	read_from_pipe(int *fd, t_leaf *cmd, t_main *main)
 	close(fd[0]);
 	if (cmd->right)
 		ft_redirect_out(cmd->right, main);
-	if (cmd->token.type == STRING && !main->flags.rdr_err)
+	if (cmd->token.type == STRING
+		&& cmd->token.arr && !main->flags.rdr_err)
 		exec_cmd(cmd->token.arr, main, true);
 	else
 		exit_child(main, 0, true);

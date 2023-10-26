@@ -34,6 +34,7 @@ void	lexer(t_main *main)
 	int	i;
 
 	i = 0;
+	main->tokens.str_len = ft_strlen(main->input);
 	while (i < main->tokens.str_len)
 	{
 		search_tokens(main, &i);

@@ -23,7 +23,6 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 
 	init_quotes(&quotes);
 	quotes_substr(&quotes, str);
-	//print_quotes(&quotes);
 	if (token == HEREDOC)
 		main->flags.hd = true;
 	if (quotes.head == NULL)
@@ -34,7 +33,6 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 		{
 			if(result == NULL)
 			{
-				printf("entra aqui rdr\n");
 				ft_free_array(&result);
 				result = str_to_arr(str, false);
 			}
@@ -58,21 +56,23 @@ t_node	*create_n(t_main *main, t_type token, char *str)
 	char	**arr;
 	bool	quote_hd;
 
-	printf("STR: %s\n", str);
+	arr = NULL;
 	quote_hd = false;
 	new = malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->token.type = token;
-	arr = quotes_split(str, main, token, &quote_hd);
-	if(!arr)
+	if (*str)
+		arr = quotes_split(str, main, token, &quote_hd);
+	if (!arr)
 		new->token.arr = NULL;
 	else
 	{
 		new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 		ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	}
-	free(arr);
+	if (str)
+		free(arr);
 	new->token.quotes = quote_hd;
 	return (new);
 }

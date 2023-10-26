@@ -33,4 +33,3 @@ void	error_syntax(char *token)
 	ft_putstr_fd(token, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
 }
-

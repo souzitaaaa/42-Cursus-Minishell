@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 18:32:50 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/25 19:20:56 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:34:44 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ bool	find_pipes(t_lexer tokens)
 
 void	parser(t_main *main)
 {
+	print_tokens(&main->tokens);
 	if (main->tokens.size == 0)
 		return ;
 	if (!syntax_analysis(main->tokens))
@@ -52,7 +53,6 @@ void	parser(t_main *main)
 		exec_cmd(main->tokens.head->token.arr, main, false);
 		return ;
 	}
-	//print_tokens(&main->tokens);
 	cmdcat(&main->tokens);
 	if (find_pipes(main->tokens))
 	{

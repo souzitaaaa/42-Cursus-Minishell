@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+         #
+#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/26 00:04:39 by jede-ara         ###   ########.fr        #
+#    Updated: 2023/10/26 18:17:28 by dinoguei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ LIBFTDIR 		= libft_group
 LIBFT 			= $(LIBFTDIR)/libft.a
 INCLUDE			= includes
 SRCS			= src
-_SUBFOLDERS		= parser envp exec builtins rdr pipes lexer lexer/tokens print_start quotes destroy
+_SUBFOLDERS		= parser envp exec builtins rdr pipes lexer lexer/tokens quotes destroy
 VPATH			= $(SRCS) $(addprefix $(SRCS)/, $(_SUBFOLDERS))
 OBJDIR			= obj
 
@@ -44,7 +44,7 @@ OBJDIR			= obj
 NAME 			= minishell
 
 _FILES 			= error_msg error_msg_2 init init_utils signal get \
-					print_img quotes list_quotes quotes_substr quotes_utils \
+					quotes list_quotes quotes_substr quotes_utils \
 					destroy free_list free_ast\
 					list lexer expand expand_utils expand_utils2 join_utils lexer_utils add_tokens quotes_treatment quotes_treatment_utils\
 					extra_tokens output_tokens input_tokens fd_token tokens_utils\

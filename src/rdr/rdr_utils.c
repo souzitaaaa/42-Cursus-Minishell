@@ -32,6 +32,8 @@ void	rdr_error(char *str, t_main *main, int options)
 		error_msg_file(str, STDERR_FILENO, FILE_ERROR);
 	if (options == 1)
 		error_msg_fd(str, STDERR_FILENO);
+	if (options == 2)
+		error_msg_file(str, STDERR_FILENO, AMBIG);
 	main->flags.rdr_err = true;
 }
 

@@ -30,7 +30,7 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 }
 
 //echo '$PWD'$USERa"$PWD"
-char	**check_join(t_join join, char before, char after, t_main *main)
+char	**check_join(t_join join, char before, char after)
 {
 	char	**result;
 	bool	free_bef;
@@ -44,11 +44,6 @@ char	**check_join(t_join join, char before, char after, t_main *main)
 	}
 	else if (before == ' ' || before == 0 || before == '\t')
 	{
-		printf("2\n");
-		printf("Before\n");
-		print_arr(join.before);
-		printf("str:%s\n", join.str);
-		printf("After\n");
 		print_arr(join.after);
 		result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
 	}
@@ -63,35 +58,12 @@ char	**check_join(t_join join, char before, char after, t_main *main)
 		printf("4\n");
 		result = ft_arrstrarrjoin(join.before, join.str, join.after);
 	}
-	if (after != 0 || free_bef == false || main->flags.free)
+	if (after != 0 || free_bef == false)
 		free(join.before);
 	free(join.after);
-	print_arr(result);
 	return (result);
 }
 
-char	last_ch(char** arr, char c)
-{
-	if(*arr == NULL)
-		return(0);
-	else
-		return(c);
-	//last_p = ft_arrlen(arr) - 1;
-	//return(arr[last_p][ft_strlen(arr[last_p]) - 1]);
-}
-
-char	first_ch(char** arr, t_main *main, char c)
-{
-	main->flags.free = false;
-	if(*arr == NULL)
-	{
-		main->flags.free = true;
-		return(0);
-	}
-	return(c);
-	//return(arr[0][0]);
-}
-//"ola"jdsgfj
 char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 {
 	t_join	join;
@@ -103,51 +75,49 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 	else
 		join.before = NULL;
 	join.str = ft_substr(str, aux->start + 1, (aux->end - aux->start) - 1);
-	if (aux->type == DQUOTE)
+	if (*join.str == '\0')
+	{
+		printf("batata\n");
+		ft_free_str(&join.str);
+	}
+	if (aux->type == DQUOTE && join.str)
 		join.str = check_expansion_str(main, join.str);
 	len = get_min(ft_strclen(str + aux->end + 1, SQUOTE),
 			ft_strclen(str + aux->end + 1, DQUOTE));
+	printf("len: %d\n", len);
 	join.after = out_of_quotes(str, aux->end + 1, len, main);
 	if (join.before == NULL && join.after == NULL)
 	{
+		printf("entra aqui first if\n");
 		if (join.str == NULL)
+		{
+			printf("e boi\n");
 			result = NULL;
+		}
 		else
 			result = str_to_arr(join.str, true);
 	}
 	else if (join.before == NULL)
 	{
-		if(first_ch(join.after, main, str[aux->end + 1]) == 0)
-		{
-			printf("entra aqui\n");
-			ft_free_array(&join.before);
-			ft_free_array(&join.after);
-			result = str_to_arr(join.str, true);
-		}
+		printf("join.before null\n");
+		if(join.str == NULL)
+			result = join.after;
 		else
-			result = check_join(join, 0, first_ch(join.after, main, str[aux->end + 1]), main);
+		{
+			printf("aqui caralho\n");
+			result = check_join(join, 0, str[aux->end + 1]);
+		}
 	}
 	else if (join.after == NULL)
 	{
-		if(last_ch(join.before, str[aux->start + 1]) == 0)
-		{
-			ft_free_array(&join.before);
-			ft_free_array(&join.after);
-			result = str_to_arr(join.str, true);
-		}
+		if(join.str == NULL)
+			result = join.before;
 		else
-			result = check_join(join, last_ch(join.before, str[aux->start + 1]), 0, main);
-	}
-	else if(last_ch(join.before, str[aux->start + 1]) == 0 && first_ch(join.after, main, str[aux->end + 1]) == 0)
-	{
-		ft_free_array(&join.before);
-		ft_free_array(&join.after);
-		result = str_to_arr(join.str, true);
+			result = check_join(join, str[aux->start - 1], 0);
 	}
 	else
 	{
-		printf("ELSE\n");
-		result = check_join(join, last_ch(join.before, str[aux->start + 1]), first_ch(join.after, main, str[aux->end + 1]), main);
+		result = check_join(join, str[aux->start - 1], str[aux->end + 1]);
 	}
 	//printf("result:\n");
 	//print_arr(result);
@@ -164,12 +134,14 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 	aux = quotes.head;
 	while (quotes.counter++ < quotes.size)
 	{
+		main->flags.free = false;
 		printf("AAAAIIII\n");
+		printf("str: %s.\n", str);
 		if (aux->index == 0)
 		{
 			temp = ft_quotes(aux, str, main, true);
 			if (temp == NULL)
-				result = NULL;
+				ft_free_array(&result);
 			else
 				result = ft_arrnl_joinfree(result, temp);
 		}
@@ -179,14 +151,26 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 			if(temp)
 			{
 				if(result == NULL)
-					result = temp;
-				if (str[aux->start - 1] == ' ' || str[aux->start - 1] == '\t')
+				{
+					printf("entra 1\n");
+					result = ft_arrdup(temp);
+					ft_free_array(&temp);
+					main->flags.free = true;
+				}
+				else if (str[aux->start - 1] == ' ' || str[aux->start - 1] == '\t')
+				{
+					printf("entra 2\n");
 					result = ft_arrnl_joinfree(result, temp);
+				}
 				else
+				{
+					printf("entra 3\n");
 					result = ft_arrjoinfree(result, temp);
+				}
 			}
 		}
-		free(temp);
+		if(!main->flags.free)
+			free(temp);
 		aux = aux->next;
 	}
 	return (result);

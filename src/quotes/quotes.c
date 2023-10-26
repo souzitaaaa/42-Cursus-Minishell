@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 00:53:00 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/26 18:30:49 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
+/*
 void	print_quotes(t_quotes *quotes)
 {
 	int					count;
@@ -30,36 +31,13 @@ void	print_quotes(t_quotes *quotes)
 		aux = aux->next;
 	}
 	printf("\033[1;36m\t\t(End printing quotes)\033[0m\n");
-}
-
-void	start_with_quotes(t_main *main, bool *cmd_error)
-{
-	int		i;
-
-	i = 0;
-	while (main->input[i] == ' ' || main->input[i] == '\t')
-		i++;
-	if (main->input[i] == SQUOTE || main->input[i] == DQUOTE)
-	{
-		while (main->input[i] != '\0'
-			&& (main->input[i] == SQUOTE
-				|| main->input[i] == DQUOTE))
-			i++;
-		if (main->input[i] == ' '
-			|| main->input[i] == '\0'
-			|| main->input[i] == '\t')
-			*cmd_error = true;
-	}
-}
+}*/
 
 int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 {
 	bool	cmd_error;
 
 	cmd_error = false;
-	start_with_quotes(main, &cmd_error);
-	main->input = remove_empty_quotes(main->input);
-	main->tokens.str_len = ft_strlen(main->input);
 	ini_variables_quotes(s_var_quotes);
 	while (main->input[s_var_quotes->i] != '\0')
 	{
