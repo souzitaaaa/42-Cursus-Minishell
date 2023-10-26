@@ -20,10 +20,16 @@ void	rdr_in(char **arr, t_main *main)
 		return ;
 	if (arr[1] == NULL)
 	{
+		if(arr[0][0] == '$')
+		{
+			rdr_error(arr[0], main, 2);
+			return ;
+		}
 		fd = open(arr[0], O_RDONLY);
 		if (fd == -1)
 			rdr_error(arr[0], main, 0);
-		dup2(fd, STDIN_FILENO);
+		else
+			dup2(fd, STDIN_FILENO);
 	}
 	else
 	{

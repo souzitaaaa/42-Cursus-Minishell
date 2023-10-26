@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/25 11:16:33 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/26 12:50:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_arr_to_str(char **arr, char *str);
 */
 void    del_emptyline_while(char **arr, int *j);
 void	del_emptyline(char **arr);
-void	check_expansion_arr(t_main *main, char **arr);
+void	check_expansion_arr(t_main *main, char ***arr);
 char	*check_expansion_str(t_main *main, char *str);
 
 /*
@@ -81,13 +81,12 @@ void		insert_last(t_lexer *stack, t_node *new);
 !QUOTES_TREATMENT.C
 */
 char	**out_of_quotes(char *str, int start, int len, t_main *main);
-char	**check_join(t_join join, char before, char after);
 char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first);
 char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 
 /*
 !QUOTES_UTILS.C
 */
-char	**str_to_arr(char *str);
+char	**str_to_arr(char *str, bool free);
 
 #endif

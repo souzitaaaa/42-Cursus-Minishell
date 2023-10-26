@@ -42,7 +42,10 @@ void	ft_exit(char **command, bool child, t_main *main, bool input)
 		free_and_exit(main, (unsigned char)exit_code, input);
 	}
 	if (ft_isnbr(command[1]) && command[2])
+	{
 		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
+		set_exit_code(main, 1);
+	}
 	if (!ft_isnbr(command[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);

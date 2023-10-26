@@ -12,13 +12,14 @@
 
 #include "../../includes/minishell.h"
 
-char	**str_to_arr(char *str)
+char	**str_to_arr(char *str, bool free)
 {
 	char	**result;
 
 	result = ft_calloc(2, sizeof(char *));
 	result[0] = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	ft_strlcpy(result[0], str, ft_strlen(str) + 1);
-	ft_free_str(&str);
+	if (free)
+		ft_free_str(&str);
 	return (result);
 }

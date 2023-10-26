@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 14:09:13 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/19 18:30:23 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/26 19:34:18 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_arrnl_strarrjoin(char	**arr1, char	*str, char	**arr2)
 	size_t	arr1_len;
 	size_t	arr2_len;
 	char	**new_arr;
-
+	
 	arr1_len = 0;
 	if (arr1)
 		arr1_len = ft_arrlen(arr1);
@@ -29,9 +29,19 @@ char	**ft_arrnl_strarrjoin(char	**arr1, char	*str, char	**arr2)
 		return (0);
 	if (arr1)
 		ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
-	str = ft_strjoinfree3(str, arr2[0]);
-	new_arr[arr1_len] = str;
+	printf("arr2[0]: %s.\n", arr2[0]);
+	if(str)
+	{
+		str = ft_strjoinfree3(str, arr2[0]);
+		new_arr[arr1_len] = str;
+	}
+	else
+		new_arr[arr1_len] = arr2[0];
+	printf("primeira vez\n");
+	print_arr(new_arr);
 	ft_arrlcpy(new_arr + arr1_len + 1, arr2 + 1, (arr2_len));
+	printf("segunda vez\n");
+	print_arr(new_arr);
 	return (new_arr);
 }
 

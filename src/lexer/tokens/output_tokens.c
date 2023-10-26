@@ -28,22 +28,22 @@ void	get_rdr_out(t_main *main, int *i, t_type token)
 	bool	run;
 
 	run = true;
-	while (is_space(main->input_prompt[*i]) == true)
+	while (is_space(main->input[*i]) == true)
 		(*i)++;
 	start = *i;
-	while (*i <= main->tokens.str_len && run && main->input_prompt[*i])
+	while (*i <= main->tokens.str_len && run && main->input[*i])
 	{
-		if (special_chr(main->input_prompt[*i]) == true
+		if (special_chr(main->input[*i]) == true
 			&& check_index_quotes(main, i) == false)
 			break ;
-		if (is_space(main->input_prompt[*i]) == false)
+		if (is_space(main->input[*i]) == false)
 			(*i)++;
 		else if (check_index_quotes(main, i) == false)
 			run = false;
 		else
 			(*i)++;
 	}
-	str = ft_substr(main->input_prompt, start, (*i - start));
+	str = ft_substr(main->input, start, (*i - start));
 	add_token(main, token, str);
 	(*i)--;
 	free(str);
@@ -54,7 +54,7 @@ t_type	get_type(t_main *main, int *i, int index)
 	if (index == (int)OUT)
 	{
 		if (*i + 1 <= main->tokens.str_len
-			&& main->input_prompt[*i + 1] == (char)index)
+			&& main->input[*i + 1] == (char)index)
 			return (APPEND);
 		else
 			return (OUT);
@@ -62,7 +62,7 @@ t_type	get_type(t_main *main, int *i, int index)
 	else
 	{
 		if (*i + 1 <= main->tokens.str_len
-			&& main->input_prompt[*i + 1] == (char)index)
+			&& main->input[*i + 1] == (char)index)
 			return (HEREDOC);
 		else
 			return (IN);

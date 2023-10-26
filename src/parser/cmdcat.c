@@ -37,11 +37,7 @@ void	cmdpipecat(t_lexer *tokens, t_node *aux, int index)
 	{
 		if (aux->token.type == STRING)
 		{
-			printf("temp:\n");
-			print_arr(temp);
 			aux_index = cmdarrcat(tokens, aux, &temp, &cmdcat);
-			printf("temp:\n");
-			print_arr(temp);
 			aux = get_node(*tokens, aux_index);
 			if (aux == NULL)
 				break ;

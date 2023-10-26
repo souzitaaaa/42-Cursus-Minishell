@@ -17,7 +17,10 @@ void	rdr_out(char **arr, t_main *main)
 	int	fd;
 
 	if (main->flags.rdr_err)
+		return ;
+	if(arr[0][0] == '$')
 	{
+		rdr_error(arr[0], main, 2);
 		return ;
 	}
 	if (arr[1] == NULL)
@@ -25,7 +28,8 @@ void	rdr_out(char **arr, t_main *main)
 		fd = open(arr[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 			rdr_error(arr[0], main, 0);
-		dup2(fd, STDOUT_FILENO);
+		else
+			dup2(fd, STDOUT_FILENO);
 	}
 	else
 	{

@@ -14,20 +14,25 @@
 
 //* Esta funcao vai verificar se nos comandos foi inserido um $ para poder
 //*  prosseguir com a expansao
-void	check_expansion_arr(t_main *main, char **arr)
+void	check_expansion_arr(t_main *main, char ***arr)
 {
 	int		i;
 
 	i = 0;
 	if (main->flags.hd)
 		return ;
-	while (arr[i])
+	while (arr[0][i])
 	{
-		if (ft_strchr(arr[i], '$'))
-			arr[i] = expand(main, arr[i]);
+		if (ft_strchr(arr[0][i], '$'))
+			arr[0][i] = expand(main, arr[0][i]);
 		i++;
 	}
-	del_emptyline(arr);
+	del_emptyline(*arr);
+	if(**arr == NULL)
+	{
+		free(*arr);
+		*arr = NULL;
+	}
 }
 
 //* Esta funcao vai verificar se existe um $ numa string
@@ -72,7 +77,10 @@ void	del_emptyline(char **arr)
 		if (arr[i][0] == '\0')
 		{
 			if (arr[i + 1] == NULL)
+			{
+				printf("entra aqui 0\n");
 				ft_free_str(&arr[i]);
+			}
 			else
 			{
 				j = i;

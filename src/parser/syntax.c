@@ -75,7 +75,8 @@ bool	syntax_last_node(t_lexer tokens)
 	t_node	*aux;
 
 	aux = tokens.head->prev;
-	if ((aux->token.type != STRING && *aux->token.arr == 0))
+	if (is_rdr(aux->token.type)
+		&& (aux->token.arr == NULL || *aux->token.arr == NULL ))
 	{
 		error_syntax("newline");
 		return (false);
