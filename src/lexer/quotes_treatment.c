@@ -23,7 +23,7 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 		result = ft_split_tab(temp);
 		ft_free_str(&temp);
 		if (main->flags.hd == false)
-			check_expansion_arr(main, result);
+			check_expansion_arr(main, &result);
 		return (result);
 	}
 	return (NULL);
@@ -110,8 +110,10 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 	join.after = out_of_quotes(str, aux->end + 1, len, main);
 	if (join.before == NULL && join.after == NULL)
 	{
-		printf("ABD\n");
-		result = str_to_arr(join.str);
+		if (join.str == NULL)
+			result = NULL;
+		else
+			result = str_to_arr(join.str, true);
 	}
 	else if (join.before == NULL)
 	{
@@ -120,7 +122,7 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 			printf("entra aqui\n");
 			ft_free_array(&join.before);
 			ft_free_array(&join.after);
-			result = str_to_arr(join.str);
+			result = str_to_arr(join.str, true);
 		}
 		else
 			result = check_join(join, 0, first_ch(join.after, main, str[aux->end + 1]), main);
@@ -131,7 +133,7 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		{
 			ft_free_array(&join.before);
 			ft_free_array(&join.after);
-			result = str_to_arr(join.str);
+			result = str_to_arr(join.str, true);
 		}
 		else
 			result = check_join(join, last_ch(join.before, str[aux->start + 1]), 0, main);
@@ -140,7 +142,7 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 	{
 		ft_free_array(&join.before);
 		ft_free_array(&join.after);
-		result = str_to_arr(join.str);
+		result = str_to_arr(join.str, true);
 	}
 	else
 	{
@@ -166,15 +168,23 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 		if (aux->index == 0)
 		{
 			temp = ft_quotes(aux, str, main, true);
-			result = ft_arrnl_joinfree(result, temp);
+			if (temp == NULL)
+				result = NULL;
+			else
+				result = ft_arrnl_joinfree(result, temp);
 		}
 		else
 		{
 			temp = ft_quotes(aux, str, main, false);
-			if (str[aux->start - 1] == ' ' || str[aux->start - 1] == '\t')
-				result = ft_arrnl_joinfree(result, temp);
-			else
-				result = ft_arrjoinfree(result, temp);
+			if(temp)
+			{
+				if(result == NULL)
+					result = temp;
+				if (str[aux->start - 1] == ' ' || str[aux->start - 1] == '\t')
+					result = ft_arrnl_joinfree(result, temp);
+				else
+					result = ft_arrjoinfree(result, temp);
+			}
 		}
 		free(temp);
 		aux = aux->next;

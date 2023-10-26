@@ -22,6 +22,8 @@ void	rdr_out(char **arr, t_main *main)
 	}
 	if (arr[1] == NULL)
 	{
+		if(arr[0] == NULL)
+			rdr_error("\0", main, 0);
 		fd = open(arr[0], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd == -1)
 			rdr_error(arr[0], main, 0);

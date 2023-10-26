@@ -29,7 +29,16 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 	if (quotes.head == NULL)
 	{
 		result = ft_split_tab(str);
-		check_expansion_arr(main, result);
+		check_expansion_arr(main, &result);
+		if(is_rdr(token))
+		{
+			if(result == NULL)
+			{
+				printf("entra aqui rdr\n");
+				ft_free_array(&result);
+				result = str_to_arr(str, false);
+			}
+		}	
 	}
 	else
 	{
@@ -49,15 +58,20 @@ t_node	*create_n(t_main *main, t_type token, char *str)
 	char	**arr;
 	bool	quote_hd;
 
-	(void)main;
+	printf("STR: %s\n", str);
 	quote_hd = false;
 	new = malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
 	new->token.type = token;
 	arr = quotes_split(str, main, token, &quote_hd);
-	new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
-	ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	if(!arr)
+		new->token.arr = NULL;
+	else
+	{
+		new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
+		ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	}
 	free(arr);
 	new->token.quotes = quote_hd;
 	return (new);
