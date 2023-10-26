@@ -12,24 +12,24 @@
 
 #include "../../include/libft.h"
 
-int ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	return(c == '\t' || c == ' ' || c == '\n');
+	return (c == '\t' || c == ' ' || c == '\n');
 }
 
-char    *ft_strtrimall(char const *str)
+char	*ft_strtrimall(char const *str)
 {
-    int     i;
-    int     j;
-    
-    i = 0;
-    j = 0;
-    if (!str)
-        return (NULL);
-    if (str[i] && ft_isspace(str[i]))
-        i++;
-    j = ft_strlen((char *)str);
-    while (str[i] && ft_isspace(str[j + i]))
-        j -= 1;
-    return (ft_substr(str, 0, j + 1));
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (!str)
+		return (NULL);
+	if (str[i] && ft_isspace(str[i]))
+		i++;
+	j = ft_strlen((char *)str);
+	while (str[i] && ft_isspace(str[j + i]))
+		j -= 1;
+	return (ft_substr(str, 0, j + 1));
 }

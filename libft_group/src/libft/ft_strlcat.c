@@ -36,18 +36,3 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	dest[j] = '\0';
 	return (lendest + lensrc);
 }
-
-int	main(void)
-{
-	char	teste[] = "Mio ";
-	char	teste2[] = "Hayasaki";
-
-	printf("Originals:\n");
-	printf("%s\n", teste);
-	printf("%s\n", teste2);
-	printf("By my function:\n");
-	printf("%zu %s\n", ft_strlcat(teste, teste2, 8), teste);
-	printf("By the original:\n");
-	printf("invalid\n");
-}
-

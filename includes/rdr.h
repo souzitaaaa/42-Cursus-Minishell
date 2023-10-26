@@ -46,8 +46,8 @@ void	rdr_out(char **arr, t_main *main);
 !RDR_UTILS
 */
 void	exec_rdr(t_token token, t_main *main, int hd);
-void    rdr_error(char *str, t_main *main, int options);
-bool    ft_isexit(t_lexer tokens);
+void	rdr_error(char *str, t_main *main, int options);
+bool	ft_isexit(t_lexer tokens);
 bool	check_cmd(t_lexer tokens);
 void	find_exec_cmd_parent(t_lexer tokens, t_main *main);
 

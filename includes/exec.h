@@ -41,8 +41,4 @@ void	execution(char **cmd, t_main *main);
 void	error_execve(char *str, t_main *main);
 void	free_pathname(char	*pathname, int flag);
 
-
-
-
-
 #endif

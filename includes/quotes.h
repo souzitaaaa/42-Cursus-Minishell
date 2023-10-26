@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 17:02:07 by joe               #+#    #+#             */
-/*   Updated: 2023/10/25 23:07:12 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:01:55 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void    verify_quotes(t_main *main, t_variables_quotes *s_var_quotes);
 /*
 !QUOTES_UTILS.C
 */
-void	create_quotes_node(t_quotes *quotes, int open_quote_type, int open_quote_position, int i);
+void	create_quotes_node(t_quotes *quotes, int open_quote_type,
+			int open_quote_position, int i);
 int		check_quotes(char c, int quotes);
 char	*remove_empty_quotes(char *prompt);
 

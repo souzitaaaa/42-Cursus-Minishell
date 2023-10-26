@@ -73,4 +73,3 @@ char	**ft_arrdup(char **arr)
 	testecpy = ft_arrdup(teste);
 	print_arr(testecpy);
 }*/
-

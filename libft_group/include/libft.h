@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/26 17:50:41 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/26 23:59:31 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ extras
 char	*ft_utoa(unsigned int n);
 int		ft_strcmp(char *s1, char *s2);
 long	int	ft_long_atol(const char *str);
-char    *ft_strtrimall(char const *str);
+char	*ft_strtrimall(char const *str);
 //FT_PRINT.C
 void	print_arr(char **arr);
 void	print_matrix(char ***matrix);
@@ -106,6 +106,6 @@ void	ft_free_str(char **str);
 void	ft_free_array(char	***array);
 void	ft_free_matrix(char	****matrix);
 
-char **ft_split_tab(char *str);
+char	**ft_split_tab(const char *str);
 
 #endif

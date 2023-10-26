@@ -25,7 +25,7 @@ char	**ft_arrjoin(char **s1, char **s2)
 	new_s = malloc((s1_len + s2_len + 1) * sizeof(char *));
 	if (!new_s)
 		return (0);
-	if(s1_len > 0)
+	if (s1_len > 0)
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
 	free(s1);
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
@@ -45,7 +45,7 @@ char	**ft_arrjoinfree(char **s1, char **s2)
 	new_s = ft_calloc((s1_len + s2_len + 1), sizeof(char *));
 	if (!new_s)
 		return (0);
-	if(s1_len > 0)
+	if (s1_len > 0)
 	{
 		s1[s1_len - 1] = ft_strjoinfree3(s1[s1_len -1], s2[0]);
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
@@ -68,7 +68,7 @@ char	**ft_arrnl_joinfree(char **s1, char **s2)
 	new_s = malloc((s1_len + s2_len + 1) * sizeof(char *));
 	if (!new_s)
 		return (0);
-	if(s1_len > 0)
+	if (s1_len > 0)
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
 	free(s1);
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
@@ -83,21 +83,21 @@ char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2)
 
 	arr1_len = 0;
 	arr2_len = 0;
-	if(arr1)
+	if (arr1)
 		arr1_len = ft_arrlen(arr1);
-	if(arr2)
+	if (arr2)
 		arr2_len = ft_arrlen(arr2);
 	new_arr = ft_calloc((arr1_len + arr2_len + 2), sizeof(char *));
 	if (!new_arr)
 		return (0);
-	if(arr1)
+	if (arr1)
 	{
 		ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
 		new_arr[arr1_len] = str;
 	}
 	else
 		new_arr[0] = str;
-	if(arr2)
+	if (arr2)
 		ft_arrlcpy(new_arr + arr1_len + 1, arr2, (arr2_len + 1));
 	return (new_arr);
 }

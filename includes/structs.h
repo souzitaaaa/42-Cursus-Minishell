@@ -23,7 +23,7 @@ typedef struct s_join
 	char	**before;
 	char	*str;
 	char	**after;
-} t_join;
+}	t_join;
 
 /*
 !HD
@@ -34,7 +34,7 @@ typedef struct s_hd
 	int			fd;
 	int			index;
 	char		*str;
-} t_hd;
+}	t_hd;
 
 /*
 !BOOL
@@ -54,24 +54,23 @@ typedef struct s_bool
 //* Cada node vai conter uma string com a variavel de ambiente
 typedef struct s_var
 {
-    struct s_var    *prev;
-    char            *var;
-    int             index;
-    struct s_var    *next;
-} t_var;
+	struct s_var	*prev;
+	char			*var;
+	int				index;
+	struct s_var	*next;
+}	t_var;
 
 //* Struct inicial da t_env
 typedef struct s_env
 {
-    t_var   *head;
-    int     size;
-    int     i;
-} t_env;
+	t_var	*head;
+	int		size;
+	int		i;
+}	t_env;
 
 /*
 !TOKENS
 */
-
 typedef struct s_extra
 {
 	int		start;
@@ -79,35 +78,35 @@ typedef struct s_extra
 	bool	run;
 	bool	extra;
 	int		n_len;
-}t_extra;
+}	t_extra;
 
 //* Enum struct para ajudar na procura dos tokens
 typedef enum s_type
 {
-	PIPE = '|',      // |
-	IN = '<',        // <
-	HEREDOC = 'H',   // <<
-	OUT = '>',       // >
-	APPEND = 'A',    // >>
-	STRING = 'S',    // Comando
-	EMPTY = 'E',	 // Vazio
-}t_type;
+	PIPE = '|',
+	IN = '<',
+	HEREDOC = 'H',
+	OUT = '>',
+	APPEND = 'A',
+	STRING = 'S',
+	EMPTY = 'E',
+}	t_type;
 
-//* Estrutura que define os tokens, metendo na array o token em si e afirmando o tipo dele
+//* Estrutura que define os tokens, metendo na array o token
+//em si e afirmando o tipo dele
 typedef struct s_token
 {
-	char			**arr; //se o tipo for um careter especial o array pode ser NULL?
+	char			**arr;
 	t_type			type;
 	bool			quotes;
-}
-t_token;
+}	t_token;
 
 /*
 !LEXER
 */
 
 //* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
-	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
+//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
 typedef struct s_node
 {
 	struct s_node	*prev;
@@ -116,7 +115,7 @@ typedef struct s_node
 	int				quotes;
 	struct s_node	*next;
 	int				fd;
-}t_node;
+}	t_node;
 
 //* Esta e a struct inicial do t_lexer, ela aponta para o node head (1 node)
 typedef struct s_lexer
@@ -124,13 +123,11 @@ typedef struct s_lexer
 	t_node			*head;
 	int				size;
 	int				str_len;
-}t_lexer;
-
+}	t_lexer;
 
 /*
 !Abstract Syntaxt Tree (AST)
 */
-
 typedef struct s_leaf		t_leaf;
 typedef struct s_ast_node	t_ast_node;
 
@@ -147,8 +144,7 @@ typedef struct s_ast_node
 	t_leaf			*left;
 	t_ast_node		*left_n;
 	int				index;
-}
-t_ast_node;
+}	t_ast_node;
 
 //*Leaves da lista da ast, onde vai conter os comandos
 //Os t_node apontam para listas de rdr in (left) e rdr out(right)
@@ -160,58 +156,55 @@ typedef struct s_leaf
 	t_node				*right;
 	int					pid;
 	t_hd				hd;
-}
-t_leaf;
+}	t_leaf;
 
 //* Struct inicial do t_ast
 //O size corresponde ao numero de de nodes/pipes
-typedef	struct s_ast
+typedef struct s_ast
 {
 	t_ast_node			*head;
 	int					counter;
 	int					size;
-}
-t_ast;
+}	t_ast;
 
 /*
 !QUOTES STRUCT
 */
 
 //* Estes sao os nodes da lista, neles temos ligacoes para o anterior e proximo
-	//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
+//* e tambem uma ligacao a outra estrutura junto com mais algumas informacoes
 typedef struct s_node_quotes
 {
 	struct s_node_quotes	*prev;
-	int				index;
-	int				type;
-	int				start;
-	int				end;
+	int						index;
+	int						type;
+	int						start;
+	int						end;
 	struct s_node_quotes	*next;
-}t_node_quotes;
+}	t_node_quotes;
 
-typedef	struct s_quotes
+typedef struct s_quotes
 {
-	t_node_quotes			*head;
-	int					counter;
-	int					size;
-}t_quotes;
+	t_node_quotes				*head;
+	int							counter;
+	int							size;
+}	t_quotes;
 
 //* Estrutura que guarda uma copia dos file descriptor
-	//*para imput (stdin), output (stdout), error (stderr)
+//*para imput (stdin), output (stdout), error (stderr)
 typedef struct s_std
 {
 	int	stdin;
 	int	stdout;
 	int	stderr;
-}
-t_std;
+}	t_std;
 
 typedef struct s_prompt
 {
 	char	*out;
 	char	*logname;
 	char	*pwd;
-}t_prompt;
+}	t_prompt;
 
 typedef struct s_len
 {
@@ -220,23 +213,20 @@ typedef struct s_len
 	int		out;
 	int		squote;
 	int		dquote;
-}t_len;
-
+}	t_len;
 
 typedef struct s_var_quotes
 {
-    int		i;
-    int		quotes_analises;
-    int		open_quote_position;
+	int		i;
+	int		quotes_analises;
+	int		open_quote_position;
 	int		open_quote_type;
 	char	c;
-} t_variables_quotes;
+}	t_variables_quotes;
 
 /*
 !MAIN STRUCT
 */
-//*Struct principal do programa, vai ser a struct por onde vamos conseguir aceder a tudo
-//* que seja informacao no nosso programa
 typedef struct s_main
 {
 	char 			*input;
@@ -249,11 +239,11 @@ typedef struct s_main
 	t_env			export_list;
 	t_env			env_list;
 	t_quotes		quotes;
-	t_ast 			ast;
+	t_ast			ast;
 	t_std			fd;
 	t_hd			hd;
 	t_prompt		prompt_list;
 	t_bool			flags;
-}t_main;
+}	t_main;
 
 #endif
