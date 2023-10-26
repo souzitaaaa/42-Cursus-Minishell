@@ -48,21 +48,3 @@ char	*ft_utoa(unsigned int n)
 	}
 	return (out);
 }
-/*
-int		main(void)
-{
-	int number1 = 123456789;
-	int number2 = 1;
-	int number3 = 0;
-	int number4 = -123456789;
-	int number5 = -1;
-	int number6 = -0;
-
-	printf("%s\n", ft_itoa(number1));
-	printf("%s\n", ft_itoa(number2));
-	printf("%s\n", ft_itoa(number3));
-	printf("%s\n", ft_itoa(number4));
-	printf("%s\n", ft_itoa(number5));
-	printf("%s\n", ft_itoa(number6));
-}
-*/

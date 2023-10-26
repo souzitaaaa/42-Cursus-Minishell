@@ -25,18 +25,19 @@ void		pipex(t_ast *ast, t_main *main);
 */
 t_ast_node	*get_beg(t_ast *ast);
 void		write_to_pipe(int *fd, t_leaf *cmd, t_main *main);
-void		pipe_read_and_write(int *fd, int *next_fd, t_leaf *cmd, t_main *main);
+void		pipe_read_and_write(int *fd, int *next_fd,
+				t_leaf *cmd, t_main *main);
 void		read_from_pipe(int *fd, t_leaf *cmd, t_main *main);
 
 /*
 !RDR_IMPUT
 */
-void	ft_redirect_in(t_node	*head, t_main *main, t_hd hd);
-void	exec_hd_p(t_ast *ast, t_main *main);
+void		ft_redirect_in(t_node	*head, t_main *main, t_hd hd);
+void		exec_hd_p(t_ast *ast, t_main *main);
 
 /*
 !RDR_OUTPUT
 */
-void	ft_redirect_out(t_node	*head, t_main *main);
+void		ft_redirect_out(t_node	*head, t_main *main);
 
 #endif

@@ -26,12 +26,12 @@ void	free_list(t_node **head);
 /*
 !FREE_AST.C
 */
-void    free_ast(t_ast	*ast);
+void	free_ast(t_ast	*ast);
 
 /*
 !DESTROY
 */
-void    destroy_input(t_main *main);
-void    destroy_main(t_main *main, bool input);
+void	destroy_input(t_main *main);
+void	destroy_main(t_main *main, bool input);
 
 #endif

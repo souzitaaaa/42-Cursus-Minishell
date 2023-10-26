@@ -58,10 +58,10 @@ void	print_intro(void);
 /*
 !INIT.C
 */
-void		init_env(t_env *stack);
-void		init_input(t_main *main, char *input);
-void		init_main(t_main *main, char ** env);
-void		init_quotes(t_quotes *quotes);
+void	init_env(t_env *stack);
+void	init_input(t_main *main, char *input);
+void	init_main(t_main *main, char **env);
+void	init_quotes(t_quotes *quotes);
 
 /*
 !SIGNAL.C
@@ -90,20 +90,20 @@ void	error_with_arg(int fd, char *str);
 /*
 !INIT.C
 */
-void		init_env(t_env *stack);
-void		init_input(t_main *main, char *input);
-void		init_main(t_main *main, char ** env);
-void	    ini_variables_quotes(t_variables_quotes *s_var_quotes);
-void	    init_input(t_main *main, char *input);
-void	    init_ast(t_ast	*ast);
-void	    init_lexer(t_lexer *stack);
+void	init_env(t_env *stack);
+void	init_input(t_main *main, char *input);
+void	init_main(t_main *main, char **env);
+void	ini_variables_quotes(t_variables_quotes *s_var_quotes);
+void	init_input(t_main *main, char *input);
+void	init_ast(t_ast	*ast);
+void	init_lexer(t_lexer *stack);
 
 /*
 !GET.C
 */
-t_main  *get_main(t_main	*main);
+t_main	*get_main(t_main	*main);
 int		get_max(int a, int b);
-int     get_min(int a, int b);
-int     get_min_len(char *str, int i);
+int		get_min(int a, int b);
+int		get_min_len(char *str, int i);
 
 #endif

@@ -31,7 +31,7 @@ COLORS
 # define COL_RESET     "\x1b[0m"
 # define BCKGRD_RED   "\e[48;2;200;0;0m"
 # define BCKGRD_GREEN "\e[48;2;0;200;0m"
-# define BCKGRD_BLUE  "\e[48;2;0;0;200m" // where rrr;ggg;bbb in 48;2;rrr;ggg;bbbm can go from 0 to 255 respectively
+# define BCKGRD_BLUE  "\e[48;2;0;0;200m"
 # define BCKGRD_MIKU   "\e[48;2;71;200;192m"
 # define BCKGRD_PINK "\e[48;2;249;245;246m"
 # define BCKGRD_WHITE "\e[48;2;255;255;255m"

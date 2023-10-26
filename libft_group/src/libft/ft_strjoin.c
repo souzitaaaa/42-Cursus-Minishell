@@ -73,6 +73,7 @@ char	*ft_strjoinfree2(char const *s1, char const *s2)
 	ft_free_str((char **)&s2);
 	return (new_s);
 }
+
 char	*ft_strjoinfree3(char const *s1, char const *s2)
 {
 	size_t	s1_len;

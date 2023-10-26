@@ -23,7 +23,7 @@ void	parser(t_main *main);
 /*
 !SYNTAX
 */
-bool    syntax_analysis(t_lexer tokens);
+bool	syntax_analysis(t_lexer tokens);
 
 /*
 !SYNTAX_UTILS
