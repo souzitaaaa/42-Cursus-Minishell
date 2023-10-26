@@ -41,7 +41,6 @@ char	**check_join(t_join join, char before, char after, t_main *main)
 	{
 		printf("1\n");
 		result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
-		ft_free_str(&join.str);
 	}
 	else if (before == ' ' || before == 0 || before == '\t')
 	{
@@ -71,17 +70,17 @@ char	**check_join(t_join join, char before, char after, t_main *main)
 	return (result);
 }
 
-char	last_ch(char** arr)
+char	last_ch(char** arr, char c)
 {
-	int last_p;
-
 	if(*arr == NULL)
 		return(0);
-	last_p = ft_arrlen(arr) - 1;
-	return(arr[last_p][ft_strlen(arr[last_p]) - 1]);
+	else
+		return(c);
+	//last_p = ft_arrlen(arr) - 1;
+	//return(arr[last_p][ft_strlen(arr[last_p]) - 1]);
 }
 
-char	first_ch(char** arr, t_main *main)
+char	first_ch(char** arr, t_main *main, char c)
 {
 	main->flags.free = false;
 	if(*arr == NULL)
@@ -89,9 +88,10 @@ char	first_ch(char** arr, t_main *main)
 		main->flags.free = true;
 		return(0);
 	}
-	return(arr[0][0]);
+	return(c);
+	//return(arr[0][0]);
 }
-
+//"ola"jdsgfj
 char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 {
 	t_join	join;
@@ -113,23 +113,42 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 		printf("ABD\n");
 		result = str_to_arr(join.str);
 	}
-	else if(last_ch(join.before) == 0 && first_ch(join.after, main) == 0)
+	else if (join.before == NULL)
+	{
+		if(first_ch(join.after, main, str[aux->end + 1]) == 0)
+		{
+			printf("entra aqui\n");
+			ft_free_array(&join.before);
+			ft_free_array(&join.after);
+			result = str_to_arr(join.str);
+		}
+		else
+			result = check_join(join, 0, first_ch(join.after, main, str[aux->end + 1]), main);
+	}
+	else if (join.after == NULL)
+	{
+		if(last_ch(join.before, str[aux->start + 1]) == 0)
+		{
+			ft_free_array(&join.before);
+			ft_free_array(&join.after);
+			result = str_to_arr(join.str);
+		}
+		else
+			result = check_join(join, last_ch(join.before, str[aux->start + 1]), 0, main);
+	}
+	else if(last_ch(join.before, str[aux->start + 1]) == 0 && first_ch(join.after, main, str[aux->end + 1]) == 0)
 	{
 		ft_free_array(&join.before);
 		ft_free_array(&join.after);
 		result = str_to_arr(join.str);
 	}
-	else if (join.before == NULL)
-		result = check_join(join, 0, first_ch(join.after, main), main);
-	else if (join.after == NULL)
-		result = check_join(join, last_ch(join.before), 0, main);
 	else
 	{
-		printf("AIII\n");
-		result = check_join(join, last_ch(join.before), first_ch(join.after, main), main);
+		printf("ELSE\n");
+		result = check_join(join, last_ch(join.before, str[aux->start + 1]), first_ch(join.after, main, str[aux->end + 1]), main);
 	}
-	printf("result:\n");
-	print_arr(result);
+	//printf("result:\n");
+	//print_arr(result);
 	return (result);
 }
 

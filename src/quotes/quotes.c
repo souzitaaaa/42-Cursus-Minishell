@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 00:05:28 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/26 00:53:00 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	verify_quotes(t_main *main, t_variables_quotes *s_var_quotes)
 		else if (s_var_quotes->quotes_analises == 0
 		&& s_var_quotes->open_quote_position != -1)
 		{
-			printf("entra aqui\n");
 			create_quotes_node(&main->quotes, s_var_quotes->open_quote_type,
 			s_var_quotes->open_quote_position, s_var_quotes->i);
 			s_var_quotes->open_quote_position = -1;
