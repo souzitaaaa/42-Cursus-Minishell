@@ -24,7 +24,7 @@ bool	check_index_quotes(t_main *main, int *i);
 /*
 !OUTPUT_TOKENS.C
 */
-t_type  get_type(t_main *main, int *i, int index);
+t_type	t_type(t_main *main, int *i, int index);
 void	search_output_tokens(t_main *main, int *i);
 bool	is_space(char c);
 int		get_fd_rdr(t_main *main, int *i);

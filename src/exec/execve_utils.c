@@ -26,7 +26,7 @@ void	free_pathname(char	*pathname, int flag)
 //*O exit code e sempre 127
 void	error_execve(char *str, t_main *main)
 {
-	if(!ft_strncmp("./", str, 2) && str[2] == '\0')
+	if (!ft_strncmp("./", str, 2) && str[2] == '\0')
 	{
 		error_msg_file(str, STDERR_FILENO, IS_D);
 		exit_child(main, 126, true);

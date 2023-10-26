@@ -20,7 +20,6 @@ t_var	*var_node(char *var)
 	if (!new_node)
 		return (NULL);
 	new_node->var = ft_strdup(var);
-	//ft_free_str(&var);
 	return (new_node);
 }
 
