@@ -46,7 +46,7 @@ bool	ft_isexit(t_lexer tokens)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 		{
 			if (!ft_strcmp(aux->token.arr[0], "exit"))
 				return (true);
@@ -65,7 +65,7 @@ bool	check_cmd(t_lexer tokens)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 		{
 			if (!ft_strcmp(aux->token.arr[0], "cd")
 				|| !ft_strcmp(aux->token.arr[0], "export")
@@ -88,7 +88,7 @@ void	find_exec_cmd_parent(t_lexer tokens, t_main *main)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING)
+		if (aux->token.type == STRING && aux->token.arr)
 			exec_cmd(aux->token.arr, main, false);
 		aux = aux->next;
 	}

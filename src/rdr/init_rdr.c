@@ -83,8 +83,11 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING && strcmp(aux->token.arr[0], "exit"))
-			exec_cmd(aux->token.arr, main, true);
+		if (aux->token.type == STRING && aux->token.arr)
+		{
+		 	if(strcmp(aux->token.arr[0], "exit"))
+				exec_cmd(aux->token.arr, main, true);
+		}		
 		aux = aux->next;
 	}
 }
