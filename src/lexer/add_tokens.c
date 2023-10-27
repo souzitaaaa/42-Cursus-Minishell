@@ -18,7 +18,7 @@ void	head_null(t_main *main, char *str, char ***result, t_type token)
 	check_expansion_arr(main, result);
 	if (is_rdr(token))
 	{
-		if (result == NULL)
+		if (*result == NULL)
 		{
 			ft_free_array(result);
 			*result = str_to_arr(str, false);
@@ -30,7 +30,7 @@ void	head_null(t_main *main, char *str, char ***result, t_type token)
 //*  se a mesma têm aspas ou não, caso não as tenha, simplesmente faz um split
 //*  e vai verificar se os argumentos precisam de ser expandidos, caso tenha
 //*  aspas vai para uma outra função mais complexa para o tratamento das mesmas
-char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
+char	**quotes_split(char *str, t_main *main, t_type token, bool *quotes_tk)
 {
 	char		**result;
 	t_quotes	quotes;
@@ -43,7 +43,7 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 		head_null(main, str, &result, token);
 	else
 	{
-		*quote_hd = true;
+		*quotes_tk = true;
 		result = quotes_treatment(quotes, str, main);
 		free_quotes(&quotes);
 	}
@@ -51,43 +51,58 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 	return (result);
 }
 
-//* Esta função trata de inserir os elementos do token em cada nó,
-//*  ou seja, o tipo do token, e uma array com o conteudo dele
-t_node	*create_n(t_main *main, t_type token, char *str)
+void	create_arr(t_main *main, char *str, t_node *new, bool *quotes_tk)
 {
-	t_node	*new;
 	char	**arr;
-	bool	quote_hd;
 
-	arr = NULL;
-	quote_hd = false;
-	new = malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->token.type = token;
-	if (*str)
-		arr = quotes_split(str, main, token, &quote_hd);
+	arr = quotes_split(str, main, new->token.type, quotes_tk);
 	if (!arr)
-		new->token.arr = NULL;
+	{
+		if (quotes_tk)
+			new->token.arr = ft_calloc(1, sizeof(char *));
+		else
+			new->token.arr = NULL;
+	}
 	else
 	{
 		new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
 		ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
 	}
-	if (str)
-		free(arr);
-	new->token.quotes = quote_hd;
+	free(arr);
+}
+
+//* Esta função trata de inserir os elementos do token em cada nó,
+//*  ou seja, o tipo do token, e uma array com o conteudo dele
+t_node	*create_n(t_main *main, t_type token, char *str, char *fd)
+{
+	t_node	*new;
+	bool	quotes_tk;
+
+	quotes_tk = false;
+	new = malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
+	new->token.type = token;
+	if (!*str)
+		new->token.arr = NULL;
+	else
+		create_arr(main, str, new, &quotes_tk);
+	new->token.quotes = quotes_tk;
+	if (fd)
+		new->token.fd = ft_atoi(fd);
+	else
+		new->token.fd = -666;
 	return (new);
 }
 
 //* Esta função trata de criar um novo node e de o inserir na lista do Lexer
 //* Recebe como argumentos, o main para ter acesso a tudo do projeto,
 //*  ao tipo do token e uma string que vai ser o conteudo do token
-int	add_token(t_main *main, t_type token, char *str)
+int	add_token(t_main *main, t_type token, char *str, char *fd)
 {
 	t_node	*new;
 
-	new = create_n(main, token, str);
+	new = create_n(main, token, str, fd);
 	if (!new)
 		return (1);
 	insert_last(&main->tokens, new);

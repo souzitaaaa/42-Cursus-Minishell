@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 15:49:31 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/25 17:20:49 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:51:01 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,3 @@ void	set_env_list(t_main *main, char **envp)
 	}
 	unset_env(main, "OLDPWD");
 }
-
-/*
-void	print_var(t_env env)
-{
-	t_var	*current;
-
-	env.i = 0;
-	current = env.head;
-    while (env.i++ < env.size)
-    {
-		printf("%d: ", current->index);
-        printf("%s\n", current->var);
-        current = current->next;
-    }
-}*/

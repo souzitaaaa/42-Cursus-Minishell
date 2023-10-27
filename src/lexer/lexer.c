@@ -17,7 +17,7 @@
 void	search_tokens(t_main *main, int *i)
 {
 	if (*i <= main->tokens.str_len && main->input[*i] == PIPE)
-		add_token(main, PIPE, "|");
+		add_token(main, PIPE, "|", NULL);
 	else if (*i <= main->tokens.str_len && main->input[*i] == IN)
 		search_input_tokens(main, i);
 	else if (*i <= main->tokens.str_len && main->input[*i] == OUT)

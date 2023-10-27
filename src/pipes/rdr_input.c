@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:47:38 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 01:05:09 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:17:38 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ void	ft_heredoc(t_node *head, t_main *main, t_hd *hd)
 				hd->flag = true;
 			else
 				close(hd->fd);
-			if (aux->token.arr[1] == NULL)
-				hd->fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
-			else
-				hd->fd = open_hd(aux->token.arr[1], aux->token.quotes, main);
+			hd->fd = open_hd(aux->token.arr[0], aux->token.quotes, main);
 			hd->index = aux->index;
 		}
 		if (g_ex_status == 130)

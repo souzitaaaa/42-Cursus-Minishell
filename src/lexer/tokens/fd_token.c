@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fd_token.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 16:47:49 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/25 16:38:44 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:13:12 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	get_fd_out(t_main *main, int *i, t_type token, char *fd)
 {
 	int		start;
 	bool	run;
+	char	*str;
 
 	run = true;
 	while (is_space(main->input[*i]) == true)
@@ -34,11 +35,10 @@ void	get_fd_out(t_main *main, int *i, t_type token, char *fd)
 		else
 			(*i)++;
 	}
-	fd = ft_strjoinfree(fd, " ");
-	fd = ft_strjoinfree3(fd, ft_substr(main->input,
-				start, (*i - start)));
-	add_token(main, token, fd);
+	str = ft_substr(main->input, start, (*i - start));
+	add_token(main, token, str, fd);
 	free(fd);
+	free(str);
 }
 
 //* Identifica qual o tipo de token do fd

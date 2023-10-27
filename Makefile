@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+         #
+#    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/26 18:17:28 by dinoguei         ###   ########.fr        #
+#    Updated: 2023/10/27 19:08:39 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			=  -g -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
@@ -52,7 +52,7 @@ _FILES 			= error_msg error_msg_2 init init_utils signal get \
 					env_list env_arr \
 					exec_cmd execve execve_utils child_aux \
 					pipe pipe_utils rdr_input rdr_output \
-					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils \
+					init_rdr rdr_in rdr_out rdr_app rdr_hd rdr_utils rdr_utils2\
 					echo pwd env unset cd export utils_export  utils_builtins utils_cd exp_unset_error exit\
 
 OBJ				= $(_FILES:%=%.o)

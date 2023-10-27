@@ -97,7 +97,7 @@ void	search_extra_tokens(t_main *main, int *i)
 	}
 	main->flags.rdr_treated = false;
 	str = ft_substr(main->input, a.start, (*i - a.start) - a.n_len);
-	add_token(main, STRING, str);
+	add_token(main, STRING, str, NULL);
 	free(str);
 	(*i)--;
 }

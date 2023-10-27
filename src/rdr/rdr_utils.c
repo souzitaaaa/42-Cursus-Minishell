@@ -16,13 +16,13 @@
 void	exec_rdr(t_token token, t_main *main, int hd)
 {
 	if (token.type == IN)
-		rdr_in(token.arr, main);
+		rdr_in(token.arr, main, token.fd);
 	if (token.type == OUT)
-		rdr_out(token.arr, main);
+		rdr_out(token.arr, main, token.fd);
 	if (token.type == APPEND)
-		rdr_app(token.arr, main);
+		rdr_app(token.arr, main, token.fd);
 	if (token.type == HEREDOC)
-		rdr_hd(token, main, hd);
+		rdr_hd(main, hd, token.fd);
 }
 
 //parar os rdr exceto o here doc, ultima linha
@@ -46,7 +46,7 @@ bool	ft_isexit(t_lexer tokens)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING && aux->token.arr)
+		if (aux->token.type == STRING && aux->token.arr && *aux->token.arr)
 		{
 			if (!ft_strcmp(aux->token.arr[0], "exit"))
 				return (true);
@@ -65,7 +65,7 @@ bool	check_cmd(t_lexer tokens)
 	counter = 0;
 	while (counter++ < tokens.size)
 	{
-		if (aux->token.type == STRING && aux->token.arr)
+		if (aux->token.type == STRING && aux->token.arr && *aux->token.arr)
 		{
 			if (!ft_strcmp(aux->token.arr[0], "cd")
 				|| !ft_strcmp(aux->token.arr[0], "export")

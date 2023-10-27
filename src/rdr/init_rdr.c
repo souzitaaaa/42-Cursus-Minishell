@@ -33,12 +33,8 @@ void	exec_hd(t_lexer tokens, t_main *main, bool *hd)
 				*hd = true;
 			else
 				close(main->hd.fd);
-			if (aux->token.arr[1] == NULL)
-				main->hd.fd = open_hd(aux->token.arr[0],
-						aux->token.quotes, main);
-			else
-				main->hd.fd = open_hd(aux->token.arr[1],
-						aux->token.quotes, main);
+			main->hd.fd = open_hd(aux->token.arr[0],
+					aux->token.quotes, main);
 			main->hd.index = aux->index;
 		}
 		if (g_ex_status == 130)
@@ -86,8 +82,13 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 	{
 		if (aux->token.type == STRING && aux->token.arr)
 		{
-			if (strcmp(aux->token.arr[0], "exit"))
+			if (!*aux->token.arr)
 				exec_cmd(aux->token.arr, main, true);
+			else
+			{
+				if (strcmp(aux->token.arr[0], "exit"))
+					exec_cmd(aux->token.arr, main, true);
+			}
 		}
 		aux = aux->next;
 	}

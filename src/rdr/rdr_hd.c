@@ -20,6 +20,10 @@ int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 		return (-1);
 	}
 	(*line)++;
+	if (!*str && !lim)
+		return (-1);
+	if (!lim)
+		return (0);
 	if (!ft_strncmp(lim, str, get_max(ft_strlen(lim), ft_strclen(str, '\n'))))
 	{
 		ft_free_str(&str);
@@ -33,7 +37,6 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 	int		line;
 	char	*str;
 
-	str = "\0";
 	line = 0;
 	while (1)
 	{
@@ -75,14 +78,14 @@ int	open_hd(char *lim, bool quotes, t_main *main)
 	return (heredoc_fd[0]);
 }
 
-void	rdr_hd(t_token token, t_main *main, int fd)
+void	rdr_hd(t_main *main, int fd, int rdr_fd)
 {
-	if (token.arr[1] == NULL)
+	if (rdr_fd == -666)
 		dup2(fd, STDIN_FILENO);
 	else
 	{
-		if (dup2(fd, ft_atoi(token.arr[0])) == -1)
-			rdr_error(token.arr[0], main, 1);
+		if (dup2(fd, rdr_fd) == -1)
+			rdr_error(ft_itoa(rdr_fd), main, 1);
 	}
 	close(fd);
 }

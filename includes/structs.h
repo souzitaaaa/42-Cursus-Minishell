@@ -99,6 +99,7 @@ typedef struct s_token
 	char			**arr;
 	t_type			type;
 	bool			quotes;
+	int				fd;
 }	t_token;
 
 /*

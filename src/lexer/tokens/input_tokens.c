@@ -37,7 +37,7 @@ void	get_rdr_in(t_main *main, int *i, t_type token)
 			(*i)++;
 	}
 	str = ft_substr(main->input, start, (*i - start));
-	add_token(main, token, str);
+	add_token(main, token, str, NULL);
 	(*i)--;
 	free(str);
 }
