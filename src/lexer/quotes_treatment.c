@@ -29,7 +29,6 @@ char	**out_of_quotes(char *str, int start, int len, t_main *main)
 	return (NULL);
 }
 
-//echo '$PWD'$USERa"$PWD"
 char	**check_join(t_join join, char before, char after)
 {
 	char	**result;
@@ -38,13 +37,13 @@ char	**check_join(t_join join, char before, char after)
 	free_bef = false;
 	if ((before == ' ' || before == 0 || before == '\t')
 		&& (after == ' ' || after == 0 || after == '\t'))
-		result = ft_arrnl_strnl_arrjoin(join.before, join.str, join.after);
+		result = check_join_options(join, 1);
 	else if (before == ' ' || before == 0 || before == '\t')
 		result = ft_arrnl_strarrjoin(join.before, join.str, join.after);
 	else if (after == ' ' || after == 0 || after == '\t')
 	{
 		free_bef = true;
-		result = ft_arrstrnl_arrjoin(join.before, join.str, join.after);
+		result = check_join_options(join, 2);
 	}
 	else
 		result = ft_arrstrarrjoin(join.before, join.str, join.after);
@@ -111,43 +110,20 @@ char	**ft_quotes(t_node_quotes *aux, char *str, t_main *main, bool first)
 char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 {
 	t_node_quotes	*aux;
-	char			**temp;
-	char			**result;
+	t_help			help;
 
-	result = ft_calloc(1, sizeof(char *));
+	init_help(&help, str);
 	aux = quotes.head;
 	while (quotes.counter++ < quotes.size)
 	{
 		main->flags.free = false;
 		if (aux->index == 0)
-		{
-			temp = ft_quotes(aux, str, main, true);
-			if (temp == NULL)
-				ft_free_array(&result);
-			else
-				result = ft_arrnl_joinfree(result, temp);
-		}
+			index_zero(main, aux, &help);
 		else
-		{
-			temp = ft_quotes(aux, str, main, false);
-			if (temp)
-			{
-				if (result == NULL)
-				{
-					result = ft_arrdup(temp);
-					ft_free_array(&temp);
-					main->flags.free = true;
-				}
-				else if (str[aux->start - 1] == ' '
-					|| str[aux->start - 1] == '\t')
-					result = ft_arrnl_joinfree(result, temp);
-				else
-					result = ft_arrjoinfree(result, temp);
-			}
-		}
+			not_first(main, aux, &help);
 		if (!main->flags.free)
-			free(temp);
+			free(help.temp);
 		aux = aux->next;
 	}
-	return (result);
+	return (help.result);
 }

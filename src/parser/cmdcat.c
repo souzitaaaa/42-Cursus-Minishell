@@ -18,7 +18,7 @@ int	cmdarrcat(t_lexer *tokens, t_node *aux, char ***temp, bool *cmdcat)
 
 	*cmdcat = true;
 	index = aux->index;
-	*temp = ft_arrjoin(*temp, aux->token.arr);
+	*temp = ft_arrjoin_free(*temp, aux->token.arr);
 	remove_node(tokens, aux->index, false);
 	return (index);
 }
