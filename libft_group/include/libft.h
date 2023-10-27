@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/26 23:59:31 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 15:55:21 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ char	*ft_strjoinfree(char const *s1, char const *s2);
 char	*ft_strjoinfree2(char const *s1, char const *s2);
 char	*ft_strjoinfree3(char const *s1, char const *s2);
 //FT_ARRJOIN.C
+char	**ft_arrjoinfree(char **s1, char **s2);
+char	**ft_arrjoin_free(char **s1, char **s2);
 char	**ft_arrjoin(char **s1, char **s2);
 char	**ft_arrnl_joinfree(char **s1, char **s2);
-char	**ft_arrjoinfree(char **s1, char **s2);
 char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2);
 char	**ft_arrstrjoin(char	**arr, char	*str);
 char	**ft_strarrjoin(char *str, char	**arr);

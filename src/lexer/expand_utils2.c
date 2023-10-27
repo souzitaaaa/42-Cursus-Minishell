@@ -46,7 +46,6 @@ char	*check_expansion_str(t_main *main, char *str)
 		str = expand(main, str);
 		if (*str == '\0')
 		{
-			printf("entra aqui\n");
 			free(str);
 			return (NULL);
 		}
@@ -77,10 +76,7 @@ void	del_emptyline(char **arr)
 		if (arr[i][0] == '\0')
 		{
 			if (arr[i + 1] == NULL)
-			{
-				printf("entra aqui 0\n");
 				ft_free_str(&arr[i]);
-			}
 			else
 			{
 				j = i;

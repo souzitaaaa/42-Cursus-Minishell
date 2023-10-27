@@ -6,11 +6,31 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 11:16:57 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 17:50:36 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 17:36:50 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
+
+char	**ft_arrjoin_free(char **s1, char **s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	**new_s;
+
+	if (!s1 || !s2)
+		return (NULL);
+	s1_len = ft_arrlen(s1);
+	s2_len = ft_arrlen(s2);
+	new_s = ft_calloc((s1_len + s2_len + 1), sizeof(char *));
+	if (!new_s)
+		return (0);
+	if (s1_len > 0)
+		ft_arrlcpy(new_s, s1, (s1_len + 1));
+	free(s1);
+	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
+	return (new_s);
+}
 
 char	**ft_arrjoin(char **s1, char **s2)
 {
@@ -22,12 +42,11 @@ char	**ft_arrjoin(char **s1, char **s2)
 		return (NULL);
 	s1_len = ft_arrlen(s1);
 	s2_len = ft_arrlen(s2);
-	new_s = malloc((s1_len + s2_len + 1) * sizeof(char *));
+	new_s = ft_calloc((s1_len + s2_len + 1), sizeof(char *));
 	if (!new_s)
 		return (0);
 	if (s1_len > 0)
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
-	free(s1);
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
 	return (new_s);
 }
@@ -65,7 +84,7 @@ char	**ft_arrnl_joinfree(char **s1, char **s2)
 		return (NULL);
 	s1_len = ft_arrlen(s1);
 	s2_len = ft_arrlen(s2);
-	new_s = malloc((s1_len + s2_len + 1) * sizeof(char *));
+	new_s = ft_calloc((s1_len + s2_len + 1), sizeof(char *));
 	if (!new_s)
 		return (0);
 	if (s1_len > 0)
@@ -93,9 +112,10 @@ char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2)
 	if (arr1)
 	{
 		ft_arrlcpy(new_arr, arr1, (arr1_len + 1));
-		new_arr[arr1_len] = str;
+		if (str)
+			new_arr[arr1_len] = str;
 	}
-	else
+	else if (str)
 		new_arr[0] = str;
 	if (arr2)
 		ft_arrlcpy(new_arr + arr1_len + 1, arr2, (arr2_len + 1));

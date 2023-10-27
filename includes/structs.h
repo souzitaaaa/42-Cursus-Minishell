@@ -199,13 +199,6 @@ typedef struct s_std
 	int	stderr;
 }	t_std;
 
-typedef struct s_prompt
-{
-	char	*out;
-	char	*logname;
-	char	*pwd;
-}	t_prompt;
-
 typedef struct s_len
 {
 	int		pipe;
@@ -223,6 +216,13 @@ typedef struct s_var_quotes
 	int		open_q_t;
 	char	c;
 }	t_variables_quotes;
+
+typedef struct s_help
+{
+	char	**result;
+	char	**temp;
+	char	*str;
+}	t_help;
 
 /*
 !MAIN STRUCT
@@ -242,7 +242,6 @@ typedef struct s_main
 	t_ast			ast;
 	t_std			fd;
 	t_hd			hd;
-	t_prompt		prompt_list;
 	t_bool			flags;
 }	t_main;
 

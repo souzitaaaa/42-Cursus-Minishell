@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/26 12:50:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:52:58 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,9 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main);
 !QUOTES_UTILS.C
 */
 char	**str_to_arr(char *str, bool free);
+void	init_help(t_help *help, char *str);
+void	index_zero(t_main *main, t_node_quotes *aux, t_help *help);
+void	not_first(t_main *main, t_node_quotes *aux, t_help *help);
+char	**check_join_options(t_join join, int option);
 
 #endif
