@@ -66,8 +66,8 @@ void	insert_node(t_lexer *lexer, t_node *new, int index)
 	}
 	lexer->size++;
 }
-/*
-void    print_tokens(t_lexer *tokens)
+
+/*void    print_tokens(t_lexer *tokens)
 {
 	int count = 0;
 	t_node  *aux = tokens->head;
@@ -79,7 +79,8 @@ void    print_tokens(t_lexer *tokens)
 		printf("\033[1;34m[TYPE]  \033[0m %c\n", aux->token.type);
 		printf("\033[1;34m[ARR] \033[0m \n");
 		print_arr(aux->token.arr);
-		printf("\033[1;34m[QUOTES HEREDOC]  \033[0m %i\n\n", aux->token.quotes);
+		printf("\033[1;34m[QUOTES HEREDOC]  \033[0m %i\n", aux->token.quotes);
+		printf("\033[1;34m[FD]  \033[0m %i\n\n", aux->token.fd);
 		aux = aux->next;
 	}
 			printf("\033[1;32m\t\t(End printing tokens)\033[0m\n");

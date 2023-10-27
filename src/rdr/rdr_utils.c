@@ -16,13 +16,13 @@
 void	exec_rdr(t_token token, t_main *main, int hd)
 {
 	if (token.type == IN)
-		rdr_in(token.arr, main);
+		rdr_in(token.arr, main, token.fd);
 	if (token.type == OUT)
-		rdr_out(token.arr, main);
+		rdr_out(token.arr, main, token.fd);
 	if (token.type == APPEND)
-		rdr_app(token.arr, main);
+		rdr_app(token.arr, main, token.fd);
 	if (token.type == HEREDOC)
-		rdr_hd(token, main, hd);
+		rdr_hd(main, hd, token.fd);
 }
 
 //parar os rdr exceto o here doc, ultima linha

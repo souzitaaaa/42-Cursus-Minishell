@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax_utils.c                                     :+:      :+:    :+:   */
+/*   rdr_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 21:16:33 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 18:09:43 by rimarque         ###   ########.fr       */
+/*   Created: 2023/10/27 15:46:29 by rimarque          #+#    #+#             */
+/*   Updated: 2023/10/27 17:39:30 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*get_token(t_type type)
+bool	check_errors(t_main *main, char **arr)
 {
-	char	*token;
-
-	if (type == IN)
-		token = "<";
-	if (type == OUT)
-		token = ">";
-	if (type == APPEND)
-		token = ">>";
-	if (type == HEREDOC)
-		token = "<<";
-	return (token);
-}
-
-bool	is_rdr(t_type type)
-{
-	if (type == OUT || type == IN
-		|| type == HEREDOC || type == APPEND)
+	if (main->flags.rdr_err)
 		return (true);
-	return (false);
+	if (!*arr)
+	{
+		rdr_error("\0", main, 0);
+		return (true);
+	}
+	if (arr[0][0] == '$')
+	{
+		rdr_error(arr[0], main, 2);
+		return (true);
+	}
+	return(false);
 }
 
-bool	is_emptyrdr(t_token token)
-{
-	if (is_rdr(token.type) && (token.arr == 0))
-		return (true);
-	return (false);
-}

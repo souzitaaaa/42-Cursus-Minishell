@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:51:53 by joe               #+#    #+#             */
-/*   Updated: 2023/10/26 12:50:38 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/27 17:02:26 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 /*
 !ADD_TOKENS.C
 */
-int		add_token(t_main *main, t_type token, char *str);
-t_node	*create_n(t_main *main, t_type token, char *str);
+int		add_token(t_main *main, t_type token, char *str, char *fd);
+t_node	*create_n(t_main *main, t_type token, char *str, char *fd);
 char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd);
 
 /*

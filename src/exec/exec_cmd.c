@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/27 00:24:27 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:42:51 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	exec_cmd(char **command, t_main *main, bool child)
 {
 	if (!command)
 		return ;
+	if (!*command)
+	{
+		error_msg_cmd("\0", STDERR_FILENO);
+		exit_child(main, 127, child);
+		return ;
+	}
 	if (ft_strcmp(command[0], "echo") == 0)
 		echo(command, main, child);
 	else if (ft_strcmp(command[0], "pwd") == 0)
