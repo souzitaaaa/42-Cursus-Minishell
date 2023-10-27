@@ -67,7 +67,8 @@ void	insert_node(t_lexer *lexer, t_node *new, int index)
 	lexer->size++;
 }
 
-/*void    print_tokens(t_lexer *tokens)
+/*
+void    print_tokens(t_lexer *tokens)
 {
 	int count = 0;
 	t_node  *aux = tokens->head;

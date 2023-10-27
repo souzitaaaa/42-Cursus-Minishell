@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:46:29 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 17:39:30 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/10/27 18:57:18 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ bool	check_errors(t_main *main, char **arr)
 		rdr_error(arr[0], main, 2);
 		return (true);
 	}
-	return(false);
+	return (false);
 }
-

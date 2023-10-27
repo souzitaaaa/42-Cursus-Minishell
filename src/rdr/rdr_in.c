@@ -21,7 +21,7 @@ void	rdr_in(char **arr, t_main *main, int rdr_fd)
 	fd = open(arr[0], O_RDONLY);
 	if (fd == -1)
 		rdr_error(arr[0], main, 0);
-	else if(rdr_fd == -666)
+	else if (rdr_fd == -666)
 		dup2(fd, STDIN_FILENO);
 	else
 	{

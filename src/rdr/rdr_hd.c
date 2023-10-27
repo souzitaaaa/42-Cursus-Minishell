@@ -20,10 +20,10 @@ int	read_stdin_aux(char *str, char *lim, t_main *main, int *line)
 		return (-1);
 	}
 	(*line)++;
-	if(!*str && !lim)
+	if (!*str && !lim)
 		return (-1);
-	if(!lim)
-		return(0);
+	if (!lim)
+		return (0);
 	if (!ft_strncmp(lim, str, get_max(ft_strlen(lim), ft_strclen(str, '\n'))))
 	{
 		ft_free_str(&str);

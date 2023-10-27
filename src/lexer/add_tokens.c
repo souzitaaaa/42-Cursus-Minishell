@@ -51,15 +51,33 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quotes_tk)
 	return (result);
 }
 
+void	create_arr(t_main *main, char *str, t_node *new, bool *quotes_tk)
+{
+	char	**arr;
+
+	arr = quotes_split(str, main, new->token.type, quotes_tk);
+	if (!arr)
+	{
+		if (quotes_tk)
+			new->token.arr = ft_calloc(1, sizeof(char *));
+		else
+			new->token.arr = NULL;
+	}
+	else
+	{
+		new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
+		ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
+	}
+	free(arr);
+}
+
 //* Esta função trata de inserir os elementos do token em cada nó,
 //*  ou seja, o tipo do token, e uma array com o conteudo dele
 t_node	*create_n(t_main *main, t_type token, char *str, char *fd)
 {
 	t_node	*new;
-	char	**arr;
 	bool	quotes_tk;
 
-	arr = NULL;
 	quotes_tk = false;
 	new = malloc(sizeof(t_node));
 	if (!new)
@@ -68,23 +86,7 @@ t_node	*create_n(t_main *main, t_type token, char *str, char *fd)
 	if (!*str)
 		new->token.arr = NULL;
 	else
-	{
-		arr = quotes_split(str, main, token, &quotes_tk);
-		if (!arr)
-		{
-			if(quotes_tk)
-				new->token.arr = ft_calloc(1, sizeof(char *));
-			else
-				new->token.arr = NULL;
-		}
-		else
-		{
-			new->token.arr = ft_calloc(ft_arrlen(arr) + 1, sizeof(char *));
-			ft_arrlcpy(new->token.arr, arr, ft_arrlen(arr) + 1);
-		}
-	}
-	if (str)
-		free(arr);
+		create_arr(main, str, new, &quotes_tk);
 	new->token.quotes = quotes_tk;
 	if (fd)
 		new->token.fd = ft_atoi(fd);

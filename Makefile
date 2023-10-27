@@ -6,7 +6,7 @@
 #    By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/08 17:57:43 by jcruz-da          #+#    #+#              #
-#    Updated: 2023/10/27 15:46:47 by rimarque         ###   ########.fr        #
+#    Updated: 2023/10/27 19:08:39 by rimarque         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC				= cc
 RM 				= rm -rf
 
 #-----------------------------------  FLAGS  -----------------------------------
-CFLAGS			=  -g -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 NPD				= --no-print-directory
 RD				= -lreadline
 
