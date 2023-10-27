@@ -13,6 +13,7 @@
 #include "../../includes/minishell.h"
 
 extern int	g_ex_status;
+
 //*Esta função percorre a lista tokens, executa os
 //* here_doc, guarda o fd do último hd executado,
 //* seta a bool hd a verdadeiro caso exista algum hd
@@ -89,9 +90,9 @@ void	find_exec_cmd(t_lexer tokens, t_main *main)
 	}
 }
 
-void    check_execmd_parent(t_lexer tokens, t_main *main)
+void	check_execmd_parent(t_lexer tokens, t_main *main)
 {
-    if (ft_isexit(tokens))
+	if (ft_isexit(tokens))
 		find_exec_cmd_parent(tokens, main);
 	else if (check_cmd(tokens))
 	{

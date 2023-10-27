@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   rdr_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:47:38 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 11:18:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/27 01:05:09 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern int	g_ex_status;
+
 //tenho de fechar o hd, aqui e no main process
 void	ft_redirect_in(t_node	*head, t_main *main, t_hd hd)
 {

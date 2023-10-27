@@ -43,7 +43,7 @@ int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 	{
 		s_var_quotes->c = main->input[s_var_quotes->i];
 		s_var_quotes->quotes_analises = check_quotes(s_var_quotes->c,
-		s_var_quotes->quotes_analises);
+				s_var_quotes->quotes_analises);
 		verify_quotes(main, s_var_quotes);
 		s_var_quotes->i++;
 	}
@@ -63,17 +63,17 @@ void	verify_quotes(t_main *main, t_variables_quotes *s_var_quotes)
 	if (s_var_quotes->c == SQUOTE || s_var_quotes->c == DQUOTE)
 	{
 		if ((s_var_quotes->quotes_analises == 1
-		|| s_var_quotes->quotes_analises == 2)
-		&& s_var_quotes->open_q_p == -1)
+				|| s_var_quotes->quotes_analises == 2)
+			&& s_var_quotes->open_q_p == -1)
 		{
 			s_var_quotes->open_q_p = s_var_quotes->i;
 			s_var_quotes->open_q_t = s_var_quotes->c;
 		}
 		else if (s_var_quotes->quotes_analises == 0
-		&& s_var_quotes->open_q_p != -1)
+			&& s_var_quotes->open_q_p != -1)
 		{
 			create_quotes_node(&main->quotes, s_var_quotes->open_q_t,
-			s_var_quotes->open_q_p, s_var_quotes->i);
+				s_var_quotes->open_q_p, s_var_quotes->i);
 			s_var_quotes->open_q_p = -1;
 			s_var_quotes->open_q_t = '\0';
 		}

@@ -18,7 +18,7 @@ void	rdr_out(char **arr, t_main *main)
 
 	if (main->flags.rdr_err)
 		return ;
-	if(arr[0][0] == '$')
+	if (arr[0][0] == '$')
 	{
 		rdr_error(arr[0], main, 2);
 		return ;

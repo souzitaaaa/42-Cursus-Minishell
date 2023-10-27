@@ -28,7 +28,7 @@ void	check_expansion_arr(t_main *main, char ***arr)
 		i++;
 	}
 	del_emptyline(*arr);
-	if(**arr == NULL)
+	if (**arr == NULL)
 	{
 		free(*arr);
 		*arr = NULL;

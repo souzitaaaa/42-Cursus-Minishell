@@ -12,6 +12,20 @@
 
 #include "../../includes/minishell.h"
 
+void	head_null(t_main *main, char *str, char ***result, t_type token)
+{
+	*result = ft_split_tab(str);
+	check_expansion_arr(main, result);
+	if (is_rdr(token))
+	{
+		if (result == NULL)
+		{
+			ft_free_array(result);
+			*result = str_to_arr(str, false);
+		}
+	}
+}
+
 //* Esta função vai tratar da separação do conteudo da array dependendo
 //*  se a mesma têm aspas ou não, caso não as tenha, simplesmente faz um split
 //*  e vai verificar se os argumentos precisam de ser expandidos, caso tenha
@@ -26,18 +40,7 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd)
 	if (token == HEREDOC)
 		main->flags.hd = true;
 	if (quotes.head == NULL)
-	{
-		result = ft_split_tab(str);
-		check_expansion_arr(main, &result);
-		if(is_rdr(token))
-		{
-			if(result == NULL)
-			{
-				ft_free_array(&result);
-				result = str_to_arr(str, false);
-			}
-		}	
-	}
+		head_null(main, str, &result, token);
 	else
 	{
 		*quote_hd = true;
