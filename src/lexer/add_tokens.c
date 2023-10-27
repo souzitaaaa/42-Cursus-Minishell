@@ -58,7 +58,7 @@ void	create_arr(t_main *main, char *str, t_node *new, bool *quotes_tk)
 	arr = quotes_split(str, main, new->token.type, quotes_tk);
 	if (!arr)
 	{
-		if (quotes_tk)
+		if (*quotes_tk)
 			new->token.arr = ft_calloc(1, sizeof(char *));
 		else
 			new->token.arr = NULL;
