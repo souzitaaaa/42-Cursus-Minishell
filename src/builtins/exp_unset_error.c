@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_unset_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jede-ara <jede-ara@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:29:46 by jenny             #+#    #+#             */
-/*   Updated: 2023/10/24 17:59:35 by jede-ara         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:27:46 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ bool	special_char(char *str, int fd, char *command)
 		|| ft_strchr(temp, '*') || ft_strchr(temp, '%') || ft_strchr(temp, '?')
 		|| ft_strchr(temp, '/') || ft_strchr(temp, '`') || ft_strchr(temp, '.')
 		|| ft_strchr(temp, ',') || ft_strchr(temp, ':')
-		|| ft_strchr(temp, '\\'))
+		|| ft_strchr(temp, '\\') || ft_strchr(temp, '{')
+		|| ft_strchr(temp, '}') || ft_strchr(temp, '[') || ft_strchr(temp, ']')
+		|| ft_strchr(temp, '^') || ft_strchr(temp, '$') || ft_strchr(temp, '!')
+		|| ft_strchr(temp, '@') || ft_strchr(temp, '#') || ft_strchr(temp, '&'))
 	{
 		invalid_identifier(fd, command, temp);
 		ft_free_str(&temp);

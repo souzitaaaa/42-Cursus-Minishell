@@ -20,6 +20,7 @@ void	set_exit_code(t_main *main, int exit_code)
 void	free_and_exit(t_main *main, int exit_code, bool input)
 {
 	destroy_main(main, input);
+	rl_clear_history();
 	if (main->flags.rdr_err)
 		exit(1);
 	exit(exit_code);
@@ -37,7 +38,6 @@ void	ft_exit(char **command, bool child, t_main *main, bool input)
 {
 	int	exit_code;
 
-	rl_clear_history();
 	if (!child)
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if (!command)
