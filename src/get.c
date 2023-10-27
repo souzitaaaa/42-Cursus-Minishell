@@ -44,5 +44,6 @@ int	get_min_len(char *str, int i)
 			ft_strclen(str + i + 1, SQUOTE));
 	min = get_min(min, ft_strclen(str + i + 1, '\n'));
 	min = get_min(min, ft_strclen(str + i + 1, '\t'));
+	min = get_min(min, ft_strclen(str + i + 1, '/'));
 	return (min);
 }
