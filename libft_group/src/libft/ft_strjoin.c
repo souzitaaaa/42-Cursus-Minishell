@@ -44,7 +44,7 @@ char	*ft_strjoinfree(char const *s1, char const *s2)
 
 	if (!s1)
 		return ((char *)s2);
-	if(!s2)
+	if (!s2)
 		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
@@ -65,7 +65,7 @@ char	*ft_strjoinfree2(char const *s1, char const *s2)
 
 	if (!s1)
 		return ((char *)s2);
-	if(!s2)
+	if (!s2)
 		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
@@ -86,7 +86,7 @@ char	*ft_strjoinfree3(char const *s1, char const *s2)
 
 	if (!s1)
 		return ((char *)s2);
-	if(!s2)
+	if (!s2)
 		return ((char *)s1);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);

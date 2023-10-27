@@ -17,7 +17,7 @@ se a lista tiver vazia ou o env for chamado com argumentos dá erro*/
 void	print_env(t_env	*env)
 {
 	t_var	*current;
-	
+
 	current = env->head;
 	env->i = 0;
 	while (env->i++ < env->size)

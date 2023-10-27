@@ -46,7 +46,7 @@ typedef struct s_bool
 	bool			not_print;
 	bool			hd;
 	bool			free;
-} t_bool;
+}	t_bool;
 
 /*
 !ENV
@@ -219,8 +219,8 @@ typedef struct s_var_quotes
 {
 	int		i;
 	int		quotes_analises;
-	int		open_quote_position;
-	int		open_quote_type;
+	int		open_q_p;
+	int		open_q_t;
 	char	c;
 }	t_variables_quotes;
 
@@ -229,7 +229,7 @@ typedef struct s_var_quotes
 */
 typedef struct s_main
 {
-	char 			*input;
+	char			*input;
 	char			**env_arr;
 	char			*path_pwd;
 	int				exit_code;

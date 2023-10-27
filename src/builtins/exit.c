@@ -25,6 +25,14 @@ void	free_and_exit(t_main *main, int exit_code, bool input)
 	exit(exit_code);
 }
 
+void	numeric_required(t_main *main, char **command, bool input)
+{
+	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
+	ft_putstr_fd(command[1], STDERR_FILENO);
+	ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+	free_and_exit(main, 2, input);
+}
+
 void	ft_exit(char **command, bool child, t_main *main, bool input)
 {
 	int	exit_code;
@@ -47,12 +55,7 @@ void	ft_exit(char **command, bool child, t_main *main, bool input)
 		set_exit_code(main, 1);
 	}
 	if (!ft_isnbr(command[1]))
-	{
-		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(command[1], STDERR_FILENO);
-		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
-		free_and_exit(main, 2, input);
-	}
+		numeric_required(main, command, input);
 }
 
 void	exit_child(t_main *main, int exit_code, bool child)

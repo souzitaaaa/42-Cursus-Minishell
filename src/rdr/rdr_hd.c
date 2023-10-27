@@ -42,7 +42,7 @@ int	read_stdin(int fd, char *lim, bool quotes, t_main *main)
 			break ;
 		if (!quotes)
 			str = check_expansion_str(main, str);
-		if(str)
+		if (str)
 			write(fd, str, ft_strlen(str));
 		write(fd, "\n", 1);
 		if (str)

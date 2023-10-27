@@ -13,16 +13,16 @@
 #include "../includes/minishell.h"
 #include "../includes/structs.h"
 
-void	create_quotes_node(t_quotes *quotes, int open_quote_type, \
-int open_quote_position, int i)
+void	create_quotes_node(t_quotes *quotes, int open_q_t, \
+int open_q_p, int i)
 {
 	t_node_quotes	*new_node;
 
 	new_node = malloc(sizeof(t_node_quotes));
 	if (!new_node)
 		return ;
-	new_node->type = open_quote_type;
-	new_node->start = open_quote_position;
+	new_node->type = open_q_t;
+	new_node->start = open_q_p;
 	new_node->end = i;
 	insert_last_quotes(quotes, new_node);
 	shift_index_quotes(quotes);

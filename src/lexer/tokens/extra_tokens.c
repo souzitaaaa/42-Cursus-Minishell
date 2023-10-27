@@ -46,7 +46,7 @@ bool	validation_fd(t_main *main, int *i)
 	if (*i > 0 && *i < main->tokens.str_len - 1)
 	{
 		if (ft_isalpha(main->input[*i - 1]) == 1
-					&& special_chr(main->input[*i + 1]) == true)
+			&& special_chr(main->input[*i + 1]) == true)
 			return (true);
 	}
 	return (false);

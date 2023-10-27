@@ -20,7 +20,7 @@ void	rdr_in(char **arr, t_main *main)
 		return ;
 	if (arr[1] == NULL)
 	{
-		if(arr[0][0] == '$')
+		if (arr[0][0] == '$')
 		{
 			rdr_error(arr[0], main, 2);
 			return ;

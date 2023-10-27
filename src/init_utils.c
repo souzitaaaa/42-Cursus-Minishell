@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:38:26 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 16:40:50 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:18:46 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ini_variables_quotes(t_variables_quotes *s_var_quotes)
 {
 	s_var_quotes->i = 0;
 	s_var_quotes->quotes_analises = 0;
-	s_var_quotes->open_quote_position = -1;
-	s_var_quotes->open_quote_type = '\0';
+	s_var_quotes->open_q_p = -1;
+	s_var_quotes->open_q_t = '\0';
 	s_var_quotes->c = '\0';
 }
 

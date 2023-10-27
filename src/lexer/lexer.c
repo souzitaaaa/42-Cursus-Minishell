@@ -40,5 +40,4 @@ void	lexer(t_main *main)
 		search_tokens(main, &i);
 		i++;
 	}
-	//print_tokens(&main->tokens);
 }

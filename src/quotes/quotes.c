@@ -6,7 +6,7 @@
 /*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 22:44:59 by rimarque          #+#    #+#             */
-/*   Updated: 2023/10/26 18:30:49 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/27 00:18:46 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_quotes_print(t_main *main, t_variables_quotes *s_var_quotes)
 	{
 		s_var_quotes->c = main->input[s_var_quotes->i];
 		s_var_quotes->quotes_analises = check_quotes(s_var_quotes->c,
-		s_var_quotes->quotes_analises);
+				s_var_quotes->quotes_analises);
 		verify_quotes(main, s_var_quotes);
 		s_var_quotes->i++;
 	}
@@ -63,19 +63,19 @@ void	verify_quotes(t_main *main, t_variables_quotes *s_var_quotes)
 	if (s_var_quotes->c == SQUOTE || s_var_quotes->c == DQUOTE)
 	{
 		if ((s_var_quotes->quotes_analises == 1
-		|| s_var_quotes->quotes_analises == 2)
-		&& s_var_quotes->open_quote_position == -1)
+				|| s_var_quotes->quotes_analises == 2)
+			&& s_var_quotes->open_q_p == -1)
 		{
-			s_var_quotes->open_quote_position = s_var_quotes->i;
-			s_var_quotes->open_quote_type = s_var_quotes->c;
+			s_var_quotes->open_q_p = s_var_quotes->i;
+			s_var_quotes->open_q_t = s_var_quotes->c;
 		}
 		else if (s_var_quotes->quotes_analises == 0
-		&& s_var_quotes->open_quote_position != -1)
+			&& s_var_quotes->open_q_p != -1)
 		{
-			create_quotes_node(&main->quotes, s_var_quotes->open_quote_type,
-			s_var_quotes->open_quote_position, s_var_quotes->i);
-			s_var_quotes->open_quote_position = -1;
-			s_var_quotes->open_quote_type = '\0';
+			create_quotes_node(&main->quotes, s_var_quotes->open_q_t,
+				s_var_quotes->open_q_p, s_var_quotes->i);
+			s_var_quotes->open_q_p = -1;
+			s_var_quotes->open_q_t = '\0';
 		}
 	}
 }

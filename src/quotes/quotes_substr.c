@@ -18,18 +18,18 @@ void	verify_quotes_str(t_quotes *quotes, t_variables_quotes *s_var_quotes)
 	{
 		if ((s_var_quotes->quotes_analises == 1 \
 		|| s_var_quotes->quotes_analises == 2) \
-		&& s_var_quotes->open_quote_position == -1)
+		&& s_var_quotes->open_q_p == -1)
 		{
-			s_var_quotes->open_quote_position = s_var_quotes->i;
-			s_var_quotes->open_quote_type = s_var_quotes->c;
+			s_var_quotes->open_q_p = s_var_quotes->i;
+			s_var_quotes->open_q_t = s_var_quotes->c;
 		}
 		else if (s_var_quotes->quotes_analises == 0 \
-		&& s_var_quotes->open_quote_position != -1)
+		&& s_var_quotes->open_q_p != -1)
 		{
-			create_quotes_node(quotes, s_var_quotes->open_quote_type, \
-			s_var_quotes->open_quote_position, s_var_quotes->i);
-			s_var_quotes->open_quote_position = -1;
-			s_var_quotes->open_quote_type = '\0';
+			create_quotes_node(quotes, s_var_quotes->open_q_t, \
+			s_var_quotes->open_q_p, s_var_quotes->i);
+			s_var_quotes->open_q_p = -1;
+			s_var_quotes->open_q_t = '\0';
 		}
 	}
 }

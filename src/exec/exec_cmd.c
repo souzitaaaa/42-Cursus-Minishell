@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 15:04:20 by jede-ara          #+#    #+#             */
-/*   Updated: 2023/10/26 12:46:48 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/27 00:24:27 by dinoguei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exec_cmd(char **command, t_main *main, bool child)
 {
-	if(!command)
+	if (!command)
 		return ;
 	if (ft_strcmp(command[0], "echo") == 0)
 		echo(command, main, child);
