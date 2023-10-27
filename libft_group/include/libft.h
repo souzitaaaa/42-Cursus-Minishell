@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dinoguei <dinoguei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/27 15:55:21 by dinoguei         ###   ########.fr       */
+/*   Updated: 2023/10/28 00:42:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int		ft_memcmp(const void *str, const void *str2, size_t n);
 char	*ft_strnstr(const char *str, const char *substr, size_t n);
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t n, size_t size);
-char	*ft_strdup(const char *str);
-char	**ft_arrdup(char **arr);
 char	*ft_substr(char const *str, unsigned int start, size_t len);
 char	*ft_strtrim(char const *str, char const *set);
 char	**ft_split(char const *str, char c);
@@ -78,8 +76,13 @@ char	**ft_arrjoin_free(char **s1, char **s2);
 char	**ft_arrjoin(char **s1, char **s2);
 char	**ft_arrnl_joinfree(char **s1, char **s2);
 char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2);
-char	**ft_arrstrjoin(char	**arr, char	*str);
-char	**ft_strarrjoin(char *str, char	**arr);
+//char	**ft_arrstrjoin(char	**arr, char	*str);
+//char	**ft_strarrjoin(char *str, char	**arr);
+//FT_STRDUP
+char	*ft_strdup(const char *str);
+char	**ft_arrdup(char **arr);
+char	**ft_arrdup_qbef(char **arr);
+char	**ft_arrdup_qafter(char **arr);
 
 /*
 ft_printf
