@@ -67,14 +67,14 @@ char	**option_quotes(t_join join, t_node_quotes *aux, char *str, int option)
 	if (option == 2)
 	{
 		if (join.str == NULL)
-			result = ft_arrdup_qbef(join.after);
+			result = ft_arrdup_bzero_first(join.after, str[aux->end + 1]);
 		else
 			result = check_join(join, 0, str[aux->end + 1]);
 	}
 	if (option == 3)
 	{
 		if (join.str == NULL)
-			result = ft_arrdup_qafter(join.before);
+			result = ft_arrdup_bzero_last(join.before, str[aux->start - 1]);
 		else
 			result = check_join(join, str[aux->start - 1], 0);
 	}
