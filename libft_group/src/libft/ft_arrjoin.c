@@ -82,7 +82,6 @@ char	**ft_arrnl_joinfree(char **s1, char **s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	char	**new_s;
-	char	*empty_str;
 
 	if (!s1 || !s2)
 		return (NULL);
@@ -93,12 +92,6 @@ char	**ft_arrnl_joinfree(char **s1, char **s2)
 		return (0);
 	if (s1_len > 0)
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
-	else
-	{
-		empty_str = ft_calloc(1, sizeof(char));
-		new_s[0] = empty_str;
-		s1_len = 1;
-	}
 	free(s1);
 	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
 	return (new_s);
