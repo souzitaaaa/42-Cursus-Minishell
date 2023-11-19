@@ -62,29 +62,16 @@ char	**ft_arrdup_bzero_last(char **arr, char c)
 
 char	**ft_arrdup_bzero_first(char **arr, char c)
 {
-	int		i;
-	int		j;
-	int		len;
 	char	**ptr;
 
-	j = 0;
-	len = ft_arrlen((char **)arr);
-	ptr = malloc((len + 2) * sizeof(const char *));
-	if (!ptr)
-		return (NULL);
 	if(c == '\t' || c == ' ')
 	{
+		ptr = malloc(2 * sizeof(const char *));
 		ptr[0] = ft_strdup("\0");
-		i = 1;
+		ptr[1] = NULL;
 	}
 	else
-		i = 0;
-	while (j < len)
-	{
-		ptr[i] = ft_strdup(arr[j]);
-		i++;
-	}
-	ptr[i] = NULL;
+		ptr = ft_arrdup(arr);
 	ft_free_array(&arr);
 	return (ptr);
 }
