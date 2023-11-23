@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:05:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/28 00:43:02 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/23 18:18:50 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_strdup(const char *str)
 	return (ptr);
 }
 
-char	**ft_arrdup_qafter(char **arr)
+char	**ft_arrdup_bzero_last(char **arr, char c)
 {
 	int		i;
 	int		len;
@@ -49,30 +49,46 @@ char	**ft_arrdup_qafter(char **arr)
 		ptr[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	ptr[i] = ft_strdup("\0");
-	ptr[i + 1] = NULL;
+	if (c == '\t' || c == ' ')
+	{
+		ptr[i] = ft_strdup("\0");
+		ptr[i + 1] = NULL;
+	}
+	else
+		ptr[i] = NULL;
 	ft_free_array(&arr);
 	return (ptr);
 }
 
-char	**ft_arrdup_qbef(char **arr)
+char	**ft_arr_bzero(void)
 {
-	int		i;
-	int		len;
 	char	**ptr;
 
+	ptr = malloc(2 * sizeof(const char *));
+	ptr[0] = ft_strdup("\0");
+	ptr[1] = NULL;
+	return (ptr);
+}
+
+char	**ft_arrdup_bzero_first(char **arr, char c)
+{
+	char	**ptr;
+	int		len;
+	int		j;
+	int		i;
+
 	len = ft_arrlen((char **)arr);
-	ptr = malloc((len + 2) * sizeof(const char *));
+	ptr = arrdup_aux(len, &j, c);
 	if (!ptr)
 		return (NULL);
-	ptr[0] = ft_strdup("\0");
-	i = 1;
+	i = 0;
 	while (i < len)
 	{
-		ptr[i] = ft_strdup(arr[i]);
+		ptr[j] = ft_strdup(arr[i]);
 		i++;
+		j++;
 	}
-	ptr[i] = NULL;
+	ptr[j] = NULL;
 	ft_free_array(&arr);
 	return (ptr);
 }

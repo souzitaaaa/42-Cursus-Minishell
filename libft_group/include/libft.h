@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/28 00:42:04 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/23 18:31:41 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@ char	**ft_arrnl_strnl_arrjoin(char	**arr1, char	*str, char	**arr2);
 //FT_STRDUP
 char	*ft_strdup(const char *str);
 char	**ft_arrdup(char **arr);
-char	**ft_arrdup_qbef(char **arr);
-char	**ft_arrdup_qafter(char **arr);
+char	**ft_arrdup_bzero_first(char **arr, char c);
+char	**ft_arrdup_bzero_last(char **arr, char c);
+char	**ft_arr_bzero(void);
+char	**arrdup_aux(int len, int *j, char c);
 
 /*
 ft_printf

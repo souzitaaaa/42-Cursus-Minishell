@@ -37,17 +37,20 @@ char	**ft_arrjoin(char **s1, char **s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	char	**new_s;
+	char	*empty_str;
 
 	if (!s1 || !s2)
 		return (NULL);
 	s1_len = ft_arrlen(s1);
 	s2_len = ft_arrlen(s2);
-	new_s = ft_calloc((s1_len + s2_len + 1), sizeof(char *));
+	new_s = ft_calloc((s1_len + s2_len + 2), sizeof(char *));
 	if (!new_s)
 		return (0);
 	if (s1_len > 0)
 		ft_arrlcpy(new_s, s1, (s1_len + 1));
-	ft_arrlcpy((new_s + s1_len), s2, (s2_len + 1));
+	empty_str = ft_calloc(1, sizeof(char));
+	new_s[s1_len] = empty_str;
+	ft_arrlcpy((new_s + s1_len + 1), s2, (s2_len + 2));
 	return (new_s);
 }
 

@@ -60,21 +60,21 @@ char	**option_quotes(t_join join, t_node_quotes *aux, char *str, int option)
 	if (option == 1)
 	{
 		if (join.str == NULL)
-			result = NULL;
+			result = ft_arr_bzero();
 		else
 			result = str_to_arr(join.str, true);
 	}
 	if (option == 2)
 	{
 		if (join.str == NULL)
-			result = ft_arrdup_qbef(join.after);
+			result = ft_arrdup_bzero_first(join.after, str[aux->end + 1]);
 		else
 			result = check_join(join, 0, str[aux->end + 1]);
 	}
 	if (option == 3)
 	{
 		if (join.str == NULL)
-			result = ft_arrdup_qafter(join.before);
+			result = ft_arrdup_bzero_last(join.before, str[aux->start - 1]);
 		else
 			result = check_join(join, str[aux->start - 1], 0);
 	}
@@ -125,5 +125,6 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 			free(help.temp);
 		aux = aux->next;
 	}
+	print_arr(help.result);
 	return (help.result);
 }
