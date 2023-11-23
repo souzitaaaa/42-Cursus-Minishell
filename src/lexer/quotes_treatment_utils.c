@@ -43,10 +43,6 @@ void	index_zero(t_main *main, t_node_quotes *aux, t_help *help)
 void	not_first(t_main *main, t_node_quotes *aux, t_help *help)
 {
 	help->temp = ft_quotes(aux, help->str, main, false);
-	printf("1:\n");
-	print_arr(help->result);
-	printf("2:\n");
-	print_arr(help->temp);
 	if (help->temp)
 	{
 		if (help->result == NULL)
@@ -61,8 +57,6 @@ void	not_first(t_main *main, t_node_quotes *aux, t_help *help)
 		else
 			help->result = ft_arrjoinfree(help->result, help->temp);
 	}
-	printf("3:\n");
-	print_arr(help->result);
 }
 
 char	**check_join_options(t_join join, int option)

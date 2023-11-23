@@ -60,7 +60,7 @@ char	**option_quotes(t_join join, t_node_quotes *aux, char *str, int option)
 	if (option == 1)
 	{
 		if (join.str == NULL)
-			result = NULL;
+			result = ft_arr_bzero();
 		else
 			result = str_to_arr(join.str, true);
 	}
@@ -125,5 +125,6 @@ char	**quotes_treatment(t_quotes quotes, char *str, t_main *main)
 			free(help.temp);
 		aux = aux->next;
 	}
+	print_arr(help.result);
 	return (help.result);
 }

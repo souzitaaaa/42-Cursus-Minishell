@@ -16,7 +16,7 @@ void	exec_cmd(char **command, t_main *main, bool child)
 {
 	if (!command)
 		return ;
-	if (!*command)
+	if (!*command || !**command)
 	{
 		error_msg_cmd("\0", STDERR_FILENO);
 		exit_child(main, 127, child);

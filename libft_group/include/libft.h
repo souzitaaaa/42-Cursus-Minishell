@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 10:17:05 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/28 12:24:58 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:31:41 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char	*ft_strdup(const char *str);
 char	**ft_arrdup(char **arr);
 char	**ft_arrdup_bzero_first(char **arr, char c);
 char	**ft_arrdup_bzero_last(char **arr, char c);
+char	**ft_arr_bzero(void);
+char	**arrdup_aux(int len, int *j, char c);
 
 /*
 ft_printf

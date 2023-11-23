@@ -6,7 +6,7 @@
 /*   By: rimarque <rimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:05:20 by dinoguei          #+#    #+#             */
-/*   Updated: 2023/10/28 14:14:32 by rimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:18:50 by rimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**ft_arrdup_bzero_last(char **arr, char c)
 		ptr[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	if(c == '\t' || c == ' ')
+	if (c == '\t' || c == ' ')
 	{
 		ptr[i] = ft_strdup("\0");
 		ptr[i + 1] = NULL;
@@ -60,18 +60,35 @@ char	**ft_arrdup_bzero_last(char **arr, char c)
 	return (ptr);
 }
 
-char	**ft_arrdup_bzero_first(char **arr, char c)
+char	**ft_arr_bzero(void)
 {
 	char	**ptr;
 
-	if(c == '\t' || c == ' ')
+	ptr = malloc(2 * sizeof(const char *));
+	ptr[0] = ft_strdup("\0");
+	ptr[1] = NULL;
+	return (ptr);
+}
+
+char	**ft_arrdup_bzero_first(char **arr, char c)
+{
+	char	**ptr;
+	int		len;
+	int		j;
+	int		i;
+
+	len = ft_arrlen((char **)arr);
+	ptr = arrdup_aux(len, &j, c);
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		ptr = malloc(2 * sizeof(const char *));
-		ptr[0] = ft_strdup("\0");
-		ptr[1] = NULL;
+		ptr[j] = ft_strdup(arr[i]);
+		i++;
+		j++;
 	}
-	else
-		ptr = ft_arrdup(arr);
+	ptr[j] = NULL;
 	ft_free_array(&arr);
 	return (ptr);
 }
