@@ -92,7 +92,7 @@ typedef enum s_type
 	EMPTY = 'E',
 }	t_type;
 
-//* Estrutura que define os tokens, metendo na array o token
+//* Estrutura que define os tokens, metendo na array o tokens
 //em si e afirmando o tipo dele
 typedef struct s_token
 {

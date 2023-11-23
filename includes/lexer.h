@@ -26,7 +26,7 @@ char	**quotes_split(char *str, t_main *main, t_type token, bool *quote_hd);
 !EXPAND_UTILS.C
 */
 bool	check_more_var(char *str, int i);
-int		get_number_len(int n);
+int		get_number_len(int nb);
 char	*expand_exitcode(t_main *main, char *str);
 char	*ft_arr_to_str(char **arr, char *str);
 
