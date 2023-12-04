@@ -45,3 +45,16 @@ cd minishell
 make
 ./minishell
 ```
+
+# Contribuidores
+
+| Foto (menor)                                     | Perfil do GitHub            |
+|-------------------------------------------------|-----------------------------|
+| <img src="https://avatars.githubusercontent.com/u/117469751?v=4" width="100" height="100"> | [souzitaaaa](https://github.com/souzitaaaa) |
+| <img src="https://avatars.githubusercontent.com/u/106436743?v=4" width="100" height="100"> | [JenniferAraujo ](https://github.com/JenniferAraujo) |
+| <img src="https://avatars.githubusercontent.com/u/116922102?v=4" width="100" height="100"> | [rimarque](https://github.com/rimarque) |
+| <img src="URL_da_Imagem_3" width="100" height="100"> | [JoelenCruz](URL_do_Perfil_3) |
+
+
+
+
