@@ -50,7 +50,7 @@ make
 
 |                                                 | GitHub                      |
 |-------------------------------------------------|-----------------------------|
-| <img src="https://avatars.githubusercontent.com/u/117469751?v=4" width="50" height="50"> | [souzitaaaa](https://github.com/souzitaaaa) |
+| <img src="https://avatars.githubusercontent.com/u/117469751?v=4"  width="50" height="50"> | [souzitaaaa](https://github.com/souzitaaaa) |
 | <img src="https://avatars.githubusercontent.com/u/106436743?v=4" width="50" height="50"> | [JenniferAraujo ](https://github.com/JenniferAraujo) |
 | <img src="https://avatars.githubusercontent.com/u/43698585?v=4" width="50" height="50"> | [JoelenCruz](https://github.com/JoelenCruz) |
 | <img src="https://avatars.githubusercontent.com/u/116922102?v=4" width="50" height="50"> | [rimarque](https://github.com/rimarque) |
